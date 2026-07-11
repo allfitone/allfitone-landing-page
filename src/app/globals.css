@@ -46,7 +46,7 @@
 .hero::before { content:""; position:absolute; inset:0; opacity:.13; background-image: linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom,black,transparent 75%); }
 .athlete-orbit { border: 1px solid rgba(200,255,25,.45); box-shadow: 0 0 80px rgba(200,255,25,.14), inset 0 0 80px rgba(200,255,25,.06); }
 .athlete-orbit::after { content:""; position:absolute; inset:9%; border:1px solid rgba(200,255,25,.16); border-radius:999px; }
-.hero-athlete { filter: grayscale(1) contrast(1.08); mask-image:linear-gradient(to bottom, transparent 0%, black 18%, black 74%, transparent 100%),linear-gradient(to right,transparent 0%,black 22%,black 80%,transparent 100%); mask-composite:intersect; mix-blend-mode:luminosity; }
+.hero-athlete { filter: contrast(1.04) saturate(.82); mask-image:linear-gradient(to bottom, transparent 0%, black 8%, black 86%, transparent 100%); }
 .text-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(7,9,8,.35); }
 .capability { transition: background-color .3s ease; }
 .capability:hover { background: linear-gradient(180deg,rgba(200,255,25,.06),transparent); }
@@ -55,8 +55,7 @@
 
 @media (max-width: 767px) {
   .hero-title { font-size: clamp(3.15rem, 13.8vw, 4.4rem); letter-spacing: -.06em; }
-  .hero-athlete { opacity:.7; }
-  .metric-card { transform: scale(.88); transform-origin: bottom left; }
+  .hero-athlete { opacity:.88; mask-image:linear-gradient(to bottom,transparent 0%,black 7%,black 84%,transparent 100%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
