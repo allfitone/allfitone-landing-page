@@ -15,6 +15,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { LogoMark } from "@/components/logo-mark";
 
 type Language = "es" | "en";
 
@@ -75,8 +76,8 @@ export default function Home() {
       <section id="home" className="hero relative min-h-screen overflow-hidden">
         <nav className="site-grid relative z-30 items-center py-6" aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
           <a href="#home" className="brand col-span-5 md:col-span-3" aria-label={language === "es" ? "AllfitOne, inicio" : "AllfitOne, home"}>
-            <span className="brand-mark" aria-hidden="true">A</span>
-            <span>ALLFITONE</span>
+            <LogoMark />
+            <span>ALLFIT<span className="brand-one">ONE</span></span>
           </a>
           <div className="col-span-6 hidden justify-center gap-9 text-[10px] font-bold uppercase tracking-[0.18em] text-white/48 md:flex">
             <a href="#os" className="nav-link">{t.nav[0]}</a>
@@ -177,9 +178,9 @@ export default function Home() {
                 <div className="flex gap-1.5"><span className="size-2 rounded-full bg-white/20" /><span className="size-2 rounded-full bg-white/20" /><span className="size-2 rounded-full bg-bolt" /></div>
                 <span className="text-[8px] font-bold uppercase tracking-[0.2em]">Allfit OS / Performance view</span>
               </div>
-              <div className="grid min-h-[520px] grid-cols-12 overflow-hidden rounded-[14px] bg-[#081321] text-white">
+              <div className="grid min-h-[520px] grid-cols-12 overflow-hidden rounded-[14px] bg-[#06101d] text-white">
                 <aside className="col-span-2 hidden border-r border-white/8 p-4 md:block">
-                  <div className="brand text-xs"><span className="brand-mark small">A</span><span>OS</span></div>
+                  <div className="brand text-xs"><LogoMark className="small" /><span>OS</span></div>
                   <div className="mt-10 flex flex-col gap-2 text-[9px] font-semibold text-white/35">
                     {t.menu.map((item, index) => <span key={item} className={index === 0 ? 'rounded-md bg-bolt px-3 py-2.5 text-void' : 'px-3 py-2.5'}>{item}</span>)}
                   </div>
@@ -247,7 +248,7 @@ export default function Home() {
           </div>
           <div className="col-span-12 mt-12 md:col-span-5 md:mt-0">
             <div className="phone-shell mx-auto w-[270px] rotate-[5deg] rounded-[42px] border-[8px] border-void bg-void p-2 shadow-[0_35px_60px_rgba(7,9,8,.25)]">
-              <div className="min-h-[510px] overflow-hidden rounded-[30px] bg-[#091525] p-5 text-white">
+              <div className="min-h-[510px] overflow-hidden rounded-[30px] bg-[#071923] p-5 text-white">
                 <div className="mx-auto h-4 w-20 rounded-full bg-black" />
                 <p className="mt-9 text-[9px] uppercase tracking-[.17em] text-white/35">{t.phoneToday}</p>
                 <h3 className="mt-2 font-display text-4xl font-semibold uppercase leading-[.88]">{t.phoneTitle}<br /><span className="text-bolt">{t.phoneTitleAccent}</span></h3>
@@ -268,7 +269,7 @@ export default function Home() {
 
       <footer className="bg-void px-5 pb-7 pt-16 text-white md:px-8 md:pt-20">
         <div className="mx-auto max-w-[1500px]">
-          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between"><div className="brand text-xl"><span className="brand-mark">A</span><span>ALLFITONE</span></div><p className="max-w-sm text-sm leading-6 text-white/40">All the Fitness in One place.</p></div>
+          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between"><div className="brand text-xl"><LogoMark /><span>ALLFIT<span className="brand-one">ONE</span></span></div><p className="max-w-sm text-sm leading-6 text-white/40">All the Fitness in One place.</p></div>
           <p className="footer-word mt-20 text-center">ALLFITONE</p>
           <Separator className="mt-10 bg-white/10" />
           <div className="mt-5 flex justify-between text-[8px] font-bold uppercase tracking-[.16em] text-white/25"><span>© 2026 AllfitOne</span><span>{t.built}</span></div>

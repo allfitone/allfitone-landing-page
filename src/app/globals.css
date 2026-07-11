@@ -10,15 +10,17 @@
   --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground);
   --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring); --color-destructive: var(--destructive);
   --color-void: var(--void); --color-panel: var(--panel); --color-chalk: var(--chalk); --color-bolt: var(--bolt);
+  --color-cyan-light: var(--cyan-light); --color-turquoise: var(--turquoise); --color-turquoise-dark: var(--turquoise-dark);
   --font-sans: var(--font-body); --font-display: var(--font-display);
   --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
 }
 
 :root {
-  --void: #050a13; --panel: #0a1626; --chalk: #eef5ff; --bolt: #2f8fff;
-  --background: #050a13; --foreground: #eef5ff; --primary: #2f8fff; --primary-foreground: #050a13;
-  --secondary: #0d1b2e; --secondary-foreground: #eef5ff; --muted: #101e31; --muted-foreground: #8294ad;
-  --accent: #2f8fff; --accent-foreground: #050a13; --border: #20324b; --input: #20324b; --ring: #2f8fff; --destructive: #e54444; --radius: 10px;
+  --void: #030713; --panel: #071923; --chalk: #eaffff; --bolt: #55effb;
+  --cyan-light: #68eef4; --turquoise: #60d1d6; --turquoise-dark: #348e94;
+  --background: #030713; --foreground: #eaffff; --primary: #55effb; --primary-foreground: #030713;
+  --secondary: #0a2029; --secondary-foreground: #eaffff; --muted: #102b34; --muted-foreground: #60d1d6;
+  --accent: #55effb; --accent-foreground: #030713; --border: #348e94; --input: #348e94; --ring: #68eef4; --destructive: #e54444; --radius: 10px;
 }
 
 @layer base {
@@ -29,9 +31,13 @@
 
 @layer components {
   .site-grid { @apply mx-auto grid w-full max-w-[1500px] grid-cols-12 gap-x-5 px-5 md:gap-x-7 md:px-8; }
-  .brand { @apply flex items-center gap-2 font-extrabold tracking-[-.045em]; }
-  .brand-mark { @apply flex size-7 -skew-x-12 items-center justify-center bg-bolt font-display text-lg font-extrabold text-void; }
-  .brand-mark.small { @apply size-5 text-xs; }
+  .brand { @apply flex items-center font-extrabold; column-gap: .48em; font-family: var(--font-display); letter-spacing: -.025em; }
+  .brand-mark { @apply flex h-7 w-[1.9rem] shrink-0 items-center justify-center bg-bolt text-void; clip-path: polygon(18% 0,100% 0,82% 100%,0 100%); }
+  .brand-mark svg { display: block; height: 82%; width: 82%; }
+  .brand-mark.small { @apply h-5 w-[1.35rem]; }
+  .brand-mark.display { @apply h-16 w-[4.5rem]; }
+  .brand-showcase { column-gap: .34em; font-size: clamp(1.8rem,4vw,3.8rem); letter-spacing: -.035em; }
+  .brand-one { @apply text-bolt; margin-left: .012em; }
   .nav-link { @apply transition-colors hover:text-bolt; }
   .hero-title { font-family: var(--font-display); font-size: clamp(4.4rem, 8.5vw, 9rem); font-weight: 700; letter-spacing: -.055em; line-height: .8; text-transform: uppercase; }
   .section-title { font-family: var(--font-display); font-size: clamp(3.8rem, 7vw, 7.8rem); font-weight: 650; letter-spacing: -.05em; line-height: .83; text-transform: uppercase; }
@@ -42,14 +48,14 @@
   .footer-word { font-family: var(--font-display); font-size: clamp(5rem, 17vw, 16rem); font-weight: 700; letter-spacing: -.075em; line-height: .68; }
 }
 
-.hero { background: radial-gradient(circle at 78% 45%, rgba(47,143,255,.16), transparent 29%), var(--void); }
+.hero { background: radial-gradient(circle at 78% 45%, rgba(85,239,251,.14), transparent 29%), var(--void); }
 .hero::before { content:""; position:absolute; inset:0; opacity:.13; background-image: linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom,black,transparent 75%); }
-.athlete-orbit { border: 1px solid rgba(47,143,255,.55); box-shadow: 0 0 90px rgba(47,143,255,.18), inset 0 0 80px rgba(47,143,255,.07); }
-.athlete-orbit::after { content:""; position:absolute; inset:9%; border:1px solid rgba(115,184,255,.2); border-radius:999px; }
+.athlete-orbit { border: 1px solid rgba(85,239,251,.55); box-shadow: 0 0 90px rgba(85,239,251,.16), inset 0 0 80px rgba(96,209,214,.08); }
+.athlete-orbit::after { content:""; position:absolute; inset:9%; border:1px solid rgba(104,238,244,.22); border-radius:999px; }
 .hero-athlete { filter: contrast(1.04) saturate(.82); mask-image:linear-gradient(to bottom, transparent 0%, black 8%, black 86%, transparent 100%); }
-.text-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(7,9,8,.35); }
+.text-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(3,7,19,.35); }
 .capability { transition: background-color .3s ease; }
-.capability:hover { background: linear-gradient(180deg,rgba(47,143,255,.09),transparent); }
+.capability:hover { background: linear-gradient(180deg,rgba(85,239,251,.08),transparent); }
 .phone-shell { animation: phone-float 5s ease-in-out infinite; }
 @keyframes phone-float { 0%,100%{transform:rotate(5deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-12px)} }
 
