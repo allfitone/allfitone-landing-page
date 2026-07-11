@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --color-background: var(--background); --color-foreground: var(--foreground);
+  --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring); --color-destructive: var(--destructive);
+  --color-void: var(--void); --color-panel: var(--panel); --color-chalk: var(--chalk); --color-bolt: var(--bolt);
+  --font-sans: var(--font-body); --font-display: var(--font-display);
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+}
+
+:root {
+  --void: #070908; --panel: #101310; --chalk: #f1f3ec; --bolt: #c8ff19;
+  --background: #070908; --foreground: #f1f3ec; --primary: #c8ff19; --primary-foreground: #070908;
+  --secondary: #171b17; --secondary-foreground: #f1f3ec; --muted: #171b17; --muted-foreground: #8b928b;
+  --accent: #c8ff19; --accent-foreground: #070908; --border: #292d29; --input: #292d29; --ring: #c8ff19; --destructive: #e54444; --radius: 10px;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; }
+  ::selection { background: var(--bolt); color: var(--void); }
+}
+
+@layer components {
+  .site-grid { @apply mx-auto grid w-full max-w-[1500px] grid-cols-12 gap-x-5 px-5 md:gap-x-7 md:px-8; }
+  .brand { @apply flex items-center gap-2 font-extrabold tracking-[-.045em]; }
+  .brand-mark { @apply flex size-7 -skew-x-12 items-center justify-center bg-bolt font-display text-lg font-extrabold text-void; }
+  .brand-mark.small { @apply size-5 text-xs; }
+  .nav-link { @apply transition-colors hover:text-bolt; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(4.4rem, 8.5vw, 9rem); font-weight: 700; letter-spacing: -.055em; line-height: .8; text-transform: uppercase; }
+  .section-title { font-family: var(--font-display); font-size: clamp(3.8rem, 7vw, 7.8rem); font-weight: 650; letter-spacing: -.05em; line-height: .83; text-transform: uppercase; }
+  .eyebrow { @apply text-[9px] font-extrabold uppercase tracking-[.2em]; }
+  .metric-card { @apply rounded-2xl border border-white/10 bg-black/60 p-4 text-white shadow-2xl backdrop-blur-xl; }
+  .metric-label { @apply text-[8px] font-bold uppercase tracking-[.15em] text-white/40; }
+  .metric-number { @apply mt-2 block text-3xl tracking-[-.04em]; }
+  .footer-word { font-family: var(--font-display); font-size: clamp(5rem, 17vw, 16rem); font-weight: 700; letter-spacing: -.075em; line-height: .68; }
+}
+
+.hero { background: radial-gradient(circle at 78% 45%, rgba(200,255,25,.10), transparent 27%), var(--void); }
+.hero::before { content:""; position:absolute; inset:0; opacity:.13; background-image: linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom,black,transparent 75%); }
+.athlete-orbit { border: 1px solid rgba(200,255,25,.45); box-shadow: 0 0 80px rgba(200,255,25,.14), inset 0 0 80px rgba(200,255,25,.06); }
+.athlete-orbit::after { content:""; position:absolute; inset:9%; border:1px solid rgba(200,255,25,.16); border-radius:999px; }
+.hero-athlete { filter: grayscale(1) contrast(1.08); mask-image:linear-gradient(to bottom, transparent 0%, black 18%, black 74%, transparent 100%),linear-gradient(to right,transparent 0%,black 22%,black 80%,transparent 100%); mask-composite:intersect; mix-blend-mode:luminosity; }
+.text-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(7,9,8,.35); }
+.capability { transition: background-color .3s ease; }
+.capability:hover { background: linear-gradient(180deg,rgba(200,255,25,.06),transparent); }
+.phone-shell { animation: phone-float 5s ease-in-out infinite; }
+@keyframes phone-float { 0%,100%{transform:rotate(5deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-12px)} }
+
+@media (max-width: 767px) {
+  .hero-title { font-size: clamp(3.15rem, 13.8vw, 4.4rem); letter-spacing: -.06em; }
+  .hero-athlete { opacity:.7; }
+  .metric-card { transform: scale(.88); transform-origin: bottom left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}
