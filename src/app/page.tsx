@@ -72,22 +72,22 @@ export default function Home() {
 
   return (
     <main className="bg-void text-white">
-      <section id="inicio" className="hero relative min-h-screen overflow-hidden">
+      <section id="home" className="hero relative min-h-screen overflow-hidden">
         <nav className="site-grid relative z-30 items-center py-6" aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
-          <a href="#inicio" className="brand col-span-5 md:col-span-3" aria-label="AllfitOne, inicio">
+          <a href="#home" className="brand col-span-5 md:col-span-3" aria-label={language === "es" ? "AllfitOne, inicio" : "AllfitOne, home"}>
             <span className="brand-mark" aria-hidden="true">A</span>
             <span>ALLFITONE</span>
           </a>
           <div className="col-span-6 hidden justify-center gap-9 text-[10px] font-bold uppercase tracking-[0.18em] text-white/48 md:flex">
             <a href="#os" className="nav-link">{t.nav[0]}</a>
-            <a href="#ecosistema" className="nav-link">{t.nav[1]}</a>
-            <a href="#proximo" className="nav-link">{t.nav[2]}</a>
+            <a href="#ecosystem" className="nav-link">{t.nav[1]}</a>
+            <a href="#upcoming" className="nav-link">{t.nav[2]}</a>
           </div>
           <div className="col-span-7 ml-auto flex items-center gap-4 md:col-span-3">
             <div className="flex rounded-full border border-white/15 p-0.5 text-[8px] font-extrabold" aria-label={language === "es" ? "Seleccionar idioma" : "Select language"}>
               {(["es", "en"] as const).map((item) => <button key={item} type="button" onClick={() => changeLanguage(item)} className={language === item ? "rounded-full bg-bolt px-2 py-1 text-void" : "rounded-full px-2 py-1 text-white/45 transition-colors hover:text-white"} aria-pressed={language === item}>{item.toUpperCase()}</button>)}
             </div>
-            <a href="#contacto" className="ml-auto flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white">
+            <a href="#contact" className="ml-auto flex items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white">
               <span className="md:hidden">{t.accessShort}</span><span className="hidden md:inline">{t.access}</span> <ArrowUpRight className="size-4 text-bolt" aria-hidden="true" />
             </a>
           </div>
@@ -106,7 +106,7 @@ export default function Home() {
               <Button nativeButton={false} render={<a href="#os" />} size="lg" className="h-13 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[0.16em] text-void hover:bg-bolt/85">
                 {t.discover} <ArrowDown data-icon="inline-end" />
               </Button>
-              <a href="#ecosistema" className="flex items-center gap-2 px-3 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white">
+              <a href="#ecosystem" className="flex items-center gap-2 px-3 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white">
                 {t.ecosystem} <ArrowRight className="size-4" />
               </a>
             </div>
@@ -169,7 +169,7 @@ export default function Home() {
         <div className="site-grid mt-14 items-start md:mt-20">
           <div className="col-span-12 md:col-span-3">
             <p className="max-w-xs text-sm leading-6 text-void/55">{t.osIntro}</p>
-            <a href="#contacto" className="mt-7 inline-flex items-center gap-2 border-b border-void pb-1 text-[10px] font-extrabold uppercase tracking-[0.16em]">{t.knowIt} <MoveUpRight className="size-4" /></a>
+            <a href="#contact" className="mt-7 inline-flex items-center gap-2 border-b border-void pb-1 text-[10px] font-extrabold uppercase tracking-[0.16em]">{t.knowIt} <MoveUpRight className="size-4" /></a>
           </div>
           <div className="col-span-12 mt-12 md:col-span-9 md:mt-0">
             <div className="os-window overflow-hidden rounded-[22px] border border-void/10 bg-void p-3 shadow-[0_30px_80px_rgba(7,9,8,.22)] md:p-4">
@@ -177,7 +177,7 @@ export default function Home() {
                 <div className="flex gap-1.5"><span className="size-2 rounded-full bg-white/20" /><span className="size-2 rounded-full bg-white/20" /><span className="size-2 rounded-full bg-bolt" /></div>
                 <span className="text-[8px] font-bold uppercase tracking-[0.2em]">Allfit OS / Performance view</span>
               </div>
-              <div className="grid min-h-[520px] grid-cols-12 overflow-hidden rounded-[14px] bg-[#0d100e] text-white">
+              <div className="grid min-h-[520px] grid-cols-12 overflow-hidden rounded-[14px] bg-[#081321] text-white">
                 <aside className="col-span-2 hidden border-r border-white/8 p-4 md:block">
                   <div className="brand text-xs"><span className="brand-mark small">A</span><span>OS</span></div>
                   <div className="mt-10 flex flex-col gap-2 text-[9px] font-semibold text-white/35">
@@ -211,7 +211,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="ecosistema" className="bg-void py-24 md:py-32">
+      <section id="ecosystem" className="bg-void py-24 md:py-32">
         <div className="site-grid">
           <div className="col-span-12 md:col-span-4"><p className="eyebrow text-white/35">{t.together}</p></div>
           <div className="col-span-12 mt-6 md:col-span-8 md:mt-0"><h2 className="section-title max-w-4xl">{t.lessFriction}<br /><span className="text-bolt">{t.moreMovement}</span></h2></div>
@@ -237,7 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="proximo" className="relative overflow-hidden bg-bolt py-24 text-void md:py-32">
+      <section id="upcoming" className="relative overflow-hidden bg-bolt py-24 text-void md:py-32">
         <div className="absolute -right-28 top-1/2 size-[500px] -translate-y-1/2 rounded-full border-[80px] border-void/7 md:size-[760px]" />
         <div className="site-grid relative z-10 items-center">
           <div className="col-span-12 md:col-span-7">
@@ -247,7 +247,7 @@ export default function Home() {
           </div>
           <div className="col-span-12 mt-12 md:col-span-5 md:mt-0">
             <div className="phone-shell mx-auto w-[270px] rotate-[5deg] rounded-[42px] border-[8px] border-void bg-void p-2 shadow-[0_35px_60px_rgba(7,9,8,.25)]">
-              <div className="min-h-[510px] overflow-hidden rounded-[30px] bg-[#121612] p-5 text-white">
+              <div className="min-h-[510px] overflow-hidden rounded-[30px] bg-[#091525] p-5 text-white">
                 <div className="mx-auto h-4 w-20 rounded-full bg-black" />
                 <p className="mt-9 text-[9px] uppercase tracking-[.17em] text-white/35">{t.phoneToday}</p>
                 <h3 className="mt-2 font-display text-4xl font-semibold uppercase leading-[.88]">{t.phoneTitle}<br /><span className="text-bolt">{t.phoneTitleAccent}</span></h3>
@@ -259,7 +259,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contacto" className="bg-chalk py-24 text-void md:py-32">
+      <section id="contact" className="bg-chalk py-24 text-void md:py-32">
         <div className="site-grid items-end">
           <div className="col-span-12 md:col-span-8"><p className="eyebrow text-void/40">{t.early}</p><h2 className="section-title mt-6">{t.prepare}<br />{t.operate}</h2></div>
           <div className="col-span-12 mt-10 md:col-span-4 md:mt-0"><p className="mb-7 text-sm leading-6 text-void/55">{t.contactCopy}</p><Button nativeButton={false} render={<a href="mailto:hello@allfitone.com" />} size="lg" className="h-14 w-full rounded-full bg-void px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-white hover:bg-void/85">{t.access} <ArrowUpRight data-icon="inline-end" /></Button></div>

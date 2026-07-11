@@ -15,10 +15,10 @@
 }
 
 :root {
-  --void: #070908; --panel: #101310; --chalk: #f1f3ec; --bolt: #c8ff19;
-  --background: #070908; --foreground: #f1f3ec; --primary: #c8ff19; --primary-foreground: #070908;
-  --secondary: #171b17; --secondary-foreground: #f1f3ec; --muted: #171b17; --muted-foreground: #8b928b;
-  --accent: #c8ff19; --accent-foreground: #070908; --border: #292d29; --input: #292d29; --ring: #c8ff19; --destructive: #e54444; --radius: 10px;
+  --void: #050a13; --panel: #0a1626; --chalk: #eef5ff; --bolt: #2f8fff;
+  --background: #050a13; --foreground: #eef5ff; --primary: #2f8fff; --primary-foreground: #050a13;
+  --secondary: #0d1b2e; --secondary-foreground: #eef5ff; --muted: #101e31; --muted-foreground: #8294ad;
+  --accent: #2f8fff; --accent-foreground: #050a13; --border: #20324b; --input: #20324b; --ring: #2f8fff; --destructive: #e54444; --radius: 10px;
 }
 
 @layer base {
@@ -42,14 +42,14 @@
   .footer-word { font-family: var(--font-display); font-size: clamp(5rem, 17vw, 16rem); font-weight: 700; letter-spacing: -.075em; line-height: .68; }
 }
 
-.hero { background: radial-gradient(circle at 78% 45%, rgba(200,255,25,.10), transparent 27%), var(--void); }
+.hero { background: radial-gradient(circle at 78% 45%, rgba(47,143,255,.16), transparent 29%), var(--void); }
 .hero::before { content:""; position:absolute; inset:0; opacity:.13; background-image: linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px); background-size:72px 72px; mask-image:linear-gradient(to bottom,black,transparent 75%); }
-.athlete-orbit { border: 1px solid rgba(200,255,25,.45); box-shadow: 0 0 80px rgba(200,255,25,.14), inset 0 0 80px rgba(200,255,25,.06); }
-.athlete-orbit::after { content:""; position:absolute; inset:9%; border:1px solid rgba(200,255,25,.16); border-radius:999px; }
+.athlete-orbit { border: 1px solid rgba(47,143,255,.55); box-shadow: 0 0 90px rgba(47,143,255,.18), inset 0 0 80px rgba(47,143,255,.07); }
+.athlete-orbit::after { content:""; position:absolute; inset:9%; border:1px solid rgba(115,184,255,.2); border-radius:999px; }
 .hero-athlete { filter: contrast(1.04) saturate(.82); mask-image:linear-gradient(to bottom, transparent 0%, black 8%, black 86%, transparent 100%); }
 .text-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(7,9,8,.35); }
 .capability { transition: background-color .3s ease; }
-.capability:hover { background: linear-gradient(180deg,rgba(200,255,25,.06),transparent); }
+.capability:hover { background: linear-gradient(180deg,rgba(47,143,255,.09),transparent); }
 .phone-shell { animation: phone-float 5s ease-in-out infinite; }
 @keyframes phone-float { 0%,100%{transform:rotate(5deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-12px)} }
 

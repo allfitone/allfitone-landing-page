@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} scroll-smooth antialiased`}>
+    <html lang="es" className={`${display.variable} ${body.variable} scroll-smooth antialiased`}>
       <body>{children}</body>
     </html>
   );
