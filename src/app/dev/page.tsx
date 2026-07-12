@@ -14,7 +14,7 @@ function Wordmark({ dark = false }: { dark?: boolean }) {
   return (
     <div className={`brand ${dark ? "text-void" : "text-white"}`}>
       <LogoMark />
-      <span>ALLFIT<span className="brand-one">ONE</span></span>
+    <span>ALLFIT <span className="brand-one">ONE</span></span>
     </div>
   );
 }
@@ -34,7 +34,7 @@ export default function BrandLab() {
       <section className="border-b border-void/10 py-20 md:py-28">
         <div className="site-grid items-end">
           <div className="col-span-12 md:col-span-4">
-            <p className="eyebrow text-void/40">AllfitOne identity system</p>
+            <p className="eyebrow text-void/40">Allfit One identity system</p>
             <p className="mt-6 max-w-sm text-sm leading-6 text-void/55">A working space to test the identity across scales, backgrounds and products before it becomes a final brand system.</p>
           </div>
           <div className="col-span-12 mt-12 md:col-span-8 md:mt-0">
@@ -47,8 +47,8 @@ export default function BrandLab() {
         <div className="site-grid">
           <div className="col-span-12 md:col-span-3"><p className="eyebrow text-void/40">01 / Primary signature</p></div>
           <div className="col-span-12 mt-8 grid gap-4 md:col-span-9 md:mt-0 md:grid-cols-2">
-            <article className="flex min-h-72 items-center justify-center rounded-2xl bg-void p-8"><div className="brand brand-showcase text-white"><LogoMark className="display" /><span>ALLFIT<span className="brand-one">ONE</span></span></div></article>
-            <article className="flex min-h-72 items-center justify-center rounded-2xl border border-void/10 bg-white p-8"><div className="brand brand-showcase text-void"><LogoMark className="display" /><span>ALLFIT<span className="brand-one">ONE</span></span></div></article>
+            <article className="flex min-h-72 items-center justify-center rounded-2xl bg-void p-8"><div className="brand brand-showcase text-white"><LogoMark className="display" /><span>ALLFIT <span className="brand-one">ONE</span></span></div></article>
+            <article className="flex min-h-72 items-center justify-center rounded-2xl border border-void/10 bg-white p-8"><div className="brand brand-showcase text-void"><LogoMark className="display" /><span>ALLFIT <span className="brand-one">ONE</span></span></div></article>
             <div className="rounded-2xl border border-void/10 bg-white p-6">
               <p className="eyebrow text-void/35">Rationale</p>
               <h2 className="mt-5 font-display text-4xl font-semibold uppercase leading-none">Forward by design.</h2>

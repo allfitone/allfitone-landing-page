@@ -6,8 +6,8 @@ const display = Barlow_Condensed({ subsets: ["latin"], variable: "--font-display
 const body = Manrope({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
-  title: "AllfitOne — All the Fitness in One place",
-  description: "Personas, entrenamiento y progreso conectados. Descubre Allfit OS, el primer producto del ecosistema AllfitOne.",
+  title: "Allfit One — All the Fitness in One place",
+  description: "Personas, entrenamiento y progreso conectados. Descubre Allfit OS, el primer producto del ecosistema Allfit One.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -26,6 +26,7 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground; }
+  section[id] { scroll-margin-top: 5.5rem; }
   ::selection { background: var(--bolt); color: var(--void); }
 }
 
@@ -60,8 +61,11 @@
 @keyframes phone-float { 0%,100%{transform:rotate(5deg) translateY(0)} 50%{transform:rotate(3deg) translateY(-12px)} }
 
 @media (max-width: 767px) {
-  .hero-title { font-size: clamp(3.15rem, 13.8vw, 4.4rem); letter-spacing: -.06em; }
+  .hero-title { font-size: clamp(3.5rem, 16vw, 5rem); letter-spacing: -.06em; line-height: .82; }
+  .section-title { font-size: clamp(3.1rem, 14vw, 4rem); line-height: .86; }
+  .mobile-title-break { display: block; }
   .hero-athlete { opacity:.88; mask-image:linear-gradient(to bottom,transparent 0%,black 7%,black 84%,transparent 100%); }
+  .footer-word { font-size: clamp(4.4rem, 22vw, 6rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
