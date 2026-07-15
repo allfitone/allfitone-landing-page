@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   Activity,
@@ -8,7 +7,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BarChart3,
-  CalendarDays,
   CircleDollarSign,
   CreditCard,
   Dumbbell,
@@ -23,9 +21,10 @@ import {
   X,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { LogoMark } from "@/components/logo-mark";
+import { cn } from "@/lib/utils";
 
 type Language = "es" | "en";
 
@@ -36,7 +35,7 @@ const signalIcons = [Users, Dumbbell, MessageCircle, CreditCard, Activity, BarCh
 const content = {
   es: {
     nav: ["Allfit OS", "Cómo funciona", "Precio", "Preguntas"], access: "Solicitar demo", accessShort: "Demo",
-    hero: "Creamos el lugar donde personas, entrenamiento y progreso se conectan. El primer paso es", discover: "Descubrir Allfit OS", ecosystem: "Ver el ecosistema",
+    hero: "Creamos el lugar donde personas, entrenamiento y progreso se conectan. El primer paso es", discover: "Descubrir Allfit OS", ecosystem: "Ver el ecosistema", heroKicker: "Un ecosistema para el fitness", firstProduct: "Primer producto", osDescriptor: "El sistema operativo para entrenadores, gimnasios y estudios.", audience: "Entrenadores · Gimnasios · Estudios",
     adherence: "Adherencia", weeklyLoad: "Carga semanal", thisWeek: "+12.4% esta semana", sessionsToday: "Sesiones hoy", inProgress: "6 en curso", athleteAlt: "Atleta entrenando con intensidad",
     osLabel: "Qué es Allfit OS", osTitle: "Todo lo que tu negocio fitness necesita, conectado en un solo sistema.", osCopy: "Allfit OS les da a entrenadores, gimnasios, estudios y marcas de entrenamiento las herramientas para tener presencia digital, gestionar su operación y ofrecer una mejor experiencia a sus clientes sin construir software desde cero.",
     pillars: [["Página pública", "Lanza", "Crea una presencia digital profesional para tu marca de entrenamiento."], ["Panel operativo", "Gestiona", "Administra clientes, planes, rutinas, reservas y actividad del negocio."], ["App cliente", "Entrena", "Dale a tus clientes una experiencia móvil para seguir planes y registrar progreso."]],
@@ -55,7 +54,7 @@ const content = {
   },
   en: {
     nav: ["Allfit OS", "How it works", "Pricing", "FAQ"], access: "Request demo", accessShort: "Demo",
-    hero: "We are building the place where people, training and progress connect. The first step is", discover: "Discover Allfit OS", ecosystem: "Explore the ecosystem",
+    hero: "We are building the place where people, training and progress connect. The first step is", discover: "Discover Allfit OS", ecosystem: "Explore the ecosystem", heroKicker: "One ecosystem for fitness", firstProduct: "First product", osDescriptor: "The operating system for coaches, gyms and studios.", audience: "Coaches · Gyms · Studios",
     adherence: "Adherence", weeklyLoad: "Weekly load", thisWeek: "+12.4% this week", sessionsToday: "Sessions today", inProgress: "6 in progress", athleteAlt: "Athlete training with intensity",
     osLabel: "What is Allfit OS", osTitle: "Everything your fitness business needs, connected in one system.", osCopy: "Allfit OS gives coaches, gyms, studios and training brands the tools to build a digital presence, manage operations and deliver a better client experience without building software from scratch.",
     pillars: [["Public page", "Launch", "Create a professional digital presence for your training brand."], ["Operations dashboard", "Manage", "Run clients, plans, routines, bookings and business activity."], ["Client app", "Train", "Give clients a mobile experience to follow plans and log progress."]],
@@ -135,62 +134,52 @@ export default function Home() {
           <div className="mt-10"><p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/30">All the Fitness in One place.</p><a href="#contact" onClick={() => setMenuOpen(false)} className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-bolt text-[10px] font-extrabold uppercase tracking-[.16em] text-void">{t.access}<ArrowUpRight className="size-4" /></a></div>
         </div> : null}
 
-        <div className="site-grid relative z-20 min-h-[calc(100vh-80px)] items-center pb-10 pt-28 md:pb-16 lg:pt-8">
-          <div className="col-span-12 lg:col-span-7">
-            <h1 className="hero-title">
-              All the <span className="mobile-title-break">fitness</span>
-              <span className="block text-bolt">in one place.</span>
-            </h1>
-            <p className="mt-7 max-w-lg text-sm leading-6 text-white/58 md:text-base md:leading-7">
-              {t.hero} <strong className="font-semibold text-white">Allfit OS</strong>.
-            </p>
-            <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:flex-wrap sm:gap-4">
-              <Button nativeButton={false} render={<a href="#features" />} size="lg" className="h-13 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[0.16em] text-void hover:bg-bolt/85">
+        <svg className="hero-brand-mark" viewBox="0 0 405 1149" aria-hidden="true">
+          <path d="M405 0 0 211l120 1L11 1149l324-490L405 0Z" />
+        </svg>
+
+        <div className="site-grid relative z-20 min-h-screen content-between pb-8 pt-32 md:pb-10 md:pt-40 lg:pt-36">
+          <div className="col-span-12 grid grid-cols-12 gap-x-5 md:gap-x-7">
+            <div className="col-span-12 mb-8 flex items-center gap-4 md:mb-10">
+              <span className="block h-px w-10 bg-bolt" aria-hidden="true" />
+              <p className="eyebrow text-bolt">{t.heroKicker}</p>
+            </div>
+
+            <div className="col-span-12">
+              <h1 className="hero-title-new" aria-label="All the Fitness in One place.">
+                <span className="block">All the</span>
+                <span className="hero-fitness block">Fitness</span>
+                <span className="block text-bolt">in One<span className="hero-place-break"> place.</span></span>
+              </h1>
+            </div>
+
+            <div className="col-span-12 mt-10 min-w-0 md:col-span-6 md:col-start-2 md:mt-12 lg:col-span-4 lg:col-start-2">
+              <p className="hero-copy max-w-lg text-sm leading-6 text-white/58 md:text-base md:leading-7">
+                {t.hero} <strong className="font-semibold text-white">Allfit OS</strong>.
+              </p>
+            </div>
+            <div className="col-span-12 mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center md:col-span-5 md:col-start-8 md:mt-12 md:justify-end">
+              <a href="#features" className={cn(buttonVariants({ size: "lg" }), "h-13 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[0.16em] text-void hover:bg-bolt/85")}>
                 {t.discover} <ArrowDown data-icon="inline-end" />
-              </Button>
+              </a>
               <a href="#how-it-works" className="flex items-center gap-2 px-3 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white">
                 {t.ecosystem} <ArrowRight className="size-4" />
               </a>
             </div>
           </div>
 
-          <div className="relative col-span-12 mt-12 min-h-[440px] sm:min-h-[560px] lg:col-span-5 lg:mt-0 lg:min-h-[680px]">
-            <div className="athlete-orbit absolute left-[62%] top-1/2 size-[370px] -translate-x-1/2 -translate-y-1/2 rounded-full sm:left-[68%] sm:size-[520px] lg:left-[56%] lg:size-[600px]" />
-            <div className="absolute -bottom-6 left-[18%] right-[-18%] top-0 sm:left-[34%] sm:right-[-8%] lg:-bottom-16 lg:-left-[16%] lg:right-[-4%]">
-              <Image
-                src="/images/allfitone-hero-v0.png"
-                alt={t.athleteAlt}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                quality={100}
-                className="hero-athlete object-contain object-right-bottom"
-              />
+          <div className="col-span-12 mt-16 grid min-w-0 grid-cols-12 border-y border-white/12 md:mt-20">
+            <div className="col-span-12 flex items-center gap-4 py-4 md:col-span-3 md:border-r md:border-white/12 md:pr-6">
+              <span className="font-mono text-[9px] text-bolt">01</span>
+              <span className="eyebrow text-white/35">{t.firstProduct}</span>
             </div>
-            <div className="absolute left-0 top-[6%] z-10 flex origin-top-left scale-[.72] flex-col gap-3 sm:left-[3%] sm:top-[8%] sm:scale-90 lg:left-0 lg:top-[10%] lg:scale-100 lg:gap-4">
-              <div className="metric-card w-44 md:w-48">
-                <div className="flex items-center justify-between"><span className="metric-label">{t.adherence}</span><Activity className="size-4 text-bolt" /></div>
-                <strong className="metric-number">87%</strong>
-                <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/10"><div className="h-full w-[87%] rounded-full bg-bolt" /></div>
-              </div>
-              <div className="metric-card w-44 md:w-48">
-                <span className="metric-label">{t.weeklyLoad}</span>
-                <strong className="metric-number">4,820</strong>
-                <span className="mt-1 block text-[9px] font-bold text-bolt">{t.thisWeek}</span>
-                <div className="mt-4 flex h-9 items-end gap-1" aria-hidden="true">
-                  {[38, 58, 48, 78, 64, 92, 72].map((height, i) => <span key={i} className="flex-1 rounded-sm bg-bolt/70" style={{ height: `${height}%` }} />)}
-                </div>
-              </div>
-              <div className="metric-card w-44 md:w-48">
-                <div className="flex items-center justify-between"><span className="metric-label">{t.sessionsToday}</span><CalendarDays className="size-4 text-bolt" /></div>
-                <div className="flex items-end justify-between">
-                  <strong className="metric-number">32</strong>
-                  <span className="mb-1 text-[8px] font-bold uppercase tracking-[.12em] text-bolt">{t.inProgress}</span>
-                </div>
-                <div className="mt-3 grid grid-cols-8 gap-1" aria-hidden="true">
-                  {[1, 1, 1, 1, 1, 1, 0, 0].map((active, i) => <span key={i} className={active ? "h-1 rounded-full bg-bolt" : "h-1 rounded-full bg-white/10"} />)}
-                </div>
-              </div>
+            <div className="col-span-12 flex items-center justify-between border-t border-white/12 py-5 md:col-span-5 md:border-t-0 md:px-7">
+              <strong className="font-display text-3xl font-semibold uppercase tracking-[-.035em]">Allfit OS</strong>
+              <ArrowUpRight className="size-5 text-bolt" aria-hidden="true" />
+            </div>
+            <div className="col-span-12 border-t border-white/12 py-5 md:col-span-4 md:border-l md:border-t-0 md:border-white/12 md:pl-7">
+              <p className="text-xs leading-5 text-white/50">{t.osDescriptor}</p>
+              <p className="mt-2 text-[8px] font-bold uppercase tracking-[.16em] text-bolt/70">{t.audience}</p>
             </div>
           </div>
         </div>
@@ -246,7 +235,7 @@ export default function Home() {
       <section id="pricing" className="bg-panel py-24 md:py-32">
         <div className="site-grid items-end">
           <div className="col-span-12 md:col-span-7"><p className="eyebrow text-bolt">{t.pricingLabel}</p><h2 className="section-title mt-7 max-w-4xl">{t.pricingTitle}</h2></div>
-          <div className="col-span-12 mt-8 md:col-span-5 md:mt-0"><p className="max-w-xl text-sm leading-6 text-white/45">{t.pricingCopy}</p><div className="mt-6 flex items-center gap-4"><Button nativeButton={false} render={<a href="mailto:hello@allfitone.com" />} size="lg" className="h-12 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.15em] text-void hover:bg-cyan-light">{t.requestDemo}<ArrowUpRight data-icon="inline-end" /></Button><span className="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">{t.trial}</span></div></div>
+          <div className="col-span-12 mt-8 md:col-span-5 md:mt-0"><p className="max-w-xl text-sm leading-6 text-white/45">{t.pricingCopy}</p><div className="mt-6 flex items-center gap-4"><a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "h-12 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.15em] text-void hover:bg-cyan-light")}>{t.requestDemo}<ArrowUpRight data-icon="inline-end" /></a><span className="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">{t.trial}</span></div></div>
         </div>
         <div className="site-grid mt-14">
           <div className="col-span-12 rounded-2xl border border-white/10 bg-void p-6 md:col-span-5 md:p-8"><CircleDollarSign className="size-6 text-bolt" /><p className="mt-8 text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{t.entry}</p><p className="mt-3 font-display text-5xl font-semibold uppercase">{t.basePrice}</p><p className="mt-4 text-sm text-white/45">{t.baseDescription}</p></div>
@@ -268,7 +257,7 @@ export default function Home() {
       </section>
 
       <section id="contact" className="bg-void py-24 text-white md:py-32">
-        <div className="site-grid items-end"><div className="col-span-12 md:col-span-8"><p className="eyebrow text-bolt">{t.early}</p><h2 className="section-title mt-6">{t.prepare}<br /><span className="text-bolt">{t.operate}</span></h2></div><div className="col-span-12 mt-10 md:col-span-4 md:mt-0"><p className="mb-7 text-sm leading-6 text-white/45">{t.contactCopy}</p><Button nativeButton={false} render={<a href="mailto:hello@allfitone.com" />} size="lg" className="h-14 w-full rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-void hover:bg-cyan-light">{t.requestDemo}<ArrowUpRight data-icon="inline-end" /></Button></div></div>
+        <div className="site-grid items-end"><div className="col-span-12 md:col-span-8"><p className="eyebrow text-bolt">{t.early}</p><h2 className="section-title mt-6">{t.prepare}<br /><span className="text-bolt">{t.operate}</span></h2></div><div className="col-span-12 mt-10 md:col-span-4 md:mt-0"><p className="mb-7 text-sm leading-6 text-white/45">{t.contactCopy}</p><a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "h-14 w-full rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-void hover:bg-cyan-light")}>{t.requestDemo}<ArrowUpRight data-icon="inline-end" /></a></div></div>
       </section>
 
       <section id="upcoming" className="relative overflow-hidden bg-bolt py-24 text-void md:py-32">

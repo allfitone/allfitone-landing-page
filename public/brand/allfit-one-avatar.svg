@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-labelledby="title description">
+  <title id="title">Allfit One</title>
+  <desc id="description">Allfit One social profile mark</desc>
+  <rect width="1080" height="1080" rx="232" fill="#030713"/>
+  <path fill="#55EFFB" d="M300 190h540L732 890H192L300 190Z"/>
+  <g transform="translate(405 214) scale(.57)">
+    <path fill="#030713" d="M405 0 0 211l120 1L11 1149l324-490L405 0Z"/>
+  </g>
+</svg>
