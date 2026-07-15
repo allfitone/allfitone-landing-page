@@ -153,7 +153,7 @@ export default function Home() {
               </h1>
             </div>
 
-            <div className="col-span-12 mt-10 min-w-0 md:col-span-6 md:col-start-2 md:mt-12 lg:col-span-4 lg:col-start-2">
+            <div className="col-span-12 mt-10 min-w-0 md:col-span-6 md:mt-12 lg:col-span-4">
               <p className="hero-copy max-w-lg text-sm leading-6 text-white/58 md:text-base md:leading-7">
                 {t.hero} <strong className="font-semibold text-white">Allfit OS</strong>.
               </p>
@@ -267,10 +267,30 @@ export default function Home() {
 
       <footer className="bg-void px-5 pb-7 pt-16 text-white md:px-8 md:pt-20">
         <div className="mx-auto max-w-[1500px]">
-          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between"><div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div><p className="max-w-sm text-sm leading-6 text-white/40">All the fitness in one place.</p></div>
+          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+            <div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div>
+            <p className="max-w-sm text-sm leading-6 text-white/40">All the fitness in one place.</p>
+          </div>
           <p className="footer-word mt-20 text-center">ALLFIT ONE</p>
           <Separator className="mt-10 bg-white/10" />
-          <div className="mt-5 flex justify-between text-[8px] font-bold uppercase tracking-[.16em] text-white/25"><span>© 2026 Allfit One</span><span>{t.built}</span></div>
+          <div className="mt-5 grid gap-4 text-[8px] font-bold uppercase tracking-[.16em] text-white/25 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+            <span>© 2026 Allfit One</span>
+            <nav className="flex w-fit items-center gap-3 text-white/45" aria-label="Redes sociales de Allfit One">
+              <a href="https://www.instagram.com/allfit.one/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label="Allfit One en Instagram">
+                <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.4" cy="6.6" r=".8" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@allfit.one" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label="Allfit One en TikTok">
+                <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M14.4 2.5h2.8a4.8 4.8 0 0 0 4.3 4.3v2.8a7.5 7.5 0 0 1-4.3-1.4v7.1a6.2 6.2 0 1 1-5.4-6.1v2.9a3.4 3.4 0 1 0 2.6 3.2V2.5Z" />
+                </svg>
+              </a>
+            </nav>
+            <span className="sm:justify-self-end">{t.built}</span>
+          </div>
         </div>
       </footer>
     </main>

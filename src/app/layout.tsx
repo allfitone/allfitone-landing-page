@@ -8,6 +8,17 @@ const body = Manrope({ subsets: ["latin"], variable: "--font-body" });
 export const metadata: Metadata = {
   title: "Allfit One — All the fitness in one place.",
   description: "Personas, entrenamiento y progreso conectados. Descubre Allfit OS, el primer producto del ecosistema Allfit One.",
+  openGraph: {
+    type: "website",
+    siteName: "Allfit One",
+    title: "Allfit One — All the fitness in one place.",
+    description: "Personas, entrenamiento y progreso conectados. Descubre Allfit OS, el primer producto del ecosistema Allfit One.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Allfit One — All the fitness in one place.",
+    description: "Personas, entrenamiento y progreso conectados. Descubre Allfit OS, el primer producto del ecosistema Allfit One.",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
