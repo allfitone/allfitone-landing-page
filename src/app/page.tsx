@@ -131,7 +131,7 @@ export default function Home() {
           <div className="flex flex-col">
             {[["#features", t.nav[0]], ["#how-it-works", t.nav[1]], ["#pricing", t.nav[2]], ["#faq", t.nav[3]]].map(([href, label], index) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="group flex items-center justify-between border-b border-white/10 py-5 font-display text-[clamp(2.5rem,11vw,4.5rem)] font-semibold uppercase leading-none text-white/70 transition-colors hover:text-bolt"><span className="flex items-start gap-4"><span className="mt-1 font-mono text-[9px] tracking-normal text-bolt/60">0{index + 1}</span>{label}</span><ArrowUpRight className="size-6 opacity-35 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:opacity-100" /></a>)}
           </div>
-          <div className="mt-10"><p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/30">All the Fitness in One place.</p><a href="#contact" onClick={() => setMenuOpen(false)} className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-bolt text-[10px] font-extrabold uppercase tracking-[.16em] text-void">{t.access}<ArrowUpRight className="size-4" /></a></div>
+          <div className="mt-10"><p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/30">All the fitness in one place.</p><a href="#contact" onClick={() => setMenuOpen(false)} className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-bolt text-[10px] font-extrabold uppercase tracking-[.16em] text-void">{t.access}<ArrowUpRight className="size-4" /></a></div>
         </div> : null}
 
         <svg className="hero-brand-mark" viewBox="0 0 405 1149" aria-hidden="true">
@@ -146,10 +146,10 @@ export default function Home() {
             </div>
 
             <div className="col-span-12">
-              <h1 className="hero-title-new" aria-label="All the Fitness in One place.">
-                <span className="block">All the</span>
-                <span className="hero-fitness block">Fitness</span>
-                <span className="block text-bolt">in One<span className="hero-place-break"> place.</span></span>
+              <h1 className="hero-title-new" aria-label="All the fitness in one place.">
+                <span className="block">ALL THE</span>
+                <span className="hero-fitness block">FITNESS</span>
+                <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
               </h1>
             </div>
 
@@ -267,7 +267,7 @@ export default function Home() {
 
       <footer className="bg-void px-5 pb-7 pt-16 text-white md:px-8 md:pt-20">
         <div className="mx-auto max-w-[1500px]">
-          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between"><div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div><p className="max-w-sm text-sm leading-6 text-white/40">All the Fitness in One place.</p></div>
+          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between"><div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div><p className="max-w-sm text-sm leading-6 text-white/40">All the fitness in one place.</p></div>
           <p className="footer-word mt-20 text-center">ALLFIT ONE</p>
           <Separator className="mt-10 bg-white/10" />
           <div className="mt-5 flex justify-between text-[8px] font-bold uppercase tracking-[.16em] text-white/25"><span>© 2026 Allfit One</span><span>{t.built}</span></div>

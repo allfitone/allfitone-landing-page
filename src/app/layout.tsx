@@ -6,7 +6,7 @@ const display = Barlow_Condensed({ subsets: ["latin"], variable: "--font-display
 const body = Manrope({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
-  title: "Allfit One — All the Fitness in One place",
+  title: "Allfit One — All the fitness in one place.",
   description: "Personas, entrenamiento y progreso conectados. Descubre Allfit OS, el primer producto del ecosistema Allfit One.",
 };
 
