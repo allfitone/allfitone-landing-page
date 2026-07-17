@@ -16,7 +16,7 @@ const structuredData = {
       },
       email: siteConfig.email,
       description:
-        "Allfit One crea productos para conectar entrenamiento, gestión y progreso. Su primer producto es Allfit OS.",
+        "Allfit One conecta personas, profesionales y organizaciones mediante productos para vivir y gestionar el fitness.",
       sameAs: [siteConfig.social.instagram, siteConfig.social.tiktok],
     },
     {
@@ -32,66 +32,12 @@ const structuredData = {
       "@type": "SoftwareApplication",
       "@id": `${siteConfig.url}/#allfit-os`,
       name: "Allfit OS",
-      url: `${siteConfig.url}/#features`,
+      url: `${siteConfig.url}/#allfit-os`,
       description:
-        "Software fitness para gestionar clientes, rutinas, reservas, pagos, membresías, progreso y métricas desde un solo sistema.",
+        "Panel administrativo para que profesionales y organizaciones gestionen clientes, entrenamientos, agenda, membresías y progreso.",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       provider: { "@id": `${siteConfig.url}/#organization` },
-      offers: {
-        "@type": "Offer",
-        price: "30",
-        priceCurrency: "USD",
-        url: `${siteConfig.url}/#pricing`,
-        description: "Plan mensual desde 30 USD con hasta 5 clientes activos y un miembro del equipo.",
-      },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteConfig.url}/#faq`,
-      inLanguage: "es",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "¿Qué es Allfit OS?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Un sistema operativo digital para negocios fitness. Integra página, panel de control y aplicación web para clientes en una sola plataforma.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Para quién está pensado?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Para entrenadores, gimnasios, estudios y marcas de entrenamiento que quieren gestionar y hacer crecer su negocio con una experiencia digital profesional.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Puedo usar mi propia marca?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Sí. Allfit OS puede personalizarse con tu logo, colores, contenido y experiencia de marca.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Mis clientes deben descargar una app?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No necesariamente. La experiencia puede funcionar como aplicación web desde el celular, sin pasar por una tienda de aplicaciones.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Incluye configuración inicial?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Sí. Te ayudamos a configurar tu ecosistema digital para que puedas empezar a usar Allfit OS más rápido.",
-          },
-        },
-      ],
     },
   ],
 };

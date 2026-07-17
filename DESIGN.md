@@ -255,6 +255,11 @@ components:
     borderColor: "{colors.canvas}"
     rounded: "{rounded.device}"
     padding: 8px
+  connected-product-stage:
+    backgroundColor: transparent
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.none}"
+    padding: 0
   footer:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.body-subtle}"
@@ -268,7 +273,7 @@ Allfit One is a **typography-first fitness ecosystem expressed through athletic 
 
 The custom “1” is the identity anchor. Its forward lean creates speed without motion effects, while the surrounding UI stays controlled. Marketing surfaces can be expressive and oversized; Allfit OS product surfaces should lower the volume and prioritize operational clarity without losing the same palette, typography, geometry, or voice.
 
-Allfit One is the parent ecosystem—not a synonym for Allfit OS and not merely a “fitness tech company.” Allfit OS is the first product for coaches, gyms, sports centers, studios, and training brands. A future product will serve hybrid athletes. The design system must be broad enough to connect these audiences without forcing every product into the same interface density.
+Allfit One is the parent ecosystem—not a synonym for Allfit OS and not merely a “fitness tech company.” It contains two equal product expressions: Allfit One App for people and Allfit OS for professionals and organizations. The App name is provisional and the product is coming soon. The design system must connect both audiences without forcing them into the same interface density.
 
 **Key Characteristics:**
 
@@ -284,7 +289,7 @@ Allfit One is the parent ecosystem—not a synonym for Allfit OS and not merely 
 
 ## Colors
 
-> **Source surfaces analyzed:** current landing page, responsive navigation, Allfit OS sections, pricing, FAQ, upcoming athlete product, footer, social preview assets, and the internal `/dev` brand lab. Explorations in `/dev` are not automatically approved tokens.
+> **Source surfaces analyzed:** current connected-product landing, responsive navigation, Allfit One App and Allfit OS editorial sections, ecosystem relationship section, product previews, footer, social preview assets, and the internal `/dev` brand lab. Explorations in `/dev` are not automatically approved tokens.
 
 ### Brand & Accent
 
@@ -498,7 +503,9 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`pricing-panel`** — A dark 16px-radius region with stronger numerical hierarchy. Pricing, inclusions, and scale information should remain aligned and scannable; avoid decorative price badges or fake scarcity.
 
-**`device-shell`** — A 42px-radius physical frame for an actual mobile product surface. Use only when the device explains the athlete or client experience. Do not add a device mockup merely to fill a column.
+**`device-shell`** — A 42px-radius physical frame for an actual Allfit One App surface. Use only when the device explains the personal fitness experience. Do not add a device mockup merely to fill a column.
+
+**`connected-product-stage`** — The signature parent-brand composition. A panoramic Allfit OS administrative panel establishes the operational plane while the Allfit One App phone crosses its edge in the foreground. The overlap communicates one ecosystem; it is not a decorative device pile. On mobile, the products become a deliberate sequence so both previews remain legible.
 
 ### Language Selector
 
@@ -532,6 +539,16 @@ Allfit OS inherits the same system at a lower visual volume:
 - Charts remain understandable without color and expose important values as text.
 - Stable layout and task completion take precedence over oversized marketing composition.
 
+### Allfit One App UI
+
+Allfit One App is the personal expression of the ecosystem:
+
+- The primary screen answers what the person should do today before exposing analytics or discovery.
+- Training, progress, professional relationships, and memberships share one identity but appear contextually.
+- Product UI may feel more kinetic than OS, while keeping one dominant action and the same disciplined palette.
+- Do not reduce the visual language to hybrid competition; it must also work for beginners, strength athletes, endurance athletes, and gym members.
+- Until the product is released, mockups are conceptual and must not imply unavailable functionality.
+
 ## Do's and Don'ts
 
 ### Do
@@ -561,7 +578,7 @@ Allfit OS inherits the same system at a lower visual volume:
 - Don't write `AllfitOne`; the brand is **Allfit One**.
 - Don't position Allfit One only as Allfit OS, gym-management software, or a “fitness tech company.”
 - Don't add user-facing content in only one language.
-- Don't describe future athlete capabilities as released product functionality.
+- Don't describe Allfit One App vision or future capabilities as released product functionality.
 
 ## Responsive Behavior
 
@@ -635,8 +652,8 @@ The structural breakpoints that matter for implementation are the Tailwind defau
 - A semantic data-visualization palette beyond the core cyan/turquoise family has not been approved.
 - The destructive color exists as a practical implementation token, but warning, success, and informational state scales are not yet formalized.
 - The commercial demo-request flow currently relies on email; a measurable form or scheduling experience has not been specified.
-- The hybrid-athlete product name, information architecture, feature scope, and data visualization needs remain open.
-- The relationship between native applications and progressive web experiences is not decided.
+- Allfit One App is a provisional name; its final name, release scope, and complete information architecture remain open.
+- The relationship between native applications and progressive web experiences for Allfit One App is not decided.
 - Dark and light application themes for Allfit OS have not been approved; the documented light mode is an editorial marketing surface, not a complete product theme.
 - Motion beyond navigation, disclosures, and isolated product presentation has not been standardized.
 - Photography art direction is defined in principle, but no approved production library, crop set, or grading preset exists.

@@ -11,8 +11,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - The brand name is **Allfit One**, always with a space. Never write `AllfitOne` in user-facing copy.
 - The tagline is exactly **“All the fitness in one place.”** Preserve its lowercase wording and final period in metadata and sentence-case contexts. Existing display treatments may render it in uppercase.
 - Allfit One is an ecosystem focused on fitness, not a company that should be marketed simply as a “fitness tech company.”
-- **Allfit OS** is the first product: an operating ecosystem for coaches, gyms, sports centers, studios, and training brands to manage clients, workouts, bookings, payments, and progress.
-- A future Allfit One product will serve hybrid athletes. Do not reduce the parent brand to gym-management software.
+- **Allfit OS** is the administrative product for coaches, gyms, sports centers, studios, and training brands to manage clients, training, schedules, memberships, payments, and progress. Its public page is an item inside OS, not a separate product. Do not describe a client PWA as part of OS.
+- **Allfit One App** is the provisional name for the personal product. It will serve people who train independently or with professionals, including strength, endurance, and hybrid athletes, gym members, and beginners. Present it as coming soon until its release scope is approved.
+- Allfit One App and Allfit OS are equal products within the parent ecosystem. Do not reduce Allfit One to either product or to gym-management software.
 - The main production URL is `https://www.allfit.one`.
 
 ## Language rules
@@ -27,6 +28,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - Next.js `16.2.10` App Router, React `19`, TypeScript, Tailwind CSS `4`, shadcn/ui with Base UI primitives, and Lucide icons.
 - `src/app/page.tsx` contains the bilingual landing experience.
+- The public homepage uses a floating navbar, one connected two-product hero, dedicated product explanation sections, an ecosystem relationship section, and the established footer.
 - `src/app/layout.tsx` owns root metadata, fonts, and global structured data.
 - `src/app/globals.css` is the only global Tailwind/theme stylesheet.
 - `src/lib/site-config.ts` is the source of truth for the public URL, SEO title, description, email, and social links.
@@ -66,7 +68,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Keep the canonical URL pointed at `https://www.allfit.one`.
 - Keep the homepage positioning broad enough to represent the parent ecosystem. Product-specific keywords belong in Allfit OS copy and future dedicated routes.
 - Preserve crawlable `robots.txt`, the canonical-only sitemap, large-image social metadata, and the Open Graph/Twitter assets.
-- Keep Organization, WebSite, SoftwareApplication, and FAQ structured data accurate and consistent with visible content. Never add ratings, reviews, availability, or claims that are not present and verifiable.
+- Keep Organization, WebSite, and Allfit OS SoftwareApplication structured data accurate and consistent with visible content. Do not add FAQ or Offer data while those sections are absent, and never add ratings, reviews, availability, or claims that are not present and verifiable.
 - The homepage must remain indexable. Internal `/dev` content must remain `noindex, nofollow`.
 - Do not add speculative `llms.txt` or duplicate language URLs without a concrete distribution plan.
 

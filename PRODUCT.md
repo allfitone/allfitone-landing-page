@@ -2,9 +2,9 @@
 
 ## Document purpose
 
-This document is the product source of truth for Allfit One. It explains what the brand is building, who it serves, how its products relate to one another, what is currently defined, and which decisions remain open.
+This document is the product source of truth for Allfit One. It explains the ecosystem, the role of each product, their audiences, how they connect, what is currently defined, and which decisions remain open.
 
-It should guide product, design, engineering, content, sales, and marketing decisions. Update it when the product strategy changes; do not let the landing page become the only place where product decisions are documented.
+It should guide product, design, engineering, content, sales, and marketing. Update it when the product strategy changes; the landing page must not become the only place where product decisions are documented.
 
 ## Brand
 
@@ -14,260 +14,301 @@ It should guide product, design, engineering, content, sales, and marketing deci
 
 **Website:** https://www.allfit.one
 
-Allfit One is an ecosystem that connects people, training, operations, and progress. It should not be positioned only as a software company or a “fitness tech company.” Technology is the means; the product experience and the fitness ecosystem are the proposition.
-
-The parent brand must remain broad enough to support products for both fitness businesses and athletes.
+Allfit One is a fitness ecosystem that connects people, professionals, organizations, training, operations, and progress. It should not be positioned only as a software company, a “fitness tech company,” or gym-management software. Technology is the means; the connected fitness experience is the proposition.
 
 ## Vision
 
-Create the place where the different parts of fitness work together: the people who train, the professionals who guide them, the businesses that serve them, and the progress they produce.
+Create the place from which a person can live their fitness life and the system from which professionals and organizations can make that experience possible.
 
-Allfit One should reduce fragmentation across the fitness experience without forcing every audience into the same interface or product.
+Allfit One should reduce fragmentation without forcing every audience into the same interface. A person and a business share infrastructure, identity, permissions, and relevant data, but each uses a product designed for their own goals.
 
 ## Product architecture
 
+```text
+ALLFIT ONE
+
+├── Allfit One App
+│   Personal fitness product
+│
+└── Allfit OS
+    Product for professionals and organizations
+```
+
 ### Allfit One
 
-The parent ecosystem and brand. It owns the shared identity, principles, and long-term product portfolio.
+The parent ecosystem and brand. It owns the shared identity, principles, infrastructure, and long-term portfolio.
+
+### Allfit One App
+
+The provisional name for the personal fitness product. It is designed for people who train independently, work with a professional, belong to a gym or studio, practice strength or endurance disciplines, or want to begin training.
+
+Its long-term proposition is:
+
+> Everything a person needs to live fitness.
+
+The App is broader than a hybrid-athlete tracker. It should eventually connect training, planning, progress, professionals, gyms, memberships, bookings, experiences, community, and commerce around one portable identity.
+
+The product is not yet publicly released. Its final commercial name, release scope, business model, and availability are open decisions. Public communication must label it as coming soon and must not present long-term capabilities as available.
 
 ### Allfit OS
 
-The first product. An operating ecosystem for coaches, gyms, sports centers, studios, and training brands.
+The administrative and operational product for independent coaches, gyms, studios, boxes, sports academies, high-performance centers, and other fitness organizations.
 
-Allfit OS combines three connected layers:
+Its proposition is:
 
-1. **Public page** — Presents the business, services, plans, and brand while helping capture potential clients.
-2. **Operations dashboard** — Manages clients, training plans, routines, bookings, payments or memberships, activity, progress, and business metrics.
-3. **Client web app** — Gives clients a mobile experience to follow training plans, log workouts, review history, and track progress.
+> Everything a professional or organization needs to offer fitness.
 
-The promise is not merely “management software.” The product should give a fitness business a coherent digital presence, an operating system, and a client experience without requiring custom software development.
+Allfit OS is centered on the management panel. It organizes clients, members, teams, training, schedules, bookings, memberships, payments, progress, and operational information. A public business page may exist as an item or module inside OS; it is not a separate product or one of several equal “layers.”
 
-### Allfit One athlete product
+Allfit OS does not include a separate client PWA as its product proposition. The personal training and progress experience belongs in Allfit One App. OS professionals and organizations connect with people through the shared ecosystem and permissions model.
 
-A future product for hybrid athletes who combine strength, running, conditioning, and competition across disciplines.
+## Product relationship
 
-The exact name, feature set, business model, and release scope are not yet defined. Until they are, communicate it as an upcoming Allfit One experience rather than a finished application.
+The competitive advantage is not having two disconnected applications. It is the flow between them:
+
+| Allfit One App | Direction | Allfit OS |
+| --- | --- | --- |
+| A person trains | ← | A professional programs |
+| A person books | ← | An organization publishes availability |
+| A person buys or joins | ← | A business offers services or memberships |
+| A person records results | → | A professional analyzes authorized results |
+| A person controls their history | ↔ | An organization receives necessary access |
+
+Shared infrastructure may eventually include identity, permissions, payments, marketplace data, memberships, bookings, and authorized training history.
+
+## Fitness ID
+
+Fitness ID is the long-term identity concept for Allfit One App. A person's goals, training history, progress, relationships, memberships, bookings, achievements, preferences, and authorized wearable data should remain portable when they change coach, gym, location, or discipline.
+
+The person—not a coach or organization—controls the identity and decides what to share. Before implementation, define consent, granular permissions, retention, export, deletion, encryption, and the boundary between fitness information and sensitive health data.
+
+Fitness ID is a product thesis, not a currently available public feature.
 
 ## Target audiences
 
-### Primary audience for Allfit OS
+### Allfit One App
 
-- Independent coaches and personal trainers.
-- Gyms and fitness centers.
-- Sports centers and training studios.
-- Training brands that need a digital client experience.
-- Small teams that currently coordinate clients and operations across spreadsheets, messaging apps, disconnected tools, or manual processes.
-
-### Secondary audience for Allfit OS
-
-- Growing fitness businesses that need their software costs to scale with active clients.
-- Businesses that want to operate under their own visual identity.
-- Teams that need a professional client experience without publishing a native mobile app.
-
-### Future athlete audience
-
-- Hybrid athletes who train across strength and endurance disciplines.
-- Athletes who do not identify with a single sport or training category.
-- People who want training, progress, load, and performance to live in one coherent experience.
-
-## Problems
-
-### Problems for fitness businesses
-
-- Public presence, lead capture, messaging, bookings, payments, training delivery, and progress tracking are fragmented.
-- Coaches and teams repeat operational work across tools that do not share context.
-- Building custom software is expensive, slow, and difficult to maintain.
-- Clients receive an inconsistent experience that does not reflect the business brand.
-- Many products become expensive before a business has enough active clients to justify the cost.
-
-### Problems for clients
-
-- Training plans, workout history, communication, and progress are spread across different channels.
-- Mobile access often depends on downloading another generic application.
-- The digital experience may feel disconnected from the coach, gym, or training brand.
-
-### Future problems for hybrid athletes
-
-- Strength and endurance data are often separated.
-- Training products tend to assume a single discipline.
-- Progress is difficult to understand when performance spans several physical qualities.
-
-## Value proposition
-
-### Allfit One
-
-One ecosystem for the different ways fitness is operated and experienced.
+- People who train independently.
+- People who want to start training.
+- Strength, running, endurance, and hybrid athletes.
+- Clients of independent coaches.
+- Members of gyms, studios, boxes, or sports centers.
+- People looking for fitness services, classes, programs, or experiences.
 
 ### Allfit OS
 
-Everything a fitness business needs to establish its digital presence, run its operation, and serve clients through one connected system.
+- Independent coaches and personal trainers.
+- Gyms and fitness centers.
+- Studios, boxes, sports academies, and high-performance centers.
+- Training brands and small teams coordinating work across spreadsheets, messaging apps, and disconnected tools.
+- In later stages, adjacent professionals such as nutritionists and physiotherapists when their workflows are explicitly defined.
 
-### Product principles
+## Problems
 
-1. **Connected by default** — Information should flow between the public page, operations dashboard, and client experience.
-2. **Simple at the beginning** — A small coach or studio should be able to start without enterprise complexity.
-3. **Scales with real usage** — Cost and operational complexity should grow with active clients and team size.
-4. **Brand belongs to the business** — The client-facing experience should support the identity of the coach, gym, studio, or brand.
-5. **Mobile without unnecessary friction** — Core client workflows should work well from a phone without requiring an app-store download.
-6. **Fitness language, not software language** — Interfaces should use concepts that coaches, businesses, clients, and athletes already understand.
-7. **Progress must be visible** — Training activity should produce understandable evidence of adherence and improvement.
+### Problems for people
+
+- Training history, plans, progress, memberships, bookings, and professional relationships are fragmented.
+- Data often belongs to the current tool, coach, or gym rather than traveling with the person.
+- Products commonly assume one discipline or one way of training.
+- People must move between unrelated products to train, find help, join a facility, or understand progress.
+
+### Problems for professionals and organizations
+
+- Clients, programming, schedules, memberships, payments, and progress are coordinated across tools that do not share context.
+- Repetitive operational work reduces the time available for coaching and service.
+- Custom software is expensive, slow, and difficult to maintain.
+- Business data and the person's training experience often become disconnected.
+- Marketplace information can drift when availability, prices, and memberships are maintained separately from real operations.
+
+## Value propositions
+
+### Allfit One
+
+One ecosystem for the different ways fitness is lived and offered.
+
+### Allfit One App
+
+Train independently or with a professional and carry your progress with you.
+
+### Allfit OS
+
+Manage clients, training, schedules, memberships, and progress from one administrative system.
+
+## Product principles
+
+1. **Connected by default** — Information should flow between products when the person has authorized it.
+2. **The person controls their identity** — A relationship with a professional or organization does not transfer ownership of personal history.
+3. **Context over module overload** — The App should adapt to goals, discipline, experience, and relationships instead of exposing every future capability at once.
+4. **Operational clarity** — OS should make daily work easier before adding enterprise complexity.
+5. **Fitness language, not software language** — Interfaces should use concepts people and professionals already understand.
+6. **Progress must be visible** — Training activity should produce understandable evidence of adherence and improvement.
+7. **AI is a layer, not a destination** — Intelligence should support planning, adaptation, analysis, and operations instead of becoming an isolated chatbot.
+8. **Product truth over vision claims** — Public communication must distinguish released capability, near-term scope, and long-term direction.
 
 ## Allfit OS scope
 
-### Public presence
+### Administrative panel
+
+- Client and member management.
+- Team members, roles, and locations when defined.
+- Training plans, routines, and programming.
+- Schedule, classes, sessions, and bookings.
+- Memberships and payments.
+- Progress and activity review.
+- Operational and business metrics.
+- Profiles, services, pricing, and availability used by the connected ecosystem.
+
+### Public presence item
 
 - Business and brand presentation.
-- Services and plans.
-- Lead capture.
-- WhatsApp contact.
-- Responsive, professional public experience.
+- Services, plans, schedules, or locations when configured.
+- Lead or contact capture.
+- Public information synchronized with the operation where possible.
 
-### Operations
+The public page is an OS item or module. It must not be described as an independent product.
 
-- Client management.
-- Team members.
-- Training plans and routines.
-- Bookings and schedule.
-- Payments or memberships.
-- Progress tracking.
-- Activity and business metrics.
+### Connection with Allfit One App
 
-### Client experience
-
-- Mobile web access.
-- Training plans.
-- Workout history.
-- Workout and progress logging.
-- Connection with the coach, gym, or training business.
-- Branded experience.
+- Professionals assign training to authorized people.
+- Organizations connect memberships, schedules, bookings, or services.
+- People send completed activity and progress back according to permissions.
+- OS does not provide a separate client PWA as a substitute for Allfit One App.
 
 ### Initial setup
 
-Allfit OS includes initial configuration support so a business can begin operating sooner. The exact limits of setup, migration, integrations, and dedicated support must be defined during commercialization.
+Allfit OS may include configuration support so a business can begin operating sooner. The exact boundaries of setup, migration, integrations, custom domains, white-label behavior, and dedicated support must be defined during commercialization.
+
+## Allfit One App scope
+
+### Phase 1 — Training core
+
+- Personal fitness profile.
+- Strength routines and workout logging.
+- Calendar and progress.
+- Programs.
+- Basic connection with Allfit OS.
+- A coach assigning routines.
+- A linked gym or membership where supported.
+
+The initial proposition is:
+
+> Train on your own or with a professional and keep all your progress in one place.
+
+### Long-term navigation model
+
+- **Today** — The immediate answer to what the person should do today.
+- **Train** — Training, logging, planning, and discipline-specific workflows.
+- **Explore** — Discovery of professionals, organizations, programs, events, and services.
+- **Community** — Real training relationships, clubs, challenges, achievements, and shared activity.
+- **You** — Fitness ID, history, progress, memberships, relationships, integrations, and privacy.
+
+These areas are a long-term information architecture, not the release checklist.
+
+### Deferred capabilities
+
+- Broad marketplace and in-app payments.
+- Complex social feed.
+- Multisport support beyond the validated core.
+- Adaptive AI planning and recovery recommendations.
+- Wearable and health-platform integrations.
+- Nutrition, commerce, events, physical products, and connected equipment.
 
 ## Commercial model
 
-The current public pricing proposal is:
+### Allfit OS
 
-- **Base price:** USD 30 per month.
-- **Included:** Up to 5 active clients and 1 team member.
-- **Trial:** 30 days.
-- **Additional team members:** From USD 15 per month.
-- **Features:** Available from the beginning rather than divided into locked feature tiers.
+The current reference proposal is a recurring subscription that scales with active clients, team members, or locations. Previous public pricing is no longer shown on the parent landing and requires a complete billing specification before it becomes canonical.
 
-Current reference pricing for additional active clients:
+Define active-client calculation, proration, taxes, failed payments, cancellations, reactivation, limits, messaging costs, payment processing, and enterprise exceptions before implementation.
 
-| Active clients | Monthly price per additional client |
-|---|---:|
-| 6–50 | USD 3.00 |
-| 51–200 | USD 2.00 |
-| 201–500 | USD 1.50 |
-| 501–1,000 | USD 1.20 |
-| 1,001–3,000 | USD 1.00 |
+### Allfit One App
 
-Payment processing, messages, migrations, integrations, and dedicated support may be priced separately depending on scope.
+The long-term direction may combine a useful free training experience with paid analytics, planning, intelligence, specialized tools, and premium programs. No public pricing or final entitlement model is approved.
 
-This model is currently a public proposal, not a substitute for a complete billing specification. Before implementation, define active-client calculation, proration, taxes, failed payments, cancellations, reactivation, limits, and enterprise exceptions.
+### Marketplace
 
-## Experience and brand principles
-
-- Premium and athletic, with precision rather than visual noise.
-- Distinctive enough to be recognized as Allfit One without depending on athlete photography.
-- Direct, confident language without generic startup claims.
-- Spanish by default with a complete English alternative.
-- Accessible, responsive, and usable across mobile, tablet, and desktop.
-- Avoid decorative badges, floating metric cards, excessive pills, and patterns that resemble generated SaaS templates.
-- Use the custom “1” mark consistently and preserve its geometry.
+Commissions for services, bookings, programs, events, or payments are a later business-model direction. They are not current landing-page claims.
 
 ## Current landing-page job
 
-The landing page has four jobs:
+The parent landing currently has four jobs:
 
-1. Establish Allfit One as the parent fitness ecosystem.
-2. Explain Allfit OS as the first concrete product.
-3. Qualify coaches, gyms, studios, sports centers, and training brands for a demo.
-4. Signal the future athlete product without presenting it as already available.
+1. Establish Allfit One as the parent ecosystem.
+2. Present Allfit One App and Allfit OS with equal visual hierarchy.
+3. Show that the personal and operational products are connected.
+4. Convert qualified Allfit OS interest into demo requests while labeling the App as coming soon.
 
-The homepage should not reduce Allfit One to Allfit OS. Product-specific search positioning can become more precise when Allfit OS has its own route.
+The page uses a navbar, one connected hero, dedicated explanations for Allfit One App and Allfit OS, an ecosystem relationship section, and the existing footer. It does not currently explain pricing or FAQs.
 
 ## Current calls to action
 
-- Discover Allfit OS.
-- Explore how the ecosystem works.
-- Request a demonstration by email.
+- Navigate to the Allfit One App presentation.
+- Navigate to the Allfit OS presentation.
+- Request an Allfit OS demo by email.
 
-The primary conversion is a qualified demo request. A future version should replace the direct email link with a measurable form or scheduling flow once sales operations are defined.
+Allfit One App has no public CTA until a real waitlist, release, or update channel exists.
 
 ## Success metrics
 
-### Landing and acquisition
+### Ecosystem landing
 
-- Qualified demo requests.
-- Demo-request conversion rate.
-- Engagement with Allfit OS sections.
-- Pricing-section reach and CTA conversion.
-- Organic impressions and qualified search traffic.
+- Qualified Allfit OS demo requests.
+- Engagement with both product anchors.
+- Language selection and device-level completion of the hero.
+- Organic impressions and qualified branded traffic.
 
-### Allfit OS activation
+### Allfit OS
 
-- Time from account creation to first configured client.
-- Percentage of businesses that publish their public page.
+- Time to first configured client.
+- Percentage of organizations that configure their operation and public information.
 - Percentage that create and assign a first training plan.
-- Percentage that invite at least one client.
-- Time to first completed client workout.
+- Active businesses, active clients, booking usage, membership activity, and retention.
 
-### Allfit OS retention and value
+### Allfit One App
 
-- Active businesses by week and month.
-- Active clients per business.
-- Client workout adherence.
-- Training plans assigned and completed.
-- Booking and payment usage.
-- Business and client retention.
-- Expansion through active clients and team members.
+The proposed north-star metric is weekly fitness sessions completed through Allfit One. Supporting measures may include active weeks per person, plan completion, retention, active professional relationships, and connected organizations.
 
-These metrics are proposed product measures. Targets and instrumentation are not yet defined.
+Targets and instrumentation are not yet defined.
 
 ## Product status
 
-- The current landing is an early public proposal and brand foundation.
-- Allfit OS is presented as the first product with early-access/demo intent.
-- Pricing is referential and requires a detailed billing specification.
-- The athlete product is a future direction, not a released product.
-- The internal `/dev` route is a brand lab and must not be indexed or treated as a public product page.
+- The current landing is an early brand and commercial-positioning surface.
+- Allfit OS is presented as the product available for demo conversations.
+- Allfit One App is a broad product vision presented as coming soon under a provisional name.
+- Fitness ID, marketplace, intelligence, broad integrations, and connected-gym capabilities are future directions.
+- The internal `/dev` route is a brand lab and must remain `noindex`.
 
 ## Non-goals for the current phase
 
 - Positioning Allfit One only as gym-management software.
-- Promising a native mobile app when the current client experience is web-based.
-- Claiming integrations, automation, analytics, or outcomes that are not implemented and verified.
-- Presenting the hybrid-athlete product as available before its scope and release are defined.
-- Building enterprise complexity before the core small-business workflow is validated.
+- Presenting Allfit OS as a public page, dashboard, and client PWA bundle.
+- Presenting Allfit One App only as a hybrid-athlete product.
+- Claiming marketplace, AI, wearable, nutrition, community, or commerce capabilities as released.
+- Building a complex social feed, general store, medical system, or support for every sport initially.
+- Publishing a waitlist or conversion action that has no real destination.
 
 ## Open decisions
 
-The following decisions require explicit product work:
-
-- Final MVP scope and release criteria for Allfit OS.
-- Account, organization, location, role, and permission model.
-- Definition of an active client for billing.
-- Trial conversion and cancellation rules.
-- Payment provider and supported countries or currencies.
-- WhatsApp integration depth and messaging costs.
-- Migration and onboarding service boundaries.
-- White-label and custom-domain capabilities.
-- Native app strategy versus progressive web application.
-- Data ownership, export, privacy, and retention policies.
-- Support model and service-level expectations.
-- Name, scope, and positioning of the hybrid-athlete product.
-- Analytics events and numeric targets for the success metrics above.
+- Final commercial name for Allfit One App.
+- Release criteria and MVP boundaries for both products.
+- Shared account, organization, role, location, and permission model.
+- Fitness ID consent, ownership, export, deletion, encryption, and retention policies.
+- Relationship between organization branding and the central Allfit One App experience.
+- Pricing and billing specifications for Allfit OS.
+- Free and paid entitlement model for Allfit One App.
+- Marketplace timing, provider verification, payments, refunds, and commissions.
+- AI safety, explanation, professional oversight, and medical boundaries.
+- Supported integrations, countries, currencies, and languages.
+- Native application versus progressive web strategy for Allfit One App.
+- Analytics events and numeric targets.
 
 ## Decision rule
 
-When a feature, campaign, or design direction is proposed, evaluate it against three questions:
+When a feature, campaign, or design direction is proposed, evaluate it against four questions:
 
 1. Does it make fitness more connected for the audience it serves?
-2. Does it strengthen the Allfit One ecosystem without blurring the role of each product?
-3. Can the promise be demonstrated by the current product rather than only described in marketing?
+2. Does it preserve the distinct role of the App and OS?
+3. Does the person retain appropriate control over their identity and data?
+4. Can the promise be demonstrated by the current product or clearly labeled as future direction?
 
 If the answer to any question is no, the proposal needs revision.

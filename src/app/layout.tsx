@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   creator: siteConfig.name,
   publisher: siteConfig.name,
-  category: "Fitness software",
+  category: "Fitness ecosystem",
   alternates: { canonical: "/" },
   robots: {
     index: true,

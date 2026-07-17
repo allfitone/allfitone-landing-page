@@ -3,266 +3,611 @@
 import { useEffect, useState } from "react";
 import {
   Activity,
-  ArrowDown,
-  ArrowRight,
   ArrowUpRight,
-  BarChart3,
-  CircleDollarSign,
+  CalendarDays,
+  ChevronRight,
+  Clock3,
   CreditCard,
   Dumbbell,
   Globe2,
-  Layers3,
   LayoutDashboard,
-  MessageCircle,
   Menu,
-  ShieldCheck,
-  Smartphone,
+  TrendingUp,
   Users,
   X,
 } from "lucide-react";
 
+import { LogoMark } from "@/components/logo-mark";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { LogoMark } from "@/components/logo-mark";
 import { cn } from "@/lib/utils";
 
 type Language = "es" | "en";
 
-const pillarIcons = [Globe2, LayoutDashboard, Dumbbell];
-const layerIcons = [Globe2, LayoutDashboard, Smartphone];
-const signalIcons = [Users, Dumbbell, MessageCircle, CreditCard, Activity, BarChart3];
-
 const content = {
   es: {
-    nav: ["Allfit OS", "Cómo funciona", "Precio", "Preguntas"], access: "Solicitar demo", accessShort: "Demo",
-    hero: "Creamos el lugar donde personas, entrenamiento y progreso se conectan. El primer paso es", discover: "Descubrir Allfit OS", ecosystem: "Ver el ecosistema", heroKicker: "Un ecosistema para el fitness", firstProduct: "Primer producto", osDescriptor: "El sistema operativo para entrenadores, gimnasios y estudios.", audience: "Entrenadores · Gimnasios · Estudios",
-    adherence: "Adherencia", weeklyLoad: "Carga semanal", thisWeek: "+12.4% esta semana", sessionsToday: "Sesiones hoy", inProgress: "6 en curso", athleteAlt: "Atleta entrenando con intensidad",
-    osLabel: "Qué es Allfit OS", osTitle: "Todo lo que tu negocio fitness necesita, conectado en un solo sistema.", osCopy: "Allfit OS les da a entrenadores, gimnasios, estudios y marcas de entrenamiento las herramientas para tener presencia digital, gestionar su operación y ofrecer una mejor experiencia a sus clientes sin construir software desde cero.",
-    pillars: [["Página pública", "Lanza", "Crea una presencia digital profesional para tu marca de entrenamiento."], ["Panel operativo", "Gestiona", "Administra clientes, planes, rutinas, reservas y actividad del negocio."], ["App cliente", "Entrena", "Dale a tus clientes una experiencia móvil para seguir planes y registrar progreso."]],
-    includesLabel: "Qué incluye", layersTitle: "Un sistema. Tres capas conectadas.", layersCopy: "Allfit OS conecta tu marca pública, tu operación interna y la experiencia de tus clientes en una sola plataforma.", signals: ["Clientes", "Rutinas", "WhatsApp", "Pagos", "Progreso", "Métricas"],
-    layers: [
-      ["Página", "Una página profesional para presentar tus servicios, planes, marca y captar nuevos clientes.", ["Servicios y planes", "Captura de contactos interesados", "Contacto por WhatsApp", "Presentación de marca"]],
-      ["Panel de control", "Tu centro de control para gestionar clientes, entrenamientos, reservas y operación.", ["Clientes", "Rutinas", "Reservas", "Pagos o membresías", "Progreso", "Métricas"]],
-      ["Aplicación web para clientes", "Una experiencia móvil para que tus clientes puedan entrenar, registrar progreso y mantenerse conectados contigo.", ["Planes de entrenamiento", "Historial de entrenamientos", "Seguimiento de progreso", "Acceso desde el celular", "Conexión con entrenador o gimnasio"]],
+    navOs: "Allfit OS",
+    navApp: "Allfit One App",
+    navEcosystem: "Ecosistema",
+    requestDemo: "Solicitar demo",
+    requestDemoShort: "Demo",
+    heroCopy:
+      "Una app para vivir el fitness. Un sistema para quienes lo hacen posible. Allfit One conecta personas, profesionales y organizaciones en un mismo ecosistema.",
+    appAudience: "Para personas",
+    appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
+    comingSoon: "Próximamente",
+    osAudience: "Para profesionales y organizaciones",
+    osDescription:
+      "Gestiona clientes, entrenamientos, agenda, membresías y progreso desde un solo panel.",
+    phoneToday: "Hoy",
+    phoneGreeting: "Tu siguiente paso",
+    phoneSession: "Fuerza · Tren superior",
+    phoneLocation: "18:00 · Allfit Performance",
+    phoneRecovery: "Recuperación moderada",
+    phoneDuration: "72 min",
+    phoneStart: "Comenzar entrenamiento",
+    phoneWeek: "Semana",
+    phoneAdherence: "Adherencia",
+    dashboardOverview: "Resumen",
+    dashboardGreeting: "Así se mueve tu operación hoy.",
+    dashboardNavigation: ["Resumen", "Clientes", "Entrenamientos", "Agenda", "Membresías", "Página pública"],
+    dashboardActiveClients: "Clientes activos",
+    dashboardSessions: "Sesiones hoy",
+    dashboardAdherence: "Adherencia",
+    dashboardAgenda: "Agenda de hoy",
+    dashboardActivity: "Actividad reciente",
+    dashboardViewAll: "Ver agenda",
+    dashboardSchedule: [
+      ["07:00", "Fuerza · Grupo 04", "8 atletas"],
+      ["10:30", "Evaluación inicial", "Laura Méndez"],
+      ["18:00", "Engine · Intermedio", "12 atletas"],
     ],
-    pricingLabel: "Precio", pricingTitle: "Empieza liviano. Escala cuando tu marca ya mueve volumen.", pricingCopy: "Allfit OS parte de una base mensual y escala principalmente con tus clientes activos y miembros adicionales del equipo.", requestDemo: "Solicitar demostración", trial: "30 días de prueba", entry: "Entrada simple", basePrice: "$30 USD / mes", baseDescription: "Incluye hasta 5 clientes activos y 1 miembro del equipo.", included: "Todo incluido", noLockedFeatures: "Sin funciones bloqueadas", includedDescription: "Rutinas, reservas, pagos, progreso, app, panel, agenda y marca desde el inicio.", model: "Un solo modelo", modelTitle: "El precio crece con tu operación.", modelCopy: "Después de los primeros 5 clientes, el valor por cliente baja por volumen. Los miembros adicionales del equipo se suman aparte desde $15 USD al mes.", tiers: [["6—50 clientes", "$3 / cliente"], ["51—200 clientes", "$2 / cliente"], ["201—500 clientes", "$1.50 / cliente"], ["501—1,000 clientes", "$1.20 / cliente"], ["1,001—3,000 clientes", "$1 / cliente"]], priceDisclaimer: "Precio referencial mensual. Pasarela de pago, mensajes, migraciones, integraciones o soporte dedicado pueden cotizarse aparte según el alcance.",
-    faqLabel: "Preguntas frecuentes", faqTitle: "Antes de construir tu plataforma fitness.", faqNotes: ["Página + panel + app", "Acceso móvil sin tienda", "Marca, contacto y operación"], faqs: [["¿Qué es Allfit OS?", "Un sistema operativo digital para negocios fitness. Integra página, panel de control y aplicación web para clientes en una sola plataforma."], ["¿Para quién está pensado?", "Para entrenadores, gimnasios, estudios y marcas de entrenamiento que quieren gestionar y hacer crecer su negocio con una experiencia digital profesional."], ["¿Puedo usar mi propia marca?", "Sí. Allfit OS puede personalizarse con tu logo, colores, contenido y experiencia de marca."], ["¿Mis clientes deben descargar una app?", "No necesariamente. La experiencia puede funcionar como aplicación web desde el celular, sin pasar por una tienda de aplicaciones."], ["¿Incluye configuración inicial?", "Sí. Te ayudamos a configurar tu ecosistema digital para que puedas empezar a usar Allfit OS más rápido."]],
-    early: "Acceso anticipado", prepare: "Construye tu ecosistema", operate: "con Allfit OS.", contactCopy: "Solicita una demostración y revisemos si necesitas operar bajo Allfit One o con tu propia marca.",
-    next: "Lo siguiente / Allfit One App", hybridTitle: "El atleta híbrido tendrá su lugar.", hybridCopy: "Entrena fuerza. Corre lejos. Compite contra tus límites. Estamos construyendo una experiencia para atletas que no caben en una sola disciplina.",
-    phoneToday: "Hoy / Motor híbrido", phoneTitle: "Construye al", phoneTitleAccent: "atleta completo.", todaySession: "Sesión de hoy", runningLoad: "Carga de carrera", strength: "Fuerza",
+    dashboardUpdates: [
+      ["Mariana completó su sesión", "Hace 8 min"],
+      ["Nuevo cliente asignado", "Hace 21 min"],
+      ["Pago de membresía registrado", "Hace 34 min"],
+    ],
+    appSectionLabel: "Allfit One App",
+    appSectionTitle: "Tu fitness no debería empezar de cero cada vez.",
+    appSectionCopy:
+      "Una experiencia personal para entrenar por tu cuenta o con profesionales, conservar tu progreso y conectarte con gimnasios, membresías y servicios desde una misma identidad.",
+    appPillars: [
+      ["Entrena", "Organiza rutinas, registra sesiones y entiende tu progreso sin importar dónde entrenes."],
+      ["Conecta", "Trabaja con profesionales y vincula gimnasios o membresías sin fragmentar tu experiencia."],
+      ["Lleva tu historia", "Tus objetivos, resultados y relaciones permanecen contigo cuando cambias de disciplina, entrenador o lugar."],
+    ],
+    appAreasLabel: "Una experiencia que se adapta a ti",
+    appAreas: [
+      ["Hoy", "Lo que toca hoy"],
+      ["Entrena", "Entrenamiento y progreso"],
+      ["Explora", "Profesionales y lugares"],
+      ["Comunidad", "Personas que entrenan"],
+      ["Tú", "Tu identidad fitness"],
+    ],
+    appVision: "Visión de producto · Próximamente",
+    osSectionLabel: "Allfit OS",
+    osSectionTitle: "La operación detrás de cada experiencia.",
+    osSectionCopy:
+      "Un panel administrativo para que entrenadores, gimnasios, estudios y centros deportivos gestionen su operación y acompañen el progreso de las personas desde un solo lugar.",
+    osModulesLabel: "Todo ocurre dentro del panel",
+    osModules: [
+      ["Clientes", "Perfiles, relaciones y seguimiento"],
+      ["Entrenamientos", "Planes, rutinas y asignaciones"],
+      ["Agenda", "Sesiones, clases y reservas"],
+      ["Membresías", "Planes, pagos y vigencias"],
+      ["Progreso", "Actividad, adherencia y resultados"],
+      ["Página pública", "Servicios, horarios y contacto"],
+    ],
+    ecosystemLabel: "Ecosistema",
+    ecosystemTitle: "Dos productos. Una sola relación.",
+    ecosystemCopy:
+      "La App acompaña a la persona. OS organiza a quienes hacen posible su experiencia. Allfit One conecta ambos lados con identidad, permisos e información compartida.",
+    ecosystemRows: [
+      ["La persona entrena", "El profesional programa"],
+      ["La persona reserva", "La organización publica"],
+      ["La persona registra progreso", "El profesional analiza"],
+      ["La persona conserva su historia", "La organización accede con permiso"],
+    ],
     built: "Creado para el movimiento",
   },
   en: {
-    nav: ["Allfit OS", "How it works", "Pricing", "FAQ"], access: "Request demo", accessShort: "Demo",
-    hero: "We are building the place where people, training and progress connect. The first step is", discover: "Discover Allfit OS", ecosystem: "Explore the ecosystem", heroKicker: "One ecosystem for fitness", firstProduct: "First product", osDescriptor: "The operating system for coaches, gyms and studios.", audience: "Coaches · Gyms · Studios",
-    adherence: "Adherence", weeklyLoad: "Weekly load", thisWeek: "+12.4% this week", sessionsToday: "Sessions today", inProgress: "6 in progress", athleteAlt: "Athlete training with intensity",
-    osLabel: "What is Allfit OS", osTitle: "Everything your fitness business needs, connected in one system.", osCopy: "Allfit OS gives coaches, gyms, studios and training brands the tools to build a digital presence, manage operations and deliver a better client experience without building software from scratch.",
-    pillars: [["Public page", "Launch", "Create a professional digital presence for your training brand."], ["Operations dashboard", "Manage", "Run clients, plans, routines, bookings and business activity."], ["Client app", "Train", "Give clients a mobile experience to follow plans and log progress."]],
-    includesLabel: "What's included", layersTitle: "One system. Three connected layers.", layersCopy: "Allfit OS connects your public brand, internal operation and client experience in a single platform.", signals: ["Clients", "Routines", "WhatsApp", "Payments", "Progress", "Metrics"],
-    layers: [
-      ["Page", "A professional page to present services, plans and your brand while capturing new clients.", ["Services and plans", "Lead capture", "WhatsApp contact", "Brand presentation"]],
-      ["Control panel", "Your command center for managing clients, training, bookings and operations.", ["Clients", "Routines", "Bookings", "Payments or memberships", "Progress", "Metrics"]],
-      ["Client web app", "A mobile experience where clients can train, log progress and stay connected with you.", ["Training plans", "Workout history", "Progress tracking", "Mobile access", "Coach or gym connection"]],
+    navOs: "Allfit OS",
+    navApp: "Allfit One App",
+    navEcosystem: "Ecosystem",
+    requestDemo: "Request demo",
+    requestDemoShort: "Demo",
+    heroCopy:
+      "An app to live fitness. A system for the people who make it possible. Allfit One connects people, professionals and organizations in one ecosystem.",
+    appAudience: "For people",
+    appDescription: "Train on your own or with a professional and keep your progress with you.",
+    comingSoon: "Coming soon",
+    osAudience: "For professionals and organizations",
+    osDescription: "Manage clients, training, schedules, memberships and progress from one dashboard.",
+    phoneToday: "Today",
+    phoneGreeting: "Your next move",
+    phoneSession: "Strength · Upper body",
+    phoneLocation: "18:00 · Allfit Performance",
+    phoneRecovery: "Moderate recovery",
+    phoneDuration: "72 min",
+    phoneStart: "Start workout",
+    phoneWeek: "Week",
+    phoneAdherence: "Adherence",
+    dashboardOverview: "Overview",
+    dashboardGreeting: "This is how your operation moves today.",
+    dashboardNavigation: ["Overview", "Clients", "Training", "Schedule", "Memberships", "Public page"],
+    dashboardActiveClients: "Active clients",
+    dashboardSessions: "Sessions today",
+    dashboardAdherence: "Adherence",
+    dashboardAgenda: "Today's schedule",
+    dashboardActivity: "Recent activity",
+    dashboardViewAll: "View schedule",
+    dashboardSchedule: [
+      ["07:00", "Strength · Group 04", "8 athletes"],
+      ["10:30", "Initial assessment", "Laura Méndez"],
+      ["18:00", "Engine · Intermediate", "12 athletes"],
     ],
-    pricingLabel: "Pricing", pricingTitle: "Start light. Scale when your brand moves volume.", pricingCopy: "Allfit OS starts with a monthly base and scales mainly with active clients and additional team members.", requestDemo: "Request a demo", trial: "30-day trial", entry: "Simple entry", basePrice: "$30 USD / month", baseDescription: "Includes up to 5 active clients and 1 team member.", included: "All included", noLockedFeatures: "No locked features", includedDescription: "Routines, bookings, payments, progress, app, dashboard, schedule and brand from day one.", model: "One model", modelTitle: "Pricing grows with your operation.", modelCopy: "After the first 5 clients, the per-client rate decreases with volume. Additional team members start at $15 USD per month.", tiers: [["6—50 clients", "$3 / client"], ["51—200 clients", "$2 / client"], ["201—500 clients", "$1.50 / client"], ["501—1,000 clients", "$1.20 / client"], ["1,001—3,000 clients", "$1 / client"]], priceDisclaimer: "Reference monthly price. Payment processing, messages, migrations, integrations or dedicated support may be quoted separately depending on scope.",
-    faqLabel: "Frequently asked questions", faqTitle: "Before building your fitness platform.", faqNotes: ["Page + dashboard + app", "Mobile access without a store", "Brand, contact and operations"], faqs: [["What is Allfit OS?", "A digital operating system for fitness businesses. It integrates a page, control panel and client web app in one platform."], ["Who is it for?", "Coaches, gyms, studios and training brands that want to manage and grow their business with a professional digital experience."], ["Can I use my own brand?", "Yes. Allfit OS can be customized with your logo, colors, content and brand experience."], ["Do my clients need to download an app?", "Not necessarily. The client experience can work as a web app on mobile without going through an app store."], ["Does it include initial setup?", "Yes. We help configure your digital ecosystem so you can start using Allfit OS faster."]],
-    early: "Early access", prepare: "Build your ecosystem", operate: "with Allfit OS.", contactCopy: "Request a demo and let's review whether you should operate under Allfit One or your own brand.",
-    next: "Up next / Allfit One App", hybridTitle: "Hybrid athletes will have their place.", hybridCopy: "Build strength. Run far. Compete against your limits. We are creating an experience for athletes who do not fit into a single discipline.",
-    phoneToday: "Today / Hybrid engine", phoneTitle: "Build the", phoneTitleAccent: "complete athlete.", todaySession: "Today's session", runningLoad: "Running load", strength: "Strength",
+    dashboardUpdates: [
+      ["Mariana completed her session", "8 min ago"],
+      ["New client assigned", "21 min ago"],
+      ["Membership payment recorded", "34 min ago"],
+    ],
+    appSectionLabel: "Allfit One App",
+    appSectionTitle: "Your fitness should not start over every time.",
+    appSectionCopy:
+      "A personal experience to train independently or with professionals, keep your progress and connect with gyms, memberships and services through one identity.",
+    appPillars: [
+      ["Train", "Organize routines, log sessions and understand your progress wherever you train."],
+      ["Connect", "Work with professionals and link gyms or memberships without fragmenting your experience."],
+      ["Carry your history", "Your goals, results and relationships stay with you when you change discipline, coach or place."],
+    ],
+    appAreasLabel: "An experience that adapts to you",
+    appAreas: [
+      ["Today", "What is next today"],
+      ["Train", "Training and progress"],
+      ["Explore", "Professionals and places"],
+      ["Community", "People who train"],
+      ["You", "Your fitness identity"],
+    ],
+    appVision: "Product vision · Coming soon",
+    osSectionLabel: "Allfit OS",
+    osSectionTitle: "The operation behind every experience.",
+    osSectionCopy:
+      "An administrative dashboard for coaches, gyms, studios and sports centers to manage their operation and support people's progress from one place.",
+    osModulesLabel: "Everything happens inside the dashboard",
+    osModules: [
+      ["Clients", "Profiles, relationships and follow-up"],
+      ["Training", "Plans, routines and assignments"],
+      ["Schedule", "Sessions, classes and bookings"],
+      ["Memberships", "Plans, payments and validity"],
+      ["Progress", "Activity, adherence and results"],
+      ["Public page", "Services, hours and contact"],
+    ],
+    ecosystemLabel: "Ecosystem",
+    ecosystemTitle: "Two products. One relationship.",
+    ecosystemCopy:
+      "The App stays with the person. OS organizes the people who make their experience possible. Allfit One connects both sides through identity, permissions and shared information.",
+    ecosystemRows: [
+      ["The person trains", "The professional programs"],
+      ["The person books", "The organization publishes"],
+      ["The person logs progress", "The professional analyzes"],
+      ["The person keeps their history", "The organization accesses it with permission"],
+    ],
     built: "Built for movement",
   },
 } as const;
 
+type LocalizedContent = (typeof content)[Language];
+
+const dashboardIcons = [LayoutDashboard, Users, Dumbbell, CalendarDays, CreditCard, Globe2];
+const appPillarIcons = [Dumbbell, Users, TrendingUp];
+const osModuleIcons = [Users, Dumbbell, CalendarDays, CreditCard, Activity, Globe2];
+
+function PhoneMockup({ copy }: { copy: LocalizedContent }) {
+  return (
+    <div className="phone-shell product-phone" aria-hidden="true">
+      <div className="phone-screen">
+        <div className="phone-island" aria-hidden="true" />
+        <div className="mt-8 flex items-end justify-between">
+          <div>
+            <p className="text-[8px] font-bold uppercase tracking-[.18em] text-white/35">{copy.phoneGreeting}</p>
+            <p className="mt-1 font-display text-[2.65rem] font-semibold uppercase leading-none">{copy.phoneToday}</p>
+          </div>
+          <span className="flex size-9 items-center justify-center rounded-full border border-white/10 text-bolt">
+            <Activity className="size-4" aria-hidden="true" />
+          </span>
+        </div>
+
+        <div className="mt-7 border-y border-white/10 py-5">
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-[8px] font-bold uppercase tracking-[.16em] text-bolt">{copy.phoneRecovery}</p>
+            <span className="font-mono text-[8px] text-white/35">68%</span>
+          </div>
+          <div className="mt-3 h-px bg-white/10">
+            <div className="h-px w-[68%] bg-bolt" />
+          </div>
+        </div>
+
+        <div className="mt-5 rounded-2xl bg-bolt p-5 text-void">
+          <div className="flex items-center justify-between">
+            <p className="text-[8px] font-extrabold uppercase tracking-[.16em]">{copy.phoneSession}</p>
+            <Dumbbell className="size-4" aria-hidden="true" />
+          </div>
+          <p className="mt-3 text-[10px] font-semibold text-void/65">{copy.phoneLocation}</p>
+          <div className="mt-8 flex items-center justify-between border-t border-void/15 pt-4">
+            <span className="flex items-center gap-1.5 text-[9px] font-bold">
+              <Clock3 className="size-3.5" aria-hidden="true" />
+              {copy.phoneDuration}
+            </span>
+            <ChevronRight className="size-4" aria-hidden="true" />
+          </div>
+        </div>
+
+        <div className="mt-3 flex h-11 w-full items-center justify-between rounded-full border border-white/15 px-4 text-left text-[8px] font-extrabold uppercase tracking-[.14em] text-white">
+          {copy.phoneStart}
+          <ArrowUpRight className="size-3.5 text-bolt" aria-hidden="true" />
+        </div>
+
+        <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10">
+          <div className="bg-white/[.035] p-4">
+            <p className="text-[7px] uppercase tracking-[.14em] text-white/35">{copy.phoneWeek}</p>
+            <strong className="mt-2 block text-lg">4 / 5</strong>
+          </div>
+          <div className="bg-white/[.035] p-4">
+            <p className="text-[7px] uppercase tracking-[.14em] text-white/35">{copy.phoneAdherence}</p>
+            <strong className="mt-2 block text-lg text-bolt">87%</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OsDashboardMockup({ copy }: { copy: LocalizedContent }) {
+  return (
+    <div className="os-shell" aria-hidden="true">
+      <div className="os-topbar">
+        <div className="flex items-center gap-2.5">
+          <LogoMark className="small" />
+          <span className="font-display text-sm font-bold tracking-[-.02em]">ALLFIT <span className="text-bolt">OS</span></span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="hidden text-[7px] font-bold uppercase tracking-[.16em] text-white/30 sm:block">Allfit Performance</span>
+          <span className="flex size-7 items-center justify-center rounded-full bg-bolt font-display text-xs font-bold text-void">AP</span>
+        </div>
+      </div>
+
+      <div className="os-workspace">
+        <aside className="os-sidebar">
+          {copy.dashboardNavigation.map((item, index) => {
+            const Icon = dashboardIcons[index];
+            return (
+              <div key={item} className={cn("os-nav-item", index === 0 && "os-nav-item-active")}>
+                <Icon className="size-3.5" aria-hidden="true" />
+                <span>{item}</span>
+              </div>
+            );
+          })}
+        </aside>
+
+        <div className="os-main">
+          <header className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[7px] font-bold uppercase tracking-[.17em] text-bolt">Allfit OS</p>
+              <p className="mt-1 font-display text-2xl font-semibold uppercase leading-none sm:text-3xl">{copy.dashboardOverview}</p>
+              <p className="mt-2 hidden text-[8px] text-white/35 sm:block">{copy.dashboardGreeting}</p>
+            </div>
+            <span className="hidden items-center gap-1.5 text-[7px] font-semibold text-white/35 md:flex">
+              <CalendarDays className="size-3" aria-hidden="true" />
+              17 Jul 2026
+            </span>
+          </header>
+
+          <div className="os-stat-grid">
+            {[
+              [copy.dashboardActiveClients, "128", Users],
+              [copy.dashboardSessions, "24", Activity],
+              [copy.dashboardAdherence, "87%", TrendingUp],
+            ].map(([label, value, Icon]) => (
+              <article key={String(label)} className="os-stat">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-[6px] font-bold uppercase tracking-[.14em] text-white/30 sm:text-[7px]">{String(label)}</p>
+                  <Icon className="size-3 text-bolt" aria-hidden="true" />
+                </div>
+                <strong className="mt-3 block font-display text-2xl font-semibold leading-none sm:text-3xl">{String(value)}</strong>
+              </article>
+            ))}
+          </div>
+
+          <div className="os-content-grid">
+            <section className="os-panel">
+              <div className="flex items-center justify-between gap-4 border-b border-white/8 pb-3">
+                <p className="text-[8px] font-bold uppercase tracking-[.15em] text-white/65">{copy.dashboardAgenda}</p>
+                <span className="text-[6px] font-bold uppercase tracking-[.12em] text-bolt">{copy.dashboardViewAll}</span>
+              </div>
+              <div className="flex flex-col">
+                {copy.dashboardSchedule.map(([time, session, detail]) => (
+                  <div key={`${time}-${session}`} className="grid grid-cols-[38px_1fr_auto] items-center gap-2 border-b border-white/6 py-3 last:border-b-0">
+                    <span className="font-mono text-[7px] text-bolt">{time}</span>
+                    <strong className="truncate text-[8px] font-semibold text-white/75">{session}</strong>
+                    <span className="hidden text-[7px] text-white/30 sm:block">{detail}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="os-panel os-activity-panel">
+              <p className="border-b border-white/8 pb-3 text-[8px] font-bold uppercase tracking-[.15em] text-white/65">{copy.dashboardActivity}</p>
+              <div className="flex flex-col">
+                {copy.dashboardUpdates.map(([update, time]) => (
+                  <div key={update} className="flex gap-2.5 border-b border-white/6 py-3 last:border-b-0">
+                    <span className="mt-1 size-1.5 shrink-0 rounded-full bg-bolt" aria-hidden="true" />
+                    <div className="min-w-0">
+                      <p className="truncate text-[7px] font-semibold text-white/65">{update}</p>
+                      <p className="mt-1 text-[6px] text-white/25">{time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [language, setLanguage] = useState<Language>("es");
   const [menuOpen, setMenuOpen] = useState(false);
-  const t = content[language];
+  const copy = content[language];
 
   useEffect(() => {
-    const saved = window.localStorage.getItem("allfitone-language");
+    const savedLanguage = window.localStorage.getItem("allfitone-language");
     const timer = window.setTimeout(() => {
-      if (saved === "en") setLanguage("en");
+      if (savedLanguage === "en") setLanguage("en");
     }, 0);
+
     return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute("lang", language);
+    document.documentElement.lang = language;
   }, [language]);
 
   useEffect(() => {
-    document.body.classList.toggle("overflow-hidden", menuOpen);
-    return () => document.body.classList.remove("overflow-hidden");
+    if (!menuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
   }, [menuOpen]);
 
-  function changeLanguage(nextLanguage: Language) {
+  const changeLanguage = (nextLanguage: Language) => {
     setLanguage(nextLanguage);
     window.localStorage.setItem("allfitone-language", nextLanguage);
-  }
+  };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <main className="overflow-x-clip bg-void text-white">
-      <section id="home" className="hero relative min-h-screen overflow-hidden">
+    <main className="min-h-screen overflow-x-clip bg-void text-white">
+      <section id="home" className="hero relative overflow-hidden">
         <nav className="site-grid fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] -translate-x-1/2 items-center rounded-2xl bg-void/86 py-3.5 shadow-[0_18px_55px_rgba(3,7,19,.24)] backdrop-blur-xl" aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
-          <a href="#home" className="brand col-span-6 lg:col-span-3" aria-label={language === "es" ? "Allfit One, inicio" : "Allfit One, home"}>
+          <a href="#home" className="brand col-span-6 min-h-11 lg:col-span-3" aria-label={language === "es" ? "Allfit One, inicio" : "Allfit One, home"}>
             <LogoMark />
             <span>ALLFIT <span className="brand-one">ONE</span></span>
           </a>
-          <div className="col-span-6 hidden justify-center gap-5 text-[10px] font-bold uppercase tracking-[0.16em] text-white/48 lg:flex">
-            <a href="#features" className="nav-link">{t.nav[0]}</a>
-            <a href="#how-it-works" className="nav-link">{t.nav[1]}</a>
-            <a href="#pricing" className="nav-link">{t.nav[2]}</a>
-            <a href="#faq" className="nav-link">{t.nav[3]}</a>
+
+          <div className="col-span-6 hidden justify-center gap-6 text-[10px] font-bold uppercase tracking-[0.16em] text-white/48 lg:flex">
+            <a href="#allfit-app" className="nav-link inline-flex min-h-11 items-center">{copy.navApp}</a>
+            <a href="#allfit-os" className="nav-link inline-flex min-h-11 items-center">{copy.navOs}</a>
+            <a href="#ecosystem" className="nav-link inline-flex min-h-11 items-center">{copy.navEcosystem}</a>
           </div>
+
           <div className="col-span-6 ml-auto flex items-center gap-3 lg:col-span-3 lg:gap-4">
-            <div className="flex rounded-full border border-white/15 p-0.5 text-[8px] font-extrabold" aria-label={language === "es" ? "Seleccionar idioma" : "Select language"}>
-              {(["es", "en"] as const).map((item) => <button key={item} type="button" onClick={() => changeLanguage(item)} className={language === item ? "rounded-full bg-bolt px-2 py-1 text-void" : "rounded-full px-2 py-1 text-white/45 transition-colors hover:text-white"} aria-pressed={language === item}>{item.toUpperCase()}</button>)}
+            <div className="hidden rounded-full border border-white/15 text-[8px] font-extrabold min-[400px]:flex" aria-label={language === "es" ? "Seleccionar idioma" : "Select language"}>
+              {(["es", "en"] as const).map((item) => (
+                <button key={item} type="button" onClick={() => changeLanguage(item)} className={language === item ? "flex size-11 items-center justify-center rounded-full bg-bolt text-void" : "flex size-11 items-center justify-center rounded-full text-white/45 transition-colors hover:text-white"} aria-pressed={language === item}>
+                  {item.toUpperCase()}
+                </button>
+              ))}
             </div>
-            <a href="#contact" className="ml-auto hidden items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white sm:flex">
-              <span className="lg:hidden">{t.accessShort}</span><span className="hidden lg:inline">{t.access}</span> <ArrowUpRight className="size-4 text-bolt" aria-hidden="true" />
+            <a href="mailto:hello@allfitone.com" className="ml-auto hidden min-h-11 items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white sm:flex">
+              <span className="lg:hidden">{copy.requestDemoShort}</span>
+              <span className="hidden lg:inline">{copy.requestDemo}</span>
+              <ArrowUpRight className="size-4 text-bolt" aria-hidden="true" />
             </a>
-            <button type="button" onClick={() => setMenuOpen((open) => !open)} className="ml-auto flex size-9 items-center justify-center rounded-full border border-white/12 text-white transition-colors hover:border-bolt/50 hover:text-bolt sm:ml-0 lg:hidden" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : (language === "es" ? "Abrir menú" : "Open menu")}>
-              {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+            <button type="button" onClick={() => setMenuOpen((open) => !open)} className="ml-auto flex size-11 items-center justify-center rounded-full border border-white/12 text-white transition-colors hover:border-bolt/50 hover:text-bolt sm:ml-0 lg:hidden" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? (language === "es" ? "Cerrar menú" : "Close menu") : (language === "es" ? "Abrir menú" : "Open menu")}>
+              {menuOpen ? <X className="size-4" aria-hidden="true" /> : <Menu className="size-4" aria-hidden="true" />}
             </button>
           </div>
         </nav>
 
-        {menuOpen ? <div id="mobile-navigation" className="fixed inset-0 z-40 flex h-dvh flex-col justify-between overflow-y-auto bg-void/98 px-6 pb-7 pt-28 backdrop-blur-2xl sm:px-10 lg:hidden">
-          <div className="flex flex-col">
-            {[["#features", t.nav[0]], ["#how-it-works", t.nav[1]], ["#pricing", t.nav[2]], ["#faq", t.nav[3]]].map(([href, label], index) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="group flex items-center justify-between border-b border-white/10 py-5 font-display text-[clamp(2.5rem,11vw,4.5rem)] font-semibold uppercase leading-none text-white/70 transition-colors hover:text-bolt"><span className="flex items-start gap-4"><span className="mt-1 font-mono text-[9px] tracking-normal text-bolt/60">0{index + 1}</span>{label}</span><ArrowUpRight className="size-6 opacity-35 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:opacity-100" /></a>)}
+        {menuOpen ? (
+          <div id="mobile-navigation" className="fixed inset-0 z-40 flex h-dvh flex-col justify-between overflow-y-auto bg-void/98 px-6 pb-7 pt-28 backdrop-blur-2xl sm:px-10 lg:hidden">
+            <div className="flex flex-col">
+              {[
+                ["#allfit-app", copy.navApp, copy.appAudience],
+                ["#allfit-os", copy.navOs, copy.osAudience],
+                ["#ecosystem", copy.navEcosystem, copy.ecosystemLabel],
+              ].map(([href, label, audience]) => (
+                <a key={href} href={href} onClick={closeMenu} className="group flex items-end justify-between gap-6 border-b border-white/10 py-6 font-display text-[clamp(2.8rem,12vw,5rem)] font-semibold uppercase leading-none text-white/70 transition-colors hover:text-bolt">
+                  <span>{label}</span>
+                  <span className="mb-1 hidden max-w-40 text-right font-sans text-[8px] font-bold uppercase leading-4 tracking-[.16em] text-white/30 sm:block">{audience}</span>
+                </a>
+              ))}
+            </div>
+            <div className="mt-10">
+              <div className="mb-6 flex w-fit rounded-full border border-white/15 text-[9px] font-extrabold min-[400px]:hidden" aria-label={language === "es" ? "Seleccionar idioma" : "Select language"}>
+                {(["es", "en"] as const).map((item) => (
+                  <button key={item} type="button" onClick={() => changeLanguage(item)} className={language === item ? "flex size-11 items-center justify-center rounded-full bg-bolt text-void" : "flex size-11 items-center justify-center rounded-full text-white/45 transition-colors hover:text-white"} aria-pressed={language === item}>
+                    {item.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+              <p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/30">All the fitness in one place.</p>
+              <a href="mailto:hello@allfitone.com" onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "h-14 w-full rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-void hover:bg-cyan-light")}>
+                {copy.requestDemo}
+                <ArrowUpRight data-icon="inline-end" />
+              </a>
+            </div>
           </div>
-          <div className="mt-10"><p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/30">All the fitness in one place.</p><a href="#contact" onClick={() => setMenuOpen(false)} className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-bolt text-[10px] font-extrabold uppercase tracking-[.16em] text-void">{t.access}<ArrowUpRight className="size-4" /></a></div>
-        </div> : null}
+        ) : null}
 
         <svg className="hero-brand-mark" viewBox="0 0 405 1149" aria-hidden="true">
           <path d="M405 0 0 211l120 1L11 1149l324-490L405 0Z" />
         </svg>
 
-        <div className="site-grid relative z-20 min-h-screen content-between pb-8 pt-32 md:pb-10 md:pt-40 lg:pt-36">
-          <div className="col-span-12 grid grid-cols-12 gap-x-5 md:gap-x-7">
-            <div className="col-span-12 mb-8 flex items-center gap-4 md:mb-10">
-              <span className="block h-px w-10 bg-bolt" aria-hidden="true" />
-              <p className="eyebrow text-bolt">{t.heroKicker}</p>
-            </div>
-
-            <div className="col-span-12">
-              <h1 className="hero-title-new" aria-label="All the fitness in one place.">
-                <span className="block">ALL THE</span>
-                <span className="hero-fitness block">FITNESS</span>
-                <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
-              </h1>
-            </div>
-
-            <div className="col-span-12 mt-10 min-w-0 md:col-span-6 md:mt-12 lg:col-span-4">
-              <p className="hero-copy max-w-lg text-sm leading-6 text-white/58 md:text-base md:leading-7">
-                {t.hero} <strong className="font-semibold text-white">Allfit OS</strong>.
-              </p>
-            </div>
-            <div className="col-span-12 mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center md:col-span-5 md:col-start-8 md:mt-12 md:justify-end">
-              <a href="#features" className={cn(buttonVariants({ size: "lg" }), "h-13 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[0.16em] text-void hover:bg-bolt/85")}>
-                {t.discover} <ArrowDown data-icon="inline-end" />
-              </a>
-              <a href="#how-it-works" className="flex items-center gap-2 px-3 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60 transition-colors hover:text-white">
-                {t.ecosystem} <ArrowRight className="size-4" />
-              </a>
-            </div>
+        <div className="site-grid relative z-20 pb-24 pt-32 md:pb-28 md:pt-40 lg:pt-36">
+          <div className="col-span-12 mt-6 md:mt-8">
+            <h1 className="hero-title-new" aria-label="All the fitness in one place.">
+              <span className="block">ALL THE</span>
+              <span className="hero-fitness block">FITNESS</span>
+              <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
+            </h1>
           </div>
 
-          <div className="col-span-12 mt-16 grid min-w-0 grid-cols-12 border-y border-white/12 md:mt-20">
-            <div className="col-span-12 flex items-center gap-4 py-4 md:col-span-3 md:border-r md:border-white/12 md:pr-6">
-              <span className="font-mono text-[9px] text-bolt">01</span>
-              <span className="eyebrow text-white/35">{t.firstProduct}</span>
+          <div className="col-span-12 mt-10 md:col-span-7 md:mt-12 lg:col-span-5">
+            <p className="hero-copy max-w-xl text-sm leading-6 text-white/58 md:text-base md:leading-7">{copy.heroCopy}</p>
+          </div>
+
+          <div className="product-stage col-span-12 mt-20 md:mt-28 lg:mt-32">
+            <div className="product-stage-visual">
+              <div className="app-visual-anchor">
+                <PhoneMockup copy={copy} />
+              </div>
+              <div className="os-visual-anchor">
+                <OsDashboardMockup copy={copy} />
+              </div>
             </div>
-            <div className="col-span-12 flex items-center justify-between border-t border-white/12 py-5 md:col-span-5 md:border-t-0 md:px-7">
-              <strong className="font-display text-3xl font-semibold uppercase tracking-[-.035em]">Allfit OS</strong>
-              <ArrowUpRight className="size-5 text-bolt" aria-hidden="true" />
+
+            <div className="product-definitions">
+              <article className="product-definition product-definition-app">
+                <p className="eyebrow text-bolt">{copy.appAudience}</p>
+                <h2 className="mt-4 font-display text-5xl font-semibold uppercase leading-none tracking-[-.04em] md:text-6xl">Allfit One App</h2>
+                <p className="mt-5 max-w-md text-sm leading-6 text-white/48">{copy.appDescription}</p>
+                <div className="mt-8 flex items-center gap-3">
+                  <span className="h-px w-8 bg-bolt" aria-hidden="true" />
+                  <span className="text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{copy.comingSoon}</span>
+                </div>
+              </article>
+
+              <article className="product-definition product-definition-os">
+                <p className="eyebrow text-bolt">{copy.osAudience}</p>
+                <h2 className="mt-4 font-display text-5xl font-semibold uppercase leading-none tracking-[-.04em] md:text-6xl">Allfit OS</h2>
+                <p className="mt-5 max-w-md text-sm leading-6 text-white/48">{copy.osDescription}</p>
+                <a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "mt-8 h-12 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-void hover:bg-cyan-light")}>
+                  {copy.requestDemo}
+                  <ArrowUpRight data-icon="inline-end" />
+                </a>
+              </article>
             </div>
-            <div className="col-span-12 border-t border-white/12 py-5 md:col-span-4 md:border-l md:border-t-0 md:border-white/12 md:pl-7">
-              <p className="text-xs leading-5 text-white/50">{t.osDescriptor}</p>
-              <p className="mt-2 text-[8px] font-bold uppercase tracking-[.16em] text-bolt/70">{t.audience}</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="allfit-app" className="bg-chalk text-void">
+        <div className="site-grid py-24 md:py-32 lg:py-40">
+          <div className="col-span-12 md:col-span-3">
+            <p className="product-section-label text-turquoise-dark">{copy.appSectionLabel}</p>
+          </div>
+          <div className="col-span-12 mt-8 md:col-span-9 md:mt-0 lg:col-span-8">
+            <h2 className="section-title text-void">{copy.appSectionTitle}</h2>
+            <p className="mt-8 max-w-2xl text-base leading-7 text-void/62 md:text-lg md:leading-8">{copy.appSectionCopy}</p>
+          </div>
+
+          <div className="col-span-12 mt-20 grid border-y border-void/14 md:mt-28 md:grid-cols-3">
+            {copy.appPillars.map(([title, description], index) => {
+              const Icon = appPillarIcons[index];
+              return (
+                <article key={title} className="app-pillar border-b border-void/14 py-8 last:border-b-0 md:border-r md:border-b-0 md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                  <Icon className="size-5 text-turquoise-dark" strokeWidth={1.6} aria-hidden="true" />
+                  <h3 className="mt-10 font-display text-4xl font-semibold uppercase leading-none tracking-[-.035em]">{title}</h3>
+                  <p className="mt-5 max-w-sm text-sm leading-6 text-void/58">{description}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="col-span-12 mt-20 bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
+            <div className="flex flex-col gap-3 border-b border-white/12 pb-7 md:flex-row md:items-end md:justify-between">
+              <h3 className="font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">{copy.appAreasLabel}</h3>
+              <p className="text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{copy.appVision}</p>
+            </div>
+            <div className="grid md:grid-cols-5">
+              {copy.appAreas.map(([area, description]) => (
+                <div key={area} className="border-b border-white/10 py-6 last:border-b-0 md:border-r md:border-b-0 md:px-5 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                  <p className="font-display text-2xl font-semibold uppercase text-bolt">{area}</p>
+                  <p className="mt-2 text-xs leading-5 text-white/42">{description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
-        <div className="absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-bolt/60 to-transparent" />
       </section>
 
-      <section id="features" className="relative overflow-hidden bg-chalk py-24 text-void md:py-36">
-        <div className="site-grid items-end">
-          <div className="col-span-12 md:col-span-3"><p className="eyebrow text-void/45">{t.osLabel}</p></div>
-          <div className="col-span-12 mt-6 md:col-span-9 md:mt-0">
-            <h2 className="section-title max-w-5xl">{t.osTitle}</h2>
-            <p className="mt-8 max-w-3xl text-base leading-7 text-void/60 md:text-lg">{t.osCopy}</p>
+      <section id="allfit-os" className="relative overflow-hidden bg-panel text-white">
+        <div className="os-section-mark" aria-hidden="true">OS</div>
+        <div className="site-grid relative z-10 py-24 md:py-32 lg:py-40">
+          <div className="col-span-12 md:col-span-3">
+            <p className="product-section-label text-bolt">{copy.osSectionLabel}</p>
+          </div>
+          <div className="col-span-12 mt-8 md:col-span-9 md:mt-0 lg:col-span-8">
+            <h2 className="section-title">{copy.osSectionTitle}</h2>
+            <p className="mt-8 max-w-2xl text-base leading-7 text-white/58 md:text-lg md:leading-8">{copy.osSectionCopy}</p>
+            <a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "mt-9 h-12 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-void hover:bg-cyan-light")}>
+              {copy.requestDemo}
+              <ArrowUpRight data-icon="inline-end" />
+            </a>
+          </div>
+
+          <div className="col-span-12 mt-20 md:mt-28">
+            <p className="mb-6 text-[9px] font-extrabold uppercase tracking-[.18em] text-white/34">{copy.osModulesLabel}</p>
+            <div className="border-t border-white/14">
+              {copy.osModules.map(([module, description], index) => {
+                const Icon = osModuleIcons[index];
+                return (
+                  <article key={module} className="os-module-row grid grid-cols-[2rem_1fr] items-start gap-4 border-b border-white/14 py-6 md:grid-cols-[3rem_minmax(12rem,.75fr)_1fr] md:items-center md:gap-7">
+                    <Icon className="mt-1 size-5 text-bolt md:mt-0" strokeWidth={1.5} aria-hidden="true" />
+                    <h3 className="font-display text-3xl font-semibold uppercase leading-none tracking-[-.03em] md:text-4xl">{module}</h3>
+                    <p className="col-start-2 text-sm leading-6 text-white/42 md:col-start-3">{description}</p>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </div>
-        <div className="site-grid mt-16 md:mt-24">
-          {t.pillars.map(([signal, title, description], index) => {
-            const Icon = pillarIcons[index];
-            return <article key={title} className="col-span-12 border-t border-void/15 py-8 md:col-span-4 md:min-h-72 md:border-l md:border-t-0 md:px-7 first:md:border-l-0">
-              <div className="flex items-center justify-between"><Icon className="size-6 text-turquoise-dark" /><span className="font-mono text-[10px] text-void/30">0{index + 1}</span></div>
-              <p className="mt-10 text-[9px] font-extrabold uppercase tracking-[.18em] text-turquoise-dark">{signal}</p>
-              <h3 className="mt-3 font-display text-5xl font-semibold uppercase leading-none">{title}</h3>
-              <p className="mt-5 max-w-sm text-sm leading-6 text-void/55">{description}</p>
-            </article>;
-          })}
-        </div>
       </section>
 
-      <section id="how-it-works" className="bg-void py-24 md:py-32">
-        <div className="site-grid items-end">
-          <div className="col-span-12 md:col-span-4"><p className="eyebrow text-white/35">{t.includesLabel}</p></div>
-          <div className="col-span-12 mt-6 md:col-span-8 md:mt-0"><h2 className="section-title max-w-4xl">{t.layersTitle}</h2><p className="mt-7 max-w-2xl text-base leading-7 text-white/45">{t.layersCopy}</p></div>
-        </div>
-        <div className="site-grid mt-12">
-          <div className="col-span-12 flex flex-wrap gap-2 md:col-start-5 md:col-span-8">
-            {t.signals.map((signal, index) => { const Icon = signalIcons[index]; return <span key={signal} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[.035] px-3 py-2 text-[10px] font-bold text-white/50"><Icon className="size-3.5 text-bolt" />{signal}</span>; })}
+      <section id="ecosystem" className="bg-bolt text-void">
+        <div className="site-grid py-24 md:py-32 lg:py-40">
+          <div className="col-span-12 md:col-span-4">
+            <p className="product-section-label text-turquoise-dark">{copy.ecosystemLabel}</p>
+          </div>
+          <div className="col-span-12 mt-8 md:col-span-8 md:mt-0">
+            <h2 className="section-title text-void">{copy.ecosystemTitle}</h2>
+            <p className="mt-8 max-w-2xl text-base leading-7 text-void/62 md:text-lg md:leading-8">{copy.ecosystemCopy}</p>
+          </div>
+
+          <div className="col-span-12 mt-20 border-t border-void/20 md:mt-28 md:col-start-5 md:col-span-8">
+            {copy.ecosystemRows.map(([person, organization]) => (
+              <div key={person} className="grid gap-3 border-b border-void/20 py-6 sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-6">
+                <p className="font-display text-2xl font-semibold uppercase leading-none tracking-[-.02em] md:text-3xl">{person}</p>
+                <ArrowUpRight className="size-5 rotate-45 text-turquoise-dark" aria-hidden="true" />
+                <p className="font-display text-2xl font-semibold uppercase leading-none tracking-[-.02em] sm:text-right md:text-3xl">{organization}</p>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="site-grid mt-14">
-          {t.layers.map(([title, description, items], index) => {
-            const Icon = layerIcons[index];
-            return <article key={title} className={index === 1 ? "col-span-12 rounded-2xl border border-bolt/35 bg-bolt/6 p-6 md:col-span-4 md:p-7" : "col-span-12 rounded-2xl border border-white/10 bg-panel/65 p-6 md:col-span-4 md:p-7"}>
-              <div className="flex items-center justify-between"><span className="flex size-11 items-center justify-center rounded-xl bg-bolt/10 text-bolt"><Icon className="size-5" /></span><span className="font-display text-4xl text-white/15">0{index + 1}</span></div>
-              <p className="mt-8 text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{language === "es" ? "Capa conectada" : "Connected layer"}</p>
-              <h3 className="mt-3 font-display text-4xl font-semibold uppercase leading-none">{title}</h3>
-              <p className="mt-5 text-sm leading-6 text-white/45">{description}</p>
-              <ul className="mt-7 flex flex-col gap-3">{items.map((item) => <li key={item} className="flex items-start gap-3 text-sm text-white/65"><span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-bolt" />{item}</li>)}</ul>
-            </article>;
-          })}
-        </div>
-      </section>
-
-      <section id="pricing" className="bg-panel py-24 md:py-32">
-        <div className="site-grid items-end">
-          <div className="col-span-12 md:col-span-7"><p className="eyebrow text-bolt">{t.pricingLabel}</p><h2 className="section-title mt-7 max-w-4xl">{t.pricingTitle}</h2></div>
-          <div className="col-span-12 mt-8 md:col-span-5 md:mt-0"><p className="max-w-xl text-sm leading-6 text-white/45">{t.pricingCopy}</p><div className="mt-6 flex items-center gap-4"><a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "h-12 rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.15em] text-void hover:bg-cyan-light")}>{t.requestDemo}<ArrowUpRight data-icon="inline-end" /></a><span className="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">{t.trial}</span></div></div>
-        </div>
-        <div className="site-grid mt-14">
-          <div className="col-span-12 rounded-2xl border border-white/10 bg-void p-6 md:col-span-5 md:p-8"><CircleDollarSign className="size-6 text-bolt" /><p className="mt-8 text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{t.entry}</p><p className="mt-3 font-display text-5xl font-semibold uppercase">{t.basePrice}</p><p className="mt-4 text-sm text-white/45">{t.baseDescription}</p></div>
-          <div className="col-span-12 mt-4 rounded-2xl border border-bolt/25 bg-bolt/6 p-6 md:col-span-7 md:mt-0 md:p-8"><ShieldCheck className="size-6 text-bolt" /><p className="mt-8 text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{t.included}</p><p className="mt-3 font-display text-5xl font-semibold uppercase">{t.noLockedFeatures}</p><p className="mt-4 text-sm text-white/45">{t.includedDescription}</p></div>
-        </div>
-        <div className="site-grid mt-5">
-          <div className="col-span-12 rounded-2xl border border-white/10 bg-void/70 p-6 md:p-8">
-            <div className="grid gap-7 md:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow text-bolt">{t.model}</p><h3 className="mt-5 font-display text-4xl font-semibold uppercase leading-none">{t.modelTitle}</h3><p className="mt-4 text-sm leading-6 text-white/45">{t.modelCopy}</p></div><div className="grid gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-5">{t.tiers.map(([range, price]) => <div key={range} className="bg-panel p-4"><p className="text-[9px] font-bold uppercase tracking-[.12em] text-white/35">{range}</p><p className="mt-4 text-sm font-extrabold text-bolt">{price}</p></div>)}</div></div>
-          </div>
-          <p className="col-span-12 mt-5 text-center text-[10px] leading-5 text-white/30">{t.priceDisclaimer}</p>
-        </div>
-      </section>
-
-      <section id="faq" className="bg-chalk py-24 text-void md:py-32">
-        <div className="site-grid items-start">
-          <div className="col-span-12 md:col-span-4"><p className="eyebrow text-turquoise-dark">{t.faqLabel}</p><h2 className="section-title mt-6">{t.faqTitle}</h2><div className="mt-8 flex flex-col gap-3">{t.faqNotes.map((note, index) => { const Icon = [Layers3, Smartphone, MessageCircle][index]; return <span key={note} className="flex items-center gap-3 text-sm text-void/55"><Icon className="size-4 text-turquoise-dark" />{note}</span>; })}</div></div>
-          <div className="col-span-12 mt-10 md:col-span-8 md:mt-0 md:pl-10">{t.faqs.map(([question, answer], index) => <details key={question} className="group border-t border-void/15 last:border-b"><summary className="flex cursor-pointer list-none items-center gap-5 py-6 font-display text-2xl font-semibold uppercase"><span className="font-mono text-[10px] text-turquoise-dark">0{index + 1}</span><span className="flex-1">{question}</span><span className="relative size-6 after:absolute after:left-1/2 after:top-1/2 after:h-px after:w-4 after:-translate-x-1/2 after:bg-void before:absolute before:left-1/2 before:top-1/2 before:h-4 before:w-px before:-translate-y-1/2 before:bg-void before:transition-transform group-open:before:scale-y-0" /></summary><p className="max-w-2xl pb-7 pl-10 text-sm leading-7 text-void/55">{answer}</p></details>)}</div>
-        </div>
-      </section>
-
-      <section id="contact" className="bg-void py-24 text-white md:py-32">
-        <div className="site-grid items-end"><div className="col-span-12 md:col-span-8"><p className="eyebrow text-bolt">{t.early}</p><h2 className="section-title mt-6">{t.prepare}<br /><span className="text-bolt">{t.operate}</span></h2></div><div className="col-span-12 mt-10 md:col-span-4 md:mt-0"><p className="mb-7 text-sm leading-6 text-white/45">{t.contactCopy}</p><a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "h-14 w-full rounded-full bg-bolt px-6 text-[10px] font-extrabold uppercase tracking-[.16em] text-void hover:bg-cyan-light")}>{t.requestDemo}<ArrowUpRight data-icon="inline-end" /></a></div></div>
-      </section>
-
-      <section id="upcoming" className="relative overflow-hidden bg-bolt py-24 text-void md:py-32">
-        <div className="absolute -right-28 top-1/2 size-[500px] -translate-y-1/2 rounded-full border-[80px] border-void/7 md:size-[760px]" />
-        <div className="site-grid relative z-10 items-center"><div className="col-span-12 md:col-span-7"><p className="eyebrow text-void/45">{t.next}</p><h2 className="section-title mt-7 max-w-3xl">{t.hybridTitle}</h2><p className="mt-7 max-w-lg text-sm leading-6 text-void/60">{t.hybridCopy}</p></div><div className="col-span-12 mt-12 md:col-span-5 md:mt-0"><div className="phone-shell mx-auto w-[270px] rotate-[5deg] rounded-[42px] border-[8px] border-void bg-void p-2 shadow-[0_35px_60px_rgba(3,7,19,.25)]"><div className="min-h-[510px] overflow-hidden rounded-[30px] bg-panel p-5 text-white"><div className="mx-auto h-4 w-20 rounded-full bg-black" /><p className="mt-9 text-[9px] uppercase tracking-[.17em] text-white/35">{t.phoneToday}</p><h3 className="mt-2 font-display text-4xl font-semibold uppercase leading-[.88]">{t.phoneTitle}<br /><span className="text-bolt">{t.phoneTitleAccent}</span></h3><div className="mt-8 rounded-2xl bg-bolt p-4 text-void"><p className="text-[8px] font-bold uppercase tracking-[.14em]">{t.todaySession}</p><p className="mt-5 text-xl font-bold">Engine + Lower</p><div className="mt-5 flex items-center justify-between text-[9px] font-semibold"><span>52 min</span><span className="flex size-8 items-center justify-center rounded-full bg-void text-bolt"><ArrowRight className="size-4" /></span></div></div><div className="mt-3 grid grid-cols-2 gap-3"><div className="rounded-xl bg-white/6 p-4"><p className="text-[8px] text-white/35">{t.runningLoad}</p><strong className="mt-3 block text-2xl">32.4</strong></div><div className="rounded-xl bg-white/6 p-4"><p className="text-[8px] text-white/35">{t.strength}</p><strong className="mt-3 block text-2xl">84%</strong></div></div></div></div></div></div>
       </section>
 
       <footer className="bg-void px-5 pb-7 pt-16 text-white md:px-8 md:pt-20">
@@ -275,21 +620,21 @@ export default function Home() {
           <Separator className="mt-10 bg-white/10" />
           <div className="mt-5 grid gap-4 text-[8px] font-bold uppercase tracking-[.16em] text-white/25 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
             <span>© 2026 Allfit One</span>
-            <nav className="flex w-fit items-center gap-3 text-white/45" aria-label="Redes sociales de Allfit One">
-              <a href="https://www.instagram.com/allfit.one/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label="Allfit One en Instagram">
+            <nav className="flex w-fit items-center gap-1 text-white/45" aria-label={language === "es" ? "Redes sociales de Allfit One" : "Allfit One social media"}>
+              <a href="https://www.instagram.com/allfit.one/" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en Instagram" : "Allfit One on Instagram"}>
                 <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="3" y="3" width="18" height="18" rx="5" />
                   <circle cx="12" cy="12" r="4" />
                   <circle cx="17.4" cy="6.6" r=".8" fill="currentColor" stroke="none" />
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@allfit.one" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label="Allfit One en TikTok">
+              <a href="https://www.tiktok.com/@allfit.one" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en TikTok" : "Allfit One on TikTok"}>
                 <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M14.4 2.5h2.8a4.8 4.8 0 0 0 4.3 4.3v2.8a7.5 7.5 0 0 1-4.3-1.4v7.1a6.2 6.2 0 1 1-5.4-6.1v2.9a3.4 3.4 0 1 0 2.6 3.2V2.5Z" />
                 </svg>
               </a>
             </nav>
-            <span className="sm:justify-self-end">{t.built}</span>
+            <span className="sm:justify-self-end">{copy.built}</span>
           </div>
         </div>
       </footer>
