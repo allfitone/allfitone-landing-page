@@ -32,7 +32,7 @@ const content = {
     requestDemo: "Solicitar demo",
     requestDemoShort: "Demo",
     heroCopy:
-      "Una app para vivir el fitness. Un sistema para quienes lo hacen posible. Allfit One conecta personas, profesionales y organizaciones en un mismo ecosistema.",
+      "Allfit One conecta personas, profesionales y organizaciones en un mismo ecosistema.",
     appAudience: "Para personas",
     appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
     comingSoon: "Próximamente",
@@ -117,7 +117,7 @@ const content = {
     requestDemo: "Request demo",
     requestDemoShort: "Demo",
     heroCopy:
-      "An app to live fitness. A system for the people who make it possible. Allfit One connects people, professionals and organizations in one ecosystem.",
+      "Allfit One connects people, professionals and organizations in one ecosystem.",
     appAudience: "For people",
     appDescription: "Train on your own or with a professional and keep your progress with you.",
     comingSoon: "Coming soon",
