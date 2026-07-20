@@ -12,8 +12,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - The tagline is exactly **“All the fitness in one place.”** Preserve its lowercase wording and final period in metadata and sentence-case contexts. Existing display treatments may render it in uppercase.
 - Allfit One is an ecosystem focused on fitness, not a company that should be marketed simply as a “fitness tech company.”
 - **Allfit OS** is the administrative product for coaches, gyms, sports centers, studios, and training brands to manage clients, training, schedules, memberships, payments, and progress. Its public page is an item inside OS, not a separate product. Do not describe a client PWA as part of OS.
-- **Allfit One App** is the provisional name for the personal product. It will serve people who train independently or with professionals, including strength, endurance, and hybrid athletes, gym members, and beginners. Present it as coming soon until its release scope is approved.
-- Allfit One App and Allfit OS are equal products within the parent ecosystem. Do not reduce Allfit One to either product or to gym-management software.
+- **Allfit Space** is the personal product. It will serve people who train independently or with professionals, including strength, endurance, and hybrid athletes, gym members, and beginners. Present it as coming soon until its release scope is approved.
+- Allfit Space and Allfit OS are equal products within the parent ecosystem. Do not reduce Allfit One to either product or to gym-management software.
 - The main production URL is `https://www.allfit.one`.
 
 ## Language rules

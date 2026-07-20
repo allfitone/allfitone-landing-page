@@ -27,7 +27,7 @@ Allfit One should reduce fragmentation without forcing every audience into the s
 ```text
 ALLFIT ONE
 
-├── Allfit One App
+├── Allfit Space
 │   Personal fitness product
 │
 └── Allfit OS
@@ -38,9 +38,9 @@ ALLFIT ONE
 
 The parent ecosystem and brand. It owns the shared identity, principles, infrastructure, and long-term portfolio.
 
-### Allfit One App
+### Allfit Space
 
-The provisional name for the personal fitness product. It is designed for people who train independently, work with a professional, belong to a gym or studio, practice strength or endurance disciplines, or want to begin training.
+The personal fitness product. It is designed for people who train independently, work with a professional, belong to a gym or studio, practice strength or endurance disciplines, or want to begin training.
 
 Its long-term proposition is:
 
@@ -60,13 +60,13 @@ Its proposition is:
 
 Allfit OS is centered on the management panel. It organizes clients, members, teams, training, schedules, bookings, memberships, payments, progress, and operational information. A public business page may exist as an item or module inside OS; it is not a separate product or one of several equal “layers.”
 
-Allfit OS does not include a separate client PWA as its product proposition. The personal training and progress experience belongs in Allfit One App. OS professionals and organizations connect with people through the shared ecosystem and permissions model.
+Allfit OS does not include a separate client PWA as its product proposition. The personal training and progress experience belongs in Allfit Space. OS professionals and organizations connect with people through the shared ecosystem and permissions model.
 
 ## Product relationship
 
 The competitive advantage is not having two disconnected applications. It is the flow between them:
 
-| Allfit One App | Direction | Allfit OS |
+| Allfit Space | Direction | Allfit OS |
 | --- | --- | --- |
 | A person trains | ← | A professional programs |
 | A person books | ← | An organization publishes availability |
@@ -78,7 +78,7 @@ Shared infrastructure may eventually include identity, permissions, payments, ma
 
 ## Fitness ID
 
-Fitness ID is the long-term identity concept for Allfit One App. A person's goals, training history, progress, relationships, memberships, bookings, achievements, preferences, and authorized wearable data should remain portable when they change coach, gym, location, or discipline.
+Fitness ID is the long-term identity concept for Allfit Space. A person's goals, training history, progress, relationships, memberships, bookings, achievements, preferences, and authorized wearable data should remain portable when they change coach, gym, location, or discipline.
 
 The person—not a coach or organization—controls the identity and decides what to share. Before implementation, define consent, granular permissions, retention, export, deletion, encryption, and the boundary between fitness information and sensitive health data.
 
@@ -86,7 +86,7 @@ Fitness ID is a product thesis, not a currently available public feature.
 
 ## Target audiences
 
-### Allfit One App
+### Allfit Space
 
 - People who train independently.
 - People who want to start training.
@@ -126,7 +126,7 @@ Fitness ID is a product thesis, not a currently available public feature.
 
 One ecosystem for the different ways fitness is lived and offered.
 
-### Allfit One App
+### Allfit Space
 
 Train independently or with a professional and carry your progress with you.
 
@@ -167,18 +167,18 @@ Manage clients, training, schedules, memberships, and progress from one administ
 
 The public page is an OS item or module. It must not be described as an independent product.
 
-### Connection with Allfit One App
+### Connection with Allfit Space
 
 - Professionals assign training to authorized people.
 - Organizations connect memberships, schedules, bookings, or services.
 - People send completed activity and progress back according to permissions.
-- OS does not provide a separate client PWA as a substitute for Allfit One App.
+- OS does not provide a separate client PWA as a substitute for Allfit Space.
 
 ### Initial setup
 
 Allfit OS may include configuration support so a business can begin operating sooner. The exact boundaries of setup, migration, integrations, custom domains, white-label behavior, and dedicated support must be defined during commercialization.
 
-## Allfit One App scope
+## Allfit Space scope
 
 ### Phase 1 — Training core
 
@@ -221,7 +221,7 @@ The current reference proposal is a recurring subscription that scales with acti
 
 Define active-client calculation, proration, taxes, failed payments, cancellations, reactivation, limits, messaging costs, payment processing, and enterprise exceptions before implementation.
 
-### Allfit One App
+### Allfit Space
 
 The long-term direction may combine a useful free training experience with paid analytics, planning, intelligence, specialized tools, and premium programs. No public pricing or final entitlement model is approved.
 
@@ -234,19 +234,19 @@ Commissions for services, bookings, programs, events, or payments are a later bu
 The parent landing currently has four jobs:
 
 1. Establish Allfit One as the parent ecosystem.
-2. Present Allfit One App and Allfit OS with equal visual hierarchy.
+2. Present Allfit Space and Allfit OS with equal visual hierarchy.
 3. Show that the personal and operational products are connected.
 4. Convert qualified Allfit OS interest into demo requests while labeling the App as coming soon.
 
-The page uses a navbar, one connected hero, dedicated explanations for Allfit One App and Allfit OS, an ecosystem relationship section, and the existing footer. It does not currently explain pricing or FAQs.
+The page uses a navbar, one connected hero, dedicated explanations for Allfit Space and Allfit OS, an ecosystem relationship section, and the existing footer. It does not currently explain pricing or FAQs.
 
 ## Current calls to action
 
-- Navigate to the Allfit One App presentation.
+- Navigate to the Allfit Space presentation.
 - Navigate to the Allfit OS presentation.
 - Request an Allfit OS demo by email.
 
-Allfit One App has no public CTA until a real waitlist, release, or update channel exists.
+Allfit Space has no public CTA until a real waitlist, release, or update channel exists.
 
 ## Success metrics
 
@@ -264,7 +264,7 @@ Allfit One App has no public CTA until a real waitlist, release, or update chann
 - Percentage that create and assign a first training plan.
 - Active businesses, active clients, booking usage, membership activity, and retention.
 
-### Allfit One App
+### Allfit Space
 
 The proposed north-star metric is weekly fitness sessions completed through Allfit One. Supporting measures may include active weeks per person, plan completion, retention, active professional relationships, and connected organizations.
 
@@ -274,7 +274,7 @@ Targets and instrumentation are not yet defined.
 
 - The current landing is an early brand and commercial-positioning surface.
 - Allfit OS is presented as the product available for demo conversations.
-- Allfit One App is a broad product vision presented as coming soon under a provisional name.
+- Allfit Space is a broad product vision presented as coming soon.
 - Fitness ID, marketplace, intelligence, broad integrations, and connected-gym capabilities are future directions.
 - The internal `/dev` route is a brand lab and must remain `noindex`.
 
@@ -282,24 +282,23 @@ Targets and instrumentation are not yet defined.
 
 - Positioning Allfit One only as gym-management software.
 - Presenting Allfit OS as a public page, dashboard, and client PWA bundle.
-- Presenting Allfit One App only as a hybrid-athlete product.
+- Presenting Allfit Space only as a hybrid-athlete product.
 - Claiming marketplace, AI, wearable, nutrition, community, or commerce capabilities as released.
 - Building a complex social feed, general store, medical system, or support for every sport initially.
 - Publishing a waitlist or conversion action that has no real destination.
 
 ## Open decisions
 
-- Final commercial name for Allfit One App.
 - Release criteria and MVP boundaries for both products.
 - Shared account, organization, role, location, and permission model.
 - Fitness ID consent, ownership, export, deletion, encryption, and retention policies.
-- Relationship between organization branding and the central Allfit One App experience.
+- Relationship between organization branding and the central Allfit Space experience.
 - Pricing and billing specifications for Allfit OS.
-- Free and paid entitlement model for Allfit One App.
+- Free and paid entitlement model for Allfit Space.
 - Marketplace timing, provider verification, payments, refunds, and commissions.
 - AI safety, explanation, professional oversight, and medical boundaries.
 - Supported integrations, countries, currencies, and languages.
-- Native application versus progressive web strategy for Allfit One App.
+- Native application versus progressive web strategy for Allfit Space.
 - Analytics events and numeric targets.
 
 ## Decision rule

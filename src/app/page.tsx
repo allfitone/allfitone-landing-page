@@ -27,7 +27,7 @@ type Language = "es" | "en";
 const content = {
   es: {
     navOs: "Allfit OS",
-    navApp: "Allfit One App",
+    navSpace: "Allfit Space",
     navEcosystem: "Ecosistema",
     requestDemo: "Solicitar demo",
     requestDemoShort: "Demo",
@@ -67,7 +67,7 @@ const content = {
       ["Nuevo cliente asignado", "Hace 21 min"],
       ["Pago de membresía registrado", "Hace 34 min"],
     ],
-    appSectionLabel: "Allfit One App",
+    appSectionLabel: "Allfit Space",
     appSectionTitle: "Tu fitness no debería empezar de cero cada vez.",
     appSectionCopy:
       "Una experiencia personal para entrenar por tu cuenta o con profesionales, conservar tu progreso y conectarte con gimnasios, membresías y servicios desde una misma identidad.",
@@ -112,7 +112,7 @@ const content = {
   },
   en: {
     navOs: "Allfit OS",
-    navApp: "Allfit One App",
+    navSpace: "Allfit Space",
     navEcosystem: "Ecosystem",
     requestDemo: "Request demo",
     requestDemoShort: "Demo",
@@ -151,7 +151,7 @@ const content = {
       ["New client assigned", "21 min ago"],
       ["Membership payment recorded", "34 min ago"],
     ],
-    appSectionLabel: "Allfit One App",
+    appSectionLabel: "Allfit Space",
     appSectionTitle: "Your fitness should not start over every time.",
     appSectionCopy:
       "A personal experience to train independently or with professionals, keep your progress and connect with gyms, memberships and services through one identity.",
@@ -408,7 +408,7 @@ export default function Home() {
           </a>
 
           <div className="col-span-6 hidden justify-center gap-6 text-[10px] font-bold uppercase tracking-[0.16em] text-white/48 lg:flex">
-            <a href="#allfit-app" className="nav-link inline-flex min-h-11 items-center">{copy.navApp}</a>
+            <a href="#allfit-space" className="nav-link inline-flex min-h-11 items-center">{copy.navSpace}</a>
             <a href="#allfit-os" className="nav-link inline-flex min-h-11 items-center">{copy.navOs}</a>
             <a href="#ecosystem" className="nav-link inline-flex min-h-11 items-center">{copy.navEcosystem}</a>
           </div>
@@ -436,7 +436,7 @@ export default function Home() {
           <div id="mobile-navigation" className="fixed inset-0 z-40 flex h-dvh flex-col justify-between overflow-y-auto bg-void/98 px-6 pb-7 pt-28 backdrop-blur-2xl sm:px-10 lg:hidden">
             <div className="flex flex-col">
               {[
-                ["#allfit-app", copy.navApp, copy.appAudience],
+                ["#allfit-space", copy.navSpace, copy.appAudience],
                 ["#allfit-os", copy.navOs, copy.osAudience],
                 ["#ecosystem", copy.navEcosystem, copy.ecosystemLabel],
               ].map(([href, label, audience]) => (
@@ -493,7 +493,7 @@ export default function Home() {
             <div className="product-definitions">
               <article className="product-definition product-definition-app">
                 <p className="eyebrow text-bolt">{copy.appAudience}</p>
-                <h2 className="mt-4 font-display text-5xl font-semibold uppercase leading-none tracking-[-.04em] md:text-6xl">Allfit One App</h2>
+                <h2 className="mt-4 font-display text-5xl font-semibold uppercase leading-none tracking-[-.04em] md:text-6xl">Allfit Space</h2>
                 <p className="mt-5 max-w-md text-sm leading-6 text-white/48">{copy.appDescription}</p>
                 <div className="mt-8 flex items-center gap-3">
                   <span className="h-px w-8 bg-bolt" aria-hidden="true" />
@@ -515,7 +515,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="allfit-app" className="bg-chalk text-void">
+      <section id="allfit-space" className="bg-chalk text-void">
         <div className="site-grid py-24 md:py-32 lg:py-40">
           <div className="col-span-12 md:col-span-3">
             <p className="product-section-label text-turquoise-dark">{copy.appSectionLabel}</p>
