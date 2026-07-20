@@ -614,12 +614,6 @@ export default function Home() {
         <div className="mx-auto max-w-[1500px]">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div>
-            <p className="max-w-sm text-sm leading-6 text-white/40">All the fitness in one place.</p>
-          </div>
-          <p className="footer-word mt-20 text-center">ALLFIT ONE</p>
-          <Separator className="mt-10 bg-white/10" />
-          <div className="mt-5 grid gap-4 text-[8px] font-bold uppercase tracking-[.16em] text-white/25 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-            <span>© 2026 Allfit One</span>
             <nav className="flex w-fit items-center gap-1 text-white/45" aria-label={language === "es" ? "Redes sociales de Allfit One" : "Allfit One social media"}>
               <a href="https://www.instagram.com/allfit.one/" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en Instagram" : "Allfit One on Instagram"}>
                 <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -634,6 +628,12 @@ export default function Home() {
                 </svg>
               </a>
             </nav>
+          </div>
+          <p className="footer-word mt-20 text-center">ALLFIT ONE</p>
+          <Separator className="mt-10 bg-white/10" />
+          <div className="mt-5 grid gap-4 text-[8px] font-bold uppercase tracking-[.16em] text-white/25 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+            <span>© 2026 Allfit One</span>
+            <p className="flex min-h-11 items-center text-[10px] font-medium uppercase tracking-[.12em] text-white/40">All the fitness in one place.</p>
             <span className="sm:justify-self-end">{copy.built}</span>
           </div>
         </div>
