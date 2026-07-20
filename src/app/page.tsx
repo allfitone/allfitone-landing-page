@@ -610,7 +610,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-void px-5 pb-7 pt-16 text-white md:px-8 md:pt-20">
+      <footer className="bg-void px-5 pb-7 pt-10 text-white md:px-8 md:pt-12">
         <div className="mx-auto max-w-[1500px]">
           <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
             <div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div>
