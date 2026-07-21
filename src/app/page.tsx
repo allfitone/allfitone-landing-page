@@ -612,9 +612,9 @@ export default function Home() {
 
       <footer className="bg-void px-5 pb-7 pt-10 text-white md:px-8 md:pt-12">
         <div className="mx-auto max-w-[1500px]">
-          <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+          <div className="flex items-center justify-between gap-6 md:items-end">
             <div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div>
-            <nav className="flex w-fit items-center gap-1 text-white/45" aria-label={language === "es" ? "Redes sociales de Allfit One" : "Allfit One social media"}>
+            <nav className="flex w-fit items-center gap-0 text-white/45" aria-label={language === "es" ? "Redes sociales de Allfit One" : "Allfit One social media"}>
               <a href="https://www.instagram.com/allfit.one/" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en Instagram" : "Allfit One on Instagram"}>
                 <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -625,6 +625,11 @@ export default function Home() {
               <a href="https://www.tiktok.com/@allfit.one" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en TikTok" : "Allfit One on TikTok"}>
                 <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M14.4 2.5h2.8a4.8 4.8 0 0 0 4.3 4.3v2.8a7.5 7.5 0 0 1-4.3-1.4v7.1a6.2 6.2 0 1 1-5.4-6.1v2.9a3.4 3.4 0 1 0 2.6 3.2V2.5Z" />
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/company/allfit-one/" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en LinkedIn" : "Allfit One on LinkedIn"}>
+                <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.7 8.3H3.4V21h3.3V8.3ZM5.05 3A2.05 2.05 0 1 0 5 7.1 2.05 2.05 0 0 0 5.05 3ZM21 13.72c0-3.83-2.04-5.61-4.77-5.61a4.12 4.12 0 0 0-3.75 2.06V8.3H9.15V21h3.33v-6.29c0-1.66.31-3.27 2.37-3.27 2.03 0 2.06 1.9 2.06 3.38V21H21v-7.28Z" />
                 </svg>
               </a>
             </nav>
