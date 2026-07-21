@@ -538,7 +538,7 @@ export default function Home() {
             })}
           </div>
 
-          <div className="col-span-12 mt-20 bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
+          <div className="col-span-12 mt-20 overflow-hidden rounded-2xl bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
             <div className="flex flex-col gap-3 border-b border-white/12 pb-7 md:flex-row md:items-end md:justify-between">
               <h3 className="font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">{copy.appAreasLabel}</h3>
               <p className="text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{copy.appVision}</p>
