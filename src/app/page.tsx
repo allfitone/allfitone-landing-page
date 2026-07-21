@@ -68,7 +68,7 @@ const content = {
       ["Pago de membresía registrado", "Hace 34 min"],
     ],
     appSectionLabel: "Allfit Space",
-    appSectionTitle: "Tu fitness no debería empezar de cero cada vez.",
+    appSectionTitle: "Tu progreso no debería empezar de cero cada vez.",
     appSectionCopy:
       "Una experiencia personal para entrenar por tu cuenta o con profesionales, conservar tu progreso y conectarte con gimnasios, membresías y servicios desde una misma identidad.",
     appPillars: [
@@ -152,7 +152,7 @@ const content = {
       ["Membership payment recorded", "34 min ago"],
     ],
     appSectionLabel: "Allfit Space",
-    appSectionTitle: "Your fitness should not start over every time.",
+    appSectionTitle: "Your progress should not start over every time.",
     appSectionCopy:
       "A personal experience to train independently or with professionals, keep your progress and connect with gyms, memberships and services through one identity.",
     appPillars: [
