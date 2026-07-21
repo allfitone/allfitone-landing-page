@@ -78,7 +78,7 @@ const content = {
     ],
     appAreasLabel: "Una experiencia que se adapta a ti",
     appAreas: [
-      ["Hoy", "Lo que toca hoy"],
+      ["Hoy", "Tu plan diario"],
       ["Entrena", "Entrenamiento y progreso"],
       ["Explora", "Profesionales y lugares"],
       ["Comunidad", "Personas que entrenan"],
@@ -162,7 +162,7 @@ const content = {
     ],
     appAreasLabel: "An experience that adapts to you",
     appAreas: [
-      ["Today", "What is next today"],
+      ["Today", "Your daily plan"],
       ["Train", "Training and progress"],
       ["Explore", "Professionals and places"],
       ["Community", "People who train"],
@@ -589,21 +589,23 @@ export default function Home() {
       </section>
 
       <section id="ecosystem" className="bg-bolt text-void">
-        <div className="site-grid py-24 md:py-32 lg:py-40">
+        <div className="site-grid py-24 md:py-32">
           <div className="col-span-12 md:col-span-4">
             <p className="product-section-label text-turquoise-dark">{copy.ecosystemLabel}</p>
           </div>
-          <div className="col-span-12 mt-8 md:col-span-8 md:mt-0">
+          <div className="col-span-12 mt-8 md:col-span-8 md:mt-0 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
             <h2 className="section-title text-void">{copy.ecosystemTitle}</h2>
-            <p className="mt-8 max-w-2xl text-base leading-7 text-void/62 md:text-lg md:leading-8">{copy.ecosystemCopy}</p>
+            <p className="mt-8 max-w-2xl text-base leading-7 text-void/62 md:text-lg md:leading-8 lg:mt-0">{copy.ecosystemCopy}</p>
           </div>
 
-          <div className="col-span-12 mt-20 border-t border-void/20 md:mt-28 md:col-start-5 md:col-span-8">
+          <div className="ecosystem-bridge col-span-12 mt-16 md:mt-20">
             {copy.ecosystemRows.map(([person, organization]) => (
-              <div key={person} className="grid gap-3 border-b border-void/20 py-6 sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-6">
-                <p className="font-display text-2xl font-semibold uppercase leading-none tracking-[-.02em] md:text-3xl">{person}</p>
-                <ArrowUpRight className="size-5 rotate-45 text-turquoise-dark" aria-hidden="true" />
-                <p className="font-display text-2xl font-semibold uppercase leading-none tracking-[-.02em] sm:text-right md:text-3xl">{organization}</p>
+              <div key={person} className="ecosystem-bridge-row">
+                <p className="ecosystem-bridge-person">{person}</p>
+                <span className="ecosystem-bridge-node" aria-hidden="true">
+                  <ArrowUpRight className="size-4" />
+                </span>
+                <p className="ecosystem-bridge-organization">{organization}</p>
               </div>
             ))}
           </div>
