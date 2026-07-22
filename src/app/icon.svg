@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <path fill="#55EFFB" d="M144 64h320l-64 384H80L144 64Z"/>
-  <g transform="translate(190 66) scale(.33)">
-    <path fill="#030713" d="M405 0 0 211l120 1L11 1149l324-490L405 0Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Allfit One">
+  <rect width="512" height="512" rx="112" fill="#030713"/>
+  <g transform="translate(187.15 60) scale(.34)">
+    <path fill="#55EFFB" d="M405 0 0 211l120 1L11 1149l324-490L405 0Z"/>
   </g>
 </svg>

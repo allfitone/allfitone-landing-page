@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   Activity,
@@ -402,9 +403,15 @@ export default function Home() {
     <main className="min-h-screen overflow-x-clip bg-void text-white">
       <section id="home" className="hero relative overflow-hidden">
         <nav className="site-grid fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] -translate-x-1/2 items-center rounded-2xl bg-void/86 py-3.5 shadow-[0_18px_55px_rgba(3,7,19,.24)] backdrop-blur-xl" aria-label={language === "es" ? "Navegación principal" : "Main navigation"}>
-          <a href="#home" className="brand col-span-6 min-h-11 lg:col-span-3" aria-label={language === "es" ? "Allfit One, inicio" : "Allfit One, home"}>
-            <LogoMark />
-            <span>ALLFIT <span className="brand-one">ONE</span></span>
+          <a href="#home" className="col-span-6 flex min-h-11 items-center lg:col-span-3" aria-label={language === "es" ? "Allfit One, inicio" : "Allfit One, home"}>
+            <Image
+              src="/brand/reusable/lockup/allfit-one-lockup-on-dark.svg"
+              alt=""
+              width={1678}
+              height={480}
+              className="h-8 w-auto"
+              aria-hidden="true"
+            />
           </a>
 
           <div className="col-span-6 hidden justify-center gap-6 text-[10px] font-bold uppercase tracking-[0.16em] text-white/48 lg:flex">
@@ -612,10 +619,13 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-void px-5 pb-7 pt-10 text-white md:px-8 md:pt-12">
+      <footer id="footer" className="bg-void px-5 pb-7 pt-10 text-white md:px-8 md:pt-12">
         <div className="mx-auto max-w-[1500px]">
           <div className="flex items-center justify-between gap-6 md:items-end">
-            <div className="brand text-xl"><LogoMark /><span>ALLFIT <span className="brand-one">ONE</span></span></div>
+            <div className="flex items-center">
+              <LogoMark className="h-9 w-10" />
+              <span className="sr-only">Allfit One</span>
+            </div>
             <nav className="flex w-fit items-center gap-0 text-white/45" aria-label={language === "es" ? "Redes sociales de Allfit One" : "Allfit One social media"}>
               <a href="https://www.instagram.com/allfit.one/" target="_blank" rel="noopener noreferrer" className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none" aria-label={language === "es" ? "Allfit One en Instagram" : "Allfit One on Instagram"}>
                 <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -636,7 +646,14 @@ export default function Home() {
               </a>
             </nav>
           </div>
-          <p className="footer-word mt-20 text-center">ALLFIT ONE</p>
+          <Image
+            src="/brand/reusable/wordmark/allfit-one-wordmark-on-dark.svg"
+            alt=""
+            width={4047}
+            height={756}
+            className="mx-auto mt-20 h-auto w-full max-w-[1160px]"
+            aria-hidden="true"
+          />
           <Separator className="mt-10 bg-white/10" />
           <div className="mt-5 grid gap-4 text-[8px] font-bold uppercase tracking-[.16em] text-white/25 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
             <span>© 2026 Allfit One</span>

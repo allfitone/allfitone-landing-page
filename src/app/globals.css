@@ -47,7 +47,6 @@
   .hero-place-break { display:inline; }
   .hero-fitness { position: relative; width: max-content; color: transparent; -webkit-text-stroke: 1.5px rgba(234,255,255,.78); }
   .eyebrow { @apply text-[9px] font-extrabold uppercase tracking-[.2em]; }
-  .footer-word { font-family: var(--font-display); font-size: clamp(5rem, 17vw, 16rem); font-weight: 700; letter-spacing: -.075em; line-height: .68; }
 }
 
 .hero { background: radial-gradient(circle at 82% 24%,rgba(85,239,251,.11),transparent 24%),linear-gradient(135deg,rgba(85,239,251,.035),transparent 42%),var(--void); }
@@ -97,7 +96,6 @@
   .hero-place-break { display:block; }
   .hero-copy { width:calc(100vw - 2.5rem); max-width:100%; overflow-wrap:break-word; }
   .hero-brand-mark { right:1.25rem; top:16%; width:62vw; opacity:.65; transform:none; }
-  .footer-word { font-size: clamp(4.4rem, 22vw, 6rem); }
   .os-workspace { min-height:360px; grid-template-columns:1fr; }
   .os-sidebar { display:none; }
   .os-main { padding:16px; }
