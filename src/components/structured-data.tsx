@@ -30,9 +30,9 @@ const structuredData = {
     },
     {
       "@type": "SoftwareApplication",
-      "@id": `${siteConfig.url}/#allfit-os`,
-      name: "Allfit OS",
-      url: `${siteConfig.url}/#allfit-os`,
+      "@id": `${siteConfig.url}/#allfit-studio`,
+      name: "Allfit Studio",
+      url: `${siteConfig.url}/#allfit-studio`,
       description:
         "Panel administrativo para que profesionales y organizaciones gestionen clientes, entrenamientos, agenda, membresías y progreso.",
       applicationCategory: "BusinessApplication",

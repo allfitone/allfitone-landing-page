@@ -4,10 +4,14 @@ import { Barlow_Condensed, Manrope } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import { siteConfig } from "@/lib/site-config";
 
+import "./cascade-layers.css";
+import "@allfitone/react/tokens.css";
+import "@allfitone/react/app.css";
+import "@allfitone/react/styles.css";
 import "./globals.css";
 
-const display = Barlow_Condensed({ subsets: ["latin"], variable: "--font-display", weight: ["500", "600", "700", "800"] });
-const body = Manrope({ subsets: ["latin"], variable: "--font-body" });
+const display = Barlow_Condensed({ subsets: ["latin"], variable: "--afo-app-font-display", weight: ["500", "600", "700", "800"] });
+const body = Manrope({ subsets: ["latin"], variable: "--afo-app-font-body" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className={`${display.variable} ${body.variable} scroll-smooth antialiased`}>
+    <html lang="es" data-afo-theme="dark" className={`${display.variable} ${body.variable} scroll-smooth antialiased`}>
       <body>
         <StructuredData />
         {children}
