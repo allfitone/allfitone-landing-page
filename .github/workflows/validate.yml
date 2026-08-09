@@ -44,7 +44,9 @@ jobs:
       - run: npm ci
       - run: npx playwright install chromium
       - run: npm run build
-      - run: npm run test:e2e -- --grep @visual
+      - name: Run canonical visual snapshots
+        shell: cmd
+        run: npm run test:e2e -- --grep "@visual"
       - name: Upload visual diffs
         if: failure()
         uses: actions/upload-artifact@v6
