@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
 import { useEffect } from "react";
+import { BrandLockup } from "@allfitone/react/brand";
+import { FoundationIcon } from "@allfitone/react/icons";
 
 export default function NotFound() {
   useEffect(() => {
@@ -29,15 +29,7 @@ export default function NotFound() {
           className="col-span-6 flex min-h-11 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bolt focus-visible:ring-offset-4 focus-visible:ring-offset-void lg:col-span-3"
           aria-label="Allfit One home"
         >
-          <Image
-            src="/brand/reusable/lockup/allfit-one-lockup-on-dark.svg"
-            alt=""
-            width={1678}
-            height={480}
-            className="h-8 w-auto"
-            priority
-            aria-hidden="true"
-          />
+          <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
         </a>
         <p className="col-span-6 text-right text-[9px] font-extrabold uppercase tracking-[0.2em] text-white/45 lg:col-span-9">
           Error / 404
@@ -60,7 +52,7 @@ export default function NotFound() {
             className="group mt-9 inline-flex min-h-14 items-center gap-4 text-xs font-extrabold uppercase tracking-[0.14em] text-white/60 outline-none transition-colors hover:text-white focus-visible:text-white"
           >
             <span className="flex size-14 items-center justify-center rounded-full border border-bolt/30 bg-bolt/5 text-bolt transition-colors group-hover:bg-bolt group-hover:text-void group-focus-visible:bg-bolt group-focus-visible:text-void group-focus-visible:ring-2 group-focus-visible:ring-bolt group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-void">
-              <ArrowLeft className="size-4" aria-hidden="true" />
+              <FoundationIcon name="back" size="sm" decorative />
             </span>
             <span>Back to home</span>
           </a>

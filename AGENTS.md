@@ -11,9 +11,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - The brand name is **Allfit One**, always with a space. Never write `AllfitOne` in user-facing copy.
 - The tagline is exactly **“All the fitness in one place.”** Preserve its lowercase wording and final period in metadata and sentence-case contexts. Existing display treatments may render it in uppercase.
 - Allfit One is an ecosystem focused on fitness, not a company that should be marketed simply as a “fitness tech company.”
-- **Allfit OS** is the administrative product for coaches, gyms, sports centers, studios, and training brands to manage clients, training, schedules, memberships, payments, and progress. Its public page is an item inside OS, not a separate product. Do not describe a client PWA as part of OS.
+- **Allfit Studio** is the administrative product for coaches, gyms, sports centers, studios, and training brands to manage clients, training, schedules, memberships, payments, and progress. Its public page is an item inside Studio, not a separate product. Do not describe a client PWA as part of Studio.
 - **Allfit Space** is the personal product. It will serve people who train independently or with professionals, including strength, endurance, and hybrid athletes, gym members, and beginners. Present it as coming soon until its release scope is approved.
-- Allfit Space and Allfit OS are equal products within the parent ecosystem. Do not reduce Allfit One to either product or to gym-management software.
+- Allfit Space and Allfit Studio are equal products within the parent ecosystem. Do not reduce Allfit One to either product or to gym-management software.
 - The main production URL is `https://www.allfit.one`.
 
 ## Language rules
@@ -26,11 +26,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Stack and architecture
 
-- Next.js `16.2.10` App Router, React `19`, TypeScript, Tailwind CSS `4`, shadcn/ui with Base UI primitives, and Lucide icons.
+- Next.js `16.2.10` App Router, React `19`, TypeScript, Tailwind CSS `4`, and `@allfitone/react@0.7.0`.
 - `src/app/page.tsx` contains the bilingual landing experience.
 - The public homepage uses a floating navbar, one connected two-product hero, dedicated product explanation sections, an ecosystem relationship section, and the established footer.
 - `src/app/layout.tsx` owns root metadata, fonts, and global structured data.
-- `src/app/globals.css` is the only global Tailwind/theme stylesheet.
+- `src/app/cascade-layers.css` only establishes Tailwind layer order before package CSS; `src/app/globals.css` owns the landing-specific global Tailwind/theme styles.
 - `src/lib/site-config.ts` is the source of truth for the public URL, SEO title, description, email, and social links.
 - `src/components/structured-data.tsx` contains JSON-LD that must match visible page content.
 - `src/app/dev/` is an internal brand lab. It must remain `noindex` and excluded from `robots.txt` and the sitemap.
@@ -53,9 +53,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Component and implementation rules
 
-- Check installed shadcn components before creating custom equivalents.
-- This project uses shadcn with **Base UI**, not Radix. Confirm current component APIs before use.
-- For links styled as buttons, use a plain `<a>` with `buttonVariants()`. Do not use `Button render={<a />}` with `nativeButton={false}` because it produces incorrect semantics and Base UI warnings.
+- Import Design System components from explicit `@allfitone/react/components/*` subpaths and icons from `@allfitone/react/icons`.
+- Keep `@allfitone/react` pinned to an exact released version. Do not link this repository to the Design System workspace.
+- Import the Design System styles once in the root layout in this order: `tokens.css`, `app.css`, `styles.css`, then `globals.css`.
+- For links styled as buttons, use a plain `<a>` with `buttonVariants()` from the Design System.
+- Synchronize framework-facing brand assets with `npm run sync:brand`; never hand-edit files managed by `public/brand/reusable/.allfitone-brand-assets.json`.
 - Use semantic HTML, a single descriptive `<h1>`, logical heading order, visible keyboard focus, adequate tap targets, and accessible labels for icon-only links.
 - External links opened in a new tab must include `rel="noopener noreferrer"`.
 - Prefer semantic theme tokens and existing utilities over introducing isolated color values.
@@ -66,9 +68,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## SEO requirements
 
 - Keep the canonical URL pointed at `https://www.allfit.one`.
-- Keep the homepage positioning broad enough to represent the parent ecosystem. Product-specific keywords belong in Allfit OS copy and future dedicated routes.
+- Keep the homepage positioning broad enough to represent the parent ecosystem. Product-specific keywords belong in Allfit Studio copy and future dedicated routes.
 - Preserve crawlable `robots.txt`, the canonical-only sitemap, large-image social metadata, and the Open Graph/Twitter assets.
-- Keep Organization, WebSite, and Allfit OS SoftwareApplication structured data accurate and consistent with visible content. Do not add FAQ or Offer data while those sections are absent, and never add ratings, reviews, availability, or claims that are not present and verifiable.
+- Keep Organization, WebSite, and Allfit Studio SoftwareApplication structured data accurate and consistent with visible content. Do not add FAQ or Offer data while those sections are absent, and never add ratings, reviews, availability, or claims that are not present and verifiable.
 - The homepage must remain indexable. Internal `/dev` content must remain `noindex, nofollow`.
 - Do not add speculative `llms.txt` or duplicate language URLs without a concrete distribution plan.
 
@@ -85,7 +87,9 @@ Run checks proportional to the change:
 
 ```bash
 npm run lint
-npx tsc --noEmit
+npm run typecheck
+npm run build
+npm run test:e2e
 ```
 
 - For metadata or SEO changes, inspect the rendered HTML and verify `/robots.txt`, `/sitemap.xml`, canonical tags, social tags, and JSON-LD.

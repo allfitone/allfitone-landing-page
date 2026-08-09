@@ -26,20 +26,13 @@
     <path fill="none" stroke="#55EFFB" stroke-width="4" d="M405 0 0 211l120 1L11 1149l324-490L405 0Z"/>
   </g>
 
-  <g transform="translate(58 48)">
-    <path fill="#55EFFB" d="M9 0h58L56 72H0L9 0Z"/>
-    <g transform="translate(25 5) scale(.054)">
-      <path fill="#030713" d="M405 0 0 211l120 1L11 1149l324-490L405 0Z"/>
-    </g>
-    <text x="82" y="51" fill="#F5FFFF" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="45" font-weight="800" letter-spacing="-1">ALLFIT</text>
-    <text x="210" y="51" fill="#55EFFB" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="45" font-weight="800" letter-spacing="-1">ONE</text>
-  </g>
+  <image href="reusable/lockup/allfit-one-lockup-on-dark.svg" x="58" y="48" width="288" height="82.4" preserveAspectRatio="xMinYMin meet"/>
 
   <text x="58" y="247" fill="#F5FFFF" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="150" font-weight="800" letter-spacing="-5">ALL THE</text>
   <text x="58" y="381" fill="none" stroke="#EAFDFE" stroke-width="2" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="150" font-weight="800" letter-spacing="-5">FITNESS</text>
   <text x="58" y="518" fill="#55EFFB" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="143" font-weight="800" letter-spacing="-5">IN ONE PLACE.</text>
 
   <path d="M58 574H1142" stroke="#68EEF4" stroke-opacity=".16"/>
-  <text x="58" y="603" fill="#68EEF4" fill-opacity=".72" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.4">ALLFIT SPACE / ALLFIT OS</text>
+  <text x="58" y="603" fill="#68EEF4" fill-opacity=".72" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2.4">ALLFIT SPACE / ALLFIT STUDIO</text>
   <text x="1142" y="603" text-anchor="end" fill="#F5FFFF" fill-opacity=".42" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.6">DOS PRODUCTOS · UN ECOSISTEMA</text>
 </svg>

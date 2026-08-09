@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Allfit One landing page
 
-## Getting Started
+Marketing site for the Allfit One ecosystem, with Spanish as the default language and English as an alternate language on the same static route. The public product story connects **Allfit Space** and **Allfit Studio** while keeping Space marked as coming soon.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 App Router and React 19
+- Tailwind CSS 4
+- `@allfitone/react@0.7.0`, pinned exactly
+- Playwright and axe for interaction, accessibility, and visual regression tests
+
+The landing remains an independent repository. It consumes released Design System packages and does not link to the Design System workspace.
+
+## Local development
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`. If that port is occupied, pass a free port to Next.js instead of stopping another process.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Brand assets
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+React views render canonical brand components directly from `@allfitone/react/brand`. Framework-facing public SVG files are generated from `@allfitone/brand@0.2.0`:
 
-## Learn More
+```bash
+npm run sync:brand
+npm run check:brand
+```
 
-To learn more about Next.js, take a look at the following resources:
+Do not edit files managed by `public/brand/reusable/.allfitone-brand-assets.json` manually.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Verification
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm run test:e2e
+```
 
-## Deploy on Vercel
+Playwright runs against the production server. Install Chromium once when needed:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx playwright install chromium
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Windows is the canonical platform for approved snapshots. Regenerate them intentionally with:
+
+```bash
+npm run test:e2e:update
+```
+
+CI validates brand synchronization, lint, TypeScript, the production build, interactions, axe, and canonical Windows screenshots.
