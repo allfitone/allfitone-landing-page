@@ -81,6 +81,17 @@ test("honors reduced motion and forced colors", async ({ page }) => {
   await expect(page.locator("h1")).toBeVisible();
 });
 
+test("section markers use labels without numeric prefixes", async ({ page }) => {
+  await page.goto("/");
+
+  const markers = page.locator(".section-marker");
+  await expect(markers).toHaveCount(4);
+  await expect(page.locator(".section-marker-index")).toHaveCount(0);
+
+  const labels = await markers.allInnerTexts();
+  expect(labels.every((label) => !/^0[1-6]\b/.test(label.trim()))).toBe(true);
+});
+
 test("has a logical heading structure and no serious axe violations", async ({ page }) => {
   await page.goto("/");
 

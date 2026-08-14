@@ -57,16 +57,11 @@
   .section-lead { max-width: 46ch; font-size: 1rem; line-height: 1.75; }
   .eyebrow { @apply text-[9px] font-extrabold uppercase tracking-[.2em]; }
 
-  /* Numbered section marker. Replaces the repeated plain eyebrow and gives the
-     page a single editorial index system, per the mono-index design token. */
+  /* Section marker shared by each editorial region. */
   .section-marker { display: flex; align-items: center; gap: var(--afo-space-3); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 60%, transparent); }
-  .section-marker-index { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .625rem; line-height: 1; color: var(--afo-color-text-accent); }
   .section-marker-rule { width: var(--afo-space-8); height: 1px; background: currentColor; opacity: .35; }
   .section-marker-label { font-size: .5625rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .2em; line-height: 1.2; text-transform: uppercase; }
   .section-marker-light { color: color-mix(in srgb, var(--afo-color-ink-void) 68%, transparent); }
-  /* Turquoise fails AA at 10px on both chalk and cyan surfaces, so the index
-     keeps its emphasis through full-strength ink instead of an accent hue. */
-  .section-marker-light .section-marker-index { color: var(--afo-color-ink-void); }
 
   .product-section-wordmark { width: min(100%, 11rem); }
   .product-section-wordmark svg { display: block; width: 100%; height: auto; }
@@ -130,10 +125,10 @@
 .studio-section-mark path { fill: transparent; stroke: color-mix(in srgb, var(--afo-color-brand-primary) 5.5%, transparent); stroke-width: 1; }
 
 /* ---------------------------------------------------------------------------
-   01 — Problem
+   Problem
    A handover ledger. The left column holds a single hollow word and nothing
    else; the imbalance against the right column is the whole argument. The
-   right column repeats the Fitness ID field list on purpose — section 02
+   right column repeats the Fitness ID field list on purpose — the Fitness ID
    shows the same inventory, kept instead of lost.
 --------------------------------------------------------------------------- */
 
@@ -145,12 +140,8 @@
 .ledger-item { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-family: var(--afo-font-family-display); font-size: clamp(1.15rem, 2.4vw, 1.65rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1.05; text-transform: uppercase; }
 .ledger-item:last-child { border-bottom: 0; }
 
-.problem-audiences { display: grid; gap: var(--afo-space-10); border-top: 1px solid var(--afo-color-border-subtle); padding-top: var(--afo-space-10); }
-.problem-audience { min-width: 0; }
-.problem-audience-title { font-family: var(--afo-font-family-display); font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1; text-transform: uppercase; }
-
 /* ---------------------------------------------------------------------------
-   02 — Fitness ID
+   Fitness ID
    The whole region is a slanted plate that echoes the brand mark geometry.
    This is the one place the diagonal language is spent at section scale.
 --------------------------------------------------------------------------- */
@@ -187,7 +178,7 @@ section[id].fid-section {
 .fid-note { display: flex; gap: var(--afo-space-3); margin-top: var(--afo-space-8); font-size: .75rem; line-height: 1.55; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 58%, transparent); }
 
 /* ---------------------------------------------------------------------------
-   04 — Studio
+   Studio
 --------------------------------------------------------------------------- */
 
 .studio-difference-grid { margin-top: var(--afo-space-8); display: grid; border-top: 1px solid var(--afo-color-border-subtle); }
@@ -200,7 +191,7 @@ section[id].fid-section {
 .studio-upcoming { display: flex; flex-direction: column; gap: var(--afo-space-2); margin-top: var(--afo-space-8); }
 
 /* ---------------------------------------------------------------------------
-   05 — Ecosystem bridge
+   Ecosystem bridge
 --------------------------------------------------------------------------- */
 
 .ecosystem-bridge { overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 12%, transparent); border-radius: var(--afo-radius-xl); background: var(--afo-color-ink-void); padding-inline: var(--afo-space-6); color: var(--afo-color-neutral-white); box-shadow: var(--afo-shadow-card); }
@@ -212,7 +203,7 @@ section[id].fid-section {
 .ecosystem-bridge-node { grid-column: 1; grid-row: 2; display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; margin-top: var(--afo-space-4); border: 1px solid var(--afo-color-accent-tonal-border); border-radius: var(--afo-radius-circle); background: var(--afo-color-accent-tonal); color: var(--afo-color-text-accent); }
 
 /* ---------------------------------------------------------------------------
-   06 — Status and contact
+   Status and contact
 --------------------------------------------------------------------------- */
 
 .status-row { display: grid; gap: var(--afo-space-3); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-8); }
@@ -284,9 +275,6 @@ section[id].fid-section {
 }
 
 @media (min-width: 640px) {
-  .problem-audiences { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
-  .problem-audience:first-child { padding-right: var(--afo-space-8); }
-  .problem-audience:last-child { border-left: 1px solid var(--afo-color-border-subtle); padding-left: var(--afo-space-8); }
   .studio-module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--afo-space-8); }
   .studio-upcoming { flex-direction: row; align-items: baseline; gap: var(--afo-space-6); }
   .ecosystem-bridge { padding-inline: var(--afo-space-8); }
