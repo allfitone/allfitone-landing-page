@@ -36,8 +36,6 @@ const content = {
     navEcosystem: "Ecosistema",
     requestDemo: "Solicitar demo",
     requestDemoShort: "Demo",
-    heroCopy:
-      "Allfit One conecta personas, profesionales y organizaciones en un mismo ecosistema.",
     appAudience: "Para personas",
     appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
     comingSoon: "Próximamente",
@@ -121,8 +119,6 @@ const content = {
     navEcosystem: "Ecosystem",
     requestDemo: "Request demo",
     requestDemoShort: "Demo",
-    heroCopy:
-      "Allfit One connects people, professionals and organizations in one ecosystem.",
     appAudience: "For people",
     appDescription: "Train on your own or with a professional and keep your progress with you.",
     comingSoon: "Coming soon",
@@ -534,10 +530,6 @@ export default function Home() {
             </h1>
           </div>
 
-          <div className="col-span-12 mt-10 md:col-span-7 md:mt-12 lg:col-span-5">
-            <p className="hero-copy max-w-xl text-sm leading-6 text-white/58 md:text-base md:leading-7">{copy.heroCopy}</p>
-          </div>
-
           <div className="product-stage col-span-12 mt-20 md:mt-28 lg:mt-32">
             <div className="product-stage-visual">
               <div className="app-visual-anchor">
@@ -567,10 +559,10 @@ export default function Home() {
                   <ProductWordmark product="studio" surface="dark" className="product-definition-wordmark" aria-hidden="true" />
                 </h2>
                 <p className="mt-5 max-w-md text-sm leading-6 text-white/48">{copy.studioDescription}</p>
-                <a href="mailto:hello@allfitone.com" className={cn(buttonVariants({ size: "lg" }), "mt-8")}>
-                  {copy.requestDemo}
-                  <FoundationIcon name="external" data-icon="inline-end" decorative />
-                </a>
+                <div className="mt-8 flex items-center gap-3">
+                  <span className="h-px w-8 bg-bolt" aria-hidden="true" />
+                  <span className="text-[9px] font-extrabold uppercase tracking-[.18em] text-bolt">{copy.comingSoon}</span>
+                </div>
               </article>
             </div>
           </div>
