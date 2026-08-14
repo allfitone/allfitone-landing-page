@@ -14,6 +14,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **Allfit Studio** is the administrative product for coaches, gyms, sports centers, studios, and training brands to manage clients, training, schedules, memberships, payments, and progress. Its public page is an item inside Studio, not a separate product. Do not describe a client PWA as part of Studio.
 - **Allfit Space** is the personal product. It will serve people who train independently or with professionals, including strength, endurance, and hybrid athletes, gym members, and beginners. Present it as coming soon until its release scope is approved.
 - Allfit Space and Allfit Studio are equal products within the parent ecosystem. Do not reduce Allfit One to either product or to gym-management software.
+- **Fitness ID** is the portable fitness identity that connects both products: the person owns it, grants and revokes access per purpose, and keeps it when a relationship ends. It is a product thesis, so the landing must keep labeling it as not publicly available.
+- Neither product is demo-able. Do not add a demo, trial, waitlist, or pricing CTA until a real destination exists. Email is the only conversion action.
+- Studio capabilities that are future expansion rather than V1 — bookings, classes and capacity, public pages, marketplace — may only appear under an explicit "on the way" label.
+- Allfit Backoffice is an internal product. It must never appear in public copy.
 - The main production URL is `https://www.allfit.one`.
 
 ## Language rules
@@ -27,8 +31,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Stack and architecture
 
 - Next.js `16.2.10` App Router, React `19`, TypeScript, Tailwind CSS `4`, and `@allfitone/react@0.7.0`.
-- `src/app/page.tsx` contains the bilingual landing experience.
-- The public homepage uses a floating navbar, one connected two-product hero, dedicated product explanation sections, an ecosystem relationship section, and the established footer.
+- `src/app/page.tsx` composes the landing experience; `src/lib/content.ts` owns every bilingual string; `src/components/product-mockups.tsx` and `src/components/fitness-id-card.tsx` own the illustrative product objects.
+- The public homepage is a numbered editorial sequence: floating navbar, connected two-product hero, `01` problem, `02` Fitness ID, `03` Allfit Space, `04` Allfit Studio, `05` ecosystem relationship, `06` current status and contact, and the established footer.
+- Sections carry a mono numeric index through the shared `.section-marker` component. Keep the numbering contiguous when adding or removing a section.
 - `src/app/layout.tsx` owns root metadata, fonts, and global structured data.
 - `src/app/cascade-layers.css` only establishes Tailwind layer order before package CSS; `src/app/globals.css` owns the landing-specific global Tailwind/theme styles.
 - `src/lib/site-config.ts` is the source of truth for the public URL, SEO title, description, email, and social links.

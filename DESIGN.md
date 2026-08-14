@@ -271,9 +271,9 @@ components:
 
 Allfit One is a **typography-first fitness ecosystem expressed through athletic tension and technical precision**. The main experience alternates deep black-blue and cool chalk canvases, using enormous compressed headlines, disciplined grid alignment, fine dividers, and one electric-cyan action color. The interface does not depend on photography to feel athletic. Scale, compression, diagonals, and directional composition carry that energy.
 
-The custom “1” is the identity anchor. Its forward lean creates speed without motion effects, while the surrounding UI stays controlled. Marketing surfaces can be expressive and oversized; Allfit OS product surfaces should lower the volume and prioritize operational clarity without losing the same palette, typography, geometry, or voice.
+The custom “1” is the identity anchor. Its forward lean creates speed without motion effects, while the surrounding UI stays controlled. Marketing surfaces can be expressive and oversized; Allfit Studio product surfaces should lower the volume and prioritize operational clarity without losing the same palette, typography, geometry, or voice.
 
-Allfit One is the parent ecosystem—not a synonym for Allfit OS and not merely a “fitness tech company.” It contains two equal product expressions: Allfit Space for people and Allfit OS for professionals and organizations. Allfit Space is coming soon. The design system must connect both audiences without forcing them into the same interface density.
+Allfit One is the parent ecosystem—not a synonym for Allfit Studio and not merely a “fitness tech company.” It contains two equal product expressions: Allfit Space for people and Allfit Studio for professionals and organizations. Allfit Space is coming soon. The design system must connect both audiences without forcing them into the same interface density.
 
 **Key Characteristics:**
 
@@ -289,7 +289,7 @@ Allfit One is the parent ecosystem—not a synonym for Allfit OS and not merely 
 
 ## Colors
 
-> **Source surfaces analyzed:** current connected-product landing, responsive navigation, Allfit Space and Allfit OS editorial sections, ecosystem relationship section, product previews, footer, social preview assets, and the internal `/dev` brand lab. Explorations in `/dev` are not automatically approved tokens.
+> **Source surfaces analyzed:** current connected-product landing, responsive navigation, Allfit Space and Allfit Studio editorial sections, ecosystem relationship section, product previews, footer, social preview assets, and the internal `/dev` brand lab. Explorations in `/dev` are not automatically approved tokens.
 
 ### Brand & Accent
 
@@ -497,7 +497,7 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 ### Cards & Containers
 
-**`product-panel`** — A 16px-radius dark panel for connected Allfit OS layers, operational content, and compact demonstrations. Background `{colors.canvas-panel}`, 1px `{colors.divider-dark}` border, and 28px padding. It should have a clear information job.
+**`product-panel`** — A 16px-radius dark panel for connected Allfit Studio layers, operational content, and compact demonstrations. Background `{colors.canvas-panel}`, 1px `{colors.divider-dark}` border, and 28px padding. It should have a clear information job.
 
 **`product-panel-featured`** — The single emphasized sibling. Uses the cyan wash and a stronger cyan border. Do not mark all cards as featured.
 
@@ -505,7 +505,7 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`device-shell`** — A 42px-radius physical frame for an actual Allfit Space surface. Use only when the device explains the personal fitness experience. Do not add a device mockup merely to fill a column.
 
-**`connected-product-stage`** — The signature parent-brand composition. A panoramic Allfit OS administrative panel establishes the operational plane while the Allfit Space phone crosses its edge in the foreground. The overlap communicates one ecosystem; it is not a decorative device pile. On mobile, the products become a deliberate sequence so both previews remain legible.
+**`connected-product-stage`** — The signature parent-brand composition. A panoramic Allfit Studio administrative panel establishes the operational plane while the Allfit Space phone crosses its edge in the foreground. The overlap communicates one ecosystem; it is not a decorative device pile. On mobile, the products become a deliberate sequence so both previews remain legible.
 
 ### Language Selector
 
@@ -528,9 +528,9 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`footer`** — A dark, low-chrome conclusion. The Allfit One lockup and exact tagline appear above an oversized `ALLFIT ONE` word treatment. A quiet divider separates legal information and icon-only Instagram/TikTok links. Social links include accessible names but no adjacent username label. The footer does not introduce a new color or layout language.
 
-### Allfit OS Operational UI
+### Allfit Studio Operational UI
 
-Allfit OS inherits the same system at a lower visual volume:
+Allfit Studio inherits the same system at a lower visual volume:
 
 - Manrope carries dense controls, tables, filters, forms, and navigation.
 - Barlow Condensed is reserved for page titles and major metrics.
@@ -560,7 +560,7 @@ Allfit Space is the personal expression of the ecosystem:
 - Preserve the exact custom “1” SVG and check its optical centering at every rendered size.
 - Keep body lines near 55–75 characters and verify Spanish and English line breaks separately.
 - Treat mobile and tablet as authored compositions, not reduced desktop layouts.
-- Keep marketing expression bold and Allfit OS operational UI quieter.
+- Keep marketing expression bold and Allfit Studio operational UI quieter.
 - Pair every color signal with text, an icon, or a structural state.
 - Verify contrast, keyboard access, touch targets, reduced motion, zoom, and heading order.
 
@@ -576,7 +576,7 @@ Allfit Space is the personal expression of the ecosystem:
 - Don't scatter floating, pulsing, or scroll-reveal animation across unrelated elements.
 - Don't redraw the “1” as a conventional numeral or alter its proportions casually.
 - Don't write `AllfitOne`; the brand is **Allfit One**.
-- Don't position Allfit One only as Allfit OS, gym-management software, or a “fitness tech company.”
+- Don't position Allfit One only as Allfit Studio, gym-management software, or a “fitness tech company.”
 - Don't add user-facing content in only one language.
 - Don't describe Allfit Space vision or future capabilities as released product functionality.
 
@@ -647,14 +647,14 @@ The structural breakpoints that matter for implementation are the Tailwind defau
 
 ## Known Gaps
 
-- The Allfit OS application interface has not yet been fully designed; operational component specifications remain directional rather than exhaustive.
+- The Allfit Studio application interface has not yet been fully designed; operational component specifications remain directional rather than exhaustive.
 - Form validation, loading, success, empty, offline, and permission states need complete product-level patterns.
 - A semantic data-visualization palette beyond the core cyan/turquoise family has not been approved.
 - The destructive color exists as a practical implementation token, but warning, success, and informational state scales are not yet formalized.
 - The commercial demo-request flow currently relies on email; a measurable form or scheduling experience has not been specified.
 - Allfit Space release scope and complete information architecture remain open.
 - The relationship between native applications and progressive web experiences for Allfit Space is not decided.
-- Dark and light application themes for Allfit OS have not been approved; the documented light mode is an editorial marketing surface, not a complete product theme.
+- Dark and light application themes for Allfit Studio have not been approved; the documented light mode is an editorial marketing surface, not a complete product theme.
 - Motion beyond navigation, disclosures, and isolated product presentation has not been standardized.
 - Photography art direction is defined in principle, but no approved production library, crop set, or grading preset exists.
 - The `/dev` route contains explorations and should not be treated as a public or canonical design-system catalog.
