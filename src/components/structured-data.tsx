@@ -17,7 +17,7 @@ const structuredData = {
       email: siteConfig.email,
       description:
         "Allfit One conecta personas, profesionales y organizaciones mediante productos para vivir y gestionar el fitness.",
-      sameAs: [siteConfig.social.instagram, siteConfig.social.tiktok],
+      sameAs: [siteConfig.social.instagram, siteConfig.social.tiktok, siteConfig.social.linkedin],
     },
     {
       "@type": "WebSite",

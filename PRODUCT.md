@@ -30,7 +30,7 @@ ALLFIT ONE
 ├── Allfit Space
 │   Personal fitness product
 │
-└── Allfit OS
+└── Allfit Studio
     Product for professionals and organizations
 ```
 
@@ -50,7 +50,7 @@ The App is broader than a hybrid-athlete tracker. It should eventually connect t
 
 The product is not yet publicly released. Its final commercial name, release scope, business model, and availability are open decisions. Public communication must label it as coming soon and must not present long-term capabilities as available.
 
-### Allfit OS
+### Allfit Studio
 
 The administrative and operational product for independent coaches, gyms, studios, boxes, sports academies, high-performance centers, and other fitness organizations.
 
@@ -58,15 +58,15 @@ Its proposition is:
 
 > Everything a professional or organization needs to offer fitness.
 
-Allfit OS is centered on the management panel. It organizes clients, members, teams, training, schedules, bookings, memberships, payments, progress, and operational information. A public business page may exist as an item or module inside OS; it is not a separate product or one of several equal “layers.”
+Allfit Studio is centered on the management panel. It organizes clients, members, teams, training, schedules, bookings, memberships, payments, progress, and operational information. A public business page may exist as an item or module inside OS; it is not a separate product or one of several equal “layers.”
 
-Allfit OS does not include a separate client PWA as its product proposition. The personal training and progress experience belongs in Allfit Space. OS professionals and organizations connect with people through the shared ecosystem and permissions model.
+Allfit Studio does not include a separate client PWA as its product proposition. The personal training and progress experience belongs in Allfit Space. OS professionals and organizations connect with people through the shared ecosystem and permissions model.
 
 ## Product relationship
 
 The competitive advantage is not having two disconnected applications. It is the flow between them:
 
-| Allfit Space | Direction | Allfit OS |
+| Allfit Space | Direction | Allfit Studio |
 | --- | --- | --- |
 | A person trains | ← | A professional programs |
 | A person books | ← | An organization publishes availability |
@@ -95,7 +95,7 @@ Fitness ID is a product thesis, not a currently available public feature.
 - Members of gyms, studios, boxes, or sports centers.
 - People looking for fitness services, classes, programs, or experiences.
 
-### Allfit OS
+### Allfit Studio
 
 - Independent coaches and personal trainers.
 - Gyms and fitness centers.
@@ -130,7 +130,7 @@ One ecosystem for the different ways fitness is lived and offered.
 
 Train independently or with a professional and carry your progress with you.
 
-### Allfit OS
+### Allfit Studio
 
 Manage clients, training, schedules, memberships, and progress from one administrative system.
 
@@ -145,7 +145,7 @@ Manage clients, training, schedules, memberships, and progress from one administ
 7. **AI is a layer, not a destination** — Intelligence should support planning, adaptation, analysis, and operations instead of becoming an isolated chatbot.
 8. **Product truth over vision claims** — Public communication must distinguish released capability, near-term scope, and long-term direction.
 
-## Allfit OS scope
+## Allfit Studio scope
 
 ### Administrative panel
 
@@ -176,7 +176,7 @@ The public page is an OS item or module. It must not be described as an independ
 
 ### Initial setup
 
-Allfit OS may include configuration support so a business can begin operating sooner. The exact boundaries of setup, migration, integrations, custom domains, white-label behavior, and dedicated support must be defined during commercialization.
+Allfit Studio may include configuration support so a business can begin operating sooner. The exact boundaries of setup, migration, integrations, custom domains, white-label behavior, and dedicated support must be defined during commercialization.
 
 ## Allfit Space scope
 
@@ -186,7 +186,7 @@ Allfit OS may include configuration support so a business can begin operating so
 - Strength routines and workout logging.
 - Calendar and progress.
 - Programs.
-- Basic connection with Allfit OS.
+- Basic connection with Allfit Studio.
 - A coach assigning routines.
 - A linked gym or membership where supported.
 
@@ -215,7 +215,7 @@ These areas are a long-term information architecture, not the release checklist.
 
 ## Commercial model
 
-### Allfit OS
+### Allfit Studio
 
 The current reference proposal is a recurring subscription that scales with active clients, team members, or locations. Previous public pricing is no longer shown on the parent landing and requires a complete billing specification before it becomes canonical.
 
@@ -231,33 +231,35 @@ Commissions for services, bookings, programs, events, or payments are a later bu
 
 ## Current landing-page job
 
-The parent landing currently has four jobs:
+The parent landing currently has five jobs:
 
 1. Establish Allfit One as the parent ecosystem.
-2. Present Allfit Space and Allfit OS with equal visual hierarchy.
-3. Show that the personal and operational products are connected.
-4. Convert qualified Allfit OS interest into demo requests while labeling the App as coming soon.
+2. Name the fragmentation problem before presenting any product.
+3. Introduce Fitness ID as the product thesis that connects both sides.
+4. Present Allfit Space and Allfit Studio with equal visual hierarchy.
+5. Open a real conversation by email while both products are labeled as coming soon.
 
-The page uses a navbar, one connected hero, dedicated explanations for Allfit Space and Allfit OS, an ecosystem relationship section, and the existing footer. It does not currently explain pricing or FAQs.
+The page is a numbered editorial sequence: navbar, connected hero, `01` problem, `02` Fitness ID, `03` Allfit Space, `04` Allfit Studio, `05` ecosystem relationship, `06` current status and contact, and the footer. It does not explain pricing or FAQs.
+
+Neither product is demo-able yet, so the page must not offer a demo. Fitness ID appears as a thesis and is explicitly labeled as not publicly available. Bookings, classes, public pages, and marketplace appear only under the Studio "on the way" label because they are future expansion, not V1.
 
 ## Current calls to action
 
-- Navigate to the Allfit Space presentation.
-- Navigate to the Allfit OS presentation.
-- Request an Allfit OS demo by email.
+- Navigate to the Fitness ID, Allfit Space, Allfit Studio, and ecosystem sections.
+- Write to `hello@allfitone.com`.
 
-Allfit Space has no public CTA until a real waitlist, release, or update channel exists.
+Neither product has a waitlist or demo CTA until a real destination exists.
 
 ## Success metrics
 
 ### Ecosystem landing
 
-- Qualified Allfit OS demo requests.
-- Engagement with both product anchors.
+- Qualified inbound emails from people, coaches, and organizations.
+- Engagement with the Fitness ID section and both product anchors.
 - Language selection and device-level completion of the hero.
 - Organic impressions and qualified branded traffic.
 
-### Allfit OS
+### Allfit Studio
 
 - Time to first configured client.
 - Percentage of organizations that configure their operation and public information.
@@ -273,15 +275,15 @@ Targets and instrumentation are not yet defined.
 ## Product status
 
 - The current landing is an early brand and commercial-positioning surface.
-- Allfit OS is presented as the product available for demo conversations.
-- Allfit Space is a broad product vision presented as coming soon.
-- Fitness ID, marketplace, intelligence, broad integrations, and connected-gym capabilities are future directions.
+- Both Allfit Space and Allfit Studio are presented as coming soon. There is no public demo.
+- Fitness ID is presented on the landing as the product thesis and explicitly labeled as not publicly available.
+- Marketplace, intelligence, broad integrations, bookings, public pages, and connected-gym capabilities are future directions.
 - The internal `/dev` route is a brand lab and must remain `noindex`.
 
 ## Non-goals for the current phase
 
 - Positioning Allfit One only as gym-management software.
-- Presenting Allfit OS as a public page, dashboard, and client PWA bundle.
+- Presenting Allfit Studio as a public page, dashboard, and client PWA bundle.
 - Presenting Allfit Space only as a hybrid-athlete product.
 - Claiming marketplace, AI, wearable, nutrition, community, or commerce capabilities as released.
 - Building a complex social feed, general store, medical system, or support for every sport initially.
@@ -293,7 +295,7 @@ Targets and instrumentation are not yet defined.
 - Shared account, organization, role, location, and permission model.
 - Fitness ID consent, ownership, export, deletion, encryption, and retention policies.
 - Relationship between organization branding and the central Allfit Space experience.
-- Pricing and billing specifications for Allfit OS.
+- Pricing and billing specifications for Allfit Studio.
 - Free and paid entitlement model for Allfit Space.
 - Marketplace timing, provider verification, payments, refunds, and commissions.
 - AI safety, explanation, professional oversight, and medical boundaries.

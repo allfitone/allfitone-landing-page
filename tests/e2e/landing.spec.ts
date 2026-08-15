@@ -5,7 +5,7 @@ test("defaults to Spanish and persists a required locale selection", async ({ pa
   await page.goto("/");
 
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(page.getByText("Solicitar demo").first()).toBeVisible();
+  await expect(page.getByText("Escríbenos").first()).toBeVisible();
 
   const English = page.getByRole("button", { name: "English" }).first();
   await English.click();
@@ -20,7 +20,7 @@ test("defaults to Spanish and persists a required locale selection", async ({ pa
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByText("Request demo").first()).toBeVisible();
+  await expect(page.getByText("Get in touch").first()).toBeVisible();
 });
 
 test("mobile Sheet traps focus, closes predictably and restores the trigger", async ({ page }) => {
@@ -42,7 +42,7 @@ test("mobile Sheet traps focus, closes predictably and restores the trigger", as
   await expect(trigger).toBeFocused();
 
   await trigger.click();
-  await page.getByRole("link", { name: /Allfit Studio/ }).click();
+  await dialog.getByRole("link", { name: /Allfit Studio/ }).click();
   await expect(dialog).toBeHidden();
   await expect(page).toHaveURL(/#allfit-studio$/);
   await expect(trigger).toBeFocused();
@@ -79,6 +79,17 @@ test("honors reduced motion and forced colors", async ({ page }) => {
   const duration = await page.locator(".nav-link").first().evaluate((element) => getComputedStyle(element).transitionDuration);
   expect(["0s", "0.00001s", "1e-05s"]).toContain(duration);
   await expect(page.locator("h1")).toBeVisible();
+});
+
+test("section markers use labels without numeric prefixes", async ({ page }) => {
+  await page.goto("/");
+
+  const markers = page.locator(".section-marker");
+  await expect(markers).toHaveCount(4);
+  await expect(page.locator(".section-marker-index")).toHaveCount(0);
+
+  const labels = await markers.allInnerTexts();
+  expect(labels.every((label) => !/^0[1-6]\b/.test(label.trim()))).toBe(true);
 });
 
 test("has a logical heading structure and no serious axe violations", async ({ page }) => {
