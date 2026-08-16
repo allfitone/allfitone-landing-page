@@ -160,12 +160,27 @@ export const content = {
     ecosystemTitle: "Dos productos. Una sola relación.",
     ecosystemCopy:
       "Allfit Space acompaña a la persona. Allfit Studio organiza a quienes hacen posible su experiencia. Allfit One conecta ambos lados con identidad, permisos e información compartida.",
-    ecosystemRows: [
-      ["La persona entrena", "El profesional programa"],
-      ["La persona acepta", "La organización propone"],
-      ["La persona registra progreso", "El profesional analiza"],
-      ["La persona conserva su historia", "La organización accede con permiso"],
-    ],
+    ecosystem: {
+      space: {
+        index: "01",
+        title: "Tu historia sigue contigo.",
+        copy: "La persona entrena, registra su progreso y conserva su información.",
+        tags: ["Identidad", "Progreso", "Historial"],
+      },
+      connect: {
+        title: "Se conectan con tu permiso",
+        tags: ["Planes", "Progreso", "Información"],
+      },
+      studio: {
+        index: "02",
+        title: "El profesional acompaña sin apropiarse.",
+        copy: "Studio permite programar, acompañar y analizar con acceso autorizado.",
+        tags: ["Programa", "Acompaña", "Analiza"],
+      },
+      closingLead: "Cambia quién te acompaña.",
+      closingAccent: "No",
+      closingRest: "lo que has construido.",
+    },
 
     statusLabel: "Dónde estamos",
     statusTitle: "Estamos construyendo Allfit One.",
@@ -339,12 +354,27 @@ export const content = {
     ecosystemTitle: "Two products. One relationship.",
     ecosystemCopy:
       "Allfit Space stays with the person. Allfit Studio organizes the people who make their experience possible. Allfit One connects both sides through identity, permissions and shared information.",
-    ecosystemRows: [
-      ["The person trains", "The professional programs"],
-      ["The person accepts", "The organization proposes"],
-      ["The person logs progress", "The professional analyzes"],
-      ["The person keeps their history", "The organization accesses it with permission"],
-    ],
+    ecosystem: {
+      space: {
+        index: "01",
+        title: "Your history stays with you.",
+        copy: "The person trains, logs their progress and keeps their information.",
+        tags: ["Identity", "Progress", "History"],
+      },
+      connect: {
+        title: "They connect with your permission",
+        tags: ["Plans", "Progress", "Information"],
+      },
+      studio: {
+        index: "02",
+        title: "The professional guides without owning it.",
+        copy: "Studio lets them program, guide and analyze with authorized access.",
+        tags: ["Program", "Guide", "Analyze"],
+      },
+      closingLead: "Change who guides you.",
+      closingAccent: "Not",
+      closingRest: "what you've built.",
+    },
 
     statusLabel: "Where we are",
     statusTitle: "We're building Allfit One.",

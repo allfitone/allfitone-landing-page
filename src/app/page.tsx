@@ -257,20 +257,55 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
           <p className="section-lead mt-8 text-void/72 lg:mt-0">{copy.ecosystemCopy}</p>
         </div>
 
-        <div className="ecosystem-bridge col-span-12 mt-16 md:mt-20">
-          <div className="ecosystem-bridge-head">
-            <p className="ecosystem-bridge-head-label">{copy.appSectionLabel}</p>
-            <p className="ecosystem-bridge-head-label">{copy.studioSectionLabel}</p>
-          </div>
-          {copy.ecosystemRows.map(([person, organization]) => (
-            <div key={person} className="ecosystem-bridge-row">
-              <p className="ecosystem-bridge-person">{person}</p>
-              <span className="ecosystem-bridge-node" aria-hidden="true">
-                <FoundationIcon name="forward" size="sm" decorative />
+        <div className="ecosystem-panel col-span-12 mt-16 md:mt-20">
+          <div className="ecosystem-grid">
+            <article className="ecosystem-product">
+              <p className="ecosystem-product-head">
+                <span className="ecosystem-product-index">{copy.ecosystem.space.index}</span>
+                <span className="ecosystem-product-rule" aria-hidden="true" />
+                <span className="ecosystem-product-label">{copy.appSectionLabel}</span>
+              </p>
+              <h3 className="ecosystem-product-title">{copy.ecosystem.space.title}</h3>
+              <p className="ecosystem-product-copy">{copy.ecosystem.space.copy}</p>
+              <p className="ecosystem-tags">{copy.ecosystem.space.tags.join(" · ")}</p>
+            </article>
+
+            <div className="ecosystem-connect">
+              <span className="ecosystem-node" aria-hidden="true">
+                <svg className="ecosystem-node-svg" viewBox="0 0 260 64" fill="none">
+                  <line x1="26" y1="32" x2="104" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+                  <line x1="156" y1="32" x2="234" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+                  <circle cx="26" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+                  <circle cx="26" cy="32" r="3.5" fill="currentColor" />
+                  <circle cx="234" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+                  <circle cx="234" cy="32" r="3.5" fill="currentColor" />
+                  <circle cx="130" cy="32" r="22" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+                  <circle cx="130" cy="32" r="13" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="130" cy="32" r="5.5" fill="currentColor" />
+                </svg>
               </span>
-              <p className="ecosystem-bridge-organization">{organization}</p>
+              <p className="ecosystem-connect-title">{copy.ecosystem.connect.title}</p>
+              <p className="ecosystem-connect-tags">{copy.ecosystem.connect.tags.join(" · ")}</p>
             </div>
-          ))}
+
+            <article className="ecosystem-product ecosystem-product-studio">
+              <p className="ecosystem-product-head">
+                <span className="ecosystem-product-index">{copy.ecosystem.studio.index}</span>
+                <span className="ecosystem-product-rule" aria-hidden="true" />
+                <span className="ecosystem-product-label">{copy.studioSectionLabel}</span>
+              </p>
+              <h3 className="ecosystem-product-title">{copy.ecosystem.studio.title}</h3>
+              <p className="ecosystem-product-copy">{copy.ecosystem.studio.copy}</p>
+              <p className="ecosystem-tags">{copy.ecosystem.studio.tags.join(" · ")}</p>
+            </article>
+          </div>
+
+          <p className="ecosystem-statement">
+            <span className="ecosystem-statement-line">{copy.ecosystem.closingLead}</span>
+            <span className="ecosystem-statement-line">
+              <span className="ecosystem-statement-accent">{copy.ecosystem.closingAccent}</span> {copy.ecosystem.closingRest}
+            </span>
+          </p>
         </div>
       </div>
     </section>
