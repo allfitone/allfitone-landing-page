@@ -258,6 +258,10 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
         </div>
 
         <div className="ecosystem-bridge col-span-12 mt-16 md:mt-20">
+          <div className="ecosystem-bridge-head">
+            <p className="ecosystem-bridge-head-label">{copy.appSectionLabel}</p>
+            <p className="ecosystem-bridge-head-label">{copy.studioSectionLabel}</p>
+          </div>
           {copy.ecosystemRows.map(([person, organization]) => (
             <div key={person} className="ecosystem-bridge-row">
               <p className="ecosystem-bridge-person">{person}</p>

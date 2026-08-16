@@ -194,7 +194,8 @@ section[id].fid-section {
 .ecosystem-bridge-person, .ecosystem-bridge-organization { font-family: var(--afo-font-family-display); font-size: clamp(1.65rem, 7.5vw, 2.15rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: .95; text-transform: uppercase; }
 .ecosystem-bridge-person { grid-column: 1 / -1; }
 .ecosystem-bridge-organization { grid-column: 2; grid-row: 2; margin-top: var(--afo-space-4); color: var(--afo-color-text-accent); text-align: left; }
-.ecosystem-bridge-node { grid-column: 1; grid-row: 2; display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; margin-top: var(--afo-space-4); border: 1px solid var(--afo-color-accent-tonal-border); border-radius: var(--afo-radius-circle); background: var(--afo-color-accent-tonal); color: var(--afo-color-text-accent); }
+.ecosystem-bridge-head { display: none; }
+.ecosystem-bridge-node { grid-column: 1; grid-row: 2; display: flex; align-items: center; justify-content: center; margin-top: var(--afo-space-4); color: var(--afo-color-brand-primary); }
 
 /* ---------------------------------------------------------------------------
    Status and contact
@@ -343,10 +344,14 @@ html[data-privacy-language="en"] [data-privacy-copy="en"] { display: inline; }
   .studio-module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--afo-space-8); }
   .studio-upcoming { flex-direction: row; align-items: baseline; gap: var(--afo-space-6); }
   .ecosystem-bridge { padding-inline: var(--afo-space-8); }
-  .ecosystem-bridge-row { grid-template-columns: minmax(0, 1fr) 3.5rem minmax(0, 1fr); gap: var(--afo-space-6); padding-block: var(--afo-space-8); }
+  .ecosystem-bridge-head { display: grid; grid-template-columns: minmax(0, 1fr) clamp(4rem, 7vw, 7rem) minmax(0, 1fr); gap: var(--afo-space-6); padding-top: var(--afo-space-8); padding-bottom: var(--afo-space-5); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-brand-light) 13%, transparent); }
+  .ecosystem-bridge-head-label { font-size: .625rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .18em; text-transform: uppercase; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 60%, transparent); }
+  .ecosystem-bridge-head-label:last-child { grid-column: 3; }
+  .ecosystem-bridge-row { grid-template-columns: minmax(0, 1fr) clamp(4rem, 7vw, 7rem) minmax(0, 1fr); gap: var(--afo-space-6); padding-block: var(--afo-space-8); }
   .ecosystem-bridge-person, .ecosystem-bridge-organization { font-size: clamp(1.75rem, 3vw, 2.4rem); }
   .ecosystem-bridge-person { grid-column: 1; grid-row: 1; }
-  .ecosystem-bridge-node { grid-column: 2; grid-row: 1; width: 3.5rem; height: 3.5rem; margin-top: 0; }
+  .ecosystem-bridge-node { grid-column: 2; grid-row: 1; justify-content: flex-start; gap: var(--afo-space-3); margin-top: 0; }
+  .ecosystem-bridge-node::before { content: ""; flex: 1 1 auto; height: 1px; background: currentColor; }
   .ecosystem-bridge-organization { grid-column: 3; grid-row: 1; margin-top: 0; color: var(--afo-color-neutral-white); }
   .site-mobile-sheet-content { padding-inline: var(--afo-space-10); }
 }
