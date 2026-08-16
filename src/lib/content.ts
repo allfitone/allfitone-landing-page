@@ -177,6 +177,8 @@ export const content = {
       ["Allfit Studio", "En desarrollo", "Gestiona clientes, planificación, progreso y suscripciones desde un mismo panel."],
       ["Fitness ID", "Tesis de producto", "Cada persona conserva su historial y decide qué comparte."],
     ],
+    closingPrompt:
+      "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
     built: "Creado para el movimiento",
     tagline: "All the fitness in one place.",
   },
@@ -355,6 +357,8 @@ export const content = {
       ["Allfit Studio", "In development", "Manage clients, planning, progress and subscriptions from one dashboard."],
       ["Fitness ID", "Product thesis", "Each person keeps their history and decides what to share."],
     ],
+    closingPrompt:
+      "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
     built: "Built for movement",
     tagline: "All the fitness in one place.",
   },

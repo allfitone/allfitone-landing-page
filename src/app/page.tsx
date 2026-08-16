@@ -153,6 +153,10 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
         <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
           <h2 className="section-title text-void">{copy.appSectionTitle}</h2>
           <p className="section-lead mt-8 text-void/70">{copy.appSectionCopy}</p>
+          <a href={CONTACT_HREF} className="inline-link inline-link-on-light mt-6">
+            {copy.contact}
+            <FoundationIcon name="forward" size="sm" decorative />
+          </a>
         </div>
 
         <div className="col-span-12 mt-20 grid border-y border-void/16 md:mt-28 md:grid-cols-3">
@@ -289,6 +293,14 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
               <p className="status-row-description">{description}</p>
             </article>
           ))}
+        </div>
+
+        <div className="col-span-12 mt-16 md:mt-24 lg:col-span-8">
+          <p className="section-lead text-white/80">{copy.closingPrompt}</p>
+          <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "mt-8 w-full sm:w-auto")}>
+            {copy.contact}
+            <FoundationIcon name="forward" data-icon="inline-end" decorative />
+          </a>
         </div>
 
       </div>

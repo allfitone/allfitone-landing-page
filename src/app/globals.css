@@ -208,6 +208,7 @@ section[id].fid-section {
 
 .inline-link { display: inline-flex; min-height: var(--afo-space-touch-target); align-items: center; gap: var(--afo-space-2); font-size: .625rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .16em; text-transform: uppercase; color: var(--afo-color-text-accent); transition: gap var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing); }
 .inline-link:hover { gap: var(--afo-space-3); }
+.inline-link.inline-link-on-light { color: var(--afo-color-brand-turquoise-dark); }
 
 /* ---------------------------------------------------------------------------
    Analytics privacy notice
