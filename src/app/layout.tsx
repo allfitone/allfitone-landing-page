@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" data-afo-theme="dark" className={`${display.variable} ${body.variable} scroll-smooth antialiased`}>
-      <body>
+      <body suppressHydrationWarning>
         <StructuredData />
         {children}
       </body>
