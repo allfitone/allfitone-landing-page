@@ -254,7 +254,19 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
       <div className="site-grid py-24 md:py-32">
         <div className="col-span-12 md:col-span-8 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
           <h2 className="section-title text-void">{copy.ecosystemTitle}</h2>
-          <p className="section-lead mt-8 text-void/72 lg:mt-0">{copy.ecosystemCopy}</p>
+          <div className="mt-8 lg:mt-0">
+            <p className="section-lead text-void/72">{copy.ecosystemCopy}</p>
+            <div className="ecosystem-relation">
+              <div className="ecosystem-relation-flow">
+                <span className="ecosystem-relation-node">{copy.ecosystem.relation[0]}</span>
+                <span className="ecosystem-relation-link" aria-hidden="true" />
+                <span className="ecosystem-relation-node">{copy.ecosystem.relation[1]}</span>
+                <span className="ecosystem-relation-link" aria-hidden="true" />
+                <span className="ecosystem-relation-node">{copy.ecosystem.relation[2]}</span>
+              </div>
+              <p className="ecosystem-relation-shared">{copy.ecosystem.relationShared}</p>
+            </div>
+          </div>
         </div>
 
         <div className="ecosystem-panel col-span-12 mt-16 md:mt-20">

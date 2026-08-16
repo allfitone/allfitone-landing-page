@@ -158,8 +158,7 @@ export const content = {
 
     ecosystemLabel: "Ecosistema",
     ecosystemTitle: "Dos productos. Una sola relación.",
-    ecosystemCopy:
-      "Allfit Space acompaña a la persona. Allfit Studio organiza a quienes hacen posible su experiencia. Allfit One conecta ambos lados con identidad, permisos e información compartida.",
+    ecosystemCopy: "Dos experiencias distintas sobre una base compartida.",
     ecosystem: {
       space: {
         index: "01",
@@ -180,6 +179,8 @@ export const content = {
       closingLead: "Cambia quién te acompaña.",
       closingAccent: "No",
       closingRest: "lo que has construido.",
+      relation: ["Persona", "Profesional", "Organización"],
+      relationShared: "Identidad · Permisos · Información compartida",
     },
 
     statusLabel: "Dónde estamos",
@@ -352,8 +353,7 @@ export const content = {
 
     ecosystemLabel: "Ecosystem",
     ecosystemTitle: "Two products. One relationship.",
-    ecosystemCopy:
-      "Allfit Space stays with the person. Allfit Studio organizes the people who make their experience possible. Allfit One connects both sides through identity, permissions and shared information.",
+    ecosystemCopy: "Two distinct experiences on one shared base.",
     ecosystem: {
       space: {
         index: "01",
@@ -374,6 +374,8 @@ export const content = {
       closingLead: "Change who guides you.",
       closingAccent: "Not",
       closingRest: "what you've built.",
+      relation: ["Person", "Professional", "Organization"],
+      relationShared: "Identity · Permissions · Shared information",
     },
 
     statusLabel: "Where we are",

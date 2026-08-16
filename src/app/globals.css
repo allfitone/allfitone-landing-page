@@ -208,6 +208,11 @@ section[id].fid-section {
 .ecosystem-statement { margin-top: var(--afo-space-8); padding-top: var(--afo-space-8); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); text-align: center; font-family: var(--afo-font-family-display); font-size: clamp(1.5rem, 5vw, 2.15rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: 1.05; text-transform: uppercase; }
 .ecosystem-statement-line { display: block; }
 .ecosystem-statement-accent { color: var(--afo-color-brand-primary); }
+.ecosystem-relation { margin-top: var(--afo-space-8); }
+.ecosystem-relation-flow { display: flex; align-items: center; gap: var(--afo-space-3); }
+.ecosystem-relation-node { font-size: .625rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .1em; text-transform: uppercase; color: var(--afo-color-ink-void); white-space: nowrap; }
+.ecosystem-relation-link { flex: 1 1 auto; min-width: var(--afo-space-4); height: 1px; background: color-mix(in srgb, var(--afo-color-ink-void) 28%, transparent); }
+.ecosystem-relation-shared { margin-top: var(--afo-space-3); padding-top: var(--afo-space-3); border-top: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 18%, transparent); font-size: .75rem; letter-spacing: .01em; color: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }
 
 @media (min-width: 1024px) {
   .ecosystem-panel { padding: var(--afo-space-10) var(--afo-space-10) var(--afo-space-8); }
