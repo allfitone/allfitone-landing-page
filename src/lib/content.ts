@@ -21,8 +21,8 @@ export const content = {
     tiktokLabel: "Allfit One en TikTok",
     linkedinLabel: "Allfit One en LinkedIn",
     heroLead:
-      "Allfit One conecta a las personas que entrenan con los profesionales y las organizaciones que hacen posible ese entrenamiento. Una identidad, dos productos y un historial que siempre viaja contigo.",
-    heroNote: "Todavía no hay demo pública. Escríbenos y te contamos en qué punto estamos.",
+      "Allfit One es el ecosistema donde el fitness se conecta. Una identidad, dos productos y un historial que viaja contigo: para las personas que entrenan y para los profesionales y organizaciones que lo hacen posible.",
+    heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
 
     appAudience: "Para personas",
     appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
@@ -200,8 +200,8 @@ export const content = {
     tiktokLabel: "Allfit One on TikTok",
     linkedinLabel: "Allfit One on LinkedIn",
     heroLead:
-      "Allfit One connects the people who train with the professionals and organizations who make that training possible. One identity, two products and a history that always travels with you.",
-    heroNote: "There is no public demo yet. Write to us and we'll tell you where we are.",
+      "Allfit One is the ecosystem where fitness connects. One identity, two products and a history that travels with you: for the people who train and for the professionals and organizations who make it possible.",
+    heroNote: "There's no public demo yet. Tell us how you train or run your space.",
 
     appAudience: "For people",
     appDescription: "Train on your own or with a professional and keep your progress with you.",
