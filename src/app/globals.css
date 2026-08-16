@@ -217,10 +217,11 @@ section[id].fid-section {
 @media (min-width: 1024px) {
   .ecosystem-panel { padding: var(--afo-space-10) var(--afo-space-10) var(--afo-space-8); }
   .ecosystem-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, .82fr) minmax(0, 1fr); align-items: stretch; }
-  .ecosystem-product { padding: var(--afo-space-2) var(--afo-space-10); }
+  .ecosystem-product { display: flex; flex-direction: column; padding: var(--afo-space-2) var(--afo-space-10); }
   .ecosystem-grid > .ecosystem-product:first-child { padding-top: var(--afo-space-2); padding-left: 0; }
   .ecosystem-product-studio { border-top: 0; padding-right: 0; }
-  .ecosystem-product-title { font-size: clamp(2.2rem, 3.4vw, 3.1rem); }
+  .ecosystem-product-title { font-size: clamp(2.2rem, 3.4vw, 3.1rem); min-height: 2em; }
+  .ecosystem-tags { margin-top: auto; }
   .ecosystem-connect { justify-content: center; border-top: 0; border-inline: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); padding: var(--afo-space-4) var(--afo-space-8); }
   .ecosystem-node-svg { width: min(100%, 15rem); }
   .ecosystem-statement { margin-top: var(--afo-space-10); font-size: clamp(1.8rem, 2.9vw, 2.5rem); }
