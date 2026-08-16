@@ -106,7 +106,7 @@ export const content = {
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
-      "Allfit Space reúne tu plan, tus sesiones y tu progreso en un solo lugar. Entrena por tu cuenta o sigue la planificación de un profesional. Si cambias de entrenador, gimnasio o disciplina, continúas desde donde estabas.",
+      "Allfit Space reúne tu plan, tus sesiones y tu progreso en un solo lugar. Entrena por tu cuenta o sigue la planificación de un profesional.",
     appPillars: [
       ["Entrena por tu cuenta", "Organiza tus sesiones y registra lo que haces cuando entrenas de forma independiente."],
       ["Sigue el plan de tu entrenador", "Consulta su planificación en el mismo lugar donde registras cada sesión."],
@@ -125,7 +125,7 @@ export const content = {
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
-      "Con Allfit Studio, entrenadores y organizaciones gestionan clientes, planificación y seguimiento desde un mismo panel. Cada persona entra con su Fitness ID, decide qué comparte y conserva su historial.",
+      "Un solo panel para gestionar clientes, planificación, progreso y operación, conectado con el Fitness ID de cada persona.",
     studioDifferentiatorsLabel: "Cómo funciona Studio",
     studioDifferentiators: [
       [
@@ -285,7 +285,7 @@ export const content = {
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Keep training from where you left off.",
     appSectionCopy:
-      "Allfit Space brings your plan, sessions and progress into one place. Train on your own or follow a professional's plan. If you change coach, gym or discipline, you pick up where you left off.",
+      "Allfit Space brings your plan, sessions and progress into one place. Train on your own or follow a professional's plan.",
     appPillars: [
       ["Train on your own", "Plan your sessions and log what you do when you train independently."],
       ["Follow your coach's plan", "Keep their plan in the same place where you log each session."],
@@ -304,7 +304,7 @@ export const content = {
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
     studioSectionCopy:
-      "Allfit Studio gives coaches and organizations one place to manage clients, planning and follow-up. Each person joins with their Fitness ID, decides what to share and keeps their history.",
+      "One dashboard to manage clients, planning, progress and operations, connected to each person's Fitness ID.",
     studioDifferentiatorsLabel: "How Studio works",
     studioDifferentiators: [
       [
