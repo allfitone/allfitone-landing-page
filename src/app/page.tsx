@@ -68,23 +68,11 @@ function LanguageToggle({
   );
 }
 
-function SectionMarker({ label, tone = "dark" }: { label: string; tone?: "dark" | "light" }) {
-  return (
-    <p className={cn("section-marker", tone === "light" && "section-marker-light")}>
-      <span className="section-marker-rule" aria-hidden="true" />
-      <span className="section-marker-label">{label}</span>
-    </p>
-  );
-}
-
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 lg:col-span-4">
-          <SectionMarker label={copy.problemLabel} />
-        </div>
-        <div className="col-span-12 mt-8 lg:col-span-8 lg:mt-0">
+        <div className="col-span-12 lg:col-span-8">
           <h2 className="section-title">{copy.problemTitle}</h2>
           <p className="section-lead mt-8 text-white/70">{copy.problemCopy}</p>
         </div>
@@ -120,10 +108,7 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
     <section id="fitness-id" className="fid-section bg-void text-white">
       <BrandLogo variant="cyan" className="fid-section-mark" aria-hidden="true" />
       <div className="site-grid relative z-10">
-        <div className="col-span-12 lg:col-span-4">
-          <SectionMarker label={copy.fitnessIdLabel} />
-        </div>
-        <div className="col-span-12 mt-8 lg:col-span-8 lg:mt-0">
+        <div className="col-span-12 lg:col-span-8">
           <h2 className="section-title">{copy.fitnessIdTitle}</h2>
         </div>
 
@@ -263,10 +248,7 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="ecosystem" className="bg-bolt text-void">
       <div className="site-grid py-24 md:py-32">
-        <div className="col-span-12 md:col-span-4">
-          <SectionMarker label={copy.ecosystemLabel} tone="light" />
-        </div>
-        <div className="col-span-12 mt-8 md:col-span-8 md:mt-0 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
+        <div className="col-span-12 md:col-span-8 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
           <h2 className="section-title text-void">{copy.ecosystemTitle}</h2>
           <p className="section-lead mt-8 text-void/72 lg:mt-0">{copy.ecosystemCopy}</p>
         </div>
@@ -291,10 +273,7 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="status" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 lg:col-span-4">
-          <SectionMarker label={copy.statusLabel} />
-        </div>
-        <div className="col-span-12 mt-8 lg:col-span-8 lg:mt-0">
+        <div className="col-span-12 lg:col-span-8">
           <h2 className="section-title">{copy.statusTitle}</h2>
           <p className="section-lead mt-8 text-white/70">{copy.statusCopy}</p>
         </div>

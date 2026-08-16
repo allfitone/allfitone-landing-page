@@ -40,7 +40,7 @@
 
 /* ---------------------------------------------------------------------------
    Editorial primitives
-   Shared type, grid and section-marker language used across every region.
+   Shared type and grid language used across every region.
 --------------------------------------------------------------------------- */
 
 @layer components {
@@ -56,12 +56,6 @@
   .section-title { max-width: 13ch; font-family: var(--afo-font-family-display); font-size: clamp(3.6rem, 7vw, 7.6rem); font-weight: var(--afo-font-weight-bold); letter-spacing: var(--afo-letter-spacing-display); line-height: var(--afo-line-height-display); text-transform: uppercase; text-wrap: balance; }
   .section-lead { max-width: 46ch; font-size: 1rem; line-height: 1.75; }
   .eyebrow { @apply text-[9px] font-extrabold uppercase tracking-[.2em]; }
-
-  /* Section marker shared by each editorial region. */
-  .section-marker { display: flex; align-items: center; gap: var(--afo-space-3); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 60%, transparent); }
-  .section-marker-rule { width: var(--afo-space-8); height: 1px; background: currentColor; opacity: .35; }
-  .section-marker-label { font-size: .5625rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .2em; line-height: 1.2; text-transform: uppercase; }
-  .section-marker-light { color: color-mix(in srgb, var(--afo-color-ink-void) 68%, transparent); }
 
   .product-section-wordmark { width: min(100%, 11rem); }
   .product-section-wordmark svg { display: block; width: 100%; height: auto; }
