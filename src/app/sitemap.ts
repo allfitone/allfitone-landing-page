@@ -11,5 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
       images: [`${siteConfig.url}/opengraph-image.png`],
     },
+    {
+      url: `${siteConfig.url}/privacy/analytics`,
+      lastModified: new Date("2026-08-16"),
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
   ];
 }
