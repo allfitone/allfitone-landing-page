@@ -33,6 +33,24 @@ test("@visual mobile menu open", async ({ page }) => {
   await expect(page).toHaveScreenshot("mobile-menu-open-320x800.png");
 });
 
+test("@visual analytics privacy desktop 1440x900", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await preparePage(page, "/privacy/analytics");
+  await expect(page).toHaveScreenshot("analytics-privacy-desktop-1440x900.png");
+});
+
+test("@visual analytics privacy tablet 768x1024", async ({ page }) => {
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await preparePage(page, "/privacy/analytics");
+  await expect(page).toHaveScreenshot("analytics-privacy-tablet-768x1024.png");
+});
+
+test("@visual analytics privacy mobile 320x800", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await preparePage(page, "/privacy/analytics");
+  await expect(page).toHaveScreenshot("analytics-privacy-mobile-320x800.png");
+});
+
 test("@visual not found", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await preparePage(page, "/missing-page");

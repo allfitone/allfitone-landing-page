@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   BrandLockup,
@@ -537,8 +538,13 @@ export default function Home() {
           <Separator className="mt-10 bg-white/12" />
           <div className="mt-5 grid gap-4 text-[9px] font-bold uppercase tracking-[.16em] text-white/60 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
             <span>© 2026 Allfit One</span>
-            <p className="flex min-h-11 items-center text-[10px] font-medium uppercase tracking-[.12em] text-white/64">{copy.tagline}</p>
-            <span className="sm:justify-self-end">{copy.built}</span>
+            <div className="flex flex-col items-start sm:items-center">
+              <p className="flex min-h-11 items-center text-[10px] font-medium uppercase tracking-[.12em] text-white/64">{copy.tagline}</p>
+              <Link className="flex min-h-11 items-center text-bolt transition-colors hover:text-white" href="/privacy/analytics">
+                {copy.analyticsPrivacy}
+              </Link>
+            </div>
+            <span className="sm:justify-self-end sm:self-start sm:pt-4">{copy.built}</span>
           </div>
         </div>
       </footer>
