@@ -32,8 +32,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - Next.js `16.2.10` App Router, React `19`, TypeScript, Tailwind CSS `4`, and `@allfitone/react@0.7.0`.
 - `src/app/page.tsx` composes the landing experience; `src/lib/content.ts` owns every bilingual string; `src/components/product-mockups.tsx` and `src/components/fitness-id-card.tsx` own the illustrative product objects.
-- The public homepage is a numbered editorial sequence: floating navbar, connected two-product hero, `01` problem, `02` Fitness ID, `03` Allfit Space, `04` Allfit Studio, `05` ecosystem relationship, `06` current status and contact, and the established footer.
-- Sections carry a mono numeric index through the shared `.section-marker` component. Keep the numbering contiguous when adding or removing a section.
+- The public homepage is an editorial sequence: floating navbar, connected two-product hero, problem, Fitness ID, Allfit Space, Allfit Studio, ecosystem relationship, current status and contact (with a closing email call to action), and the established footer.
+- Editorial sections open directly with their title. The former per-section eyebrow markers — the `.section-marker` component and its numeric section index — were removed to make the page warmer and less templated; do not reintroduce them. Numeric indexes inside components (Fitness ID card and controls, Studio differentiators, ecosystem product columns) stay.
 - `src/app/layout.tsx` owns root metadata, fonts, and global structured data.
 - `src/app/cascade-layers.css` only establishes Tailwind layer order before package CSS; `src/app/globals.css` owns the landing-specific global Tailwind/theme styles.
 - `src/lib/site-config.ts` is the source of truth for the public URL, SEO title, description, email, and social links.

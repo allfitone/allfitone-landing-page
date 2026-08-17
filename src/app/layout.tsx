@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Manrope } from "next/font/google";
 
 import { StructuredData } from "@/components/structured-data";
@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     locale: "es_CO",
+    alternateLocale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
@@ -48,10 +49,15 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#030713",
+  colorScheme: "dark",
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" data-afo-theme="dark" className={`${display.variable} ${body.variable} scroll-smooth antialiased`}>
-      <body>
+      <body suppressHydrationWarning>
         <StructuredData />
         {children}
       </body>

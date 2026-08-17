@@ -296,7 +296,7 @@ Allfit One is the parent ecosystem—not a synonym for Allfit Studio and not mer
 - **Electric Cyan** (`{colors.primary}` — #55EFFB): The primary identity and action color. Use it for the main CTA, selected language, focus signal, key headline phrase, and small directional accents. A section should usually spend this emphasis once.
 - **Focus Cyan** (`{colors.primary-focus}` — #68EEF4): The brighter focus and hover sibling. It is not a second accent and should not compete with Electric Cyan in the same state.
 - **Supporting Turquoise** (`{colors.primary-muted}` — #60D1D6): Secondary visualization and supporting data color. Avoid using it for long body copy.
-- **Dark Turquoise** (`{colors.primary-dark}` — #348E94): Readable accent on chalk surfaces, stronger separators, and secondary iconography.
+- **Dark Turquoise** (`{colors.primary-dark}` — #348E94): Accent for larger elements, stronger separators, and secondary iconography on chalk surfaces. It does not meet WCAG AA (4.5:1) for small text on chalk, so small directional text links on light surfaces use `{colors.ink}` instead.
 
 ### Surface
 
@@ -332,7 +332,7 @@ There is **no decorative brand gradient**. The hero may use low-opacity radial c
 
 - **Display:** `Barlow Condensed, Arial Narrow, sans-serif`. The condensed proportions, heavy vertical strokes, and compact counters generate the athletic/editorial voice.
 - **Body / UI:** `Manrope, system-ui, sans-serif`. Its open construction balances the compression of Barlow Condensed and remains legible in bilingual copy and operational UI.
-- **Indexes / tabular utility:** system monospace. Use only for aligned numeric indexes, compact section numbering, and technical data where fixed width helps scanning.
+- **Indexes / tabular utility:** system monospace. Use only for aligned numeric indexes inside components and technical data where fixed width helps scanning. Editorial sections no longer carry a top numeric marker.
 
 Both brand fonts are loaded through `next/font`. Do not replace them with browser-default approximations in production assets.
 
@@ -483,7 +483,7 @@ Whitespace acts as controlled recovery between high-intensity typographic moment
 
 **`button-secondary-dark`** — A transparent full-pill control with a quiet dark-surface border. Use only when the secondary action needs button weight. Otherwise prefer `{component.text-link-dark}`.
 
-**`text-link-dark` / `text-link-light`** — Low-chrome directional actions. Pair the specific label with an arrow when movement or destination benefits from it. Avoid generic `Learn more`, `Submit`, `OK`, and `Click here` labels.
+**`text-link-dark` / `text-link-light`** — Low-chrome directional actions. Pair the specific label with an arrow when movement or destination benefits from it. Avoid generic `Learn more`, `Submit`, `OK`, and `Click here` labels. On chalk surfaces these links use `{colors.ink}` (not cyan or dark turquoise) so small-text contrast stays at or above WCAG AA.
 
 Links styled as buttons remain native anchors. In the current Base UI stack, use a plain `<a>` with `buttonVariants()` instead of rendering an anchor through a primitive that expects a native `<button>`.
 
@@ -494,6 +494,8 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 **`editorial-section-light`** — Full-width `{colors.canvas-chalk}` region with Void typography. Used for explanations, comparisons, and FAQ content where reading clarity should temporarily lower the visual intensity.
 
 **`feature-column`** — A grid-aligned content region separated by shared 1px dividers rather than a floating card. It combines a functional icon, numeric index, eyebrow, condensed title, and compact body copy. The shared structure is preferred to three identical rounded feature cards.
+
+**`ecosystem-relationship-panel`** — The signature relationship composition inside the ecosystem section: a dark rounded panel with two product columns (`01`/`02` mono eyebrow, condensed title, compact copy, and a tag list) flanking a central connection node — a thin cyan line with end points and concentric rings — and closed by a full-width statement whose single accent word is cyan. On chalk the section frames the panel with a short lead and an inline `person — professional — organization` relationship strip. Below `lg` the three columns stack into one reading column; the product titles reserve equal height so both columns align.
 
 ### Cards & Containers
 

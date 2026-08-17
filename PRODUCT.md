@@ -239,14 +239,14 @@ The parent landing currently has five jobs:
 4. Present Allfit Space and Allfit Studio with equal visual hierarchy.
 5. Open a real conversation by email while both products are labeled as coming soon.
 
-The page is a numbered editorial sequence: navbar, connected hero, `01` problem, `02` Fitness ID, `03` Allfit Space, `04` Allfit Studio, `05` ecosystem relationship, `06` current status and contact, and the footer. It does not explain pricing or FAQs.
+The page is an editorial sequence: navbar, connected hero, problem, Fitness ID, Allfit Space, Allfit Studio, ecosystem relationship, current status and contact, and the footer. Sections open directly with their title; the earlier per-section numeric markers were removed. It does not explain pricing or FAQs.
 
 Neither product is demo-able yet, so the page must not offer a demo. Fitness ID appears as a thesis and is explicitly labeled as not publicly available. Bookings, classes, public pages, and marketplace appear only under the Studio "on the way" label because they are future expansion, not V1.
 
 ## Current calls to action
 
 - Navigate to the Fitness ID, Allfit Space, Allfit Studio, and ecosystem sections.
-- Write to `hello@allfitone.com`.
+- Write to `hello@allfitone.com`. The email action appears in the navbar, the hero, the Allfit Space and Allfit Studio sections, and as a closing call to action at the end of the current-status section.
 
 Neither product has a waitlist or demo CTA until a real destination exists.
 

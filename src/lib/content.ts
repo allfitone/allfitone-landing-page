@@ -21,8 +21,8 @@ export const content = {
     tiktokLabel: "Allfit One en TikTok",
     linkedinLabel: "Allfit One en LinkedIn",
     heroLead:
-      "Allfit One conecta a las personas que entrenan con los profesionales y las organizaciones que hacen posible ese entrenamiento. Una identidad, dos productos y un historial que siempre viaja contigo.",
-    heroNote: "Todavía no hay demo pública. Escríbenos y te contamos en qué punto estamos.",
+      "Allfit One es el ecosistema donde el fitness se conecta. Una identidad, dos productos y un historial que viaja contigo: para las personas que entrenan y para los profesionales y organizaciones que lo hacen posible.",
+    heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
 
     appAudience: "Para personas",
     appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
@@ -106,7 +106,7 @@ export const content = {
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
-      "Allfit Space reúne tu plan, tus sesiones y tu progreso en un solo lugar. Entrena por tu cuenta o sigue la planificación de un profesional. Si cambias de entrenador, gimnasio o disciplina, continúas desde donde estabas.",
+      "Allfit Space reúne tu plan, tus sesiones y tu progreso en un solo lugar. Entrena por tu cuenta o sigue la planificación de un profesional.",
     appPillars: [
       ["Entrena por tu cuenta", "Organiza tus sesiones y registra lo que haces cuando entrenas de forma independiente."],
       ["Sigue el plan de tu entrenador", "Consulta su planificación en el mismo lugar donde registras cada sesión."],
@@ -125,7 +125,7 @@ export const content = {
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
-      "Con Allfit Studio, entrenadores y organizaciones gestionan clientes, planificación y seguimiento desde un mismo panel. Cada persona entra con su Fitness ID, decide qué comparte y conserva su historial.",
+      "Un solo panel para gestionar clientes, planificación, progreso y operación, conectado con el Fitness ID de cada persona.",
     studioDifferentiatorsLabel: "Cómo funciona Studio",
     studioDifferentiators: [
       [
@@ -151,7 +151,6 @@ export const content = {
       ["Entrenamiento", "Plantillas, programas, asignaciones e historial de versiones"],
       ["Progreso", "Sesiones registradas, adherencia y resultados compartidos"],
       ["Equipo", "Miembros, roles y permisos"],
-      ["Nutrición", "Registros y orientación según los permisos de cada persona"],
       ["Planes", "Planes que vendes y suscripciones activas"],
     ],
     studioUpcomingLabel: "Más adelante",
@@ -159,14 +158,30 @@ export const content = {
 
     ecosystemLabel: "Ecosistema",
     ecosystemTitle: "Dos productos. Una sola relación.",
-    ecosystemCopy:
-      "Allfit Space acompaña a la persona. Allfit Studio organiza a quienes hacen posible su experiencia. Allfit One conecta ambos lados con identidad, permisos e información compartida.",
-    ecosystemRows: [
-      ["La persona entrena", "El profesional programa"],
-      ["La persona acepta", "La organización propone"],
-      ["La persona registra progreso", "El profesional analiza"],
-      ["La persona conserva su historia", "La organización accede con permiso"],
-    ],
+    ecosystemCopy: "Dos experiencias distintas sobre una base compartida.",
+    ecosystem: {
+      space: {
+        index: "01",
+        title: "Tu historia sigue contigo.",
+        copy: "La persona entrena, registra su progreso y conserva su información.",
+        tags: ["Identidad", "Progreso", "Historial"],
+      },
+      connect: {
+        title: "Se conectan con tu permiso",
+        tags: ["Planes", "Progreso", "Información"],
+      },
+      studio: {
+        index: "02",
+        title: "El profesional acompaña sin apropiarse.",
+        copy: "Studio permite programar, acompañar y analizar con acceso autorizado.",
+        tags: ["Programa", "Acompaña", "Analiza"],
+      },
+      closingLead: "Cambia quién te acompaña.",
+      closingAccent: "No",
+      closingRest: "lo que has construido.",
+      relation: ["Persona", "Profesional", "Organización"],
+      relationShared: "Identidad · Permisos · Información compartida",
+    },
 
     statusLabel: "Dónde estamos",
     statusTitle: "Estamos construyendo Allfit One.",
@@ -177,6 +192,8 @@ export const content = {
       ["Allfit Studio", "En desarrollo", "Gestiona clientes, planificación, progreso y suscripciones desde un mismo panel."],
       ["Fitness ID", "Tesis de producto", "Cada persona conserva su historial y decide qué comparte."],
     ],
+    closingPrompt:
+      "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
     built: "Creado para el movimiento",
     tagline: "All the fitness in one place.",
   },
@@ -200,8 +217,8 @@ export const content = {
     tiktokLabel: "Allfit One on TikTok",
     linkedinLabel: "Allfit One on LinkedIn",
     heroLead:
-      "Allfit One connects the people who train with the professionals and organizations who make that training possible. One identity, two products and a history that always travels with you.",
-    heroNote: "There is no public demo yet. Write to us and we'll tell you where we are.",
+      "Allfit One is the ecosystem where fitness connects. One identity, two products and a history that travels with you: for the people who train and for the professionals and organizations who make it possible.",
+    heroNote: "There's no public demo yet. Tell us how you train or run your space.",
 
     appAudience: "For people",
     appDescription: "Train on your own or with a professional and keep your progress with you.",
@@ -284,7 +301,7 @@ export const content = {
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Keep training from where you left off.",
     appSectionCopy:
-      "Allfit Space brings your plan, sessions and progress into one place. Train on your own or follow a professional's plan. If you change coach, gym or discipline, you pick up where you left off.",
+      "Allfit Space brings your plan, sessions and progress into one place. Train on your own or follow a professional's plan.",
     appPillars: [
       ["Train on your own", "Plan your sessions and log what you do when you train independently."],
       ["Follow your coach's plan", "Keep their plan in the same place where you log each session."],
@@ -303,7 +320,7 @@ export const content = {
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
     studioSectionCopy:
-      "Allfit Studio gives coaches and organizations one place to manage clients, planning and follow-up. Each person joins with their Fitness ID, decides what to share and keeps their history.",
+      "One dashboard to manage clients, planning, progress and operations, connected to each person's Fitness ID.",
     studioDifferentiatorsLabel: "How Studio works",
     studioDifferentiators: [
       [
@@ -329,7 +346,6 @@ export const content = {
       ["Training", "Templates, programs, assignments and version history"],
       ["Progress", "Logged sessions, adherence and shared results"],
       ["Team", "Members, roles and permissions"],
-      ["Nutrition", "Logs and guidance based on each person's permissions"],
       ["Plans", "Plans you sell and active subscriptions"],
     ],
     studioUpcomingLabel: "Later",
@@ -337,14 +353,30 @@ export const content = {
 
     ecosystemLabel: "Ecosystem",
     ecosystemTitle: "Two products. One relationship.",
-    ecosystemCopy:
-      "Allfit Space stays with the person. Allfit Studio organizes the people who make their experience possible. Allfit One connects both sides through identity, permissions and shared information.",
-    ecosystemRows: [
-      ["The person trains", "The professional programs"],
-      ["The person accepts", "The organization proposes"],
-      ["The person logs progress", "The professional analyzes"],
-      ["The person keeps their history", "The organization accesses it with permission"],
-    ],
+    ecosystemCopy: "Two distinct experiences on one shared base.",
+    ecosystem: {
+      space: {
+        index: "01",
+        title: "Your history stays with you.",
+        copy: "The person trains, logs their progress and keeps their information.",
+        tags: ["Identity", "Progress", "History"],
+      },
+      connect: {
+        title: "They connect with your permission",
+        tags: ["Plans", "Progress", "Information"],
+      },
+      studio: {
+        index: "02",
+        title: "The professional guides without owning it.",
+        copy: "Studio lets them program, guide and analyze with authorized access.",
+        tags: ["Program", "Guide", "Analyze"],
+      },
+      closingLead: "Change who guides you.",
+      closingAccent: "Not",
+      closingRest: "what you've built.",
+      relation: ["Person", "Professional", "Organization"],
+      relationShared: "Identity · Permissions · Shared information",
+    },
 
     statusLabel: "Where we are",
     statusTitle: "We're building Allfit One.",
@@ -355,6 +387,8 @@ export const content = {
       ["Allfit Studio", "In development", "Manage clients, planning, progress and subscriptions from one dashboard."],
       ["Fitness ID", "Product thesis", "Each person keeps their history and decides what to share."],
     ],
+    closingPrompt:
+      "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
     built: "Built for movement",
     tagline: "All the fitness in one place.",
   },

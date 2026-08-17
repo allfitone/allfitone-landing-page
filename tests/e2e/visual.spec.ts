@@ -30,6 +30,7 @@ test("@visual mobile menu open", async ({ page }) => {
   await preparePage(page);
   await page.getByRole("button", { name: "Abrir menú" }).click();
   await expect(page.getByRole("dialog", { name: "Navegación principal" })).toBeVisible();
+  await page.getByRole("button", { name: "Cerrar menú" }).blur();
   await expect(page).toHaveScreenshot("mobile-menu-open-320x800.png");
 });
 

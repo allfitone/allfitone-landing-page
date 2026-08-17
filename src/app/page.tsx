@@ -68,23 +68,11 @@ function LanguageToggle({
   );
 }
 
-function SectionMarker({ label, tone = "dark" }: { label: string; tone?: "dark" | "light" }) {
-  return (
-    <p className={cn("section-marker", tone === "light" && "section-marker-light")}>
-      <span className="section-marker-rule" aria-hidden="true" />
-      <span className="section-marker-label">{label}</span>
-    </p>
-  );
-}
-
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 lg:col-span-4">
-          <SectionMarker label={copy.problemLabel} />
-        </div>
-        <div className="col-span-12 mt-8 lg:col-span-8 lg:mt-0">
+        <div className="col-span-12 lg:col-span-8">
           <h2 className="section-title">{copy.problemTitle}</h2>
           <p className="section-lead mt-8 text-white/70">{copy.problemCopy}</p>
         </div>
@@ -120,10 +108,7 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
     <section id="fitness-id" className="fid-section bg-void text-white">
       <BrandLogo variant="cyan" className="fid-section-mark" aria-hidden="true" />
       <div className="site-grid relative z-10">
-        <div className="col-span-12 lg:col-span-4">
-          <SectionMarker label={copy.fitnessIdLabel} />
-        </div>
-        <div className="col-span-12 mt-8 lg:col-span-8 lg:mt-0">
+        <div className="col-span-12 lg:col-span-8">
           <h2 className="section-title">{copy.fitnessIdTitle}</h2>
         </div>
 
@@ -168,6 +153,10 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
         <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
           <h2 className="section-title text-void">{copy.appSectionTitle}</h2>
           <p className="section-lead mt-8 text-void/70">{copy.appSectionCopy}</p>
+          <a href={CONTACT_HREF} className="inline-link inline-link-on-light mt-6">
+            {copy.contact}
+            <FoundationIcon name="forward" size="sm" decorative />
+          </a>
         </div>
 
         <div className="col-span-12 mt-20 grid border-y border-void/16 md:mt-28 md:grid-cols-3">
@@ -263,24 +252,72 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="ecosystem" className="bg-bolt text-void">
       <div className="site-grid py-24 md:py-32">
-        <div className="col-span-12 md:col-span-4">
-          <SectionMarker label={copy.ecosystemLabel} tone="light" />
-        </div>
-        <div className="col-span-12 mt-8 md:col-span-8 md:mt-0 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
+        <div className="col-span-12 md:col-span-8 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
           <h2 className="section-title text-void">{copy.ecosystemTitle}</h2>
-          <p className="section-lead mt-8 text-void/72 lg:mt-0">{copy.ecosystemCopy}</p>
+          <div className="mt-8 lg:mt-0">
+            <p className="section-lead text-void/72">{copy.ecosystemCopy}</p>
+            <div className="ecosystem-relation">
+              <div className="ecosystem-relation-flow">
+                <span className="ecosystem-relation-node">{copy.ecosystem.relation[0]}</span>
+                <span className="ecosystem-relation-link" aria-hidden="true" />
+                <span className="ecosystem-relation-node">{copy.ecosystem.relation[1]}</span>
+                <span className="ecosystem-relation-link" aria-hidden="true" />
+                <span className="ecosystem-relation-node">{copy.ecosystem.relation[2]}</span>
+              </div>
+              <p className="ecosystem-relation-shared">{copy.ecosystem.relationShared}</p>
+            </div>
+          </div>
         </div>
 
-        <div className="ecosystem-bridge col-span-12 mt-16 md:mt-20">
-          {copy.ecosystemRows.map(([person, organization]) => (
-            <div key={person} className="ecosystem-bridge-row">
-              <p className="ecosystem-bridge-person">{person}</p>
-              <span className="ecosystem-bridge-node" aria-hidden="true">
-                <FoundationIcon name="forward" size="sm" decorative />
+        <div className="ecosystem-panel col-span-12 mt-16 md:mt-20">
+          <div className="ecosystem-grid">
+            <article className="ecosystem-product">
+              <p className="ecosystem-product-head">
+                <span className="ecosystem-product-index">{copy.ecosystem.space.index}</span>
+                <span className="ecosystem-product-rule" aria-hidden="true" />
+                <span className="ecosystem-product-label">{copy.appSectionLabel}</span>
+              </p>
+              <h3 className="ecosystem-product-title">{copy.ecosystem.space.title}</h3>
+              <p className="ecosystem-product-copy">{copy.ecosystem.space.copy}</p>
+              <p className="ecosystem-tags">{copy.ecosystem.space.tags.join(" · ")}</p>
+            </article>
+
+            <div className="ecosystem-connect">
+              <span className="ecosystem-node" aria-hidden="true">
+                <svg className="ecosystem-node-svg" viewBox="0 0 260 64" fill="none">
+                  <line x1="26" y1="32" x2="104" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+                  <line x1="156" y1="32" x2="234" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+                  <circle cx="26" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+                  <circle cx="26" cy="32" r="3.5" fill="currentColor" />
+                  <circle cx="234" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+                  <circle cx="234" cy="32" r="3.5" fill="currentColor" />
+                  <circle cx="130" cy="32" r="22" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+                  <circle cx="130" cy="32" r="13" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="130" cy="32" r="5.5" fill="currentColor" />
+                </svg>
               </span>
-              <p className="ecosystem-bridge-organization">{organization}</p>
+              <p className="ecosystem-connect-title">{copy.ecosystem.connect.title}</p>
+              <p className="ecosystem-connect-tags">{copy.ecosystem.connect.tags.join(" · ")}</p>
             </div>
-          ))}
+
+            <article className="ecosystem-product ecosystem-product-studio">
+              <p className="ecosystem-product-head">
+                <span className="ecosystem-product-index">{copy.ecosystem.studio.index}</span>
+                <span className="ecosystem-product-rule" aria-hidden="true" />
+                <span className="ecosystem-product-label">{copy.studioSectionLabel}</span>
+              </p>
+              <h3 className="ecosystem-product-title">{copy.ecosystem.studio.title}</h3>
+              <p className="ecosystem-product-copy">{copy.ecosystem.studio.copy}</p>
+              <p className="ecosystem-tags">{copy.ecosystem.studio.tags.join(" · ")}</p>
+            </article>
+          </div>
+
+          <p className="ecosystem-statement">
+            <span className="ecosystem-statement-line">{copy.ecosystem.closingLead}</span>
+            <span className="ecosystem-statement-line">
+              <span className="ecosystem-statement-accent">{copy.ecosystem.closingAccent}</span> {copy.ecosystem.closingRest}
+            </span>
+          </p>
         </div>
       </div>
     </section>
@@ -291,10 +328,7 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="status" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 lg:col-span-4">
-          <SectionMarker label={copy.statusLabel} />
-        </div>
-        <div className="col-span-12 mt-8 lg:col-span-8 lg:mt-0">
+        <div className="col-span-12 lg:col-span-8">
           <h2 className="section-title">{copy.statusTitle}</h2>
           <p className="section-lead mt-8 text-white/70">{copy.statusCopy}</p>
         </div>
@@ -310,6 +344,14 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
               <p className="status-row-description">{description}</p>
             </article>
           ))}
+        </div>
+
+        <div className="col-span-12 mt-16 md:mt-24 lg:col-span-8">
+          <p className="section-lead text-white/80">{copy.closingPrompt}</p>
+          <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "mt-8 w-full sm:w-auto")}>
+            {copy.contact}
+            <FoundationIcon name="forward" data-icon="inline-end" decorative />
+          </a>
         </div>
 
       </div>
