@@ -5,13 +5,10 @@ import { useEffect, useState } from "react";
 import {
   BrandLockup,
   BrandLogo,
-  BrandLogoCarrier,
-  BrandWordmark,
   ProductWordmark,
 } from "@allfitone/react/brand";
 import { buttonVariants } from "@allfitone/react/components/button";
 import { IconButton } from "@allfitone/react/components/icon-button";
-import { Separator } from "@allfitone/react/components/separator";
 import {
   Sheet,
   SheetClose,
@@ -531,62 +528,55 @@ export default function Home() {
       <EcosystemSection copy={copy} />
       <StatusSection copy={copy} />
 
-      <footer id="footer" className="bg-void px-5 pb-7 pt-10 text-white md:px-8 md:pt-12">
-        <div className="mx-auto max-w-[1500px]">
-          <div className="flex items-center justify-between gap-6 md:items-end">
-            <div className="flex items-center">
-              <BrandLogoCarrier className="h-9 w-auto" title="Allfit One" />
+      <footer id="footer" className="site-footer">
+        <div className="footer-shell">
+          <div className="footer-main">
+            <div className="footer-brand">
+              <p className="footer-tagline">{copy.tagline}</p>
             </div>
-            <nav className="flex w-fit items-center gap-0 text-white/55" aria-label={copy.socialNavigation}>
-              <a
-                href={siteConfig.social.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none"
-                aria-label={copy.instagramLabel}
-              >
-                <svg className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.4" cy="6.6" r=".8" fill="currentColor" stroke="none" />
-                </svg>
-              </a>
-              <a
-                href={siteConfig.social.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none"
-                aria-label={copy.tiktokLabel}
-              >
-                <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M14.4 2.5h2.8a4.8 4.8 0 0 0 4.3 4.3v2.8a7.5 7.5 0 0 1-4.3-1.4v7.1a6.2 6.2 0 1 1-5.4-6.1v2.9a3.4 3.4 0 1 0 2.6 3.2V2.5Z" />
-                </svg>
-              </a>
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-11 items-center justify-center transition-colors hover:text-bolt focus-visible:text-bolt focus-visible:outline-none"
-                aria-label={copy.linkedinLabel}
-              >
-                <svg className="size-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M6.7 8.3H3.4V21h3.3V8.3ZM5.05 3A2.05 2.05 0 1 0 5 7.1 2.05 2.05 0 0 0 5.05 3ZM21 13.72c0-3.83-2.04-5.61-4.77-5.61a4.12 4.12 0 0 0-3.75 2.06V8.3H9.15V21h3.33v-6.29c0-1.66.31-3.27 2.37-3.27 2.03 0 2.06 1.9 2.06 3.38V21H21v-7.28Z" />
-                </svg>
-              </a>
-            </nav>
+
+            <div className="footer-nav-grid">
+              <nav className="footer-nav" aria-label={copy.footerExplore}>
+                <p className="footer-nav-title">{copy.footerExplore}</p>
+                <div className="footer-link-list">
+                  <a className="footer-link" href="#fitness-id">{copy.navFitnessId}</a>
+                  <a className="footer-link" href="#allfit-space">{copy.navSpace}</a>
+                  <a className="footer-link" href="#allfit-studio">{copy.navStudio}</a>
+                  <a className="footer-link" href="#ecosystem">{copy.navEcosystem}</a>
+                  <a className="footer-link" href="#status">{copy.statusLabel}</a>
+                </div>
+              </nav>
+
+              <nav className="footer-nav" aria-label={copy.socialNavigation}>
+                <p className="footer-nav-title">{copy.footerSocial}</p>
+                <div className="footer-link-list">
+                  <a className="footer-link" href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" aria-label={copy.instagramLabel}>
+                    <span>Instagram</span><span className="footer-link-mark" aria-hidden="true">↗</span>
+                  </a>
+                  <a className="footer-link" href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer" aria-label={copy.tiktokLabel}>
+                    <span>TikTok</span><span className="footer-link-mark" aria-hidden="true">↗</span>
+                  </a>
+                  <a className="footer-link" href={siteConfig.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label={copy.linkedinLabel}>
+                    <span>LinkedIn</span><span className="footer-link-mark" aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </nav>
+
+              <nav className="footer-nav" aria-label={copy.footerInformation}>
+                <p className="footer-nav-title">{copy.footerInformation}</p>
+                <div className="footer-link-list">
+                  <Link className="footer-link" href="/privacy/analytics">{copy.analyticsPrivacy}</Link>
+                  <a className="footer-link" href={CONTACT_HREF}>
+                    <span>{siteConfig.email}</span><span className="footer-link-mark" aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </nav>
+            </div>
           </div>
 
-          <BrandWordmark surface="dark" className="mx-auto mt-20 h-auto w-full max-w-[1160px]" aria-hidden="true" />
-          <Separator className="mt-10 bg-white/12" />
-          <div className="mt-5 grid gap-4 text-[9px] font-bold uppercase tracking-[.16em] text-white/60 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+          <div className="footer-meta">
             <span>© 2026 Allfit One</span>
-            <div className="flex flex-col items-start sm:items-center">
-              <p className="flex min-h-11 items-center text-[10px] font-medium uppercase tracking-[.12em] text-white/64">{copy.tagline}</p>
-              <Link className="flex min-h-11 items-center text-bolt transition-colors hover:text-white" href="/privacy/analytics">
-                {copy.analyticsPrivacy}
-              </Link>
-            </div>
-            <span className="sm:justify-self-end sm:self-start sm:pt-4">{copy.built}</span>
+            <span>{copy.built}</span>
           </div>
         </div>
       </footer>

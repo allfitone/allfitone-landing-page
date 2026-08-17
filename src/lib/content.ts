@@ -20,6 +20,9 @@ export const content = {
     instagramLabel: "Allfit One en Instagram",
     tiktokLabel: "Allfit One en TikTok",
     linkedinLabel: "Allfit One en LinkedIn",
+    footerExplore: "Explora",
+    footerSocial: "Síguenos",
+    footerInformation: "Información",
     heroLead:
       "Allfit One es el ecosistema donde el fitness se conecta. Una identidad, dos productos y un historial que viaja contigo: para las personas que entrenan y para los profesionales y organizaciones que lo hacen posible.",
     heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
@@ -216,6 +219,9 @@ export const content = {
     instagramLabel: "Allfit One on Instagram",
     tiktokLabel: "Allfit One on TikTok",
     linkedinLabel: "Allfit One on LinkedIn",
+    footerExplore: "Explore",
+    footerSocial: "Follow",
+    footerInformation: "Information",
     heroLead:
       "Allfit One is the ecosystem where fitness connects. One identity, two products and a history that travels with you: for the people who train and for the professionals and organizations who make it possible.",
     heroNote: "There's no public demo yet. Tell us how you train or run your space.",
