@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     title: spanish.metaTitle,
     description: spanish.metaDescription,
     locale: "es_CO",
+    alternateLocale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
@@ -39,11 +40,24 @@ function Localized({ es, en }: { es: string; en: string }) {
   );
 }
 
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: siteConfig.name, item: siteConfig.url },
+    { "@type": "ListItem", position: 2, name: spanish.title, item: `${siteConfig.url}/privacy/analytics` },
+  ],
+};
+
 export default function AnalyticsPrivacyPage() {
   const contactHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Allfit One privacy request")}`;
 
   return (
     <main className="privacy-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData).replace(/</g, "\\u003c") }}
+      />
       <header className="privacy-header">
         <div className="privacy-shell privacy-header-inner">
           <Link href="/" className="privacy-brand" aria-label="Allfit One">
