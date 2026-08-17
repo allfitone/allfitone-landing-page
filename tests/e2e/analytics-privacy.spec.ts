@@ -14,7 +14,7 @@ test("publishes an indexable bilingual analytics notice with the required policy
   expect(html).toContain("90 días");
   expect(html).toContain("30 días");
   expect(html).toContain("Global Privacy Control");
-  expect(html).toContain("hello@allfitone.com");
+  expect(html).toContain("hello@allfit.one");
   expect(html).toContain("We never collect");
 
   const sitemap = await (await request.get("/sitemap.xml")).text();

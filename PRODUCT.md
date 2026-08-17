@@ -246,7 +246,7 @@ Neither product is demo-able yet, so the page must not offer a demo. Fitness ID 
 ## Current calls to action
 
 - Navigate to the Fitness ID, Allfit Space, Allfit Studio, and ecosystem sections.
-- Write to `hello@allfitone.com`. The email action appears in the navbar, the hero, the Allfit Space and Allfit Studio sections, and as a closing call to action at the end of the current-status section.
+- Write to `hello@allfit.one`. The email action appears in the navbar, the hero, the Allfit Space and Allfit Studio sections, and as a closing call to action at the end of the current-status section.
 
 Neither product has a waitlist or demo CTA until a real destination exists.
 

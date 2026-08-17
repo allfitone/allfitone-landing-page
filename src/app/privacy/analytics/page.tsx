@@ -198,7 +198,7 @@ export default function AnalyticsPrivacyPage() {
           </section>
 
           <section id="contact" className="privacy-contact" aria-labelledby="privacy-contact-title">
-            <p className="privacy-kicker">hello@allfitone.com</p>
+            <p className="privacy-kicker">hello@allfit.one</p>
             <h2 id="privacy-contact-title">
               <Localized es={spanish.contact} en={english.contact} />
             </h2>
