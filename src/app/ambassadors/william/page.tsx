@@ -62,10 +62,10 @@ export default function WilliamAmbassadorPage() {
       <section className="ambassador-hero" aria-labelledby="ambassador-name">
         <figure className="ambassador-hero-figure">
           <Image
-            src="/ambassadors/william-vergel-hero.jpg"
+            src="/ambassadors/william-vergel-portrait.jpg"
             alt=""
             width={1440}
-            height={1200}
+            height={1800}
             priority
             sizes="(min-width: 1024px) 72vw, 100vw"
           />
