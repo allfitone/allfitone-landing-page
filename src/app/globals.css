@@ -324,6 +324,117 @@ html[data-privacy-language="en"] [data-privacy-copy="en"] { display: inline; }
 .privacy-home-link { display: flex; min-height: var(--afo-space-touch-target); align-items: center; color: var(--afo-color-text-accent); }
 
 /* ---------------------------------------------------------------------------
+   Ambassador profile
+   The page spends its boldness once: the name crosses in front of the portrait.
+   Everything else runs on the landing's grid, type scale, and hairlines.
+--------------------------------------------------------------------------- */
+
+.ambassador-page { min-height: 100dvh; overflow-x: clip; background: var(--afo-color-ink-void); color: var(--afo-color-neutral-chalk); }
+
+.ambassador-nav-shell { position: sticky; top: var(--afo-space-4); z-index: 50; margin-bottom: -5.5rem; }
+.ambassador-nav { width: calc(100% - 2rem); margin-inline: auto; align-items: center; border-radius: var(--afo-radius-lg); background: color-mix(in srgb, var(--afo-color-ink-void) 86%, transparent); padding-block: .875rem; box-shadow: 0 18px 55px rgba(3, 7, 19, .24); backdrop-filter: blur(24px); }
+.ambassador-brand { display: flex; min-height: var(--afo-space-touch-target); align-items: center; }
+.ambassador-nav .locale-toggle-item { min-width: var(--afo-space-touch-target); min-height: var(--afo-space-touch-target); }
+
+/* The photo's brown backdrop must never read as a box on the blue-black canvas, so every
+   edge dissolves through a mask before it can meet the page. */
+.ambassador-hero { position: relative; overflow: hidden; padding-top: 5.5rem; padding-bottom: var(--afo-space-8); }
+.ambassador-hero-figure { aspect-ratio: 4 / 5; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 52%, transparent 96%); mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 52%, transparent 96%); }
+.ambassador-hero-figure img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 88% top; }
+.ambassador-hero-grid, .ambassador-hero-rail { position: relative; z-index: 1; }
+.ambassador-hero-copy { margin-top: -7rem; }
+.ambassador-role { color: var(--afo-color-text-accent); }
+.ambassador-name { margin-top: var(--afo-space-4); font-family: var(--afo-font-family-display); font-size: clamp(4.5rem, 12vw, 12.5rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.065em; line-height: .68; text-transform: uppercase; }
+.ambassador-name span { display: block; }
+.ambassador-name-outline { width: max-content; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 74%, transparent); }
+.ambassador-hero-lead { max-width: 38ch; margin-top: var(--afo-space-6); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: 1.125rem; line-height: 1.56; }
+
+.ambassador-rail { display: grid; gap: 0; margin-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--afo-color-border-subtle); }
+.ambassador-rail li { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 80%, transparent); font-size: .9375rem; }
+
+/* Manifesto: the standing portrait dissolves the same way the hero does, mirrored to
+   the left, so the two photographs read as one sequence instead of two boxes. */
+.ambassador-manifesto { padding-block: clamp(4rem, 9vw, 8rem); }
+.ambassador-manifesto-grid { align-items: center; }
+.ambassador-standing { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 66%, transparent 97%); mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 66%, transparent 97%); }
+.ambassador-standing img { display: block; width: 100%; height: auto; }
+.ambassador-manifesto-copy { position: relative; z-index: 1; margin-top: -5rem; }
+.ambassador-statement { max-width: 16ch; font-family: var(--afo-font-family-display); font-size: clamp(2.6rem, 5.6vw, 5.4rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: -.04em; line-height: .94; text-transform: uppercase; text-wrap: balance; }
+.ambassador-body { max-width: 58ch; margin-top: var(--afo-space-8); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 76%, transparent); font-size: 1.125rem; line-height: 1.6; }
+.ambassador-body + .ambassador-body { margin-top: var(--afo-space-5); }
+
+/* Method: this content is a real sequence, so the numbered feature columns are earned. */
+.ambassador-method { margin-top: clamp(4rem, 8vw, 7rem); }
+.ambassador-method-title { color: var(--afo-color-text-accent); }
+.ambassador-method-list { display: grid; margin-top: var(--afo-space-6); border-top: 1px solid var(--afo-color-border-subtle); }
+.ambassador-method-step { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-8); }
+.ambassador-method-index { display: block; color: var(--afo-color-text-accent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .75rem; line-height: 1; }
+.ambassador-method-name { margin-top: var(--afo-space-4); font-family: var(--afo-font-family-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
+.ambassador-method-body { max-width: 40ch; margin-top: var(--afo-space-3); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 66%, transparent); font-size: .9375rem; line-height: 1.65; }
+
+/* Plans: three separate cards. On desktop they share row tracks through subgrid, so
+   prices, lists, and actions line up and the plans compare line by line. */
+.ambassador-plans { background: var(--afo-color-neutral-chalk); color: var(--afo-color-ink-void); padding-block: clamp(4rem, 9vw, 8rem); }
+.ambassador-plans-head { align-items: end; }
+.ambassador-plans-lead { margin-top: var(--afo-space-6); color: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }
+.plans-panel { display: grid; gap: var(--afo-space-4); margin-top: clamp(2.5rem, 5vw, 4rem); }
+.plan { --plan-padding: clamp(1.75rem, 3vw, 2.5rem); --plan-lift: var(--afo-space-4); position: relative; display: flex; flex-direction: column; gap: var(--afo-space-5); border: 1px solid var(--afo-color-border-subtle); border-radius: var(--afo-radius-lg); background: var(--afo-color-ink-panel); color: var(--afo-color-neutral-chalk); padding: var(--plan-padding); }
+.plan-featured { margin-top: var(--plan-lift); border-color: var(--afo-color-brand-primary); background: color-mix(in srgb, var(--afo-color-brand-primary) 9%, var(--afo-color-ink-panel)); }
+/* Absolutely positioned so it never becomes an extra subgrid row and misaligns the cards. */
+.plan-tag { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); border-radius: var(--afo-radius-xs); background: var(--afo-color-brand-primary); padding: var(--afo-space-2) var(--afo-space-4); color: var(--afo-color-ink-void); font-size: .625rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .2em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+.plan-name { font-family: var(--afo-font-family-display); font-size: clamp(2rem, 3.2vw, 2.75rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.035em; line-height: .92; text-transform: uppercase; }
+.plan-who { max-width: 38ch; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 70%, transparent); font-size: .9375rem; line-height: 1.6; }
+.plan-price { display: flex; align-items: baseline; gap: var(--afo-space-2); font-family: var(--afo-font-family-display); font-size: clamp(3rem, 4.6vw, 4.25rem); font-weight: var(--afo-font-weight-bold); font-variant-numeric: tabular-nums; letter-spacing: -.035em; line-height: 1; }
+.plan-currency { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 60%, transparent); font-family: var(--afo-font-family-body); font-size: .75rem; font-weight: var(--afo-font-weight-bold); letter-spacing: .08em; }
+.plan-meta { display: flex; flex-direction: column; gap: var(--afo-space-1); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 72%, transparent); font-size: .875rem; line-height: 1.5; }
+.plan-saving { color: var(--afo-color-brand-turquoise); font-weight: var(--afo-font-weight-bold); }
+.plan-cadence { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 80%, transparent); font-size: .875rem; }
+.plan-includes { border-top: 1px solid var(--afo-color-border-subtle); padding-top: var(--afo-space-5); }
+.plan-includes-lead { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: .8125rem; }
+.plan-includes ul { display: grid; gap: var(--afo-space-2); margin-top: var(--afo-space-3); }
+.plan-includes li { position: relative; padding-left: var(--afo-space-5); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 88%, transparent); font-size: .9375rem; line-height: 1.5; }
+.plan-includes li::before { content: ""; position: absolute; top: .72em; left: 0; width: 8px; height: 1px; background: var(--afo-color-brand-turquoise); }
+.plan-cta { width: 100%; min-height: 3rem; margin-top: auto; }
+
+/* Closing: the final conversion moment, so it takes the large primary action. */
+.ambassador-contact { padding-block: clamp(5rem, 11vw, 10rem); }
+.ambassador-contact-grid { align-items: end; row-gap: var(--afo-space-8); }
+.ambassador-contact-title { max-width: 10ch; font-family: var(--afo-font-family-display); font-size: clamp(3.6rem, 9vw, 9rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.055em; line-height: .82; text-transform: uppercase; text-wrap: balance; }
+.ambassador-contact-lead { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 74%, transparent); font-size: 1.125rem; line-height: 1.56; }
+.ambassador-contact-button { width: 100%; min-height: 3.5rem; margin-top: var(--afo-space-8); }
+.ambassador-socials { display: flex; flex-wrap: wrap; gap: var(--afo-space-6); margin-top: var(--afo-space-8); }
+
+/* The landing's footer grid pairs its first two of three navs on phones and stretches the
+   last. This footer has two navs, so on phones both take the full width instead. */
+.ambassador-footer-nav { grid-template-columns: minmax(0, 1fr); }
+
+@media (min-width: 1024px) {
+  .ambassador-hero { display: grid; grid-template-rows: 1fr auto; min-height: clamp(38rem, 100svh, 58rem); padding-top: 6.5rem; }
+  /* Starts below the floating nav so his head never falls inside the top fade. */
+  .ambassador-hero-figure { position: absolute; top: 2.75rem; bottom: 0; right: max(2rem, calc((100vw - 1500px) / 2 + 2rem + 5vw)); aspect-ratio: auto; -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 42%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 8%, #000 68%, transparent 94%); mask-image: linear-gradient(to right, transparent 0%, #000 42%, #000 86%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 8%, #000 68%, transparent 94%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .ambassador-hero-figure img { width: auto; height: 100%; max-width: none; object-fit: fill; }
+  .ambassador-hero-grid { align-self: center; width: 100%; }
+  .ambassador-hero-copy { margin-top: 0; }
+  .ambassador-hero-rail { width: 100%; }
+  .ambassador-hero-rail .ambassador-rail { margin-top: 0; }
+  .ambassador-standing { -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 72%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 8%, #000 70%, transparent 98%); mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 72%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 8%, #000 70%, transparent 98%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .ambassador-manifesto-copy { margin-top: 0; }
+  .ambassador-method-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ambassador-method-step { border-bottom: 0; border-left: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-8); }
+  .ambassador-method-step:first-child { border-left: 0; padding-left: 0; }
+  .ambassador-contact-button { width: auto; }
+  .plans-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(7, auto); column-gap: var(--afo-space-6); row-gap: var(--afo-space-5); }
+  .plan { display: grid; grid-row: span 7; grid-template-rows: subgrid; }
+  /* Extra padding offset by negative margin: the card grows past its siblings while its
+     content stays on the shared row tracks. */
+  .plan-featured { margin-block: calc(-1 * var(--plan-lift)); padding-block: calc(var(--plan-padding) + var(--plan-lift)); }
+  .plan-cta { align-self: end; }
+  .ambassador-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--afo-color-border-subtle); }
+  .ambassador-rail li { border-bottom: 0; border-left: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-6); }
+  .ambassador-rail li:first-child { border-left: 0; padding-left: 0; }
+}
+
+/* ---------------------------------------------------------------------------
    Local overrides
 --------------------------------------------------------------------------- */
 
