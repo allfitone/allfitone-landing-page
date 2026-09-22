@@ -39,6 +39,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - `src/lib/site-config.ts` is the source of truth for the public URL, SEO title, description, email, and social links.
 - `src/components/structured-data.tsx` contains JSON-LD that must match visible page content.
 - `src/app/dev/` is an internal brand lab. It must remain `noindex` and excluded from `robots.txt` and the sitemap.
+- `src/app/ambassadors/william/` is a private proposal page for the first ambassador, William Vergel. It stays `noindex, nofollow`, out of the sitemap, and unlinked from the homepage until his real content and prices replace the samples. Its copy lives in `ambassadorContent` in `src/lib/content.ts`, and its plan prices in `ambassadorPlans`. Every plan CTA is a `mailto:` link, because email remains the only conversion action. Linking it from the homepage or making it indexable requires a product decision on the pricing rule above.
 - Static Open Graph and Twitter images live beside the root app route and use Next.js metadata file conventions.
 
 ## Visual direction
