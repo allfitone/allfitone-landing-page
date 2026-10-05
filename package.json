@@ -14,21 +14,21 @@
     "test:e2e:update": "playwright test --update-snapshots"
   },
   "dependencies": {
-    "@allfitone/react": "0.9.1",
-    "next": "^16.3.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "@allfitone/react": "0.14.0",
+    "next": "^16.3.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@allfitone/brand": "0.2.0",
-    "@axe-core/playwright": "4.12.1",
-    "@playwright/test": "1.62.1",
+    "@allfitone/brand": "0.4.0",
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.10",
+    "eslint-config-next": "16.3.8",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

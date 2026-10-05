@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BrandLockup, BrandLogoCarrier } from "@allfitone/react/brand";
+import { BrandLockup } from "@allfitone/react/brand";
 import { FoundationIcon } from "@allfitone/react/icons";
 
 import { PrivacyLanguageToggle } from "@/components/privacy-language-toggle";
@@ -212,7 +212,7 @@ export default function AnalyticsPrivacyPage() {
 
       <footer className="privacy-footer">
         <div className="privacy-shell privacy-footer-inner">
-          <BrandLogoCarrier className="h-8 w-auto" title="Allfit One" />
+          <BrandLockup surface="dark" className="h-8 w-auto" title="Allfit One" />
           <p><Localized es={spanish.footer} en={english.footer} /></p>
           <Link href="/" className="privacy-home-link">
             <Localized es={spanish.home} en={english.home} />

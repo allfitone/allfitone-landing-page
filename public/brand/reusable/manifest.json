@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "brandVersion": "0.2.0",
+  "brandVersion": "0.4.0",
   "sourceOfTruth": "packages/brand/assets",
   "colors": {
     "cyan": "#55EFFB",
@@ -27,12 +27,6 @@
       "lettering": null
     },
     {
-      "path": "assets/logo/allfit-one-logo-carrier.svg",
-      "type": "logo-carrier",
-      "background": "transparent",
-      "lettering": null
-    },
-    {
       "path": "assets/wordmark/allfit-one-wordmark-on-light.svg",
       "type": "wordmark",
       "background": "transparent",
@@ -55,6 +49,20 @@
       "type": "lockup",
       "background": "transparent",
       "lettering": "outlined"
+    },
+    {
+      "path": "assets/favicon/allfit-one-favicon-ink.svg",
+      "type": "favicon",
+      "variant": "ink",
+      "background": "ink",
+      "lettering": null
+    },
+    {
+      "path": "assets/favicon/allfit-one-favicon-cyan.svg",
+      "type": "favicon",
+      "variant": "cyan",
+      "background": "cyan",
+      "lettering": null
     },
     {
       "path": "assets/product/space/allfit-space-wordmark-on-dark.svg",
