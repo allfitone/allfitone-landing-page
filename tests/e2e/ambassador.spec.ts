@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const profilePath = "/ambassadors/william";
+const profilePath = "/es/ambassadors/william";
 
 test("keeps the draft profile out of search results and out of the sitemap", async ({ page, request }) => {
   const response = await request.get(profilePath);
@@ -12,23 +12,26 @@ test("keeps the draft profile out of search results and out of the sitemap", asy
   expect(html).toContain("noindex");
 
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  expect(sitemap).not.toContain(`${profilePath}<`);
+  expect(sitemap).not.toContain("/ambassadors/william");
+
+  const legacy = await request.get("/ambassadors/william", { maxRedirects: 0 });
+  expect(legacy.status()).toBe(308);
+  expect(legacy.headers().location).toMatch(/\/es\/ambassadors\/william$/);
 
   await page.goto(profilePath);
   await expect(page.locator("h1")).toHaveCount(1);
 });
 
-test("serves both languages and follows the shared language preference", async ({ page }) => {
+test("serves each language under its own URL", async ({ page }) => {
   await page.goto(profilePath);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  await expect(page.getByRole("heading", { name: "Planes" })).toBeVisible();
 
   await page.getByRole("button", { name: "English" }).click();
 
+  await expect(page).toHaveURL(/\/en\/ambassadors\/william$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator("html")).toHaveAttribute("data-privacy-language", "en");
-  await expect(page.locator('[data-privacy-copy="en"]').first()).toBeVisible();
-  await expect(page.locator('[data-privacy-copy="es"]').first()).toBeHidden();
-  await expect.poll(() => page.evaluate(() => window.localStorage.getItem("allfitone-language"))).toBe("en");
+  await expect(page.getByRole("heading", { name: "Plans" })).toBeVisible();
 });
 
 test("sends every plan request to email, the only conversion action", async ({ page }) => {

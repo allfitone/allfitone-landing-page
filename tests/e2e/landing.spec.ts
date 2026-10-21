@@ -1,26 +1,36 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-test("defaults to Spanish and persists a required locale selection", async ({ page }) => {
-  await page.goto("/");
+test("redirects the root to Spanish and switches language through the URL", async ({ page, request }) => {
+  const root = await request.get("/", { maxRedirects: 0 });
+  expect(root.status()).toBe(307);
+  expect(root.headers().location).toMatch(/\/es$/);
 
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/es$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
   await expect(page.getByText("Escríbenos").first()).toBeVisible();
 
   const English = page.getByRole("button", { name: "English" }).first();
   await English.click();
 
+  await expect(page).toHaveURL(/\/en$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(English).toHaveAttribute("aria-pressed", "true");
-  await expect.poll(() => page.evaluate(() => window.localStorage.getItem("allfitone-language"))).toBe("en");
-
-  await English.click();
-  await expect(English).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.getByRole("button", { name: "English" }).first()).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("Get in touch").first()).toBeVisible();
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByText("Get in touch").first()).toBeVisible();
+
+  await page.getByRole("button", { name: "Español" }).first().click();
+  await expect(page).toHaveURL(/\/es$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+});
+
+test("answers unknown languages and paths with a 404", async ({ request }) => {
+  for (const path of ["/fr", "/es/missing", "/missing/page"]) {
+    expect((await request.get(path)).status(), path).toBe(404);
+  }
 });
 
 test("mobile Sheet traps focus, closes predictably and restores the trigger", async ({ page }) => {
@@ -102,10 +112,13 @@ test("has a logical heading structure and no serious axe violations", async ({ p
 });
 
 test("publishes Studio metadata and keeps the legacy anchor compatible", async ({ page, request }) => {
-  const response = await request.get("/");
+  const response = await request.get("/es");
   const html = await response.text();
 
-  expect(html).toContain('<link rel="canonical" href="https://www.allfit.one"');
+  expect(html).toContain('<link rel="canonical" href="https://www.allfit.one/es"/>');
+  expect(html).toContain('<link rel="alternate" hrefLang="en" href="https://www.allfit.one/en"/>');
+  expect(html).toContain('<link rel="alternate" hrefLang="x-default" href="https://www.allfit.one"/>');
+  expect(html).toContain('<meta property="og:image" content="https://www.allfit.one/social/allfit-one-share.png"/>');
   expect(html).toContain("Allfit Studio");
   expect(html).not.toContain("Allfit OS");
 
@@ -114,12 +127,17 @@ test("publishes Studio metadata and keeps the legacy anchor compatible", async (
   expect(robots).toContain("Disallow: /dev");
 
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  expect(sitemap).toContain("<loc>https://www.allfit.one</loc>");
+  expect(sitemap).toContain("<loc>https://www.allfit.one/es</loc>");
+  expect(sitemap).toContain("<loc>https://www.allfit.one/en</loc>");
 
-  await page.goto("/#allfit-studio");
+  const english = await (await request.get("/en")).text();
+  expect(english).toContain('<html lang="en"');
+  expect(english).toContain('<link rel="canonical" href="https://www.allfit.one/en"/>');
+
+  await page.goto("/es#allfit-studio");
   await expect(page.locator("#allfit-studio")).toBeInViewport();
 
-  await page.goto("/#allfit-os");
+  await page.goto("/es#allfit-os");
   await expect(page.locator("#allfit-os")).toBeInViewport();
   const [studioTop, legacyTop] = await page.evaluate(() => {
     const studio = document.querySelector("#allfit-studio");

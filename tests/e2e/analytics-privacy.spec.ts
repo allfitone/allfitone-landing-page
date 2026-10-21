@@ -1,24 +1,36 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const noticePath = "/privacy/analytics";
+const noticePath = "/es/privacy/analytics";
+const englishNoticePath = "/en/privacy/analytics";
 
-test("publishes an indexable bilingual analytics notice with the required policy", async ({ page, request }) => {
+test("publishes an indexable analytics notice in each language with the required policy", async ({ page, request }) => {
   const response = await request.get(noticePath);
   expect(response.ok()).toBe(true);
   const html = await response.text();
 
-  expect(html).toContain('<link rel="canonical" href="https://www.allfit.one/privacy/analytics"');
+  expect(html).toContain('<link rel="canonical" href="https://www.allfit.one/es/privacy/analytics"/>');
+  expect(html).toContain('<link rel="alternate" hrefLang="en" href="https://www.allfit.one/en/privacy/analytics"/>');
   expect(html).toContain("analytics-v1");
   expect(html).toContain("PostHog US");
   expect(html).toContain("90 días");
   expect(html).toContain("30 días");
   expect(html).toContain("Global Privacy Control");
   expect(html).toContain("hello@allfit.one");
-  expect(html).toContain("We never collect");
+  expect(html).not.toContain("We never collect");
+
+  const english = await (await request.get(englishNoticePath)).text();
+  expect(english).toContain('<link rel="canonical" href="https://www.allfit.one/en/privacy/analytics"/>');
+  expect(english).toContain("We never collect");
+  expect(english).toContain("90 days");
+
+  const legacy = await request.get("/privacy/analytics", { maxRedirects: 0 });
+  expect(legacy.status()).toBe(308);
+  expect(legacy.headers().location).toMatch(/\/es\/privacy\/analytics$/);
 
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  expect(sitemap).toContain("<loc>https://www.allfit.one/privacy/analytics</loc>");
+  expect(sitemap).toContain("<loc>https://www.allfit.one/es/privacy/analytics</loc>");
+  expect(sitemap).toContain("<loc>https://www.allfit.one/en/privacy/analytics</loc>");
 
   await page.goto(noticePath);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
@@ -26,18 +38,17 @@ test("publishes an indexable bilingual analytics notice with the required policy
   await expect(page.getByRole("heading", { name: "Lo que medimos. Lo que nunca tocamos." })).toBeVisible();
 });
 
-test("uses the shared language preference and preserves the semantic document", async ({ page }) => {
+test("switches language through the URL and links home in the same language", async ({ page }) => {
   await page.goto(noticePath);
   await page.getByRole("button", { name: "English" }).click();
 
+  await expect(page).toHaveURL(new RegExp(`${englishNoticePath}$`));
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.locator("html")).toHaveAttribute("data-privacy-language", "en");
   await expect(page.getByRole("heading", { name: "What we measure. What we never touch." })).toBeVisible();
-  await expect.poll(() => page.evaluate(() => window.localStorage.getItem("allfitone-language"))).toBe("en");
 
-  await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByRole("link", { name: "Analytics privacy" })).toBeVisible();
+  await page.getByRole("link", { name: "Allfit One" }).first().click();
+  await expect(page).toHaveURL(/\/en$/);
+  await expect(page.getByRole("link", { name: "Analytics privacy" })).toHaveAttribute("href", englishNoticePath);
 });
 
 test("has no serious axe findings and remains keyboard-accessible at 320 px", async ({ page }) => {

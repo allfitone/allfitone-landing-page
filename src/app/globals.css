@@ -250,6 +250,15 @@ section[id].fid-section {
 .footer-main { display: grid; gap: var(--afo-space-12); padding-block: clamp(3.5rem, 8vw, 7rem); }
 .footer-brand { align-self: start; }
 .footer-tagline { max-width: 11ch; font-family: var(--afo-font-family-display); font-size: clamp(2.5rem, 9vw, 4.5rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .88; text-transform: uppercase; text-wrap: balance; }
+/* Badge, membership line, and NVIDIA's verbatim trademark notice form one sign-off unit, stacked so the
+   fine print always sits directly under the mark it explains. The badge keeps its own colors and built-in
+   clear space; at 3.5rem its visible box is about 41px, above NVIDIA's 30px digital minimum, and the negative
+   margin aligns that box with the grid edge. */
+.footer-partner { display: grid; justify-items: start; gap: var(--afo-space-3); }
+.footer-partner-badge { width: auto; height: 3.5rem; margin-left: -.40625rem; }
+.footer-partner-text { display: grid; gap: var(--afo-space-2); max-width: 24rem; }
+.footer-partner-copy { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 68%, transparent); font-size: .875rem; line-height: 1.45; }
+.footer-partner-legal { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); font-size: .625rem; line-height: 1.5; }
 .footer-nav-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--afo-space-10) var(--afo-space-6); }
 .footer-nav { min-width: 0; }
 .footer-nav-grid > .footer-nav:last-child { grid-column: 1 / -1; }
@@ -261,14 +270,12 @@ section[id].fid-section {
 .footer-link:focus-visible { color: var(--afo-color-text-accent); outline: 2px solid var(--afo-color-brand-primary); outline-offset: 2px; }
 .footer-link-mark { flex: none; color: var(--afo-color-text-accent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .75rem; }
 .footer-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--afo-space-4) var(--afo-space-8); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); padding-block: var(--afo-space-6); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); font-size: .5625rem; font-weight: var(--afo-font-weight-bold); letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+.footer-meta-centered { justify-content: center; }
 
 /* ---------------------------------------------------------------------------
    Analytics privacy notice
 --------------------------------------------------------------------------- */
 
-[data-privacy-copy="en"] { display: none; }
-html[data-privacy-language="en"] [data-privacy-copy="es"] { display: none; }
-html[data-privacy-language="en"] [data-privacy-copy="en"] { display: inline; }
 
 .privacy-page { min-height: 100dvh; overflow: clip; background: var(--afo-color-ink-void); color: var(--afo-color-neutral-chalk); }
 .privacy-shell { width: min(100%, 1500px); margin-inline: auto; padding-inline: var(--afo-space-5); }
@@ -530,6 +537,10 @@ html[data-privacy-language="en"] [data-privacy-copy="en"] { display: inline; }
   .site-footer { padding-inline: var(--afo-space-8); }
   .footer-main { grid-template-columns: minmax(18rem, .85fr) minmax(0, 1.35fr); align-items: start; gap: clamp(5rem, 9vw, 10rem); }
   .footer-tagline { font-size: clamp(3.5rem, 4.4vw, 4.5rem); }
+  .footer-main { row-gap: var(--afo-space-12); }
+  .footer-brand { grid-column: 1; grid-row: 1; }
+  .footer-nav-grid { grid-column: 2; grid-row: 1 / span 2; }
+  .footer-partner { grid-column: 1; grid-row: 2; align-self: end; }
   .privacy-layout { grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(3rem, 6vw, 7rem); }
   .privacy-rail { position: sticky; top: 72px; display: block; height: calc(100dvh - 72px); border-right: 1px solid var(--afo-color-border-subtle); padding-top: var(--afo-space-12); }
   .privacy-nav-list { margin-top: var(--afo-space-6); }

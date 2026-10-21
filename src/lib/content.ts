@@ -1,4 +1,13 @@
-export type Language = "es" | "en";
+export const languages = ["es", "en"] as const;
+export type Language = (typeof languages)[number];
+export const defaultLanguage: Language = "es";
+
+export function isLanguage(value: string): value is Language {
+  return (languages as readonly string[]).includes(value);
+}
+
+/** Open Graph locale codes for each URL language. */
+export const ogLocales: Record<Language, string> = { es: "es_CO", en: "en_US" };
 
 export const content = {
   es: {
@@ -197,8 +206,12 @@ export const content = {
     ],
     closingPrompt:
       "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
-    built: "Creado para el movimiento",
     tagline: "All the fitness in one place.",
+    inceptionMember: "Allfit One es miembro de NVIDIA Inception.",
+    inceptionBadgeAlt: "Insignia del NVIDIA Inception Program",
+    // NVIDIA requires its trademark attribution verbatim, so it stays in English in both languages.
+    nvidiaTrademarks:
+      "© 2026 NVIDIA, the NVIDIA logo, and NVIDIA Inception are trademarks and/or registered trademarks of NVIDIA Corporation in the U.S. and other countries.",
   },
   en: {
     navFitnessId: "Fitness ID",
@@ -395,8 +408,12 @@ export const content = {
     ],
     closingPrompt:
       "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
-    built: "Built for movement",
     tagline: "All the fitness in one place.",
+    inceptionMember: "Allfit One is a member of NVIDIA Inception.",
+    inceptionBadgeAlt: "NVIDIA Inception Program badge",
+    // NVIDIA requires its trademark attribution verbatim, so it stays in English in both languages.
+    nvidiaTrademarks:
+      "© 2026 NVIDIA, the NVIDIA logo, and NVIDIA Inception are trademarks and/or registered trademarks of NVIDIA Corporation in the U.S. and other countries.",
   },
 } as const;
 
@@ -740,21 +757,3 @@ export const ambassadorSocials: { platform: string; handle: string; url: string 
   { platform: "Instagram", handle: "@pendiente", url: "" },
   { platform: "TikTok", handle: "@pendiente", url: "" },
 ];
-
-export const LANGUAGE_STORAGE_KEY = "allfitone-language";
-
-export function readStoredLanguage(): Language {
-  try {
-    return window.localStorage.getItem(LANGUAGE_STORAGE_KEY) === "en" ? "en" : "es";
-  } catch {
-    return "es";
-  }
-}
-
-export function writeStoredLanguage(language: Language) {
-  try {
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
-  } catch {
-    // The selected locale remains active for this session when storage is unavailable.
-  }
-}

@@ -4,7 +4,11 @@ import { useEffect } from "react";
 import { BrandLockup } from "@allfitone/react/brand";
 import { FoundationIcon } from "@allfitone/react/icons";
 
-export default function NotFound() {
+/**
+ * The 404 copy is English-only, so the document language follows it while the
+ * view is mounted inside a language route.
+ */
+export function NotFoundView() {
   useEffect(() => {
     const previousLanguage = document.documentElement.lang;
     document.documentElement.lang = "en";

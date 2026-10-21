@@ -1,7 +1,11 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
 <!-- END:nextjs-agent-rules -->
 
 # Allfit One project guide
@@ -25,22 +29,23 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Source code, identifiers, filenames, technical attributes, comments, and structural names must be in English.
 - The interface is bilingual, with Spanish as the default and English as the alternate language.
 - Any new user-facing copy must be added in both languages unless it is a brand or product name.
-- Do not create separate `hreflang` URLs while both languages use the same client-side route.
-- Keep the document language synchronized with the selected UI language.
+- Each language lives under its own URL prefix: `/es` (default) and `/en`. `/` redirects temporarily (307) to `/es`, so the root can later negotiate the visitor's language; pages published before the prefixes redirect permanently to their `/es` version in `next.config.ts`.
+- Every indexable page exists in both languages with a self-referencing canonical and `hreflang` alternates built with `languageAlternates()` from `src/lib/site-config.ts`.
+- `<html lang>` comes from the `[lang]` route segment. The language switch (`src/components/language-switch.tsx`) opens the same path in the other language; there is no stored language preference.
 
 ## Stack and architecture
 
 - Next.js `16.2.10` App Router, React `19`, TypeScript, Tailwind CSS `4`, and `@allfitone/react@0.7.0`.
-- `src/app/page.tsx` composes the landing experience; `src/lib/content.ts` owns every bilingual string; `src/components/product-mockups.tsx` and `src/components/fitness-id-card.tsx` own the illustrative product objects.
+- `src/app/[lang]/page.tsx` renders `src/components/landing-page.tsx`, which composes the landing experience; `src/lib/content.ts` owns every bilingual string; `src/components/product-mockups.tsx` and `src/components/fitness-id-card.tsx` own the illustrative product objects.
 - The public homepage is an editorial sequence: floating navbar, connected two-product hero, problem, Fitness ID, Allfit Space, Allfit Studio, ecosystem relationship, current status and contact (with a closing email call to action), and the established footer.
 - Editorial sections open directly with their title. The former per-section eyebrow markers — the `.section-marker` component and its numeric section index — were removed to make the page warmer and less templated; do not reintroduce them. Numeric indexes inside components (Fitness ID card and controls, Studio differentiators, ecosystem product columns) stay.
-- `src/app/layout.tsx` owns root metadata, fonts, and global structured data.
+- `src/app/[lang]/layout.tsx` is the root layout. It owns per-language metadata, `<html lang>`, and global structured data, and generates only `es` and `en` (`dynamicParams = false`). Fonts live in `src/lib/fonts.ts`. `src/app/global-not-found.tsx` renders URLs that match no route; Next.js logs an internal `NoFallbackError` for unknown single-segment paths such as `/fr`, while still answering with the 404 page.
 - `src/app/cascade-layers.css` only establishes Tailwind layer order before package CSS; `src/app/globals.css` owns the landing-specific global Tailwind/theme styles.
 - `src/lib/site-config.ts` is the source of truth for the public URL, SEO title, description, email, and social links.
 - `src/components/structured-data.tsx` contains JSON-LD that must match visible page content.
 - `src/app/dev/` is an internal brand lab. It must remain `noindex` and excluded from `robots.txt` and the sitemap.
-- `src/app/ambassadors/william/` is a private proposal page for the first ambassador, William Vergel. It stays `noindex, nofollow`, out of the sitemap, and unlinked from the homepage until his real content and prices replace the samples. Its copy lives in `ambassadorContent` in `src/lib/content.ts`, and its plan prices in `ambassadorPlans`. Every plan CTA is a `mailto:` link, because email remains the only conversion action. Linking it from the homepage or making it indexable requires a product decision on the pricing rule above.
-- Static Open Graph and Twitter images live beside the root app route and use Next.js metadata file conventions.
+- `src/app/[lang]/ambassadors/william/` is a private proposal page for the first ambassador, William Vergel. It stays `noindex, nofollow`, out of the sitemap, and unlinked from the homepage until his real content and prices replace the samples. Its copy lives in `ambassadorContent` in `src/lib/content.ts`, and its plan prices in `ambassadorPlans`. Every plan CTA is a `mailto:` link, because email remains the only conversion action. Linking it from the homepage or making it indexable requires a product decision on the pricing rule above.
+- The social preview image lives in `public/social/` and every page declares it through `shareImage()` in `src/lib/site-config.ts`. Metadata file conventions are not used for it: a page that sets its own `openGraph` replaces the inherited image, and the alt text must follow the page language.
 
 ## Visual direction
 
@@ -73,12 +78,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## SEO requirements
 
-- Keep the canonical URL pointed at `https://www.allfit.one`.
+- Each page's canonical is its own language URL, such as `https://www.allfit.one/es`. The homepage's `x-default` alternate points to the root.
 - Keep the homepage positioning broad enough to represent the parent ecosystem. Product-specific keywords belong in Allfit Studio copy and future dedicated routes.
 - Preserve crawlable `robots.txt`, the canonical-only sitemap, large-image social metadata, and the Open Graph/Twitter assets.
 - Keep Organization, WebSite, and Allfit Studio SoftwareApplication structured data accurate and consistent with visible content. Do not add FAQ or Offer data while those sections are absent, and never add ratings, reviews, availability, or claims that are not present and verifiable.
 - The homepage must remain indexable. Internal `/dev` content must remain `noindex, nofollow`.
-- Do not add speculative `llms.txt` or duplicate language URLs without a concrete distribution plan.
+- Do not add speculative `llms.txt` without a concrete distribution plan.
 
 ## Local development safety
 

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { BrandLockup } from "@allfitone/react/brand";
 import { buttonVariants } from "@allfitone/react/components/button";
 import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
-import { PrivacyLanguageToggle } from "@/components/privacy-language-toggle";
-import { ambassadorContent, ambassadorPlans, ambassadorSocials, content } from "@/lib/content";
-import { siteConfig } from "@/lib/site-config";
+import { LanguageSwitch } from "@/components/language-switch";
+import { ambassadorContent, ambassadorPlans, ambassadorSocials, content, isLanguage, ogLocales, type Language } from "@/lib/content";
+import { localizedPath, shareImage, siteConfig } from "@/lib/site-config";
 
-const spanish = ambassadorContent.es;
-const english = ambassadorContent.en;
+const PAGE_PATH = "/ambassadors/william";
+const numberLocales: Record<Language, "es-CO" | "en-US"> = { es: "es-CO", en: "en-US" };
 
 const linkedSocials = ambassadorSocials.filter((social) => social.url);
 
@@ -26,35 +27,45 @@ const formatPesos = (amount: number, locale: "es-CO" | "en-US") => `$${amount.to
  * The page holds sample copy and no approved ambassador program, so it stays out
  * of the index and the sitemap until William's own content replaces the draft.
  */
-export const metadata: Metadata = {
-  title: spanish.metaTitle,
-  description: spanish.metaDescription,
-  alternates: { canonical: "/ambassadors/william" },
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({ params }: PageProps<"/[lang]/ambassadors/william">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  const copy = ambassadorContent[lang];
 
-function Localized({ es, en }: { es: string; en: string }) {
-  return (
-    <>
-      <span data-privacy-copy="es" lang="es">{es}</span>
-      <span data-privacy-copy="en" lang="en">{en}</span>
-    </>
-  );
+  return {
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    alternates: { canonical: localizedPath(lang, PAGE_PATH) },
+    robots: { index: false, follow: false },
+    openGraph: {
+      type: "profile",
+      url: localizedPath(lang, PAGE_PATH),
+      siteName: siteConfig.name,
+      title: copy.metaTitle,
+      description: copy.metaDescription,
+      locale: ogLocales[lang],
+      images: [shareImage(lang)],
+    },
+  };
 }
 
-export default function WilliamAmbassadorPage() {
-  const contactSubject = `Allfit One · ${spanish.givenName} ${spanish.familyName}`;
+export default async function WilliamAmbassadorPage({ params }: PageProps<"/[lang]/ambassadors/william">) {
+  const { lang } = await params;
+  if (!isLanguage(lang)) notFound();
+  const copy = ambassadorContent[lang];
+  const numberLocale = numberLocales[lang];
+  const contactSubject = `Allfit One · ${copy.givenName} ${copy.familyName}`;
   const contactHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(contactSubject)}`;
 
   return (
     <main className="ambassador-page">
       <header className="ambassador-nav-shell">
         <div className="site-grid ambassador-nav">
-          <Link href="/" className="col-span-6 ambassador-brand" aria-label={siteConfig.name}>
+          <Link href={localizedPath(lang)} className="col-span-6 ambassador-brand" aria-label={siteConfig.name}>
             <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
           </Link>
           <div className="col-span-6 flex justify-end">
-            <PrivacyLanguageToggle />
+            <LanguageSwitch language={lang} label={copy.selectLanguage} />
           </div>
         </div>
       </header>
@@ -74,23 +85,23 @@ export default function WilliamAmbassadorPage() {
         <div className="site-grid ambassador-hero-grid">
           <div className="ambassador-hero-copy col-span-12 lg:col-span-6">
             <p className="eyebrow ambassador-role">
-              <Localized es={spanish.role} en={english.role} />
+              {copy.role}
             </p>
             <h1 id="ambassador-name" className="ambassador-name">
-              <span>{spanish.givenName}</span>
-              <span className="ambassador-name-outline">{spanish.familyName}</span>
+              <span>{copy.givenName}</span>
+              <span className="ambassador-name-outline">{copy.familyName}</span>
             </h1>
             <p className="ambassador-hero-lead">
-              <Localized es={spanish.lead} en={english.lead} />
+              {copy.lead}
             </p>
           </div>
         </div>
 
         <div className="site-grid ambassador-hero-rail">
           <ul className="ambassador-rail col-span-12">
-            {spanish.heroFacts.map((fact, index) => (
+            {copy.heroFacts.map((fact) => (
               <li key={fact}>
-                <Localized es={fact} en={english.heroFacts[index]} />
+                {fact}
               </li>
             ))}
           </ul>
@@ -111,11 +122,11 @@ export default function WilliamAmbassadorPage() {
 
           <div className="ambassador-manifesto-copy col-span-12 lg:col-span-6 lg:col-start-7">
             <h2 id="ambassador-statement" className="ambassador-statement">
-              <Localized es={spanish.statement} en={english.statement} />
+              {copy.statement}
             </h2>
-            {spanish.aboutBody.map((paragraph, index) => (
+            {copy.aboutBody.map((paragraph) => (
               <p key={paragraph} className="ambassador-body">
-                <Localized es={paragraph} en={english.aboutBody[index]} />
+                {paragraph}
               </p>
             ))}
           </div>
@@ -124,19 +135,19 @@ export default function WilliamAmbassadorPage() {
         <div className="site-grid">
           <div className="ambassador-method col-span-12">
             <h3 className="eyebrow ambassador-method-title">
-              <Localized es={spanish.methodTitle} en={english.methodTitle} />
+              {copy.methodTitle}
             </h3>
             <ol className="ambassador-method-list">
-              {spanish.method.map((step, index) => (
+              {copy.method.map((step, index) => (
                 <li key={step.title} className="ambassador-method-step">
                   <span className="ambassador-method-index" aria-hidden="true">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h4 className="ambassador-method-name">
-                    <Localized es={step.title} en={english.method[index].title} />
+                    {step.title}
                   </h4>
                   <p className="ambassador-method-body">
-                    <Localized es={step.body} en={english.method[index].body} />
+                    {step.body}
                   </p>
                 </li>
               ))}
@@ -148,67 +159,60 @@ export default function WilliamAmbassadorPage() {
       <section className="ambassador-plans" aria-labelledby="ambassador-plans-title">
         <div className="site-grid ambassador-plans-head">
           <h2 id="ambassador-plans-title" className="section-title text-void col-span-12 lg:col-span-6">
-            <Localized es={spanish.plansTitle} en={english.plansTitle} />
+            {copy.plansTitle}
           </h2>
           <p className="section-lead ambassador-plans-lead col-span-12 lg:col-span-4 lg:col-start-9">
-            <Localized es={spanish.plansLead} en={english.plansLead} />
+            {copy.plansLead}
           </p>
         </div>
 
         <div className="site-grid">
           <div className="plans-panel col-span-12">
             {ambassadorPlans.map((plan, index) => {
-              const planEs = spanish.plans[index];
-              const planEn = english.plans[index];
+              const planCopy = copy.plans[index];
               const monthly = monthlyPrice(plan);
               const saving = savingPercent(plan);
-              const subject = `Allfit One · ${spanish.givenName} ${spanish.familyName} · ${planEs.name}`;
+              const subject = `Allfit One · ${copy.givenName} ${copy.familyName} · ${planCopy.name}`;
 
               return (
                 <article key={plan.months} className={cn("plan", plan.featured && "plan-featured")}>
                   {plan.featured && (
                     <p className="plan-tag">
-                      <Localized es={spanish.featuredTag} en={english.featuredTag} />
+                      {copy.featuredTag}
                     </p>
                   )}
                   <h3 className="plan-name">
-                    <Localized es={planEs.name} en={planEn.name} />
+                    {planCopy.name}
                   </h3>
                   <p className="plan-who">
-                    <Localized es={planEs.who} en={planEn.who} />
+                    {planCopy.who}
                   </p>
 
                   <p className="plan-price">
-                    <Localized es={formatPesos(plan.price, "es-CO")} en={formatPesos(plan.price, "en-US")} />
+                    {formatPesos(plan.price, numberLocale)}
                     <span className="plan-currency">COP</span>
                   </p>
                   <p className="plan-meta">
-                    <Localized
-                      es={spanish.perMonth.replace("{amount}", formatPesos(monthly, "es-CO"))}
-                      en={english.perMonth.replace("{amount}", formatPesos(monthly, "en-US"))}
-                    />
+                    {copy.perMonth.replace("{amount}", formatPesos(monthly, numberLocale))}
                     {saving > 0 && (
                       <span className="plan-saving">
-                        <Localized
-                          es={spanish.saving.replace("{percent}", String(saving))}
-                          en={english.saving.replace("{percent}", String(saving))}
-                        />
+                        {copy.saving.replace("{percent}", String(saving))}
                       </span>
                     )}
                   </p>
 
                   <p className="plan-cadence">
-                    <Localized es={planEs.cadence} en={planEn.cadence} />
+                    {planCopy.cadence}
                   </p>
 
                   <div className="plan-includes">
                     <p className="plan-includes-lead">
-                      <Localized es={planEs.includesLead} en={planEn.includesLead} />
+                      {planCopy.includesLead}
                     </p>
                     <ul>
-                      {planEs.includes.map((item, itemIndex) => (
+                      {planCopy.includes.map((item) => (
                         <li key={item}>
-                          <Localized es={item} en={planEn.includes[itemIndex]} />
+                          {item}
                         </li>
                       ))}
                     </ul>
@@ -221,7 +225,7 @@ export default function WilliamAmbassadorPage() {
                       "plan-cta",
                     )}
                   >
-                    <Localized es={planEs.cta} en={planEn.cta} />
+                    {planCopy.cta}
                   </a>
                 </article>
               );
@@ -234,14 +238,14 @@ export default function WilliamAmbassadorPage() {
       <section className="ambassador-contact" aria-labelledby="ambassador-contact-title">
         <div className="site-grid ambassador-contact-grid">
           <h2 id="ambassador-contact-title" className="ambassador-contact-title col-span-12 lg:col-span-7">
-            <Localized es={spanish.contactTitle} en={english.contactTitle} />
+            {copy.contactTitle}
           </h2>
           <div className="ambassador-contact-side col-span-12 lg:col-span-4 lg:col-start-9">
             <p className="ambassador-contact-lead">
-              <Localized es={spanish.contactBody} en={english.contactBody} />
+              {copy.contactBody}
             </p>
             <a href={contactHref} className={cn(buttonVariants({ size: "lg" }), "ambassador-contact-button")}>
-              <Localized es={spanish.contact} en={english.contact} />
+              {copy.contact}
               <FoundationIcon name="forward" data-icon="inline-end" decorative />
             </a>
 
@@ -264,20 +268,20 @@ export default function WilliamAmbassadorPage() {
         <div className="footer-shell">
           <div className="footer-main">
             <div className="footer-brand">
-              <p className="footer-tagline">{content.es.tagline}</p>
+              <p className="footer-tagline">{content[lang].tagline}</p>
             </div>
 
             <div className="footer-nav-grid ambassador-footer-nav">
               <nav className="footer-nav" aria-labelledby="ambassador-footer-site">
                 <p id="ambassador-footer-site" className="footer-nav-title">
-                  <Localized es={spanish.footerNavTitle} en={english.footerNavTitle} />
+                  {copy.footerNavTitle}
                 </p>
                 <div className="footer-link-list">
-                  <Link className="footer-link" href="/">
-                    <Localized es={spanish.footerHome} en={english.footerHome} />
+                  <Link className="footer-link" href={localizedPath(lang)}>
+                    {copy.footerHome}
                   </Link>
-                  <Link className="footer-link" href="/privacy/analytics">
-                    <Localized es={spanish.footerPrivacy} en={english.footerPrivacy} />
+                  <Link className="footer-link" href={localizedPath(lang, "/privacy/analytics")}>
+                    {copy.footerPrivacy}
                   </Link>
                   <a className="footer-link" href={contactHref}>
                     <span>{siteConfig.email}</span>
@@ -288,7 +292,7 @@ export default function WilliamAmbassadorPage() {
 
               <nav className="footer-nav" aria-labelledby="ambassador-footer-social">
                 <p id="ambassador-footer-social" className="footer-nav-title">
-                  <Localized es={spanish.footerSocialTitle} en={english.footerSocialTitle} />
+                  {copy.footerSocialTitle}
                 </p>
                 <div className="footer-link-list">
                   <a className="footer-link" href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer">
@@ -309,7 +313,7 @@ export default function WilliamAmbassadorPage() {
           </div>
 
           <div className="footer-meta">
-            <span>{spanish.rights}</span>
+            <span>{copy.rights}</span>
           </div>
         </div>
       </footer>

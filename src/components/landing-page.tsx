@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   BrandLockup,
   BrandLogo,
@@ -18,52 +19,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@allfitone/react/components/sheet";
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@allfitone/react/components/toggle-group";
 import { FoundationIcon, type IconName } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
 import { FitnessIdCard } from "@/components/fitness-id-card";
+import { LanguageSwitch } from "@/components/language-switch";
 import { PhoneMockup, StudioDashboardMockup } from "@/components/product-mockups";
-import {
-  content,
-  readStoredLanguage,
-  writeStoredLanguage,
-  type Language,
-  type LocalizedContent,
-} from "@/lib/content";
-import { siteConfig } from "@/lib/site-config";
+import { content, type Language, type LocalizedContent } from "@/lib/content";
+import { localizedPath, siteConfig } from "@/lib/site-config";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
 const spacePillarIcons = ["training", "people", "permissions"] as const satisfies readonly IconName[];
-
-function LanguageToggle({
-  language,
-  onLanguageChange,
-}: {
-  language: Language;
-  onLanguageChange: (language: Language) => void;
-}) {
-  return (
-    <ToggleGroup
-      className="locale-toggle"
-      aria-label={content[language].selectLanguage}
-      value={[language]}
-      onValueChange={(value) => {
-        const nextLanguage = value[0];
-        if (nextLanguage === "es" || nextLanguage === "en") {
-          onLanguageChange(nextLanguage);
-        }
-      }}
-    >
-      <ToggleGroupItem className="locale-toggle-item" value="es" aria-label="Español">ES</ToggleGroupItem>
-      <ToggleGroupItem className="locale-toggle-item" value="en" aria-label="English">EN</ToggleGroupItem>
-    </ToggleGroup>
-  );
-}
 
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
   return (
@@ -356,28 +323,9 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-export default function Home() {
-  const [language, setLanguage] = useState<Language>("es");
+export function LandingPage({ language }: { language: Language }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const copy = content[language];
-
-  useEffect(() => {
-    const savedLanguage = readStoredLanguage();
-    const timer = window.setTimeout(() => {
-      if (savedLanguage !== language) setLanguage(savedLanguage);
-    }, 0);
-
-    return () => window.clearTimeout(timer);
-  }, [language]);
-
-  useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
-
-  const changeLanguage = (nextLanguage: Language) => {
-    setLanguage(nextLanguage);
-    writeStoredLanguage(nextLanguage);
-  };
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -407,7 +355,7 @@ export default function Home() {
 
           <div className="col-span-6 ml-auto flex items-center gap-3 lg:col-span-3 lg:gap-4">
             <div className="hidden min-[400px]:block">
-              <LanguageToggle language={language} onLanguageChange={changeLanguage} />
+              <LanguageSwitch language={language} label={copy.selectLanguage} />
             </div>
             <a href={CONTACT_HREF} className="ml-auto hidden min-h-11 items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white sm:flex">
               {copy.contactShort}
@@ -428,7 +376,7 @@ export default function Home() {
                   <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
                   <div className="ml-auto flex items-center gap-3">
                     <div className="hidden min-[400px]:block">
-                      <LanguageToggle language={language} onLanguageChange={changeLanguage} />
+                      <LanguageSwitch language={language} label={copy.selectLanguage} />
                     </div>
                     <SheetClose render={<IconButton aria-label={copy.closeMenu} variant="outline" />}>
                       <FoundationIcon name="close" size="sm" decorative />
@@ -446,7 +394,7 @@ export default function Home() {
                   </nav>
                   <div className="mt-10">
                     <div className="mb-6 min-[400px]:hidden">
-                      <LanguageToggle language={language} onLanguageChange={changeLanguage} />
+                      <LanguageSwitch language={language} label={copy.selectLanguage} />
                     </div>
                     <p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/60">{copy.tagline}</p>
                     <a href={CONTACT_HREF} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
@@ -565,18 +513,31 @@ export default function Home() {
               <nav className="footer-nav" aria-label={copy.footerInformation}>
                 <p className="footer-nav-title">{copy.footerInformation}</p>
                 <div className="footer-link-list">
-                  <Link className="footer-link" href="/privacy/analytics">{copy.analyticsPrivacy}</Link>
+                  <Link className="footer-link" href={localizedPath(language, "/privacy/analytics")}>{copy.analyticsPrivacy}</Link>
                   <a className="footer-link" href={CONTACT_HREF}>
                     <span>{siteConfig.email}</span><span className="footer-link-mark" aria-hidden="true">→</span>
                   </a>
                 </div>
               </nav>
             </div>
+
+            <div className="footer-partner">
+              <Image
+                className="footer-partner-badge"
+                src="/partners/nvidia-inception-program-badge.svg"
+                alt={copy.inceptionBadgeAlt}
+                width={500}
+                height={216}
+              />
+              <div className="footer-partner-text">
+                <p className="footer-partner-copy">{copy.inceptionMember}</p>
+                <p className="footer-partner-legal">{copy.nvidiaTrademarks}</p>
+              </div>
+            </div>
           </div>
 
-          <div className="footer-meta">
+          <div className="footer-meta footer-meta-centered">
             <span>© 2026 Allfit One</span>
-            <span>{copy.built}</span>
           </div>
         </div>
       </footer>
