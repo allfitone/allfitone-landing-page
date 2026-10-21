@@ -521,18 +521,19 @@ export function LandingPage({ language }: { language: Language }) {
               </nav>
             </div>
 
-            <div className="footer-partner">
-              <Image
-                className="footer-partner-badge"
-                src="/partners/nvidia-inception-program-badge.svg"
-                alt={copy.inceptionBadgeAlt}
-                width={500}
-                height={216}
-              />
-              <div className="footer-partner-text">
-                <p className="footer-partner-copy">{copy.inceptionMember}</p>
-                <p className="footer-partner-legal">{copy.nvidiaTrademarks}</p>
-              </div>
+          </div>
+
+          <div className="footer-partner">
+            <Image
+              className="footer-partner-badge"
+              src="/partners/nvidia-inception-program-badge.svg"
+              alt={copy.inceptionBadgeAlt}
+              width={500}
+              height={216}
+            />
+            <div className="footer-partner-text">
+              <p className="footer-partner-copy">{copy.inceptionMember}</p>
+              <p className="footer-partner-legal" lang="en">{copy.nvidiaTrademarks}</p>
             </div>
           </div>
 

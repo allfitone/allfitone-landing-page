@@ -250,15 +250,14 @@ section[id].fid-section {
 .footer-main { display: grid; gap: var(--afo-space-12); padding-block: clamp(3.5rem, 8vw, 7rem); }
 .footer-brand { align-self: start; }
 .footer-tagline { max-width: 11ch; font-family: var(--afo-font-family-display); font-size: clamp(2.5rem, 9vw, 4.5rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .88; text-transform: uppercase; text-wrap: balance; }
-/* Badge, membership line, and NVIDIA's verbatim trademark notice form one sign-off unit, stacked so the
-   fine print always sits directly under the mark it explains. The badge keeps its own colors and built-in
-   clear space; at 3.5rem its visible box is about 41px, above NVIDIA's 30px digital minimum, and the negative
-   margin aligns that box with the grid edge. */
-.footer-partner { display: grid; justify-items: start; gap: var(--afo-space-3); }
-.footer-partner-badge { width: auto; height: 3.5rem; margin-left: -.40625rem; }
-.footer-partner-text { display: grid; gap: var(--afo-space-2); max-width: 24rem; }
-.footer-partner-copy { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 68%, transparent); font-size: .875rem; line-height: 1.45; }
-.footer-partner-legal { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); font-size: .625rem; line-height: 1.5; }
+/* NVIDIA Inception gets its own band between the footer columns and the legal line: badge, membership
+   line and NVIDIA's verbatim trademark notice stacked on one centered axis, like the copyright below it.
+   The badge keeps its own colors and built-in clear space. */
+.footer-partner { display: grid; justify-items: center; gap: var(--afo-space-6); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); padding-block: var(--afo-space-16); text-align: center; }
+.footer-partner-badge { width: 12.5rem; height: auto; }
+.footer-partner-text { display: grid; justify-items: center; gap: var(--afo-space-2); }
+.footer-partner-copy { font-size: 1.25rem; font-weight: var(--afo-font-weight-semibold); line-height: 1.4; text-wrap: balance; }
+.footer-partner-legal { max-width: 70ch; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); font-size: .8125rem; line-height: 1.6; text-wrap: balance; }
 .footer-nav-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--afo-space-10) var(--afo-space-6); }
 .footer-nav { min-width: 0; }
 .footer-nav-grid > .footer-nav:last-child { grid-column: 1 / -1; }
@@ -537,10 +536,8 @@ section[id].fid-section {
   .site-footer { padding-inline: var(--afo-space-8); }
   .footer-main { grid-template-columns: minmax(18rem, .85fr) minmax(0, 1.35fr); align-items: start; gap: clamp(5rem, 9vw, 10rem); }
   .footer-tagline { font-size: clamp(3.5rem, 4.4vw, 4.5rem); }
-  .footer-main { row-gap: var(--afo-space-12); }
   .footer-brand { grid-column: 1; grid-row: 1; }
-  .footer-nav-grid { grid-column: 2; grid-row: 1 / span 2; }
-  .footer-partner { grid-column: 1; grid-row: 2; align-self: end; }
+  .footer-nav-grid { grid-column: 2; grid-row: 1; }
   .privacy-layout { grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(3rem, 6vw, 7rem); }
   .privacy-rail { position: sticky; top: 72px; display: block; height: calc(100dvh - 72px); border-right: 1px solid var(--afo-color-border-subtle); padding-top: var(--afo-space-12); }
   .privacy-nav-list { margin-top: var(--afo-space-6); }
