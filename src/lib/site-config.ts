@@ -22,9 +22,9 @@ export const siteConfig = {
   description: seo.es.description,
   email: "hello@allfit.one",
   social: {
-    instagram: "https://www.instagram.com/allfit.one/",
-    tiktok: "https://www.tiktok.com/@allfit.one",
-    linkedin: "https://www.linkedin.com/company/allfit-one/",
+    instagram: "https://www.instagram.com/allfitone/",
+    tiktok: "https://www.tiktok.com/@allfitone",
+    linkedin: "https://www.linkedin.com/company/allfitone/",
   },
 } as const;
 
