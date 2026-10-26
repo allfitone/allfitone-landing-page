@@ -25,8 +25,10 @@ const nextConfig: NextConfig = {
 
 export default function config(phase: string): NextConfig {
   // Every deployment runs a production build, so this is where unapproved ambassadors and
-  // their photos are stopped, whichever pipeline deploys the site. `next dev` still previews drafts.
-  if (phase === PHASE_PRODUCTION_BUILD) {
+  // their photos are stopped, whichever pipeline deploys the site. `next dev` still previews drafts,
+  // and `next typegen` loads this phase only to generate route types, so it keeps working on drafts.
+  const generatingTypes = process.argv.slice(2).includes("typegen");
+  if (phase === PHASE_PRODUCTION_BUILD && !generatingTypes) {
     const blockers = ambassadorReleaseBlockers(process.cwd());
     if (blockers.length > 0) {
       throw new Error(`Ambassador profiles are not ready to ship:\n- ${blockers.join("\n- ")}\nSee docs/ambassadors/README.md.`);
