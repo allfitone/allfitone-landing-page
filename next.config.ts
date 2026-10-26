@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+import { ambassadorReleaseBlockers } from "./src/lib/ambassadors/release.ts";
+
+const PHASE_PRODUCTION_BUILD: typeof import("next/constants").PHASE_PRODUCTION_BUILD = "phase-production-build";
+
 const nextConfig: NextConfig = {
   experimental: {
     // The root layout lives under app/[lang], so unmatched URLs need a 404 that renders its own document.
@@ -19,4 +23,14 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default function config(phase: string): NextConfig {
+  // Every deployment runs a production build, so this is where unapproved ambassadors and
+  // their photos are stopped, whichever pipeline deploys the site. `next dev` still previews drafts.
+  if (phase === PHASE_PRODUCTION_BUILD) {
+    const blockers = ambassadorReleaseBlockers(process.cwd());
+    if (blockers.length > 0) {
+      throw new Error(`Ambassador profiles are not ready to ship:\n- ${blockers.join("\n- ")}\nSee docs/ambassadors/README.md.`);
+    }
+  }
+  return nextConfig;
+}

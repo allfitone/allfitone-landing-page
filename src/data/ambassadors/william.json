@@ -1,0 +1,215 @@
+{
+  "slug": "william",
+  "status": "published",
+  "identity": {
+    "givenName": "William",
+    "familyName": "Vergel"
+  },
+  "photos": {
+    "hero": {
+      "src": "/ambassadors/william-vergel-portrait.jpg",
+      "width": 1440,
+      "height": 1800,
+      "alt": {
+        "es": "",
+        "en": ""
+      },
+      "focusMobile": "88% top",
+      "insetDesktop": "5vw"
+    },
+    "standing": {
+      "src": "/ambassadors/william-vergel-standing.jpg",
+      "width": 1351,
+      "height": 1801,
+      "alt": {
+        "es": "",
+        "en": ""
+      }
+    }
+  },
+  "socials": [
+    {
+      "platform": "Instagram",
+      "handle": "@pendiente"
+    },
+    {
+      "platform": "TikTok",
+      "handle": "@pendiente"
+    }
+  ],
+  "basePlanId": "3-months",
+  "plans": [
+    {
+      "id": "3-months",
+      "months": 3,
+      "priceCOP": 450000,
+      "featured": false,
+      "copy": {
+        "es": {
+          "name": "3 meses",
+          "who": "Para empezar con estructura y notar el cambio en la primera temporada.",
+          "cadence": "12 semanas, revisión cada 4",
+          "includesLead": "Incluye",
+          "includes": [
+            "Plan de 12 semanas escrito para tu semana",
+            "Ajuste del plan cada 4 semanas",
+            "Revisión de técnica por video, una al mes",
+            "Dudas por chat en días hábiles"
+          ],
+          "cta": "Pedir el plan de 3 meses"
+        },
+        "en": {
+          "name": "3 months",
+          "who": "To start with structure and feel the change within the first season.",
+          "cadence": "12 weeks, a review every 4",
+          "includesLead": "Includes",
+          "includes": [
+            "A 12-week plan written for your week",
+            "Plan adjusted every 4 weeks",
+            "One video technique review a month",
+            "Questions by chat on business days"
+          ],
+          "cta": "Ask for the 3-month plan"
+        }
+      }
+    },
+    {
+      "id": "6-months",
+      "months": 6,
+      "priceCOP": 810000,
+      "featured": true,
+      "copy": {
+        "es": {
+          "name": "6 meses",
+          "who": "Para quien ya arrancó y quiere progresar sin estancarse a mitad de camino.",
+          "cadence": "26 semanas, revisión cada 2",
+          "includesLead": "Todo lo del plan de 3 meses, más:",
+          "includes": [
+            "Revisión cada 2 semanas en vez de cada 4",
+            "Revisión de técnica por video, dos al mes",
+            "Evaluación de fuerza y resistencia a mitad del plan"
+          ],
+          "cta": "Pedir el plan de 6 meses"
+        },
+        "en": {
+          "name": "6 months",
+          "who": "For anyone already underway who wants to keep progressing without stalling halfway.",
+          "cadence": "26 weeks, a review every 2",
+          "includesLead": "Everything in the 3-month plan, plus:",
+          "includes": [
+            "A review every 2 weeks instead of every 4",
+            "Two video technique reviews a month",
+            "A strength and endurance assessment halfway through"
+          ],
+          "cta": "Ask for the 6-month plan"
+        }
+      }
+    },
+    {
+      "id": "1-year",
+      "months": 12,
+      "priceCOP": 1440000,
+      "featured": false,
+      "copy": {
+        "es": {
+          "name": "1 año",
+          "who": "Para preparar una temporada completa, con fechas objetivo y picos de rendimiento.",
+          "cadence": "52 semanas, revisión cada semana",
+          "includesLead": "Todo lo del plan de 6 meses, más:",
+          "includes": [
+            "Revisión semanal",
+            "El año planificado hacia tus fechas objetivo",
+            "Evaluación cada 3 meses",
+            "Respuesta prioritaria por chat"
+          ],
+          "cta": "Pedir el plan de 1 año"
+        },
+        "en": {
+          "name": "1 year",
+          "who": "To prepare a full season, with target dates and performance peaks.",
+          "cadence": "52 weeks, a review every week",
+          "includesLead": "Everything in the 6-month plan, plus:",
+          "includes": [
+            "A weekly review",
+            "The year planned toward your target dates",
+            "An assessment every 3 months",
+            "Priority replies by chat"
+          ],
+          "cta": "Ask for the 1-year plan"
+        }
+      }
+    }
+  ],
+  "content": {
+    "es": {
+      "metaTitle": "William Vergel · Embajador de Allfit One",
+      "metaDescription": "William Vergel, primer embajador de Allfit One: quién es, cómo entrena y los programas con los que trabaja.",
+      "role": "Primer embajador",
+      "lead": "Entrenador de fuerza e híbrido. Trabaja con gente que quiere rendir sin poner su vida en pausa.",
+      "heroFacts": [
+        "Fuerza e híbrido",
+        "Presencial y en remoto",
+        "Ocho años entrenando"
+      ],
+      "statement": "Un plan solo sirve si cabe en la semana que ya tienes.",
+      "aboutBody": [
+        "Por eso empieza siempre por ahí: cuántos días puedes entrenar, a qué hora, y con qué te vas a encontrar cuando llegues al gimnasio. El programa se escribe después.",
+        "Es entrenador personal certificado y lleva seis años acompañando a otras personas: atletas híbridos, gente que compite y gente que vuelve al gimnasio después de años parada."
+      ],
+      "methodTitle": "Cómo trabaja",
+      "method": [
+        {
+          "title": "Mira tu semana",
+          "body": "Antes de escribir nada, cuenta lo que tienes: cuántos días, a qué hora y con qué equipo."
+        },
+        {
+          "title": "Escribe el plan",
+          "body": "Un programa con progresión real, hecho para esos días y no para una semana ideal."
+        },
+        {
+          "title": "Ajusta cada mes",
+          "body": "Revisa cómo responde tu cuerpo y corrige el rumbo antes de que el plan deje de servir."
+        }
+      ],
+      "plansTitle": "Planes",
+      "plansLead": "Cualquier plan sirve para fuerza, híbrido o resistencia. Lo que cambia es cuánto tiempo entrenas con él y cuánto te acompaña.",
+      "contactTitle": "Entrena con William",
+      "contactBody": "¿Quieres entrenar con él o proponerle algo? Escríbenos y te ponemos en contacto."
+    },
+    "en": {
+      "metaTitle": "William Vergel · Allfit One ambassador",
+      "metaDescription": "William Vergel, the first Allfit One ambassador: who he is, how he trains, and the programs he works with.",
+      "role": "First ambassador",
+      "lead": "Strength and hybrid coach. He works with people who want to perform without putting life on hold.",
+      "heroFacts": [
+        "Strength and hybrid",
+        "In person and remote",
+        "Eight years training"
+      ],
+      "statement": "A plan only works if it fits the week you already have.",
+      "aboutBody": [
+        "So that is where he starts: how many days you can train, at what time, and what you will run into when you get to the gym. The program is written after that.",
+        "He is a certified personal trainer and has coached others for six years: hybrid athletes, people who compete, and people returning to the gym after years away."
+      ],
+      "methodTitle": "How he works",
+      "method": [
+        {
+          "title": "Look at your week",
+          "body": "Before writing anything, count what you have: how many days, at what time, and with what equipment."
+        },
+        {
+          "title": "Write the plan",
+          "body": "A program with real progression, built for those days rather than for an ideal week."
+        },
+        {
+          "title": "Adjust every month",
+          "body": "Check how your body responds and correct course before the plan stops working."
+        }
+      ],
+      "plansTitle": "Plans",
+      "plansLead": "Any plan works for strength, hybrid, or endurance. What changes is how long you train with him and how closely he coaches you.",
+      "contactTitle": "Train with William",
+      "contactBody": "Want to train with him, or bring him an idea? Write to us and we will connect you."
+    }
+  }
+}

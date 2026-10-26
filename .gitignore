@@ -41,3 +41,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent context: reference photos, notes, and reports that are not approved for the repository
+/.claude/
+
+# ambassador intake files and original photos stay local; only approved, published profiles are committed
+/ambassador-intake/

@@ -559,92 +559,16 @@ export const analyticsPrivacyContent = {
 } as const;
 
 /**
- * Every string below is a sample. It exists so the ambassador layout can be
- * reviewed with William before he sends his own material, which is why the page
- * stays noindex and out of the sitemap until his content replaces this draft.
+ * Interface copy shared by every ambassador page. Each ambassador's own copy, plans,
+ * and photos live in their profile under `src/data/ambassadors/`. `{basePlan}` is
+ * filled with the base plan's duration, such as "3 meses" or "3-month".
  */
-export const ambassadorContent = {
+export const ambassadorPageContent = {
   es: {
-    metaTitle: "William Vergel · Embajador de Allfit One",
-    metaDescription:
-      "William Vergel, primer embajador de Allfit One: quién es, cómo entrena y los programas con los que trabaja.",
     selectLanguage: "Seleccionar idioma",
-    home: "Volver a Allfit One",
-    role: "Primer embajador",
-    givenName: "William",
-    familyName: "Vergel",
-    lead:
-      "Entrenador de fuerza e híbrido. Trabaja con gente que quiere rendir sin poner su vida en pausa.",
-    heroFacts: ["Fuerza e híbrido", "Presencial y en remoto", "Ocho años entrenando"],
-    statement: "Un plan solo sirve si cabe en la semana que ya tienes.",
-    aboutBody: [
-      "Por eso empieza siempre por ahí: cuántos días puedes entrenar, a qué hora, y con qué te vas a encontrar cuando llegues al gimnasio. El programa se escribe después.",
-      "Es entrenador personal certificado y lleva seis años acompañando a otras personas: atletas híbridos, gente que compite y gente que vuelve al gimnasio después de años parada.",
-    ],
-    methodTitle: "Cómo trabaja",
-    method: [
-      {
-        title: "Mira tu semana",
-        body: "Antes de escribir nada, cuenta lo que tienes: cuántos días, a qué hora y con qué equipo.",
-      },
-      {
-        title: "Escribe el plan",
-        body: "Un programa con progresión real, hecho para esos días y no para una semana ideal.",
-      },
-      {
-        title: "Ajusta cada mes",
-        body: "Revisa cómo responde tu cuerpo y corrige el rumbo antes de que el plan deje de servir.",
-      },
-    ],
-    plansTitle: "Planes",
-    plansLead:
-      "Cualquier plan sirve para fuerza, híbrido o resistencia. Lo que cambia es cuánto tiempo entrenas con él y cuánto te acompaña.",
     perMonth: "Equivale a {amount} al mes",
-    saving: "Ahorras {percent}% frente al plan de 3 meses",
+    saving: "Ahorras {percent}% frente al plan de {basePlan}",
     featuredTag: "Recomendado",
-    plans: [
-      {
-        name: "3 meses",
-        who: "Para empezar con estructura y notar el cambio en la primera temporada.",
-        cadence: "12 semanas, revisión cada 4",
-        includesLead: "Incluye",
-        includes: [
-          "Plan de 12 semanas escrito para tu semana",
-          "Ajuste del plan cada 4 semanas",
-          "Revisión de técnica por video, una al mes",
-          "Dudas por chat en días hábiles",
-        ],
-        cta: "Pedir el plan de 3 meses",
-      },
-      {
-        name: "6 meses",
-        who: "Para quien ya arrancó y quiere progresar sin estancarse a mitad de camino.",
-        cadence: "26 semanas, revisión cada 2",
-        includesLead: "Todo lo del plan de 3 meses, más:",
-        includes: [
-          "Revisión cada 2 semanas en vez de cada 4",
-          "Revisión de técnica por video, dos al mes",
-          "Evaluación de fuerza y resistencia a mitad del plan",
-        ],
-        cta: "Pedir el plan de 6 meses",
-      },
-      {
-        name: "1 año",
-        who: "Para preparar una temporada completa, con fechas objetivo y picos de rendimiento.",
-        cadence: "52 semanas, revisión cada semana",
-        includesLead: "Todo lo del plan de 6 meses, más:",
-        includes: [
-          "Revisión semanal",
-          "El año planificado hacia tus fechas objetivo",
-          "Evaluación cada 3 meses",
-          "Respuesta prioritaria por chat",
-        ],
-        cta: "Pedir el plan de 1 año",
-      },
-    ],
-    contactTitle: "Entrena con William",
-    contactBody:
-      "¿Quieres entrenar con él o proponerle algo? Escríbenos y te ponemos en contacto.",
     contact: "Escríbenos",
     footerNavTitle: "Allfit One",
     footerHome: "Inicio",
@@ -653,86 +577,10 @@ export const ambassadorContent = {
     rights: "© 2026 Allfit One",
   },
   en: {
-    metaTitle: "William Vergel · Allfit One ambassador",
-    metaDescription:
-      "William Vergel, the first Allfit One ambassador: who he is, how he trains, and the programs he works with.",
     selectLanguage: "Select language",
-    home: "Back to Allfit One",
-    role: "First ambassador",
-    givenName: "William",
-    familyName: "Vergel",
-    lead:
-      "Strength and hybrid coach. He works with people who want to perform without putting life on hold.",
-    heroFacts: ["Strength and hybrid", "In person and remote", "Eight years training"],
-    statement: "A plan only works if it fits the week you already have.",
-    aboutBody: [
-      "So that is where he starts: how many days you can train, at what time, and what you will run into when you get to the gym. The program is written after that.",
-      "He is a certified personal trainer and has coached others for six years: hybrid athletes, people who compete, and people returning to the gym after years away.",
-    ],
-    methodTitle: "How he works",
-    method: [
-      {
-        title: "Look at your week",
-        body: "Before writing anything, count what you have: how many days, at what time, and with what equipment.",
-      },
-      {
-        title: "Write the plan",
-        body: "A program with real progression, built for those days rather than for an ideal week.",
-      },
-      {
-        title: "Adjust every month",
-        body: "Check how your body responds and correct course before the plan stops working.",
-      },
-    ],
-    plansTitle: "Plans",
-    plansLead:
-      "Any plan works for strength, hybrid, or endurance. What changes is how long you train with him and how closely he coaches you.",
     perMonth: "That is {amount} a month",
-    saving: "Save {percent}% compared with the 3-month plan",
+    saving: "Save {percent}% compared with the {basePlan} plan",
     featuredTag: "Recommended",
-    plans: [
-      {
-        name: "3 months",
-        who: "To start with structure and feel the change within the first season.",
-        cadence: "12 weeks, a review every 4",
-        includesLead: "Includes",
-        includes: [
-          "A 12-week plan written for your week",
-          "Plan adjusted every 4 weeks",
-          "One video technique review a month",
-          "Questions by chat on business days",
-        ],
-        cta: "Ask for the 3-month plan",
-      },
-      {
-        name: "6 months",
-        who: "For anyone already underway who wants to keep progressing without stalling halfway.",
-        cadence: "26 weeks, a review every 2",
-        includesLead: "Everything in the 3-month plan, plus:",
-        includes: [
-          "A review every 2 weeks instead of every 4",
-          "Two video technique reviews a month",
-          "A strength and endurance assessment halfway through",
-        ],
-        cta: "Ask for the 6-month plan",
-      },
-      {
-        name: "1 year",
-        who: "To prepare a full season, with target dates and performance peaks.",
-        cadence: "52 weeks, a review every week",
-        includesLead: "Everything in the 6-month plan, plus:",
-        includes: [
-          "A weekly review",
-          "The year planned toward your target dates",
-          "An assessment every 3 months",
-          "Priority replies by chat",
-        ],
-        cta: "Ask for the 1-year plan",
-      },
-    ],
-    contactTitle: "Train with William",
-    contactBody:
-      "Want to train with him, or bring him an idea? Write to us and we will connect you.",
     contact: "Write to us",
     footerNavTitle: "Allfit One",
     footerHome: "Home",
@@ -741,19 +589,3 @@ export const ambassadorContent = {
     rights: "© 2026 Allfit One",
   },
 } as const;
-
-/**
- * Plan numbers are language-neutral, so they live once here. Prices are whole
- * Colombian pesos; the per-month figure and the saving are derived from them.
- */
-export const ambassadorPlans: { months: number; price: number; featured: boolean }[] = [
-  { months: 3, price: 450_000, featured: false },
-  { months: 6, price: 810_000, featured: true },
-  { months: 12, price: 1_440_000, featured: false },
-];
-
-/** Handles and links are not translated, so they live outside the localized copy. */
-export const ambassadorSocials: { platform: string; handle: string; url: string }[] = [
-  { platform: "Instagram", handle: "@pendiente", url: "" },
-  { platform: "TikTok", handle: "@pendiente", url: "" },
-];
