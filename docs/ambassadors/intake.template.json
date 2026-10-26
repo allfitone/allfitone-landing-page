@@ -1,0 +1,55 @@
+{
+  "slug": "",
+  "identity": {
+    "givenName": "",
+    "familyName": ""
+  },
+  "photos": {
+    "hero": {
+      "file": "",
+      "alt": { "es": "", "en": "" },
+      "focusMobile": "center top"
+    },
+    "standing": {
+      "file": "",
+      "alt": { "es": "", "en": "" }
+    }
+  },
+  "socials": [
+    { "platform": "Instagram", "handle": "", "url": "" },
+    { "platform": "TikTok", "handle": "", "url": "" }
+  ],
+  "plans": [],
+  "content": {
+    "es": {
+      "metaTitle": "",
+      "metaDescription": "",
+      "role": "",
+      "lead": "",
+      "heroFacts": [],
+      "statement": "",
+      "aboutBody": [],
+      "methodTitle": "",
+      "method": [],
+      "plansTitle": "",
+      "plansLead": "",
+      "contactTitle": "",
+      "contactBody": ""
+    },
+    "en": {
+      "metaTitle": "",
+      "metaDescription": "",
+      "role": "",
+      "lead": "",
+      "heroFacts": [],
+      "statement": "",
+      "aboutBody": [],
+      "methodTitle": "",
+      "method": [],
+      "plansTitle": "",
+      "plansLead": "",
+      "contactTitle": "",
+      "contactBody": ""
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "slug": "marco",
+  "status": "published",
+  "identity": {
+    "givenName": "Marco Santiago",
+    "familyName": "Alfonso"
+  },
+  "photos": {
+    "hero": {
+      "src": "/ambassadors/marco/hero.jpg",
+      "width": 1440,
+      "height": 1920,
+      "alt": {
+        "es": "",
+        "en": ""
+      },
+      "focusMobile": "center top"
+    },
+    "standing": {
+      "src": "/ambassadors/marco/standing.jpg",
+      "width": 1080,
+      "height": 1440,
+      "alt": {
+        "es": "",
+        "en": ""
+      }
+    }
+  },
+  "socials": [
+    {
+      "platform": "Instagram",
+      "handle": "@marcobodybuilder_",
+      "url": "https://instagram.com/marcobodybuilder_"
+    }
+  ],
+  "basePlanId": "3-months",
+  "plans": [
+    {
+      "id": "3-months",
+      "months": 3,
+      "priceCOP": 450000,
+      "featured": false,
+      "copy": {
+        "es": {
+          "name": "3 meses",
+          "who": "Para empezar con estructura y notar el cambio en la primera temporada.",
+          "cadence": "12 semanas, revisión cada 4",
+          "includesLead": "Incluye",
+          "includes": [
+            "Plan de 12 semanas escrito para tu semana",
+            "Ajuste del plan cada 4 semanas",
+            "Revisión de técnica por video, una al mes",
+            "Dudas por chat en días hábiles"
+          ],
+          "cta": "Pedir el plan de 3 meses"
+        },
+        "en": {
+          "name": "3 months",
+          "who": "To start with structure and feel the change within the first season.",
+          "cadence": "12 weeks, a review every 4",
+          "includesLead": "Includes",
+          "includes": [
+            "A 12-week plan written for your week",
+            "Plan adjusted every 4 weeks",
+            "One video technique review a month",
+            "Questions by chat on business days"
+          ],
+          "cta": "Ask for the 3-month plan"
+        }
+      }
+    },
+    {
+      "id": "6-months",
+      "months": 6,
+      "priceCOP": 810000,
+      "featured": true,
+      "copy": {
+        "es": {
+          "name": "6 meses",
+          "who": "Para quien ya arrancó y quiere progresar sin estancarse a mitad de camino.",
+          "cadence": "26 semanas, revisión cada 2",
+          "includesLead": "Todo lo del plan de 3 meses, más:",
+          "includes": [
+            "Revisión cada 2 semanas en vez de cada 4",
+            "Revisión de técnica por video, dos al mes",
+            "Evaluación de fuerza y resistencia a mitad del plan"
+          ],
+          "cta": "Pedir el plan de 6 meses"
+        },
+        "en": {
+          "name": "6 months",
+          "who": "For anyone already underway who wants to keep progressing without stalling halfway.",
+          "cadence": "26 weeks, a review every 2",
+          "includesLead": "Everything in the 3-month plan, plus:",
+          "includes": [
+            "A review every 2 weeks instead of every 4",
+            "Two video technique reviews a month",
+            "A strength and endurance assessment halfway through"
+          ],
+          "cta": "Ask for the 6-month plan"
+        }
+      }
+    },
+    {
+      "id": "1-year",
+      "months": 12,
+      "priceCOP": 1440000,
+      "featured": false,
+      "copy": {
+        "es": {
+          "name": "1 año",
+          "who": "Para preparar una temporada completa, con fechas objetivo y picos de rendimiento.",
+          "cadence": "52 semanas, revisión cada semana",
+          "includesLead": "Todo lo del plan de 6 meses, más:",
+          "includes": [
+            "Revisión semanal",
+            "El año planificado hacia tus fechas objetivo",
+            "Evaluación cada 3 meses",
+            "Respuesta prioritaria por chat"
+          ],
+          "cta": "Pedir el plan de 1 año"
+        },
+        "en": {
+          "name": "1 year",
+          "who": "To prepare a full season, with target dates and performance peaks.",
+          "cadence": "52 weeks, a review every week",
+          "includesLead": "Everything in the 6-month plan, plus:",
+          "includes": [
+            "A weekly review",
+            "The year planned toward your target dates",
+            "An assessment every 3 months",
+            "Priority replies by chat"
+          ],
+          "cta": "Ask for the 1-year plan"
+        }
+      }
+    }
+  ],
+  "content": {
+    "es": {
+      "metaTitle": "Marco Santiago Alfonso · Embajador de Allfit One",
+      "metaDescription": "Marco Santiago Alfonso, embajador de Allfit One: entrenamiento personalizado y nutrición deportiva con el Método MBT.",
+      "role": "Entrenamiento personalizado · Nutrición deportiva",
+      "lead": "Entrena con una estrategia diseñada para ti. Un proceso personalizado que combina dirección, seguimiento y hábitos sostenibles para avanzar con propósito.",
+      "heroFacts": [
+        "Más de 5 años de experiencia",
+        "Más de 200 personas acompañadas con el Método MBT",
+        "Acompañamiento individual 1 a 1"
+      ],
+      "statement": "Tu entrenamiento debe adaptarse a tu vida, no al revés.",
+      "aboutBody": [
+        "Marco Santiago Alfonso desarrolla procesos de entrenamiento personalizados que consideran los objetivos, la experiencia y el contexto de cada persona. Su enfoque integra planificación del ejercicio, orientación en nutrición deportiva y seguimiento para ajustar el proceso a medida que se avanza.",
+        "A través de su Método MBT, organiza el acompañamiento en evaluación, planificación individual, seguimiento y construcción de hábitos sostenibles. El propósito es hacer más claro el camino y facilitar la constancia, sin recurrir a soluciones genéricas."
+      ],
+      "methodTitle": "Método MBT: un proceso construido alrededor de ti",
+      "method": [
+        {
+          "title": "Evaluación inicial",
+          "body": "Entender tus objetivos, experiencia y disponibilidad antes de diseñar el plan."
+        },
+        {
+          "title": "Programa personalizado",
+          "body": "Definir entrenamiento y estrategia de nutrición deportiva según tus necesidades."
+        },
+        {
+          "title": "Seguimiento estratégico",
+          "body": "Evaluar la evolución y ajustar el programa cuando sea necesario."
+        },
+        {
+          "title": "Resultados sostenibles",
+          "body": "Desarrollar rutinas y hábitos que puedas mantener con el tiempo."
+        }
+      ],
+      "plansTitle": "Planes",
+      "plansLead": "Elige el acompañamiento que mejor se adapte a tus objetivos. Tres opciones para entrenar con estructura, seguimiento y una estrategia pensada para avanzar de forma constante.",
+      "contactTitle": "Entrena con Marco",
+      "contactBody": "Cuéntanos qué quieres conseguir. Escríbenos y revisemos qué alternativa de acompañamiento puede ajustarse mejor a tus objetivos."
+    },
+    "en": {
+      "metaTitle": "Marco Santiago Alfonso · Allfit One ambassador",
+      "metaDescription": "Marco Santiago Alfonso, Allfit One ambassador: personal training and sports nutrition through the MBT Method.",
+      "role": "Personal training · Sports nutrition",
+      "lead": "Train with a strategy built around you. A personalized process combining direction, consistent follow-up, and sustainable habits to help you move forward with purpose.",
+      "heroFacts": [
+        "Over 5 years of experience",
+        "Over 200 people supported through the MBT Method",
+        "One-on-one personalized coaching"
+      ],
+      "statement": "Your training should fit your life, not the other way around.",
+      "aboutBody": [
+        "Marco Santiago Alfonso develops personalized training programs grounded in each person's goals, experience, and circumstances. His approach brings together exercise planning, sports nutrition guidance, and ongoing follow-up so the program can evolve with the individual.",
+        "Through his MBT Method, coaching follows four stages: assessment, individual planning, progress monitoring, and sustainable habit building. The aim is to make the path forward clearer and help consistency become more manageable, without one-size-fits-all solutions."
+      ],
+      "methodTitle": "The MBT Method: a process built around you",
+      "method": [
+        {
+          "title": "Initial assessment",
+          "body": "Understand your goals, experience, and availability before building a plan."
+        },
+        {
+          "title": "Personalized program",
+          "body": "Shape training and sports nutrition strategies around your needs."
+        },
+        {
+          "title": "Strategic follow-up",
+          "body": "Review progress and adapt the program when appropriate."
+        },
+        {
+          "title": "Sustainable progress",
+          "body": "Build routines and habits that can last."
+        }
+      ],
+      "plansTitle": "Plans",
+      "plansLead": "Choose the coaching plan that best fits your goals. Three options designed to provide structure, guidance, and a consistent approach to your progress.",
+      "contactTitle": "Train with Marco",
+      "contactBody": "Tell us what you want to achieve. Get in touch so we can explore which coaching option may be right for your goals."
+    }
+  }
+}
