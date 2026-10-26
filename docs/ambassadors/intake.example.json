@@ -1,0 +1,118 @@
+{
+  "slug": "andrea-ejemplo",
+  "identity": {
+    "givenName": "Andrea",
+    "familyName": "Ejemplo"
+  },
+  "photos": {
+    "hero": {
+      "file": "fotos/retrato.jpg",
+      "alt": { "es": "", "en": "" },
+      "focusMobile": "center top"
+    },
+    "standing": {
+      "file": "fotos/cuerpo-entero.jpg",
+      "alt": { "es": "", "en": "" }
+    }
+  },
+  "socials": [
+    { "platform": "Instagram", "handle": "@andrea.ejemplo", "url": "" }
+  ],
+  "basePlanId": "1-month",
+  "plans": [
+    {
+      "id": "1-month",
+      "months": 1,
+      "priceCOP": 200000,
+      "featured": false,
+      "copy": {
+        "es": {
+          "name": "1 mes",
+          "who": "Para empezar con un plan claro y conocer el método.",
+          "cadence": "4 semanas, una revisión al final",
+          "includesLead": "Incluye",
+          "includes": ["Plan de entrenamiento de 4 semanas", "Una revisión de progreso"],
+          "cta": "Pedir el plan de 1 mes"
+        },
+        "en": {
+          "name": "1 month",
+          "who": "To start with a clear plan and get to know the method.",
+          "cadence": "4 weeks, one review at the end",
+          "includesLead": "Includes",
+          "includes": ["A 4-week training plan", "One progress review"],
+          "cta": "Ask for the 1-month plan"
+        }
+      }
+    },
+    {
+      "id": "3-months",
+      "months": 3,
+      "priceCOP": 540000,
+      "featured": true,
+      "copy": {
+        "es": {
+          "name": "3 meses",
+          "who": "Para quien quiere constancia y ajustes durante una temporada completa.",
+          "cadence": "12 semanas, revisión cada 4",
+          "includesLead": "Todo lo del plan de 1 mes, más:",
+          "includes": ["Ajuste del plan cada 4 semanas", "Dudas por chat en días hábiles"],
+          "cta": "Pedir el plan de 3 meses"
+        },
+        "en": {
+          "name": "3 months",
+          "who": "For anyone who wants consistency and adjustments over a full season.",
+          "cadence": "12 weeks, a review every 4",
+          "includesLead": "Everything in the 1-month plan, plus:",
+          "includes": ["Plan adjusted every 4 weeks", "Questions by chat on business days"],
+          "cta": "Ask for the 3-month plan"
+        }
+      }
+    }
+  ],
+  "content": {
+    "es": {
+      "metaTitle": "Andrea Ejemplo · Embajadora de Allfit One",
+      "metaDescription": "Andrea Ejemplo, embajadora ficticia de Allfit One: perfil de ejemplo para documentar el sistema de landings.",
+      "role": "Entrenadora de running y fuerza",
+      "lead": "Entrena para correr mejor sin descuidar la fuerza. Un plan pensado para tu semana real.",
+      "heroFacts": ["Running y fuerza", "Presencial y en línea", "Planes por temporada"],
+      "statement": "Correr mejor empieza por entrenar con un plan.",
+      "aboutBody": [
+        "Andrea Ejemplo es un perfil ficticio que muestra cómo se completa cada campo de una landing de embajador.",
+        "En un perfil real, este espacio cuenta la trayectoria del embajador con información confirmada por él o ella."
+      ],
+      "methodTitle": "Cómo trabaja",
+      "method": [
+        { "title": "Conoce tu punto de partida", "body": "Revisa tu experiencia, tus objetivos y el tiempo disponible." },
+        { "title": "Diseña tu plan", "body": "Arma un programa realista para tu semana." },
+        { "title": "Ajusta en el camino", "body": "Revisa tu progreso y corrige el rumbo cuando haga falta." }
+      ],
+      "plansTitle": "Planes",
+      "plansLead": "Dos opciones de ejemplo para mostrar cómo se presentan los planes y el ahorro mensual.",
+      "contactTitle": "Entrena con Andrea",
+      "contactBody": "Cuéntanos qué quieres conseguir y te ponemos en contacto."
+    },
+    "en": {
+      "metaTitle": "Andrea Ejemplo · Allfit One ambassador",
+      "metaDescription": "Andrea Ejemplo, a fictional Allfit One ambassador: a sample profile that documents the landing system.",
+      "role": "Running and strength coach",
+      "lead": "Train to run better without neglecting strength. A plan built for your real week.",
+      "heroFacts": ["Running and strength", "In person and online", "Season-long plans"],
+      "statement": "Running better starts with training to a plan.",
+      "aboutBody": [
+        "Andrea Ejemplo is a fictional profile that shows how each field of an ambassador landing is filled in.",
+        "In a real profile, this space tells the ambassador's story with information they have confirmed."
+      ],
+      "methodTitle": "How she works",
+      "method": [
+        { "title": "Know your starting point", "body": "Review your experience, your goals, and the time you have." },
+        { "title": "Design your plan", "body": "Build a realistic program for your week." },
+        { "title": "Adjust along the way", "body": "Review your progress and correct course when needed." }
+      ],
+      "plansTitle": "Plans",
+      "plansLead": "Two sample options that show how plans and the monthly saving are presented.",
+      "contactTitle": "Train with Andrea",
+      "contactBody": "Tell us what you want to achieve and we will put you in touch."
+    }
+  }
+}

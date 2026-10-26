@@ -3,7 +3,8 @@
 **Uso:** el equipo la completa con aprobación del embajador. Es el insumo para llenar [`intake.template.json`](intake.template.json) y **no se publica**.
 
 - Lo que no se sepa se marca como **pendiente** y en el JSON queda vacío. Nunca se inventa.
-- La ficha diligenciada se guarda en `ambassador-intake/<slug>/`, que Git ignora, o fuera del repositorio.
+- La ficha diligenciada se guarda en `ambassador-intake/<slug>/`, que Git ignora, junto a `intake.json` y la carpeta `fotos/`. Ver el [paso 2 de la guía](README.md#2-dónde-guardar-las-fotos-y-la-información).
+- [`intake.example.json`](intake.example.json) muestra un intake completo con datos ficticios.
 
 Entre corchetes va el campo del JSON que corresponde a cada respuesta.
 
