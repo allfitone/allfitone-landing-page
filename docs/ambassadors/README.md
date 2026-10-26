@@ -199,7 +199,7 @@ El contrato completo está en `src/lib/ambassadors/schema.ts`. Ejemplo real: `sr
 | `identity.givenName`, `identity.familyName` | texto | sí | El apellido se muestra en outline. No se traducen. |
 | `photos.hero` | foto | sí | Vertical o cuadrada. Admite `focusMobile` e `insetDesktop`. |
 | `photos.standing` | foto | sí | Foto vertical de cuerpo entero. |
-| `socials[]` | `{ platform, handle, url? }` | no | Sin `url` (o con `url` vacío) la red no se muestra. La URL debe ser `https://`. |
+| `socials[]` | `{ platform, handle, url? }` | no | Se muestran en el cierre como enlaces secundarios junto al botón de email: el nombre de la red en texto (el Design System no usa logos de marca) y el `handle` visible, por ejemplo `@usuario`. Sin `url` (o con `url` vacío) la red no se muestra. La URL debe ser `https://`. |
 | `basePlanId` | texto | si hay planes | `id` del plan contra el que se calcula el ahorro. |
 | `plans[]` | plan | no | Sin planes, la sección no se muestra. |
 | `content.es`, `content.en` | copy | sí | Misma estructura en ambos idiomas, ítem por ítem. |

@@ -21,22 +21,31 @@ export function AmbassadorContact({ profile, language }: { profile: AmbassadorPr
           <p className="ambassador-contact-lead">
             {copy.contactBody}
           </p>
-          <a href={ambassadorContactHref(profile)} className={cn(buttonVariants({ size: "lg" }), "ambassador-contact-button")}>
-            {ambassadorPageContent[language].contact}
-            <FoundationIcon name="forward" data-icon="inline-end" decorative />
-          </a>
+          {/* Email stays the primary action; the ambassador's own profiles sit beside it as quiet
+              secondary links, or below it when the column is too narrow. */}
+          <div className="ambassador-contact-actions">
+            <a href={ambassadorContactHref(profile)} className={cn(buttonVariants({ size: "lg" }), "ambassador-contact-button")}>
+              {ambassadorPageContent[language].contact}
+              <FoundationIcon name="forward" data-icon="inline-end" decorative />
+            </a>
 
-          {linkedSocials.length > 0 && (
-            <ul className="ambassador-socials">
-              {linkedSocials.map((social) => (
-                <li key={social.platform}>
-                  <a className="inline-link" href={social.url} target="_blank" rel="noopener noreferrer">
-                    {social.platform}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+            {linkedSocials.length > 0 && (
+              <ul className="ambassador-socials">
+                {linkedSocials.map((social) => (
+                  <li key={social.platform}>
+                    {/* The Design System has no brand marks, so the platform is named in text. */}
+                    <a className="ambassador-social" href={social.url} target="_blank" rel="noopener noreferrer">
+                      <span className="ambassador-social-text">
+                        <span className="eyebrow ambassador-social-platform">{social.platform}</span>{" "}
+                        {social.handle && <span className="ambassador-social-handle">{social.handle}</span>}
+                      </span>
+                      <FoundationIcon name="external" size="sm" decorative />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </section>
