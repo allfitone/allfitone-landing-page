@@ -7,7 +7,7 @@ Complemento técnico de la [guía para el equipo](README.md). Describe cómo est
 | Perfil | URL | Estado | Notas |
 |---|---|---|---|
 | William Vergel | `/es/ambassadors/william`, `/en/ambassadors/william` | `published` | Propuesta privada: el copy y los precios son **muestras**. `/ambassadors/william` redirige con 308 a la versión en español. |
-| Marco Santiago Alfonso | `/es/ambassadors/marco`, `/en/ambassadors/marco` | `draft` | Solo visible en `next dev`. Aprobaciones comerciales y autorizaciones pendientes. |
+| Marco Santiago Alfonso | `/es/ambassadors/marco`, `/en/ambassadors/marco` | `published` | Aprobado por el equipo de Allfit One el 2026-10-26: cifras, planes y servicios, uso de las fotos, enlace a Instagram, nombre, URL y textos ES/EN. |
 
 Publicado no significa indexable. Todas las páginas de embajador son `noindex, nofollow`, quedan fuera del sitemap y no se enlazan desde el home. No existe un índice `/ambassadors`.
 
