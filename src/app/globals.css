@@ -356,6 +356,8 @@ section[id].fid-section {
 .ambassador-name { margin-top: var(--afo-space-4); font-family: var(--afo-font-family-display); font-size: clamp(4.5rem, 12vw, 12.5rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.065em; line-height: .68; text-transform: uppercase; }
 .ambassador-name span { display: block; }
 .ambassador-name-outline { width: max-content; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 74%, transparent); }
+/* Capital accents rise above the .68 line height; this room keeps them clear of the given name. */
+.ambassador-name-accented { margin-top: .26em; }
 .ambassador-hero-lead { max-width: 38ch; margin-top: var(--afo-space-6); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: 1.125rem; line-height: 1.56; }
 
 .ambassador-rail { display: grid; gap: 0; margin-top: clamp(2.5rem, 5vw, 4rem); border-top: 1px solid var(--afo-color-border-subtle); }

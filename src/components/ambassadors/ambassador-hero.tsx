@@ -1,13 +1,20 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import { cn } from "@allfitone/react/lib/utils";
 
 import type { AmbassadorProfile } from "@/lib/ambassadors/schema";
 import type { Language } from "@/lib/content";
+
+/** Accents and tildes decompose into combining marks, such as Á into A + U+0301. */
+const combiningMark = /[\u0300-\u036f]/;
 
 /** The page spends its boldness here: the name crosses in front of the portrait. */
 export function AmbassadorHero({ profile, language }: { profile: AmbassadorProfile; language: Language }) {
   const copy = profile.content[language];
   const { hero } = profile.photos;
+  // The stacked name's tight line height hides an accent on the family name behind the given
+  // name, so only those names get room for it; names without accents keep their exact layout.
+  const accentedFamilyName = combiningMark.test(profile.identity.familyName.normalize("NFD"));
   // Framing belongs to each photo, so it travels as CSS variables instead of per-person rules.
   const framing = {
     "--ambassador-hero-focus": hero.focusMobile,
@@ -35,7 +42,9 @@ export function AmbassadorHero({ profile, language }: { profile: AmbassadorProfi
           {/* The space between the block-level names keeps the accessible name two words. */}
           <h1 id="ambassador-name" className="ambassador-name">
             <span>{profile.identity.givenName}</span>{" "}
-            <span className="ambassador-name-outline">{profile.identity.familyName}</span>
+            <span className={cn("ambassador-name-outline", accentedFamilyName && "ambassador-name-accented")}>
+              {profile.identity.familyName}
+            </span>
           </h1>
           <p className="ambassador-hero-lead">
             {copy.lead}
