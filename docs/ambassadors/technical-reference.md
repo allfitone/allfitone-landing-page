@@ -8,6 +8,7 @@ Complemento técnico de la [guía para el equipo](README.md). Describe cómo est
 |---|---|---|---|
 | William Vergel | `/es/ambassadors/william`, `/en/ambassadors/william` | `published` | Propuesta privada: el copy y los precios son **muestras**. `/ambassadors/william` redirige con 308 a la versión en español. |
 | Marco Santiago Alfonso | `/es/ambassadors/marco`, `/en/ambassadors/marco` | `published` | Aprobado por el equipo de Allfit One el 2026-10-26: cifras, planes y servicios, uso de las fotos, enlace a Instagram, nombre, URL y textos ES/EN. |
+| Kevin Velásquez | `/es/ambassadors/kevin`, `/en/ambassadors/kevin` | `published` | Aprobado por el equipo de Allfit One el 2026-10-28: uso de las fotos, nombre y URL, enlace a Instagram, planes y servicios, y textos ES/EN. TikTok sigue sin confirmar y oculto. |
 
 Publicado no significa indexable. Todas las páginas de embajador son `noindex, nofollow`, quedan fuera del sitemap y no se enlazan desde el home. No existe un índice `/ambassadors`.
 
@@ -185,6 +186,7 @@ Los scripts corren con el soporte de TypeScript de Node 24 y no agregan dependen
 - **Copy del perfil fuera de `content.ts`.** `content.ts` conserva el copy de interfaz, incluido el común de embajadores.
 - **Publicación segura en el build.** Los borradores solo existen en `next dev`. No hay variable de entorno para saltarse la regla.
 - **Hero horizontal prohibido.** Es una restricción de datos comprobada visualmente, no una variante de diseño.
+- **Apellidos con tilde o Ñ.** El interlineado comprimido del nombre ocultaba el acento detrás del nombre de pila. Si el apellido tiene una marca diacrítica, `ambassador-hero.tsx` agrega la clase `ambassador-name-accented` (`.26em` de espacio superior); los demás nombres conservan su composición exacta.
 - **Redes sin logos de marca.** El Design System no los usa como iconos de interfaz; la red se nombra en texto, junto al icono semántico `external`.
 - **URL de William intacta.** Sus fotos siguen en `public/ambassadors/william-vergel-*.jpg`; los perfiles nuevos usan `public/ambassadors/<slug>/`.
 
