@@ -1,6 +1,6 @@
 # Allfit One landing page
 
-Marketing site for the Allfit One ecosystem, with Spanish as the default language under `/es` and English as the alternate language under `/en`; `/` redirects to `/es`. The public product story connects **Allfit Space** and **Allfit Studio** while keeping Space marked as coming soon.
+Marketing site for the Allfit One ecosystem, with Spanish as the default language under `/es` and English as the alternate language under `/en`; `/` redirects to `/es`. The public product story connects **Allfit Space** and **Allfit Studio**, and the hero links each one to its own landing (`space.allfit.one`, `studio.allfit.one`) in the page language.
 
 ## Stack
 

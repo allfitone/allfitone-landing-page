@@ -41,7 +41,8 @@ export const content = {
     studioAudience: "Para profesionales y organizaciones",
     studioDescription:
       "Gestiona personas, entrenamiento, progreso y tu operación desde un solo panel.",
-    comingSoon: "Próximamente",
+    spaceLink: "Conoce Allfit Space",
+    studioLink: "Conoce Allfit Studio",
 
     phaseLabel: "Fase actual",
 
@@ -243,7 +244,8 @@ export const content = {
     appDescription: "Train on your own or with a professional and keep your progress with you.",
     studioAudience: "For professionals and organizations",
     studioDescription: "Manage people, training, progress and your operation from one dashboard.",
-    comingSoon: "Coming soon",
+    spaceLink: "Explore Allfit Space",
+    studioLink: "Explore Allfit Studio",
 
     phaseLabel: "Current phase",
 
