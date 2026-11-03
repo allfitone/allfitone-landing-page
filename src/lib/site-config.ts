@@ -26,7 +26,17 @@ export const siteConfig = {
     tiktok: "https://www.tiktok.com/@allfitone",
     linkedin: "https://www.linkedin.com/company/allfitone/",
   },
+  /** Each product's own landing. Both answer under `/es` and `/en`, like this site. */
+  products: {
+    space: "https://space.allfit.one",
+    studio: "https://studio.allfit.one",
+  },
 } as const;
+
+/** A product's landing in the given language, e.g. `https://studio.allfit.one/en`. */
+export function productSiteUrl(product: keyof typeof siteConfig.products, language: Language) {
+  return `${siteConfig.products[product]}/${language}`;
+}
 
 const shareImageAlt = {
   es: "Allfit One — All the fitness in one place. Allfit Space y Allfit Studio, dos productos conectados.",

@@ -26,7 +26,7 @@ import { FitnessIdCard } from "@/components/fitness-id-card";
 import { LanguageSwitch } from "@/components/language-switch";
 import { PhoneMockup, StudioDashboardMockup } from "@/components/product-mockups";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
-import { localizedPath, siteConfig } from "@/lib/site-config";
+import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
@@ -447,10 +447,10 @@ export function LandingPage({ language }: { language: Language }) {
                   <ProductWordmark product="space" surface="dark" className="product-definition-wordmark" aria-hidden="true" />
                 </h2>
                 <p className="mt-5 max-w-md text-sm leading-6 text-white/64">{copy.appDescription}</p>
-                <div className="mt-8 flex items-center gap-3">
-                  <span className="h-px w-8 bg-bolt" aria-hidden="true" />
-                  <span className="eyebrow text-bolt">{copy.comingSoon}</span>
-                </div>
+                <a href={productSiteUrl("space", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
+                  {copy.spaceLink}
+                  <FoundationIcon name="forward" data-icon="inline-end" decorative />
+                </a>
               </article>
 
               <article className="product-definition product-definition-studio">
@@ -459,10 +459,10 @@ export function LandingPage({ language }: { language: Language }) {
                   <ProductWordmark product="studio" surface="dark" className="product-definition-wordmark" aria-hidden="true" />
                 </h2>
                 <p className="mt-5 max-w-md text-sm leading-6 text-white/64">{copy.studioDescription}</p>
-                <div className="mt-8 flex items-center gap-3">
-                  <span className="h-px w-8 bg-bolt" aria-hidden="true" />
-                  <span className="eyebrow text-bolt">{copy.comingSoon}</span>
-                </div>
+                <a href={productSiteUrl("studio", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
+                  {copy.studioLink}
+                  <FoundationIcon name="forward" data-icon="inline-end" decorative />
+                </a>
               </article>
             </div>
           </div>

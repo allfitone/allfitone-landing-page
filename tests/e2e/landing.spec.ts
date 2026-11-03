@@ -33,6 +33,17 @@ test("answers unknown languages and paths with a 404", async ({ request }) => {
   }
 });
 
+test("links each product to its own landing in the page language", async ({ page }) => {
+  for (const [language, space, studio] of [
+    ["es", "Conoce Allfit Space", "Conoce Allfit Studio"],
+    ["en", "Explore Allfit Space", "Explore Allfit Studio"],
+  ] as const) {
+    await page.goto(`/${language}`);
+    await expect(page.getByRole("link", { name: space })).toHaveAttribute("href", `https://space.allfit.one/${language}`);
+    await expect(page.getByRole("link", { name: studio })).toHaveAttribute("href", `https://studio.allfit.one/${language}`);
+  }
+});
+
 test("mobile Sheet traps focus, closes predictably and restores the trigger", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto("/");
