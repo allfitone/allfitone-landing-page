@@ -122,6 +122,34 @@ test("has a logical heading structure and no serious axe violations", async ({ p
   expect(seriousViolations).toEqual([]);
 });
 
+test("describes each product with the identity and URL of its own landing", async ({ request }) => {
+  for (const language of ["es", "en"] as const) {
+    const html = await (await request.get(`/${language}`)).text();
+    const graph = [...html.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g)].flatMap(
+      ([, json]) => JSON.parse(json)["@graph"] ?? [],
+    ) as Array<Record<string, unknown>>;
+    const entity = (id: string) => graph.find((node) => node["@id"] === id);
+
+    // Same @id as each product's landing, so search engines merge both descriptions into one product.
+    expect(entity("https://space.allfit.one/#app")).toMatchObject({
+      "@type": "MobileApplication",
+      name: "Allfit Space",
+      url: `https://space.allfit.one/${language}`,
+    });
+    const studio = entity("https://studio.allfit.one/#app");
+    expect(studio).toMatchObject({
+      "@type": "WebApplication",
+      name: "Allfit Studio",
+      url: `https://studio.allfit.one/${language}`,
+    });
+    // The page lists the schedule under "later", so the structured data must not sell it as current.
+    expect(String(studio?.description)).not.toMatch(/agenda|schedule/i);
+    expect(graph.filter((node) => /^Allfit (Space|Studio)$/.test(String(node.name))).map((node) => node.url)).not.toContainEqual(
+      expect.stringContaining("www.allfit.one"),
+    );
+  }
+});
+
 test("publishes Studio metadata and keeps the legacy anchor compatible", async ({ page, request }) => {
   const response = await request.get("/es");
   const html = await response.text();
