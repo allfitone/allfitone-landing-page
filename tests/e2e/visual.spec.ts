@@ -31,6 +31,9 @@ test("@visual mobile menu open", async ({ page }) => {
   await page.getByRole("button", { name: "Abrir menú" }).click();
   await expect(page.getByRole("dialog", { name: "Navegación principal" })).toBeVisible();
   await page.getByRole("button", { name: "Cerrar menú" }).blur();
+  // The click leaves the pointer over the close button, and Chrome applies that hover
+  // whenever its next frame lands; rest it on an empty part of the sheet instead.
+  await page.mouse.move(160, 560);
   await expect(page).toHaveScreenshot("mobile-menu-open-320x800.png");
 });
 
