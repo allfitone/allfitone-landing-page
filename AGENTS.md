@@ -75,6 +75,15 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Preserve the custom “1” mark and its geometry. Do not replace it with a conventional numeral or alter its proportions casually.
 - Favor disciplined typography, spacing, alignment, and editorial structure. Avoid unnecessary badges, chips, floating metric cards, decorative gradients, excessive rounded containers, and scattered animations.
 - Spend visual emphasis in one place per section. Remove decoration that competes with the content hierarchy.
+- Homepage motion shares the vocabulary of the Space and Studio landings and is spent sparingly, one moment per section:
+  - the hero enters once, on load, in pure CSS;
+  - each section title rises line by line out of its masks (`RevealTitle`) the first time it scrolls into view;
+  - each section then reveals one main object: the product stage (`data-reveal="stage"`), the ledger, a card that uncovers (`data-reveal="card"`), or one staggered wave (`--i`) of the Studio columns or the status rows;
+  - in the ecosystem panel the two products then connect.
+- Leads, links, labels, list items and rows inside objects stay still. Do not add a reveal to every block: a new one replaces a section's moment rather than adding to it.
+- `src/components/landing-motion.ts` arms the reveals (`[data-motion='on']`) and drives the scroll progress bar and the pointer light (`data-spotlight`, on the Studio columns only). The CSS lives in the Motion block of `globals.css`.
+- Hidden states stay inside `prefers-reduced-motion: no-preference`, so the page reads whole without JavaScript and reduced motion keeps every final state. Content already on screen when the reveals arm stays shown.
+- Final states must match the static design pixel for pixel, so the visual snapshots never depend on motion.
 - Material UI changes must be checked visually at desktop, tablet, and mobile widths. Use the `frontend-design` skill when it is available.
 
 ## Component and implementation rules
