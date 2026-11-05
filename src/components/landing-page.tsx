@@ -23,8 +23,10 @@ import { FoundationIcon, type IconName } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
 import { FitnessIdCard } from "@/components/fitness-id-card";
+import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
 import { PhoneMockup, StudioDashboardMockup } from "@/components/product-mockups";
+import { RevealTitle } from "@/components/reveal-title";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
@@ -37,7 +39,7 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
         <div className="col-span-12 lg:col-span-8">
-          <h2 className="section-title">{copy.problemTitle}</h2>
+          <RevealTitle className="section-title">{copy.problemTitle}</RevealTitle>
           <p className="section-lead mt-8 text-white/70">{copy.problemCopy}</p>
         </div>
 
@@ -46,7 +48,7 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
             list, opposite outcome. */}
         <div className="col-span-12 mt-16 md:mt-24">
           <p className="ledger-lead">{copy.problemLedgerLead}</p>
-          <div className="ledger">
+          <div className="ledger" data-reveal>
             <div className="ledger-keep">
               <p className="ledger-label">{copy.problemKeepLabel}</p>
               <p className="ledger-keep-value">{copy.problemKeepValue}</p>
@@ -73,7 +75,7 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
       <BrandLogo variant="cyan" className="fid-section-mark" aria-hidden="true" />
       <div className="site-grid relative z-10">
         <div className="col-span-12 lg:col-span-8">
-          <h2 className="section-title">{copy.fitnessIdTitle}</h2>
+          <RevealTitle className="section-title">{copy.fitnessIdTitle}</RevealTitle>
         </div>
 
         <div className="col-span-12 mt-16 md:mt-20 lg:col-span-5 lg:mt-24">
@@ -115,7 +117,7 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
           </div>
         </div>
         <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
-          <h2 className="section-title text-void">{copy.appSectionTitle}</h2>
+          <RevealTitle className="section-title text-void">{copy.appSectionTitle}</RevealTitle>
           <p className="section-lead mt-8 text-void/70">{copy.appSectionCopy}</p>
           <a href={CONTACT_HREF} className="inline-link inline-link-on-light mt-6">
             {copy.contact}
@@ -136,7 +138,7 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
           ))}
         </div>
 
-        <div className="col-span-12 mt-20 overflow-hidden rounded-2xl bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
+        <div data-reveal="card" className="space-areas col-span-12 mt-20 overflow-hidden rounded-2xl bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
           <div className="flex flex-col gap-3 border-b border-white/14 pb-7 md:flex-row md:items-end md:justify-between">
             <h3 className="font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">{copy.appAreasLabel}</h3>
             <p className="eyebrow text-bolt">{copy.appVision}</p>
@@ -170,7 +172,7 @@ function StudioSection({ copy }: { copy: LocalizedContent }) {
           </div>
         </div>
         <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
-          <h2 className="section-title">{copy.studioSectionTitle}</h2>
+          <RevealTitle className="section-title">{copy.studioSectionTitle}</RevealTitle>
           <p className="section-lead mt-8 text-white/70">{copy.studioSectionCopy}</p>
           <a href={CONTACT_HREF} className="inline-link mt-6">
             {copy.contact}
@@ -182,7 +184,7 @@ function StudioSection({ copy }: { copy: LocalizedContent }) {
           <p className="eyebrow text-white/70">{copy.studioDifferentiatorsLabel}</p>
           <div className="studio-difference-grid">
             {copy.studioDifferentiators.map(([title, description], index) => (
-              <article key={title} className="studio-difference">
+              <article key={title} className="studio-difference" data-reveal data-spotlight style={stagger(index)}>
                 <span className="studio-difference-index">{String(index + 1).padStart(2, "0")}</span>
                 <h3 className="studio-difference-title">{title}</h3>
                 <p className="mt-4 max-w-md text-sm leading-6 text-white/64">{description}</p>
@@ -217,7 +219,7 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
     <section id="ecosystem" className="bg-bolt text-void">
       <div className="site-grid py-24 md:py-32">
         <div className="col-span-12 md:col-span-8 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
-          <h2 className="section-title text-void">{copy.ecosystemTitle}</h2>
+          <RevealTitle className="section-title text-void">{copy.ecosystemTitle}</RevealTitle>
           <div className="mt-8 lg:mt-0">
             <p className="section-lead text-void/72">{copy.ecosystemCopy}</p>
             <div className="ecosystem-relation">
@@ -233,7 +235,7 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
           </div>
         </div>
 
-        <div className="ecosystem-panel col-span-12 mt-16 md:mt-20">
+        <div className="ecosystem-panel col-span-12 mt-16 md:mt-20" data-reveal="card">
           <div className="ecosystem-grid">
             <article className="ecosystem-product">
               <p className="ecosystem-product-head">
@@ -249,15 +251,17 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
             <div className="ecosystem-connect">
               <span className="ecosystem-node" aria-hidden="true">
                 <svg className="ecosystem-node-svg" viewBox="0 0 260 64" fill="none">
-                  <line x1="26" y1="32" x2="104" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
-                  <line x1="156" y1="32" x2="234" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+                  <line className="ecosystem-node-line" pathLength={1} x1="26" y1="32" x2="104" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+                  <line className="ecosystem-node-line" pathLength={1} x1="234" y1="32" x2="156" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
                   <circle cx="26" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
                   <circle cx="26" cy="32" r="3.5" fill="currentColor" />
                   <circle cx="234" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
                   <circle cx="234" cy="32" r="3.5" fill="currentColor" />
-                  <circle cx="130" cy="32" r="22" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
-                  <circle cx="130" cy="32" r="13" stroke="currentColor" strokeWidth="1.5" />
-                  <circle cx="130" cy="32" r="5.5" fill="currentColor" />
+                  <g className="ecosystem-node-core">
+                    <circle cx="130" cy="32" r="22" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+                    <circle cx="130" cy="32" r="13" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="130" cy="32" r="5.5" fill="currentColor" />
+                  </g>
                 </svg>
               </span>
               <p className="ecosystem-connect-title">{copy.ecosystem.connect.title}</p>
@@ -276,10 +280,14 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
             </article>
           </div>
 
-          <p className="ecosystem-statement">
-            <span className="ecosystem-statement-line">{copy.ecosystem.closingLead}</span>
+          <p className="ecosystem-statement" data-reveal="mask">
             <span className="ecosystem-statement-line">
-              <span className="ecosystem-statement-accent">{copy.ecosystem.closingAccent}</span> {copy.ecosystem.closingRest}
+              <span>{copy.ecosystem.closingLead}</span>
+            </span>
+            <span className="ecosystem-statement-line">
+              <span>
+                <span className="ecosystem-statement-accent">{copy.ecosystem.closingAccent}</span> {copy.ecosystem.closingRest}
+              </span>
             </span>
           </p>
         </div>
@@ -293,13 +301,13 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
     <section id="status" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
         <div className="col-span-12 lg:col-span-8">
-          <h2 className="section-title">{copy.statusTitle}</h2>
+          <RevealTitle className="section-title">{copy.statusTitle}</RevealTitle>
           <p className="section-lead mt-8 text-white/70">{copy.statusCopy}</p>
         </div>
 
         <div className="col-span-12 mt-16 border-t border-white/14 md:mt-24">
-          {copy.statusRows.map(([name, state, description]) => (
-            <article key={name} className="status-row">
+          {copy.statusRows.map(([name, state, description], index) => (
+            <article key={name} className="status-row" data-reveal style={stagger(index)}>
               <h3 className="status-row-name">{name}</h3>
               <p className="status-row-state">
                 <span className="status-dot" aria-hidden="true" />
@@ -326,6 +334,7 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
 export function LandingPage({ language }: { language: Language }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const copy = content[language];
+  useLandingMotion(language);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -337,7 +346,8 @@ export function LandingPage({ language }: { language: Language }) {
   ] as const;
 
   return (
-    <main className="min-h-screen overflow-x-clip bg-void text-white">
+    <main data-landing className="min-h-screen overflow-x-clip bg-void text-white">
+      <div className="scroll-progress" aria-hidden="true" />
       <section id="home" className="hero relative overflow-hidden">
         <nav
           className="site-grid fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] -translate-x-1/2 items-center rounded-2xl bg-void/86 py-3.5 shadow-[0_18px_55px_rgba(3,7,19,.24)] backdrop-blur-xl"
@@ -413,15 +423,17 @@ export function LandingPage({ language }: { language: Language }) {
         <div className="site-grid relative z-20 pb-24 pt-32 md:pb-28 md:pt-40 lg:pt-36">
           <div className="col-span-12 mt-6 md:mt-8">
             <h1 className="hero-title-new" aria-label={copy.tagline}>
-              <span className="block">ALL THE</span>
-              <span className="hero-fitness block">FITNESS</span>
-              <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
+              <span className="hero-line"><span className="block">ALL THE</span></span>
+              <span className="hero-line"><span className="hero-fitness block">FITNESS</span></span>
+              <span className="hero-line">
+                <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
+              </span>
             </h1>
           </div>
 
           <div className="col-span-12 mt-12 md:mt-14 lg:col-span-7">
-            <p className="hero-lead">{copy.heroLead}</p>
-            <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
+            <p className="hero-lead hero-enter">{copy.heroLead}</p>
+            <div style={stagger(1)} className="hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
               <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
                 {copy.contact}
                 <FoundationIcon name="forward" data-icon="inline-end" decorative />
@@ -431,7 +443,7 @@ export function LandingPage({ language }: { language: Language }) {
           </div>
 
           <div className="product-stage col-span-12 mt-20 md:mt-28 lg:mt-32">
-            <div className="product-stage-visual">
+            <div className="product-stage-visual" data-reveal="stage">
               <div className="app-visual-anchor">
                 <PhoneMockup copy={copy} />
               </div>

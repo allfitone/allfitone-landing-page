@@ -5,7 +5,7 @@ import type { LocalizedContent } from "@/lib/content";
 
 export function FitnessIdCard({ copy }: { copy: LocalizedContent }) {
   return (
-    <figure className="fid-card">
+    <figure className="fid-card" data-reveal="card">
       <span className="fid-card-band" aria-hidden="true" />
 
       <div className="fid-card-head">

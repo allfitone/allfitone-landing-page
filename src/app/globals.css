@@ -594,6 +594,73 @@ section[id].fid-section {
   section[id].fid-section { clip-path: none; margin-block: 0; }
 }
 
+/* ---------------------------------------------------------------------------
+   Motion: the vocabulary of the Space and Studio landings, spent sparingly
+   The hero enters once, on load: the title rises out of its masks line by line,
+   then the lead and the action lift in. Below it, each section has a single
+   moment, the first time it scrolls into view: its title rises line by line and
+   its main object arrives (the product stage, the ledger, a card that uncovers,
+   the Studio columns, the status rows). In the ecosystem the two products then
+   connect. A light follows the pointer over the Studio columns and a bar along
+   the top follows the scroll. Everything else stays still. Reveals are armed by
+   `[data-motion='on']` (src/components/landing-motion.ts), so without
+   JavaScript the page is whole, and reduced motion keeps every final state.
+--------------------------------------------------------------------------- */
+
+:root { --landing-ease: cubic-bezier(0.16, 1, 0.3, 1); }
+
+.scroll-progress { position: fixed; inset: 0 0 auto; z-index: 60; height: 2px; background: var(--afo-color-brand-primary); transform-origin: 0 50%; transform: scaleX(var(--progress, 0)); pointer-events: none; }
+
+/* Masks clip only below the line, so accents and the outlined FITNESS keep their edges. */
+.hero-line, .ecosystem-statement-line { display: block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
+.hero-line > span, .ecosystem-statement-line > span { display: block; }
+/* Each mask is its own stacking context, so the outlined FITNESS keeps drawing over the line below, as it does unmasked. */
+.hero-line { position: relative; }
+.hero-line:has(.hero-fitness) { z-index: 1; }
+.reveal-word { display: inline-block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
+.reveal-word > span { display: inline-block; }
+
+[data-spotlight] { position: relative; isolation: isolate; }
+[data-spotlight]::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--afo-color-brand-primary) 12%, transparent), transparent 46%); opacity: 0; pointer-events: none; transition: opacity .5s var(--landing-ease); }
+[data-spotlight]:hover::before { opacity: 1; }
+
+.fid-card { --reveal-radius: var(--afo-radius-panel); }
+.space-areas { --reveal-radius: var(--radius-2xl, 1rem); }
+.ecosystem-panel { --reveal-radius: var(--afo-radius-xl); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Backwards fill only: a finished entrance stops applying, so the text returns to its normal rendering. */
+  .hero-line > span { animation: landing-rise 1.1s var(--landing-ease) backwards; }
+  .hero-line:nth-child(2) > span { animation-delay: 110ms; }
+  .hero-line:nth-child(3) > span { animation-delay: 220ms; }
+  .hero-enter { animation: landing-lift 1s var(--landing-ease) backwards; animation-delay: calc(520ms + var(--i, 0) * 120ms); }
+
+  /* Hidden states arm instantly; the transitions live on the revealed states. */
+  [data-landing][data-motion='on'] [data-reveal] { opacity: 0; transform: translate3d(0, 36px, 0); }
+  [data-landing][data-motion='on'] :is([data-reveal='mask'], [data-reveal='card'], [data-reveal='stage']) { opacity: 1; transform: none; }
+  [data-landing][data-motion='on'] [data-reveal='mask'] :is(.reveal-word, .ecosystem-statement-line) > span { transform: translate3d(0, 115%, 0); }
+  [data-landing][data-motion='on'] [data-reveal='card'] { clip-path: inset(18% 0 0 0 round var(--reveal-radius, 0)); }
+  /* The product stage arrives as one object: the dashboard, then the phone in front of it. */
+  [data-landing][data-motion='on'] [data-reveal='stage'] :is(.studio-visual-anchor, .app-visual-anchor) { opacity: 0; transform: translate3d(0, 48px, 0); }
+  [data-landing][data-motion='on'] [data-reveal='stage'] .app-visual-anchor { transform: translate3d(0, 88px, 0); }
+
+  [data-landing][data-motion='on'] [data-reveal].is-in { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.1s var(--landing-ease); transition-delay: calc(var(--i, 0) * 90ms); }
+  [data-landing][data-motion='on'] [data-reveal='mask'].is-in :is(.reveal-word, .ecosystem-statement-line) > span { transform: none; transition: transform 1.1s var(--landing-ease) calc(var(--l, 0) * 110ms); }
+  [data-landing][data-motion='on'] [data-reveal='mask'].is-in .ecosystem-statement-line + .ecosystem-statement-line > span { transition-delay: 110ms; }
+  [data-landing][data-motion='on'] [data-reveal='card'].is-in { clip-path: inset(0 0 0 0 round var(--reveal-radius, 0)); transition: clip-path 1.2s var(--landing-ease); }
+  [data-landing][data-motion='on'] [data-reveal='stage'].is-in :is(.studio-visual-anchor, .app-visual-anchor) { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.2s var(--landing-ease); }
+  [data-landing][data-motion='on'] [data-reveal='stage'].is-in .app-visual-anchor { transition-delay: 160ms; }
+
+  /* Once the ecosystem panel has uncovered, each line draws toward the centre and the core lights up. */
+  [data-landing][data-motion='on'] .ecosystem-node-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  [data-landing][data-motion='on'] .ecosystem-node-core { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; }
+  [data-landing][data-motion='on'] .is-in .ecosystem-node-line { stroke-dashoffset: 0; transition: stroke-dashoffset .8s var(--landing-ease) 450ms; }
+  [data-landing][data-motion='on'] .is-in .ecosystem-node-core { opacity: 1; transform: none; transition: opacity .6s var(--landing-ease) 950ms, transform .6s var(--landing-ease) 950ms; }
+}
+
+@keyframes landing-rise { from { transform: translate3d(0, 135%, 0); } }
+@keyframes landing-lift { from { opacity: 0; transform: translate3d(0, 24px, 0); } }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
