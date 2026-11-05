@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/static/serve.mts",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "sync:brand": "allfitone-brand-assets ./public/brand/reusable",
