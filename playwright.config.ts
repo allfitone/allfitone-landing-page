@@ -29,7 +29,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run start -- --hostname 127.0.0.1 --port ${port}`,
+    // The exported files, answered with production's edge rules.
+    command: `npm run start -- --port ${port}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

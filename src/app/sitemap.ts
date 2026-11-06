@@ -3,6 +3,9 @@ import type { MetadataRoute } from "next";
 import { languages } from "@/lib/content";
 import { localizedPath, shareImage, siteConfig } from "@/lib/site-config";
 
+// Rendered once at build time: the site is a static export.
+export const dynamic = "force-static";
+
 const pages = [
   { path: "", lastModified: new Date("2026-10-20"), changeFrequency: "monthly", priority: 1, image: true },
   { path: "/privacy/analytics", lastModified: new Date("2026-10-20"), changeFrequency: "yearly", priority: 0.4, image: false },
