@@ -308,60 +308,100 @@ section[id].fid-section {
 
 /* ---------------------------------------------------------------------------
    Analytics privacy notice
+   A document, not a landing: one display title, then hierarchy, hairlines and a
+   readable measure. From 1024px the contents sit beside the text, stay put while it
+   scrolls and mark the section being read; below that they read as a list under the
+   title. No section numbers, no label above a heading, no ghost type behind the title.
 --------------------------------------------------------------------------- */
 
-.privacy-page { min-height: 100dvh; overflow: clip; background: var(--afo-color-ink-void); color: var(--afo-color-neutral-chalk); }
-.privacy-shell { width: min(100%, 1500px); margin-inline: auto; padding-inline: var(--afo-space-5); }
+.privacy-page { --privacy-header-height: 72px; --privacy-intro-top: clamp(3.5rem, 9vw, 6.5rem); min-height: 100dvh; background: var(--afo-color-ink-void); color: var(--afo-color-neutral-chalk); }
+.privacy-shell { width: min(100%, 69rem); margin-inline: auto; padding-inline: var(--afo-space-5); }
 .privacy-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--afo-color-border-subtle); background: color-mix(in srgb, var(--afo-color-ink-void) 88%, transparent); backdrop-filter: blur(24px); }
-.privacy-header-inner { display: flex; min-height: 72px; align-items: center; justify-content: space-between; gap: var(--afo-space-6); }
+.privacy-header-inner { display: flex; min-height: var(--privacy-header-height); align-items: center; justify-content: space-between; gap: var(--afo-space-6); }
 .privacy-brand { display: flex; min-height: var(--afo-space-touch-target); align-items: center; }
 .privacy-header .locale-toggle-item { min-width: var(--afo-space-touch-target); min-height: var(--afo-space-touch-target); }
-.privacy-layout { display: grid; }
-.privacy-rail { display: none; }
-.privacy-article { min-width: 0; }
-.privacy-hero { position: relative; padding-block: clamp(5rem, 11vw, 10rem); }
-.privacy-hero::after { content: "analytics-v1"; position: absolute; right: -2.5rem; bottom: 1rem; color: color-mix(in srgb, var(--afo-color-brand-primary) 4%, transparent); font-family: var(--afo-font-family-display); font-size: clamp(4rem, 17vw, 13rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.04em; line-height: 1; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
-.privacy-hero > * { position: relative; z-index: 1; }
-.privacy-kicker, .privacy-rail-label { font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: var(--landing-tracking-label); line-height: 1.4; text-transform: uppercase; color: var(--afo-color-text-accent); }
-.privacy-title { max-width: 10ch; margin-top: var(--afo-space-6); font-family: var(--afo-font-family-display); font-size: clamp(4rem, 13vw, 10rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.055em; line-height: .76; text-transform: uppercase; text-wrap: balance; }
-.privacy-lead { max-width: 54ch; margin-top: var(--afo-space-8); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 74%, transparent); font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.75; }
-.privacy-version { display: flex; width: fit-content; min-height: var(--afo-space-touch-target); align-items: center; gap: var(--afo-space-5); margin-top: var(--afo-space-10); border-block: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-1); font-size: var(--landing-type-label); letter-spacing: .15em; text-transform: uppercase; }
-.privacy-version span { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); }
-.privacy-version strong { color: var(--afo-color-text-accent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
-.privacy-section { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--afo-space-3); border-top: 1px solid var(--afo-color-border-subtle); padding-block: clamp(4rem, 9vw, 8rem); scroll-margin-top: 72px; }
-.privacy-section-number { padding-top: .6rem; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 58%, transparent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: var(--landing-type-label); }
-.privacy-section h2 { max-width: 12ch; font-family: var(--afo-font-family-display); font-size: clamp(2.8rem, 8vw, 6.25rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: -.04em; line-height: .84; text-transform: uppercase; text-wrap: balance; }
-.privacy-section h3 { font-family: var(--afo-font-family-display); font-size: 1.5rem; font-weight: var(--afo-font-weight-semibold); line-height: 1; text-transform: uppercase; }
-.privacy-body { max-width: 62ch; margin-top: var(--afo-space-8); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 68%, transparent); font-size: .9375rem; line-height: 1.8; }
-.privacy-boundary { display: grid; margin-top: var(--afo-space-12); border-block: 1px solid var(--afo-color-border-subtle); }
-.privacy-boundary-column { padding-block: var(--afo-space-8); }
+
+.privacy-layout { display: grid; grid-template-areas: "intro" "contents" "document"; }
+.privacy-intro { grid-area: intro; max-width: 46rem; padding-block: var(--privacy-intro-top) var(--afo-space-10); }
+.privacy-title { font-family: var(--afo-font-family-display); font-size: clamp(2.75rem, 5.2vw, 4.5rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.035em; line-height: .92; text-transform: uppercase; }
+.privacy-lead { max-width: 58ch; margin-top: var(--afo-space-6); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 80%, transparent); font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); line-height: 1.65; text-wrap: pretty; }
+.privacy-effective { margin-top: var(--afo-space-6); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: .875rem; line-height: 1.5; }
+.privacy-effective time { color: var(--afo-color-neutral-chalk); font-weight: var(--afo-font-weight-semibold); }
+
+.privacy-contents { grid-area: contents; }
+.privacy-contents-inner { border-top: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-6); }
+.privacy-contents-label { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: .8125rem; font-weight: var(--afo-font-weight-semibold); line-height: 1.4; }
+.privacy-contents-list { margin-top: var(--afo-space-3); border-left: 1px solid var(--afo-color-border-subtle); }
+.privacy-contents-link { display: flex; min-height: var(--afo-space-touch-target); align-items: center; margin-left: -1px; border-left: 1px solid transparent; padding-left: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 66%, transparent); font-size: .9375rem; line-height: 1.35; transition: color var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing), border-color var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing); }
+.privacy-contents-link:hover { color: var(--afo-color-neutral-chalk); }
+.privacy-contents-link[aria-current="true"] { border-left-color: var(--afo-color-brand-primary); color: var(--afo-color-neutral-chalk); font-weight: var(--afo-font-weight-semibold); }
+
+.privacy-document { grid-area: document; min-width: 0; max-width: 46rem; }
+.privacy-section, .privacy-contact { border-top: 1px solid var(--afo-color-border-subtle); padding-block: clamp(2.75rem, 5vw, 4rem); scroll-margin-top: var(--privacy-header-height); }
+.privacy-section h2, .privacy-contact h2 { font-family: var(--afo-font-family-display); font-size: clamp(1.875rem, 3.4vw, 2.5rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: -.02em; line-height: 1; text-transform: uppercase; text-wrap: balance; }
+.privacy-document h3 { color: var(--afo-color-neutral-chalk); font-size: 1rem; font-weight: var(--afo-font-weight-bold); line-height: 1.4; }
+.privacy-text { max-width: 58ch; margin-top: var(--afo-space-5); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); font-size: 1rem; line-height: 1.75; text-wrap: pretty; }
+
+/* The data boundary reads as one two-column table: what may be measured, what never is. */
+.privacy-boundary { display: grid; margin-top: var(--afo-space-8); overflow: hidden; border: 1px solid var(--afo-color-border-subtle); border-radius: var(--afo-radius-md); }
 .privacy-boundary-column + .privacy-boundary-column { border-top: 1px solid var(--afo-color-border-subtle); }
-.privacy-boundary-column h3 { color: var(--afo-color-text-accent); }
-.privacy-boundary-prohibited h3 { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 64%, transparent); }
-.privacy-boundary-column ul { margin-top: var(--afo-space-6); }
-.privacy-boundary-column li { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: var(--afo-space-3); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 9%, transparent); padding-block: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 68%, transparent); font-size: .8125rem; line-height: 1.65; }
-.privacy-boundary-allowed li > svg { margin-top: .2rem; color: var(--afo-color-text-accent); }
-.privacy-prohibited-mark { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 45%, transparent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 1.1rem; line-height: 1; }
-.privacy-note { margin-top: var(--afo-space-10); border-left: 2px solid var(--afo-color-brand-primary); padding-left: var(--afo-space-5); }
-.privacy-note p:last-child { max-width: 58ch; margin-top: var(--afo-space-3); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 68%, transparent); font-size: .8125rem; line-height: 1.7; }
-.privacy-note-label { font-family: var(--afo-font-family-display); font-size: 1.35rem; font-weight: var(--afo-font-weight-semibold); text-transform: uppercase; }
-.privacy-provider-boundary { display: flex; width: fit-content; min-height: var(--afo-space-touch-target); align-items: center; gap: var(--afo-space-3); margin-top: var(--afo-space-8); border: 1px solid var(--afo-color-accent-tonal-border); padding-inline: var(--afo-space-4); color: var(--afo-color-text-accent); font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-bold); letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; }
-.privacy-status-dot { width: .4rem; height: .4rem; flex: none; border-radius: 999px; background: var(--afo-color-brand-primary); box-shadow: 0 0 0 4px color-mix(in srgb, var(--afo-color-brand-primary) 12%, transparent); }
-.privacy-retention { display: grid; margin-top: var(--afo-space-10); border-top: 1px solid var(--afo-color-border-subtle); }
-.privacy-retention div { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--afo-space-4); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-5); }
-.privacy-retention dt { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: .75rem; text-transform: uppercase; }
-.privacy-retention dd { color: var(--afo-color-text-accent); font-family: var(--afo-font-family-display); font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: var(--afo-font-weight-semibold); line-height: 1; text-transform: uppercase; }
-.privacy-control-list { margin-top: var(--afo-space-10); border-top: 1px solid var(--afo-color-border-subtle); }
-.privacy-control-list li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: var(--afo-space-3); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-6); }
-.privacy-control-list li > span { padding-top: .2rem; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 58%, transparent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: var(--landing-type-label); }
-.privacy-control-list p, .privacy-deletion p { max-width: 54ch; margin-top: var(--afo-space-3); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 64%, transparent); font-size: .8125rem; line-height: 1.7; }
-.privacy-deletion { margin-top: var(--afo-space-10); background: color-mix(in srgb, var(--afo-color-brand-primary) 5%, transparent); padding: var(--afo-space-6); }
-.privacy-contact { border-top: 1px solid var(--afo-color-border-subtle); padding-block: clamp(5rem, 11vw, 9rem); scroll-margin-top: 72px; }
-.privacy-contact h2 { max-width: 10ch; margin-top: var(--afo-space-6); font-family: var(--afo-font-family-display); font-size: clamp(3.3rem, 10vw, 7.5rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: -.045em; line-height: .82; text-transform: uppercase; }
-.privacy-contact-link { display: inline-flex; min-height: var(--afo-space-touch-target); align-items: center; gap: var(--afo-space-3); margin-top: var(--afo-space-8); border-bottom: 1px solid var(--afo-color-brand-primary); color: var(--afo-color-text-accent); font-size: .8125rem; font-weight: var(--afo-font-weight-bold); letter-spacing: .08em; }
+.privacy-document .privacy-boundary-title { border-bottom: 1px solid var(--afo-color-border-subtle); background: var(--afo-color-ink-panel); padding: var(--afo-space-4) var(--afo-space-5); font-size: .9375rem; }
+.privacy-boundary-column[data-kind="allowed"] .privacy-boundary-title { color: var(--afo-color-text-accent); }
+.privacy-boundary-list { padding: var(--afo-space-2) var(--afo-space-5); }
+.privacy-boundary-list li { display: grid; grid-template-columns: 1rem minmax(0, 1fr); gap: var(--afo-space-3); padding-block: var(--afo-space-3); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); font-size: .9375rem; line-height: 1.6; }
+.privacy-boundary-list li + li { border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 7%, transparent); }
+.privacy-boundary-icon { margin-top: .25rem; }
+.privacy-boundary-column[data-kind="allowed"] .privacy-boundary-icon { color: var(--afo-color-text-accent); }
+.privacy-boundary-column[data-kind="prohibited"] .privacy-boundary-icon { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 50%, transparent); }
+
+.privacy-panel { margin-top: var(--afo-space-8); border: 1px solid var(--afo-color-border-subtle); border-radius: var(--afo-radius-md); background: var(--afo-color-ink-panel); padding: var(--afo-space-6); }
+.privacy-panel p { max-width: 55ch; margin-top: var(--afo-space-2); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); font-size: .9375rem; line-height: 1.7; }
+
+/* Provider and retention facts: a term and its value on one hairline row. */
+.privacy-facts { margin-top: var(--afo-space-8); border-top: 1px solid var(--afo-color-border-subtle); }
+.privacy-facts > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--afo-space-1) var(--afo-space-6); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-4); }
+.privacy-facts dt { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 72%, transparent); font-size: .9375rem; line-height: 1.5; }
+.privacy-facts dd { color: var(--afo-color-neutral-chalk); font-size: 1rem; font-weight: var(--afo-font-weight-semibold); font-variant-numeric: tabular-nums; line-height: 1.5; }
+.privacy-section h2 + .privacy-facts { margin-top: var(--afo-space-6); }
+.privacy-facts + .privacy-text { margin-top: var(--afo-space-6); }
+
+.privacy-controls { margin-top: var(--afo-space-8); border-top: 1px solid var(--afo-color-border-subtle); }
+.privacy-controls li { display: grid; gap: var(--afo-space-2); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-5); }
+.privacy-controls p { max-width: 60ch; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); font-size: .9375rem; line-height: 1.7; }
+
+.privacy-contact { display: grid; gap: var(--afo-space-6); padding-bottom: clamp(4rem, 8vw, 6rem); }
+.privacy-contact-link { display: inline-flex; width: fit-content; min-height: 3rem; align-items: center; gap: var(--afo-space-3); border: 1px solid color-mix(in srgb, var(--afo-color-brand-primary) 45%, transparent); border-radius: var(--afo-radius-action); padding-inline: var(--afo-space-5); color: var(--afo-color-text-accent); font-size: .9375rem; font-weight: var(--afo-font-weight-semibold); transition: border-color var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing), background-color var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing); }
+.privacy-contact-link:hover { border-color: var(--afo-color-brand-primary); background: color-mix(in srgb, var(--afo-color-brand-primary) 8%, transparent); }
+
 .privacy-footer { border-top: 1px solid var(--afo-color-border-subtle); background: var(--afo-color-ink-panel); }
-.privacy-footer-inner { display: grid; gap: var(--afo-space-6); align-items: center; padding-block: var(--afo-space-8); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 54%, transparent); font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-bold); letter-spacing: .15em; line-height: 1.5; text-transform: uppercase; }
-.privacy-home-link { display: flex; min-height: var(--afo-space-touch-target); align-items: center; color: var(--afo-color-text-accent); }
+.privacy-footer-inner { display: grid; gap: var(--afo-space-4); align-items: center; padding-block: var(--afo-space-8); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-size: .8125rem; line-height: 1.5; }
+.privacy-home-link { display: flex; width: fit-content; min-height: var(--afo-space-touch-target); align-items: center; color: var(--afo-color-text-accent); font-size: .875rem; font-weight: var(--afo-font-weight-semibold); text-underline-offset: .3em; }
+.privacy-home-link:hover { text-decoration: underline; }
+
+@media (min-width: 640px) {
+  .privacy-shell { padding-inline: var(--afo-space-8); }
+  .privacy-footer-inner { grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--afo-space-8); }
+}
+
+@media (min-width: 720px) {
+  .privacy-boundary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .privacy-boundary-column + .privacy-boundary-column { border-top: 0; border-left: 1px solid var(--afo-color-border-subtle); }
+  .privacy-controls li { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--afo-space-6); }
+  .privacy-contact { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+}
+
+@media (min-width: 1024px) {
+  .privacy-layout { grid-template-columns: 13rem minmax(0, 1fr); grid-template-areas: "contents intro" "contents document"; column-gap: clamp(3rem, 6vw, 6rem); }
+  .privacy-contents { padding-top: var(--privacy-intro-top); }
+  .privacy-contents-inner { position: sticky; top: calc(var(--privacy-header-height) + var(--afo-space-10)); border-top: 0; padding-block: 0; }
+}
+
+@media print {
+  .privacy-header, .privacy-contents, .privacy-footer { display: none; }
+  .privacy-page, .privacy-page * { background: none !important; color: #000 !important; }
+  .privacy-layout { display: block; }
+  .privacy-boundary-column, .privacy-panel, .privacy-facts, .privacy-controls li { break-inside: avoid; }
+}
 
 /* ---------------------------------------------------------------------------
    Ambassador profiles
@@ -556,15 +596,6 @@ section[id].fid-section {
 @media (min-width: 640px) {
   .footer-nav-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .footer-nav-grid > .footer-nav:last-child { grid-column: auto; }
-  .privacy-shell { padding-inline: var(--afo-space-8); }
-  .privacy-section { grid-template-columns: 4rem minmax(0, 1fr); gap: var(--afo-space-6); }
-  .privacy-boundary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .privacy-boundary-column { padding: var(--afo-space-8); }
-  .privacy-boundary-column:first-child { padding-left: 0; }
-  .privacy-boundary-column:last-child { padding-right: 0; }
-  .privacy-boundary-column + .privacy-boundary-column { border-top: 0; border-left: 1px solid var(--afo-color-border-subtle); }
-  .privacy-footer-inner { grid-template-columns: 1fr auto 1fr; }
-  .privacy-home-link { justify-self: end; }
   .site-mobile-sheet-content { padding-inline: var(--afo-space-10); }
 }
 
@@ -582,14 +613,6 @@ section[id].fid-section {
   .footer-tagline { font-size: clamp(3.5rem, 4.4vw, 4.5rem); }
   .footer-brand { grid-column: 1; grid-row: 1; }
   .footer-nav-grid { grid-column: 2; grid-row: 1; }
-  .privacy-layout { grid-template-columns: 15rem minmax(0, 1fr); gap: clamp(3rem, 6vw, 7rem); }
-  .privacy-rail { position: sticky; top: 72px; display: block; height: calc(100dvh - 72px); border-right: 1px solid var(--afo-color-border-subtle); padding-top: var(--afo-space-12); }
-  .privacy-nav-list { margin-top: var(--afo-space-6); }
-  .privacy-nav-link { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); min-height: var(--afo-space-touch-target); align-items: center; gap: var(--afo-space-2); padding-right: var(--afo-space-5); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); font-size: var(--landing-type-control); font-weight: var(--afo-font-weight-bold); line-height: 1.45; text-transform: uppercase; transition: color var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing); }
-  .privacy-nav-link span:first-child { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 26%, transparent); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
-  .privacy-nav-link:hover { color: var(--afo-color-text-accent); }
-  .privacy-article { max-width: 64rem; }
-  .privacy-hero { min-height: calc(100dvh - 72px); display: flex; flex-direction: column; justify-content: center; }
   .space-phone-anchor { width: 320px; }
   .studio-topbar { height: 58px; padding-inline: var(--afo-space-5); }
   .studio-sidebar { padding: 22px 14px; }
@@ -604,11 +627,11 @@ section[id].fid-section {
 }
 
 @media (forced-colors: active) {
-  .privacy-hero::after { display: none; }
-  .privacy-note, .privacy-contact-link { border-color: LinkText; }
   .hero-fitness { -webkit-text-stroke: 0; }
   .hero-fitness { color: CanvasText; }
   section[id].fid-section { clip-path: none; margin-block: 0; }
+  .privacy-contents-link[aria-current="true"] { border-left-color: Highlight; }
+  .privacy-contact-link { border-color: LinkText; }
 }
 
 /* ---------------------------------------------------------------------------

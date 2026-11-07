@@ -11,7 +11,9 @@ test("publishes an indexable analytics notice in each language with the required
 
   expect(html).toContain('<link rel="canonical" href="https://www.allfit.one/es/privacy/analytics"/>');
   expect(html).toContain('<link rel="alternate" hrefLang="en" href="https://www.allfit.one/en/privacy/analytics"/>');
-  expect(html).toContain("analytics-v1");
+  // The page shows when the notice took effect, not the internal version id.
+  expect(html).toContain("16 de agosto de 2026");
+  expect(html).not.toContain("analytics-v1");
   expect(html).toContain("PostHog US");
   expect(html).toContain("90 días");
   expect(html).toContain("30 días");
@@ -23,6 +25,7 @@ test("publishes an indexable analytics notice in each language with the required
   expect(english).toContain('<link rel="canonical" href="https://www.allfit.one/en/privacy/analytics"/>');
   expect(english).toContain("We never collect");
   expect(english).toContain("90 days");
+  expect(english).toContain("August 16, 2026");
 
   const legacy = await request.get("/privacy/analytics", { maxRedirects: 0 });
   expect(legacy.status()).toBe(308);

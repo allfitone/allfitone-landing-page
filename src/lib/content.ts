@@ -326,6 +326,14 @@ export const content = {
 
 export type LocalizedContent = (typeof content)[Language];
 
+/**
+ * The day the analytics notice took effect (PR #3, merged 2026-08-16). The page shows
+ * it instead of the internal version id the products record with consent
+ * («analytics-v1»), which the owner removed from the page in November 2026. Change it
+ * whenever the notice's terms change.
+ */
+export const analyticsNoticeEffectiveDate = "2026-08-16";
+
 export const analyticsPrivacyContent = {
   es: {
     metaTitle: "Privacidad de analítica | Allfit One",
@@ -334,12 +342,11 @@ export const analyticsPrivacyContent = {
     selectLanguage: "Seleccionar idioma",
     home: "Volver a Allfit One",
     navigation: "Contenido del aviso",
-    kicker: "Privacidad · Analítica opcional",
     title: "Lo que medimos. Lo que nunca tocamos.",
     lead:
       "La analítica de Allfit One es opcional. Nos ayuda a detectar fallos y entender el rendimiento sin leer tu contenido ni convertir tu actividad física en un perfil.",
-    versionLabel: "Aviso vigente",
-    version: "analytics-v1",
+    // `{date}` is `analyticsNoticeEffectiveDate`, written out in the page language.
+    effective: "Vigente desde el {date}",
     sections: [
       ["#purpose", "Para qué la usamos"],
       ["#data-boundary", "La frontera de datos"],
@@ -375,7 +382,10 @@ export const analyticsPrivacyContent = {
     providerTitle: "Proveedor y entorno",
     providerBody:
       "Los eventos permitidos se procesan en PostHog US. La analítica está deshabilitada en desarrollo y preview. En producción requiere, al mismo tiempo, tu consentimiento y un gate remoto activo para el producto que usas.",
-    providerBoundary: "Procesador: PostHog US · Perfiles personales: deshabilitados",
+    providerFacts: [
+      ["Procesador", "PostHog US"],
+      ["Perfiles personales", "Deshabilitados"],
+    ],
     retentionTitle: "Retención limitada",
     retentionItems: [
       ["Analítica de producto", "Hasta 90 días"],
@@ -393,7 +403,8 @@ export const analyticsPrivacyContent = {
     deletionBody:
       "Puedes cambiar tu decisión desde el control Privacidad de Allfit Studio, Allfit Space o el Backoffice autorizado. Para solicitar la eliminación de la información asociada a tu seudónimo, escríbenos. Verificaremos la solicitud sin pedirte que publiques datos sensibles.",
     contact: "Solicitar ayuda de privacidad",
-    footer: "Allfit One · Aviso de analítica analytics-v1",
+    // The Allfit One lockup sits beside it, so the line does not repeat the name.
+    footer: "Aviso de analítica",
   },
   en: {
     metaTitle: "Analytics privacy | Allfit One",
@@ -402,12 +413,10 @@ export const analyticsPrivacyContent = {
     selectLanguage: "Select language",
     home: "Back to Allfit One",
     navigation: "Notice contents",
-    kicker: "Privacy · Optional analytics",
     title: "What we measure. What we never touch.",
     lead:
       "Allfit One analytics is optional. It helps us find failures and understand performance without reading your content or turning your fitness activity into a profile.",
-    versionLabel: "Current notice",
-    version: "analytics-v1",
+    effective: "Effective {date}",
     sections: [
       ["#purpose", "Why we use it"],
       ["#data-boundary", "The data boundary"],
@@ -443,7 +452,10 @@ export const analyticsPrivacyContent = {
     providerTitle: "Provider and environment",
     providerBody:
       "Allowed events are processed in PostHog US. Analytics is disabled in development and preview. In production it requires both your consent and an active remote gate for the product you use.",
-    providerBoundary: "Processor: PostHog US · Personal profiles: disabled",
+    providerFacts: [
+      ["Processor", "PostHog US"],
+      ["Personal profiles", "Disabled"],
+    ],
     retentionTitle: "Limited retention",
     retentionItems: [
       ["Product analytics", "Up to 90 days"],
@@ -461,7 +473,7 @@ export const analyticsPrivacyContent = {
     deletionBody:
       "You can change your choice from the Privacy control in Allfit Studio, Allfit Space, or the authorized Backoffice. To request deletion of information associated with your pseudonym, contact us. We will verify the request without asking you to publish sensitive data.",
     contact: "Request privacy help",
-    footer: "Allfit One · Analytics notice analytics-v1",
+    footer: "Analytics notice",
   },
 } as const;
 
