@@ -26,6 +26,7 @@ import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
 import { PhoneMockup, StudioDashboardMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
+import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
@@ -260,16 +261,21 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-function StatusSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
+function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
-    <section id="status" className="bg-void text-white">
+    <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 lg:col-span-8">
+        {/* The hero's action lands here. As in the hero, the lead and the form sit beside
+            the title from lg, so the form is in view as soon as the jump ends. */}
+        <div className="col-span-12 lg:col-span-6 lg:row-start-1">
           <RevealTitle className="section-title">{copy.statusTitle}</RevealTitle>
-          <p className="section-lead mt-8 text-white/70">{copy.statusCopy}</p>
+        </div>
+        <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0 lg:self-end">
+          <p className="section-lead text-white/72">{copy.statusCopy}</p>
+          <WaitlistForm copy={copy.waitlist} />
         </div>
 
-        <div className="col-span-12 mt-16 border-t border-white/14 md:mt-24">
+        <div className="col-span-12 mt-20 border-t border-white/14 md:mt-28">
           {copy.statusRows.map(({ name, state, target }, index) => {
             const href = target === "fitness-id" ? "#fitness-id" : productSiteUrl(target, language);
             // A product row shows the address of its own site; the thesis points back up the page.
@@ -290,11 +296,12 @@ function StatusSection({ copy, language }: { copy: LocalizedContent; language: L
           })}
         </div>
 
-        <div className="col-span-12 mt-16 md:mt-24 lg:col-span-8">
-          <p className="section-lead text-white/80">{copy.closingPrompt}</p>
-          <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "mt-8 min-h-14 w-full sm:min-h-11 sm:w-auto")}>
+        {/* Email stays possible, but quiet: the waitlist is this section's one action. */}
+        <div className="col-span-12 mt-12 flex flex-col gap-2 md:mt-16 lg:col-span-8">
+          <p className="max-w-xl text-sm leading-6 text-white/64">{copy.closingPrompt}</p>
+          <a href={CONTACT_HREF} className="inline-link self-start">
             {copy.contact}
-            <FoundationIcon name="forward" data-icon="inline-end" decorative />
+            <FoundationIcon name="forward" size="sm" decorative />
           </a>
         </div>
 
@@ -405,11 +412,10 @@ export function LandingPage({ language }: { language: Language }) {
           <div className="hero-copy col-span-12 mt-12 md:mt-14 lg:col-span-5 lg:col-start-8 lg:row-start-1">
             <p className="hero-lead hero-enter">{copy.heroLead}</p>
             <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 lg:mt-8">
-              <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
-                {copy.contact}
+              <a href="#waitlist" className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
+                {copy.heroAction}
                 <FoundationIcon name="forward" data-icon="inline-end" decorative />
               </a>
-              <p className="max-w-xs text-xs leading-5 text-white/56">{copy.heroNote}</p>
             </div>
           </div>
 
@@ -457,7 +463,7 @@ export function LandingPage({ language }: { language: Language }) {
       <SpaceSection copy={copy} />
       <StudioSection copy={copy} />
       <EcosystemSection copy={copy} />
-      <StatusSection copy={copy} language={language} />
+      <WaitlistSection copy={copy} language={language} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">
@@ -474,7 +480,7 @@ export function LandingPage({ language }: { language: Language }) {
                   <a className="footer-link" href="#allfit-space">{copy.navSpace}</a>
                   <a className="footer-link" href="#allfit-studio">{copy.navStudio}</a>
                   <a className="footer-link" href="#ecosystem">{copy.navEcosystem}</a>
-                  <a className="footer-link" href="#status">{copy.statusLabel}</a>
+                  <a className="footer-link" href="#waitlist">{copy.statusLabel}</a>
                 </div>
               </nav>
 

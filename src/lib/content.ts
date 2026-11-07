@@ -34,7 +34,7 @@ export const content = {
     footerInformation: "Información",
     heroLead:
       "Cambias de entrenador, de gimnasio o de app y tu historial se queda atrás. Estamos construyendo Allfit One para que se quede contigo: Allfit Space para quien entrena, Allfit Studio para quien acompaña y gestiona.",
-    heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
+    heroAction: "Únete a la lista de espera",
 
     appAudience: "Para personas",
     appDescription: "Entrena por tu cuenta o con un profesional, sin empezar de cero cada vez.",
@@ -182,10 +182,10 @@ export const content = {
       relation: ["Persona", "Profesional", "Organización"],
     },
 
-    statusLabel: "Dónde estamos",
+    statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
     statusCopy:
-      "Allfit Space y Allfit Studio están en desarrollo. El Fitness ID es la tesis de producto que los conecta.",
+      "Déjanos tu correo y te avisaremos cuando Allfit Space y Allfit Studio abran sus puertas.",
     // Each row links to where the product is explained instead of describing it a third time.
     statusRows: [
       { name: "Allfit Space", state: "En desarrollo", target: "space" },
@@ -193,6 +193,19 @@ export const content = {
       { name: "Fitness ID", state: "Tesis de producto", target: "fitness-id" },
     ],
     statusFitnessIdLink: "Qué es el Fitness ID",
+    waitlist: {
+      label: "Tu correo",
+      placeholder: "nombre@correo.com",
+      submit: "Unirme a la lista",
+      pending: "Un momento…",
+      errorEmpty: "Escribe tu correo para unirte.",
+      errorInvalid: "Revisa el correo: necesita la forma nombre@correo.com.",
+      failed: "No pudimos apuntarte. Inténtalo de nuevo o escríbenos a",
+      joinedTitle: "Ya estás en la lista.",
+      joinedBody: "Te escribiremos a {email} cuando abramos.",
+      reset: "Usar otro correo",
+      note: "Solo usaremos tu correo para avisarte cuando abramos.",
+    },
     closingPrompt:
       "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
     tagline: "All the fitness in one place.",
@@ -226,7 +239,7 @@ export const content = {
     footerInformation: "Information",
     heroLead:
       "You change coach, gym or app, and your history stays behind. We're building Allfit One so it stays with you: Allfit Space for the people who train, Allfit Studio for the people who coach and run the work.",
-    heroNote: "There's no public demo yet. Tell us how you train or run your space.",
+    heroAction: "Join the waitlist",
 
     appAudience: "For people",
     appDescription: "Train on your own or with a professional, without starting over each time.",
@@ -373,16 +386,29 @@ export const content = {
       relation: ["Person", "Professional", "Organization"],
     },
 
-    statusLabel: "Where we are",
+    statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",
     statusCopy:
-      "Allfit Space and Allfit Studio are in development. Fitness ID is the product thesis that connects them.",
+      "Leave your email and we'll let you know when Allfit Space and Allfit Studio open their doors.",
     statusRows: [
       { name: "Allfit Space", state: "In development", target: "space" },
       { name: "Allfit Studio", state: "In development", target: "studio" },
       { name: "Fitness ID", state: "Product thesis", target: "fitness-id" },
     ],
     statusFitnessIdLink: "What Fitness ID is",
+    waitlist: {
+      label: "Your email",
+      placeholder: "name@email.com",
+      submit: "Join the list",
+      pending: "One moment…",
+      errorEmpty: "Enter your email to join.",
+      errorInvalid: "Check the email: it needs the form name@email.com.",
+      failed: "We couldn't add you. Try again or write to us at",
+      joinedTitle: "You're on the list.",
+      joinedBody: "We'll write to {email} when we open.",
+      reset: "Use another email",
+      note: "We'll only use your email to tell you when we open.",
+    },
     closingPrompt:
       "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
     tagline: "All the fitness in one place.",

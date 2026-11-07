@@ -93,12 +93,50 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
   expect(focusStyle).not.toBe("none");
 });
 
+test("the hero action leads to the waitlist, which validates and confirms in the page language", async ({ page }) => {
+  for (const [language, action, field, submit, empty, invalid, joined, another] of [
+    ["es", "Únete a la lista de espera", "Tu correo", "Unirme a la lista", "Escribe tu correo", "Revisa el correo", "Ya estás en la lista.", "Usar otro correo"],
+    ["en", "Join the waitlist", "Your email", "Join the list", "Enter your email", "Check the email", "You're on the list.", "Use another email"],
+  ] as const) {
+    await page.goto(`/${language}`);
+    await page.locator(".hero-actions").getByRole("link", { name: action }).click();
+    await expect(page).toHaveURL(new RegExp(`/${language}#waitlist$`));
+
+    const waitlist = page.locator("#waitlist");
+    const email = waitlist.getByLabel(field);
+    await expect(email).toBeInViewport();
+    await expect(email).toHaveAttribute("type", "email");
+    await expect(email).toHaveAttribute("autocomplete", "email");
+
+    // Validation runs on submit, in the page language, and keeps the keyboard on the field.
+    await waitlist.getByRole("button", { name: submit }).click();
+    await expect(waitlist.getByRole("alert")).toContainText(empty);
+    await expect(email).toHaveAttribute("aria-invalid", "true");
+    await expect(email).toBeFocused();
+
+    await email.fill("mariana@correo");
+    await email.press("Enter");
+    await expect(waitlist.getByRole("alert")).toContainText(invalid);
+
+    // Typing again clears the error; a plausible address joins and the confirmation takes focus.
+    await email.fill("mariana.rojas@correo.com");
+    await expect(waitlist.getByRole("alert")).toHaveCount(0);
+    await email.press("Enter");
+    const confirmation = waitlist.getByText(joined);
+    await expect(confirmation).toBeFocused();
+    await expect(waitlist.getByRole("status")).toContainText("mariana.rojas@correo.com");
+
+    await waitlist.getByRole("button", { name: another }).click();
+    await expect(waitlist.getByLabel(field)).toBeFocused();
+  }
+});
+
 test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {
   await page.goto("/es");
 
   // The hero action, then each product link: all render through buttonVariants().
   const actions = [
-    page.locator(".hero-actions").getByRole("link", { name: "Escríbenos" }),
+    page.locator(".hero-actions").getByRole("link", { name: "Únete a la lista de espera" }),
     page.getByRole("link", { name: "Conoce Allfit Space" }),
     page.getByRole("link", { name: "Conoce Allfit Studio" }),
   ];
@@ -196,6 +234,16 @@ test("has a logical heading structure and no serious axe violations", async ({ p
     expect(levels[index] - levels[index - 1]).toBeLessThanOrEqual(1);
   }
 
+  // The hero fades in on load; axe would measure its action's colors mid-fade and report
+  // contrast the settled page does not have. Let every finite animation finish first.
+  await page.evaluate(() =>
+    Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.effect?.getComputedTiming().endTime !== Infinity)
+        .map((animation) => animation.finished),
+    ),
+  );
   const results = await new AxeBuilder({ page }).analyze();
   const seriousViolations = results.violations.filter(({ impact }) => impact === "serious" || impact === "critical");
   expect(seriousViolations).toEqual([]);

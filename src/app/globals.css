@@ -33,6 +33,9 @@
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground; }
   section[id], .legacy-section-anchor { scroll-margin-top: 7rem; }
+  /* The hero action lands here. Its own top padding clears the navbar, so it lands flush
+     instead of leaving a strip of the cyan section above behind the bar. */
+  section#waitlist { scroll-margin-top: 0; }
   ::selection { background: var(--afo-color-brand-primary); color: var(--afo-color-ink-void); }
   a { outline: none; }
   /* Body copy never ends on a single orphaned word; headings keep their own balance rules. */
@@ -256,6 +259,35 @@ section[id].fid-section {
 .status-dot { width: 6px; height: 6px; border-radius: var(--afo-radius-circle); background: var(--afo-color-brand-primary); }
 /* A domain or a sentence, so it keeps its own case instead of the inline-link capitals. */
 .inline-link.status-row-link { justify-self: start; font-size: .875rem; font-weight: var(--afo-font-weight-semibold); letter-spacing: .01em; text-transform: none; }
+
+/* Waitlist: the page's one conversion. A visible label (never a placeholder standing in
+   for it), one large field with its button on the same line from sm, and the note on
+   what the email is for. Errors sit under the field in the danger text color. */
+.waitlist { margin-top: var(--afo-space-8); }
+.waitlist-label { display: block; font-size: .875rem; font-weight: var(--afo-font-weight-semibold); line-height: 1.4; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 86%, transparent); }
+.waitlist-row { display: flex; flex-direction: column; gap: var(--afo-space-3); margin-top: var(--afo-space-3); }
+.waitlist-input { height: 3.5rem; border-color: color-mix(in srgb, var(--afo-color-neutral-chalk) 22%, transparent); border-radius: var(--afo-radius-action); background: var(--afo-color-ink-panel); padding-inline: var(--afo-space-6); color: var(--afo-color-neutral-white); font-size: 1rem; }
+.waitlist-input::placeholder { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 52%, transparent); }
+.waitlist-input:hover { border-color: color-mix(in srgb, var(--afo-color-neutral-chalk) 34%, transparent); }
+.waitlist-input[aria-invalid='true'] { border-color: var(--afo-color-text-danger); }
+.waitlist-input[readonly] { color: color-mix(in srgb, var(--afo-color-neutral-white) 64%, transparent); }
+.waitlist-submit { min-height: 3.5rem; flex: none; padding-inline: var(--afo-space-8); }
+.waitlist-submit:disabled { opacity: 1; cursor: progress; }
+.waitlist-message { display: flex; gap: var(--afo-space-2); margin-top: var(--afo-space-3); font-size: .875rem; line-height: 1.5; color: var(--afo-color-text-danger); }
+.waitlist-message-link { text-decoration: underline; text-underline-offset: 3px; }
+.waitlist-note { margin-top: var(--afo-space-4); font-size: .75rem; line-height: 1.55; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 58%, transparent); }
+.waitlist-joined { margin-top: var(--afo-space-8); border-top: 1px solid color-mix(in srgb, var(--afo-color-brand-primary) 40%, transparent); padding-top: var(--afo-space-6); }
+.waitlist-joined-title { display: flex; align-items: center; gap: var(--afo-space-3); font-family: var(--afo-font-family-display); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: 1; text-transform: uppercase; outline: none; }
+.waitlist-joined-body { margin-top: var(--afo-space-3); font-size: 1rem; line-height: 1.6; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 72%, transparent); overflow-wrap: anywhere; }
+.inline-link.waitlist-reset { margin-top: var(--afo-space-2); }
+@media (min-width: 640px) {
+  .waitlist-row { flex-direction: row; }
+  .waitlist-row > .waitlist-input { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .waitlist-spinner { animation: waitlist-spin .9s linear infinite; }
+}
+@keyframes waitlist-spin { to { transform: rotate(1turn); } }
 
 .inline-link { display: inline-flex; min-height: var(--afo-space-touch-target); align-items: center; gap: var(--afo-space-2); font-size: var(--landing-type-control); font-weight: var(--afo-font-weight-extrabold); letter-spacing: var(--landing-tracking-control); text-transform: uppercase; color: var(--afo-color-text-accent); transition: gap var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing); }
 .inline-link:hover { gap: var(--afo-space-3); }
