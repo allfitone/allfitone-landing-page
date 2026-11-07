@@ -29,7 +29,6 @@ import { RevealTitle } from "@/components/reveal-title";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
-import { usePersonName, withPerson } from "@/lib/person";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
@@ -46,7 +45,6 @@ function NewTabHint({ copy }: { copy: LocalizedContent }) {
 }
 
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
-  const person = usePersonName();
   return (
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -55,13 +53,13 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
           <p className="section-lead mt-8 text-white/70">{copy.problemCopy}</p>
         </div>
 
-        {/* A handover ledger with one real case: what the person takes from the gym they
-            left (nothing) beside what stays there, in figures rather than categories.
+        {/* A handover ledger spoken to the reader, like the title: what you take from the
+            gym you leave (nothing) beside what stays there, in figures rather than categories.
             The Fitness ID card in the next section holds the same kinds of data, kept. */}
         <div className="col-span-12 mt-16 md:mt-24">
           <div className="ledger" data-reveal>
             <div className="ledger-keep">
-              <p className="ledger-label">{withPerson(copy.problemKeepLabel, person)}</p>
+              <p className="ledger-label">{copy.problemKeepLabel}</p>
               <p className="ledger-keep-value">{copy.problemKeepValue}</p>
             </div>
             <div className="ledger-lose">

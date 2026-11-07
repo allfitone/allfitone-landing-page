@@ -192,20 +192,21 @@ test("the page names one person per visit, the same in every section", async ({ 
   await page.goto("/es");
   for (let visit = 0; visit < 8; visit += 1) {
     if (visit > 0) await page.reload();
-    const label = page.locator("#problem .ledger-label").first();
-    await expect(label).toHaveText(/ se lleva$/);
-    const person = (await label.innerText()).replace(/ se lleva$/i, "");
-    const name = names.find((candidate) => candidate.toLowerCase() === person.toLowerCase());
+    // The visit's pick replaces the static name right after hydration; the motion hook arms
+    // in the same commit, so wait for it and one more task before reading.
+    await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve))));
+    const waitlist = page.locator("#waitlist");
+    const person = (await waitlist.getByLabel("Tu nombre").getAttribute("placeholder")) ?? "";
+    const name = names.find((candidate) => candidate === person);
     expect(name, `«${person}» is one of the five names`).toBeDefined();
     seen.add(name!);
 
-    // The Studio panel, the access line and the waitlist's placeholders name the same person.
+    // The email placeholder, the Studio panel and its access line name the same person.
+    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
     const panel = page.locator(".studio-review");
     await expect(panel).toContainText(`Lo autorizó ${name}.`);
     await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
-    const waitlist = page.locator("#waitlist");
-    await expect(waitlist.getByLabel("Tu nombre")).toHaveAttribute("placeholder", name!);
-    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
   }
   // Eight visits all on one name out of five would happen about once in 78,000 runs.
   expect(seen.size).toBeGreaterThan(1);

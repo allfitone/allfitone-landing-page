@@ -1,10 +1,10 @@
 import { useSyncExternalStore } from "react";
 
 /**
- * The one person the landing names. Every place a name appears (the problem ledger,
- * the Allfit Studio panel, the waitlist's placeholders and its email error) uses the
- * same first name, picked at random once per visit from these five, so the page keeps
- * telling one person's story. The owner chose the five in November 2026.
+ * The one person the landing names. Every place a name appears (the Allfit Studio
+ * panel, the waitlist's placeholders and its email error) uses the same first name,
+ * picked at random once per visit from these five, so the page keeps telling one
+ * person's story. The owner chose the five in November 2026.
  *
  * The static HTML carries the first name; the visit's pick replaces it right after
  * hydration (`useSyncExternalStore` reads the server snapshot while hydrating, so React

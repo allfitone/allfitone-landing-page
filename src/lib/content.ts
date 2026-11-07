@@ -56,18 +56,18 @@ export const content = {
     problemTitle: "Cada vez que cambias, empiezas de cero.",
     problemCopy:
       "Tu historial no vive contigo: vive en la app, el entrenador o el gimnasio de turno. Cuando esa relación termina, tú sigues entrenando, pero tu progreso se queda ahí.",
-    // `{name}` is the visit's person (`usePersonName()`), filled by `withPerson()`.
-    problemKeepLabel: "{name} se lleva",
+    // The ledger speaks to the reader, like the title: what you take, what you leave.
+    problemKeepLabel: "Tú te llevas",
     problemKeepValue: "Nada",
-    problemLoseLabel: "Deja en su antiguo gimnasio",
-    // The person's record at the gym they left before Estudio Norte, in real figures rather
+    problemLoseLabel: "Dejas en tu antiguo gimnasio",
+    // Your record at the gym you leave, in real figures rather
     // than categories. The Fitness ID card in the next section holds the same kinds of
     // data, kept instead of lost.
     problemLoseItems: [
       ["Sesiones registradas", "184"],
       ["Mejor sentadilla", "95 kg"],
       ["Programa de fuerza", "12 semanas"],
-      ["Notas sobre su lesión de rodilla", "11"],
+      ["Notas sobre tu lesión de rodilla", "11"],
       ["Con el mismo entrenador", "2 años"],
     ],
     fitnessIdLabel: "Fitness ID",
@@ -221,14 +221,14 @@ export const content = {
     problemTitle: "Every time you switch, you start over.",
     problemCopy:
       "Your history does not live with you: it lives in whichever app, coach or gym you are using. When that relationship ends, you keep training, but your progress stays behind.",
-    problemKeepLabel: "{name} takes",
+    problemKeepLabel: "You take",
     problemKeepValue: "Nothing",
-    problemLoseLabel: "Leaves behind at the old gym",
+    problemLoseLabel: "You leave behind at your old gym",
     problemLoseItems: [
       ["Logged sessions", "184"],
       ["Best squat", "95 kg"],
       ["Strength program", "12 weeks"],
-      ["Knee injury notes", "11"],
+      ["Notes on your knee injury", "11"],
       ["With the same coach", "2 years"],
     ],
     fitnessIdLabel: "Fitness ID",
