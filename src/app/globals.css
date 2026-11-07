@@ -208,37 +208,8 @@ section[id].fid-section {
 .studio-module-upcoming .studio-module-name { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 56%, transparent); }
 
 /* ---------------------------------------------------------------------------
-   Ecosystem
+   Waitlist
 --------------------------------------------------------------------------- */
-
-/* At 11px the three nodes no longer fit a 320px phone with the default gaps; tighten the
-   spacing there instead of dropping the type below the 11px floor. */
-
-
-/* ---------------------------------------------------------------------------
-   Status and contact
---------------------------------------------------------------------------- */
-
-/* A domain or a sentence, so it keeps its own case instead of the inline-link capitals. */
-
-/* Ecosystem: one relationship read across both products. A typographic table in Void ink
-   on the cyan field: hairline rows, the step named in display type, Studio and Space side
-   by side from lg. Below lg each side names itself inline. */
-.relationship-head { display: none; }
-.relationship { border-top: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent); }
-.relationship-step { display: grid; gap: var(--afo-space-4); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent); padding-block: var(--afo-space-8); }
-.relationship-step-name { font-family: var(--afo-font-family-display); font-size: clamp(2rem, 7vw, 3rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; }
-.relationship-side { max-width: 36ch; font-size: 1rem; font-weight: var(--afo-font-weight-medium); line-height: 1.55; color: color-mix(in srgb, var(--afo-color-ink-void) 80%, transparent); }
-.relationship-side-who { display: block; margin-bottom: var(--afo-space-1); font-size: .8125rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .04em; color: var(--afo-color-ink-void); }
-/* The payoff: where the relationship ends, the person's side is the one line set large. */
-.relationship-step:last-child .relationship-side-space { max-width: none; font-family: var(--afo-font-family-display); font-size: clamp(2rem, 7vw, 3rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; color: var(--afo-color-ink-void); }
-.relationship-step:last-child .relationship-side-space .relationship-side-who { font-family: var(--afo-font-family-body); line-height: 1.4; text-transform: none; letter-spacing: .04em; }
-@media (min-width: 1024px) {
-  .relationship-head, .relationship-step { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr); column-gap: var(--afo-space-8); }
-  .relationship-head { padding-bottom: var(--afo-space-4); font-size: .8125rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .04em; color: var(--afo-color-ink-void); }
-  .relationship-step { align-items: baseline; padding-block: var(--afo-space-10); }
-  .relationship-side-who { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-}
 
 /* Waitlist: the page's one conversion. A visible label (never a placeholder standing in
    for it), one large field with its button on the same line from sm, and the note on
@@ -640,8 +611,8 @@ section[id].fid-section {
    then the lead and the action lift in. Below it, each section has a single
    moment, the first time it scrolls into view: its title rises line by line and
    its main object arrives (the product stage, the ledger, a card that uncovers,
-   the Studio columns, the steps of the ecosystem relationship). A light
-   follows the pointer over the Studio columns; there is no scroll progress bar. Everything else stays still. Reveals are armed by
+   the Studio columns). A light follows the pointer over the Studio columns;
+   there is no scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
 --------------------------------------------------------------------------- */

@@ -205,47 +205,6 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
   );
 }
 
-function EcosystemSection({ copy }: { copy: LocalizedContent }) {
-  const { studioSide, spaceSide, steps } = copy.ecosystem;
-  return (
-    <section id="ecosystem" className="bg-bolt text-void">
-      <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 lg:col-span-7">
-          <RevealTitle className="section-title text-void">{copy.ecosystemTitle}</RevealTitle>
-        </div>
-        <p className="section-lead col-span-12 mt-8 text-void/76 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
-          {copy.ecosystemCopy}
-        </p>
-
-        {/* One relationship read across both products, step by step. From lg the two sides
-            become columns under a header; below it each side names itself inline, and that
-            inline name is what screen readers hear at every width, so the header stays hidden
-            from them. The last step's person side is the section's one emphasis. */}
-        <div className="col-span-12 mt-16 md:mt-24">
-          <div className="relationship-head" aria-hidden="true">
-            <span />
-            <span>{studioSide}</span>
-            <span>{spaceSide}</span>
-          </div>
-          <ol className="relationship">
-            {steps.map(({ name, studio, space }, index) => (
-              <li key={name} className="relationship-step" data-reveal style={stagger(index)}>
-                <h3 className="relationship-step-name">{name}</h3>
-                <p className="relationship-side">
-                  <strong className="relationship-side-who">Allfit Studio</strong> {studio}
-                </p>
-                <p className="relationship-side relationship-side-space">
-                  <strong className="relationship-side-who">Allfit Space</strong> {space}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function WaitlistSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="waitlist" className="bg-void text-white">
@@ -284,7 +243,6 @@ export function LandingPage({ language }: { language: Language }) {
     ["#fitness-id", copy.navFitnessId, copy.fitnessIdLabel],
     ["#allfit-space", copy.navSpace, copy.appAudience],
     ["#allfit-studio", copy.navStudio, copy.studioAudience],
-    ["#ecosystem", copy.navEcosystem, copy.ecosystemLabel],
   ] as const;
 
   return (
@@ -427,7 +385,6 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      <EcosystemSection copy={copy} />
       <WaitlistSection copy={copy} />
 
       <footer id="footer" className="site-footer">
@@ -444,7 +401,6 @@ export function LandingPage({ language }: { language: Language }) {
                   <a className="footer-link" href="#fitness-id">{copy.navFitnessId}</a>
                   <a className="footer-link" href="#allfit-space">{copy.navSpace}</a>
                   <a className="footer-link" href="#allfit-studio">{copy.navStudio}</a>
-                  <a className="footer-link" href="#ecosystem">{copy.navEcosystem}</a>
                   <a className="footer-link" href="#waitlist">{copy.statusLabel}</a>
                 </div>
               </nav>
