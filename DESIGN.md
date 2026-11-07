@@ -509,6 +509,13 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`connected-product-stage`** — The signature parent-brand composition. A panoramic Allfit Studio administrative panel establishes the operational plane while the Allfit Space phone crosses its edge in the foreground. The overlap communicates one ecosystem; it is not a decorative device pile. On mobile, the products become a deliberate sequence so both previews remain legible.
 
+- **One scripted moment, not two screens.** Both previews show the same story: Mariana Rojas trains with a neutral studio, Estudio Norte. Her phone shows today's 18:00 «Fuerza · Tren superior» session and that she shares her history with Estudio Norte; the Studio panel shows the same 18:00 session in its agenda, the week she shared (four sessions done, today's pending) and the activity line that she shared it. Any number or name on one screen must agree with the other.
+- **No metric decoration.** No KPI tile rows, progress rings, sparklines or a percentage repeated across screens. The shared week is drawn as five day marks because the sequence carries the information.
+- **No real or Allfit-branded organization inside the mockups.** The studio is fictional and neutral so the preview reads as a customer's workspace, not as Allfit One's own gym.
+- **Composition.** The phone leans forward (+2°) and crosses the panel's edge, never its content; below `lg` the panel drops its sidebar so its main column stays readable beside the phone. The panel carries the workspace shadow only, with no cyan glow.
+- **First viewport.** From `lg`, the lead and the email action sit in columns 8–12 beside the headline, so the stage starts inside a 900px-tall viewport.
+- **Product definitions.** Below the stage, each product is named by its wordmark first, then its audience as a plain line («Para personas», «Para profesionales y organizaciones»), never as an uppercase label above the wordmark. Both wordmarks share a height, not a width.
+
 ### Language Selector
 
 **`language-selector`** — A compact pill containing `ES` and `EN`. The selected language uses the cyan fill and Void text; the unselected language remains quiet but legible. Spanish is selected by default. Changing the selection updates every interface string and the document `lang` attribute.

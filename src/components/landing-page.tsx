@@ -419,7 +419,9 @@ export function LandingPage({ language }: { language: Language }) {
         </nav>
 
         <div className="site-grid relative z-20 pb-24 pt-32 md:pb-28 md:pt-40 lg:pt-36">
-          <div className="col-span-12 mt-6 md:mt-8">
+          {/* From lg the lead and the action sit beside the first two headline lines,
+              so the product stage rises into the first viewport. */}
+          <div className="col-span-12 mt-6 md:mt-8 lg:col-start-1 lg:row-start-1">
             <h1 className="hero-title-new" lang="en" aria-label={copy.tagline}>
               <span className="hero-line"><span className="block">ALL THE</span></span>
               <span className="hero-line"><span className="hero-fitness block">FITNESS</span></span>
@@ -429,10 +431,10 @@ export function LandingPage({ language }: { language: Language }) {
             </h1>
           </div>
 
-          <div className="col-span-12 mt-12 md:mt-14 lg:col-span-7">
+          <div className="hero-copy col-span-12 mt-12 md:mt-14 lg:col-span-5 lg:col-start-8 lg:row-start-1">
             <p className="hero-lead hero-enter">{copy.heroLead}</p>
-            <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
-              <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
+            <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 lg:mt-8">
+              <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
                 {copy.contact}
                 <FoundationIcon name="forward" data-icon="inline-end" decorative />
               </a>
@@ -440,7 +442,7 @@ export function LandingPage({ language }: { language: Language }) {
             </div>
           </div>
 
-          <div className="product-stage col-span-12 mt-20 md:mt-28 lg:mt-32">
+          <div className="product-stage col-span-12 mt-20 md:mt-28 lg:mt-20">
             <div className="product-stage-visual" data-reveal="stage">
               <div className="app-visual-anchor">
                 <PhoneMockup copy={copy} />
@@ -452,11 +454,11 @@ export function LandingPage({ language }: { language: Language }) {
 
             <div className="product-definitions">
               <article className="product-definition product-definition-app">
-                <p className="eyebrow text-white/60">{copy.appAudience}</p>
-                <h2 className="mt-4" aria-label="Allfit Space">
+                <h2 aria-label="Allfit Space">
                   <ProductWordmark product="space" surface="dark" className="product-definition-wordmark" aria-hidden="true" />
                 </h2>
-                <p className="mt-5 max-w-md text-sm leading-6 text-white/64">{copy.appDescription}</p>
+                <p className="product-definition-audience">{copy.appAudience}</p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-white/64">{copy.appDescription}</p>
                 <a href={productSiteUrl("space", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
                   {copy.spaceLink}
                   <FoundationIcon name="forward" data-icon="inline-end" decorative />
@@ -464,11 +466,11 @@ export function LandingPage({ language }: { language: Language }) {
               </article>
 
               <article className="product-definition product-definition-studio">
-                <p className="eyebrow text-white/60">{copy.studioAudience}</p>
-                <h2 className="mt-4" aria-label="Allfit Studio">
+                <h2 aria-label="Allfit Studio">
                   <ProductWordmark product="studio" surface="dark" className="product-definition-wordmark" aria-hidden="true" />
                 </h2>
-                <p className="mt-5 max-w-md text-sm leading-6 text-white/64">{copy.studioDescription}</p>
+                <p className="product-definition-audience">{copy.studioAudience}</p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-white/64">{copy.studioDescription}</p>
                 <a href={productSiteUrl("studio", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
                   {copy.studioLink}
                   <FoundationIcon name="forward" data-icon="inline-end" decorative />
