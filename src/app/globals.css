@@ -35,7 +35,6 @@
   section[id], .legacy-section-anchor { scroll-margin-top: 7rem; }
   ::selection { background: var(--afo-color-brand-primary); color: var(--afo-color-ink-void); }
   a { outline: none; }
-  a:focus-visible { box-shadow: var(--afo-shadow-focus); }
 }
 
 /* ---------------------------------------------------------------------------
@@ -462,6 +461,13 @@ section[id].fid-section {
 /* ---------------------------------------------------------------------------
    Local overrides
 --------------------------------------------------------------------------- */
+
+/* Keyboard focus. The Design System button classes paint their control shadow from the
+   utilities layer, which outranks every layered focus rule, so links styled as buttons
+   showed no focus at all. This rule is unlayered so it wins: a Void gap and a light-cyan
+   ring, which reads on the dark, chalk and cyan sections alike. Footer links keep their outline. */
+:is(a:not(.footer-link), [data-slot]):focus-visible { outline: none; box-shadow: 0 0 0 2px var(--afo-color-ink-void), 0 0 0 4px var(--afo-color-brand-light); }
+:is(.nav-link, .inline-link):focus-visible { border-radius: var(--afo-radius-xs); }
 
 .locale-toggle { gap: 2px; padding: 2px; }
 .locale-toggle-item { min-width: 36px; min-height: 36px; padding: var(--afo-space-1) var(--afo-space-2); font-size: .625rem; }

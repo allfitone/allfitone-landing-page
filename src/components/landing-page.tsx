@@ -422,7 +422,7 @@ export function LandingPage({ language }: { language: Language }) {
 
         <div className="site-grid relative z-20 pb-24 pt-32 md:pb-28 md:pt-40 lg:pt-36">
           <div className="col-span-12 mt-6 md:mt-8">
-            <h1 className="hero-title-new" aria-label={copy.tagline}>
+            <h1 className="hero-title-new" lang="en" aria-label={copy.tagline}>
               <span className="hero-line"><span className="block">ALL THE</span></span>
               <span className="hero-line"><span className="hero-fitness block">FITNESS</span></span>
               <span className="hero-line">
@@ -433,7 +433,7 @@ export function LandingPage({ language }: { language: Language }) {
 
           <div className="col-span-12 mt-12 md:mt-14 lg:col-span-7">
             <p className="hero-lead hero-enter">{copy.heroLead}</p>
-            <div style={stagger(1)} className="hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
+            <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7">
               <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-auto")}>
                 {copy.contact}
                 <FoundationIcon name="forward" data-icon="inline-end" decorative />

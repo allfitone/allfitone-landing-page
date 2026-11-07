@@ -93,6 +93,25 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
   expect(focusStyle).not.toBe("none");
 });
 
+test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {
+  await page.goto("/es");
+
+  // The hero action, then each product link: all render through buttonVariants().
+  const actions = [
+    page.locator(".hero-actions").getByRole("link", { name: "Escríbenos" }),
+    page.getByRole("link", { name: "Conoce Allfit Space" }),
+    page.getByRole("link", { name: "Conoce Allfit Studio" }),
+  ];
+  for (const action of actions) {
+    const resting = await action.evaluate((element) => getComputedStyle(element).boxShadow);
+    await action.focus();
+    await expect(action).toBeFocused();
+    const focused = await action.evaluate((element) => getComputedStyle(element).boxShadow);
+    expect(focused, "focus must change the rendered ring").not.toBe(resting);
+    expect(focused).toContain("104, 238, 244");
+  }
+});
+
 test("honors reduced motion and forced colors", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce", forcedColors: "active" });
   await page.goto("/");
