@@ -139,6 +139,30 @@ test("editorial sections render without eyebrow markers", async ({ page }) => {
   await expect(page.locator(".section-marker")).toHaveCount(0);
 });
 
+test("sections carry no sequence numbers or ghost marks", async ({ page }) => {
+  await page.goto("/es");
+
+  // No "01 / 02 / 03" on lists whose order carries no information.
+  const indexes = await page.locator("section[id]").evaluateAll((sections) =>
+    sections.flatMap((section) =>
+      [...section.querySelectorAll("*")]
+        .filter((element) => element.children.length === 0 && /^0\d$/.test(element.textContent?.trim() ?? ""))
+        .map((element) => `${section.id}: ${element.textContent?.trim()}`),
+    ),
+  );
+  expect(indexes).toEqual([]);
+
+  // No large decorative outline sitting behind a section's content.
+  const ghosts = await page.locator("section[id]:not(#home)").evaluateAll((sections) =>
+    sections.flatMap((section) =>
+      [...section.querySelectorAll<HTMLElement | SVGElement>("[aria-hidden='true']")]
+        .filter((element) => getComputedStyle(element).position === "absolute" && element.getBoundingClientRect().width > 300)
+        .map(() => section.id),
+    ),
+  );
+  expect(ghosts).toEqual([]);
+});
+
 test("has a logical heading structure and no serious axe violations", async ({ page }) => {
   await page.goto("/");
 
