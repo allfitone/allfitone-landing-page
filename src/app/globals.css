@@ -123,6 +123,19 @@
 .phone-screen { min-height: 540px; overflow: hidden; border-radius: var(--afo-radius-4xl); background: var(--afo-color-ink-panel); padding: var(--afo-space-5); color: var(--afo-color-neutral-white); }
 .phone-island { width: 78px; height: 15px; margin-inline: auto; border-radius: var(--afo-radius-pill); background: var(--afo-color-neutral-black); }
 
+/* Allfit Space section: one larger phone on Chalk, the session under way. Exercises are
+   hairline rows; the sets are short marks, filled once logged. Rows already finished
+   step back, the one she is on reads at full strength. */
+.space-phone-anchor { width: min(100%, 300px); }
+.space-phone { width: 100%; box-shadow: 0 32px 70px color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent), 0 8px 18px color-mix(in srgb, var(--afo-color-ink-void) 14%, transparent); }
+.space-phone .phone-screen { min-height: 0; }
+.space-exercises { margin-top: var(--afo-space-5); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 12%, transparent); }
+.space-exercise { display: flex; align-items: center; justify-content: space-between; gap: var(--afo-space-3); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 12%, transparent); padding-block: 11px; }
+.space-exercise[data-state='done'] { color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
+.space-set-marks { display: flex; flex: none; gap: 4px; }
+.space-set-mark { width: 14px; height: 5px; border-radius: var(--afo-radius-pill); background: color-mix(in srgb, var(--afo-color-neutral-white) 18%, transparent); }
+.space-set-mark-done { background: var(--afo-color-brand-primary); }
+
 .studio-shell { overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-brand-light) 18%, transparent); border-radius: var(--afo-radius-panel); background: var(--afo-color-ink-panel); box-shadow: var(--afo-shadow-workspace); }
 .studio-topbar { display: flex; height: 52px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-4); background: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }
 .studio-workspace { display: grid; min-height: 430px; grid-template-columns: 140px minmax(0, 1fr); }
@@ -579,6 +592,7 @@ section[id].fid-section {
   .app-visual-anchor { left: 0; }
   .product-phone { width: 270px; }
   .phone-screen { min-height: 540px; }
+  .space-phone-anchor { width: 320px; }
   .studio-topbar { height: 58px; padding-inline: var(--afo-space-5); }
   .studio-workspace { min-height: 460px; grid-template-columns: 176px minmax(0, 1fr); }
   .studio-sidebar { display: flex; padding: 22px 14px; }
@@ -631,7 +645,6 @@ section[id].fid-section {
 [data-spotlight]:hover::before { opacity: 1; }
 
 .fid-card { --reveal-radius: var(--afo-radius-panel); }
-.space-areas { --reveal-radius: var(--radius-2xl, 1rem); }
 
 @media (prefers-reduced-motion: no-preference) {
   /* Backwards fill only: a finished entrance stops applying, so the text returns to its normal rendering. */
@@ -646,13 +659,13 @@ section[id].fid-section {
   [data-landing][data-motion='on'] [data-reveal='mask'] .reveal-word > span { transform: translate3d(0, 115%, 0); }
   [data-landing][data-motion='on'] [data-reveal='card'] { clip-path: inset(18% 0 0 0 round var(--reveal-radius, 0)); }
   /* The product stage arrives as one object: the dashboard, then the phone in front of it. */
-  [data-landing][data-motion='on'] [data-reveal='stage'] :is(.studio-visual-anchor, .app-visual-anchor) { opacity: 0; transform: translate3d(0, 48px, 0); }
-  [data-landing][data-motion='on'] [data-reveal='stage'] .app-visual-anchor { transform: translate3d(0, 88px, 0); }
+  [data-landing][data-motion='on'] [data-reveal='stage'] :is(.studio-visual-anchor, .app-visual-anchor, .space-phone-anchor) { opacity: 0; transform: translate3d(0, 48px, 0); }
+  [data-landing][data-motion='on'] [data-reveal='stage'] :is(.app-visual-anchor, .space-phone-anchor) { transform: translate3d(0, 88px, 0); }
 
   [data-landing][data-motion='on'] [data-reveal].is-in { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.1s var(--landing-ease); transition-delay: calc(var(--i, 0) * 90ms); }
   [data-landing][data-motion='on'] [data-reveal='mask'].is-in .reveal-word > span { transform: none; transition: transform 1.1s var(--landing-ease) calc(var(--l, 0) * 110ms); }
   [data-landing][data-motion='on'] [data-reveal='card'].is-in { clip-path: inset(0 0 0 0 round var(--reveal-radius, 0)); transition: clip-path 1.2s var(--landing-ease); }
-  [data-landing][data-motion='on'] [data-reveal='stage'].is-in :is(.studio-visual-anchor, .app-visual-anchor) { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.2s var(--landing-ease); }
+  [data-landing][data-motion='on'] [data-reveal='stage'].is-in :is(.studio-visual-anchor, .app-visual-anchor, .space-phone-anchor) { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.2s var(--landing-ease); }
   [data-landing][data-motion='on'] [data-reveal='stage'].is-in .app-visual-anchor { transition-delay: 160ms; }
 
 }

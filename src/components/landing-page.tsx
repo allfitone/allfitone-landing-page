@@ -24,7 +24,7 @@ import { cn } from "@allfitone/react/lib/utils";
 import { FitnessIdCard } from "@/components/fitness-id-card";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
-import { PhoneMockup, StudioDashboardMockup } from "@/components/product-mockups";
+import { PhoneMockup, SpaceSessionMockup, StudioDashboardMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
@@ -110,15 +110,13 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
 
 function SpaceSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
-    <section id="allfit-space" className="bg-chalk text-void">
+    <section id="allfit-space" className="overflow-hidden bg-chalk text-void">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 lg:col-span-7 lg:self-center">
           <div className="product-section-wordmark">
             <ProductWordmark product="space" surface="light" title={copy.appSectionLabel} />
           </div>
-        </div>
-        <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
-          <RevealTitle className="section-title text-void">{copy.appSectionTitle}</RevealTitle>
+          <RevealTitle className="section-title mt-10 text-void md:mt-12">{copy.appSectionTitle}</RevealTitle>
           <p className="section-lead mt-8 text-void/70">{copy.appSectionCopy}</p>
           <a {...productSiteLink("space", language)} className="inline-link inline-link-on-light mt-6">
             {copy.spaceSectionLink}
@@ -127,20 +125,12 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
           </a>
         </div>
 
-        <div data-reveal="card" className="space-areas col-span-12 mt-20 overflow-hidden rounded-2xl bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
-          <h3 className="border-b border-white/14 pb-7 font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">
-            {copy.appAreasLabel}
-          </h3>
-          <div className="grid md:grid-cols-5">
-            {copy.appAreas.map(([area, description]) => (
-              <div
-                key={area}
-                className="border-b border-white/12 py-6 last:border-b-0 md:border-b-0 md:border-r md:px-5 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
-              >
-                <p className="font-display text-2xl font-semibold uppercase">{area}</p>
-                <p className="mt-2 text-xs leading-5 text-white/70">{description}</p>
-              </div>
-            ))}
+        {/* The section's one object is the app itself: the hero's 18:00 session under way,
+            the professional's plan and the person's log on one screen. It replaces the row
+            of five app areas, which listed what the app will hold instead of showing it. */}
+        <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center" data-reveal="stage">
+          <div className="space-phone-anchor">
+            <SpaceSessionMockup copy={copy} />
           </div>
         </div>
       </div>

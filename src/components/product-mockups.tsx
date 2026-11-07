@@ -64,6 +64,82 @@ export function PhoneMockup({ copy }: { copy: LocalizedContent }) {
   );
 }
 
+type SpaceExercise = LocalizedContent["spaceSession"]["exercises"][number];
+
+function exerciseTarget(exercise: SpaceExercise) {
+  return exercise.load === null
+    ? `${exercise.sets} × ${exercise.reps}`
+    : `${exercise.sets} × ${exercise.reps} · ${exercise.load} kg`;
+}
+
+/*
+ * The Allfit Space section's phone: the same 18:00 session the hero announces, now under
+ * way. Estudio Norte's program sets each exercise and Mariana logs it set by set, so the
+ * plan and what she did sit on one screen. The set she is on is the screen's one cyan block.
+ */
+export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
+  const session = copy.spaceSession;
+  const current = session.exercises.find((exercise) => exercise.done < exercise.sets) ?? session.exercises[0];
+  const setLabel = session.setOf.replace("{set}", String(current.done + 1)).replace("{sets}", String(current.sets));
+
+  return (
+    <div className="phone-shell space-phone" aria-hidden="true">
+      <div className="phone-screen">
+        <div className="phone-island" aria-hidden="true" />
+
+        <div className="mt-6">
+          <p className="mock-eyebrow text-bolt">{session.status}</p>
+          <p className="mt-2 font-display text-[2rem] font-semibold uppercase leading-none">{copy.phoneSession}</p>
+          <p className="mock-body mt-2 text-white/60">{session.plan}</p>
+        </div>
+
+        <ol className="space-exercises">
+          {session.exercises.map((exercise) => (
+            <li
+              key={exercise.name}
+              className="space-exercise"
+              data-state={exercise === current ? "current" : exercise.done === exercise.sets ? "done" : "next"}
+            >
+              <div className="min-w-0">
+                <p className="mock-label">{exercise.name}</p>
+                <p className="mock-body mt-1 tabular-nums text-white/56">{exerciseTarget(exercise)}</p>
+              </div>
+              <span className="space-set-marks">
+                {Array.from({ length: exercise.sets }, (_, set) => (
+                  <span key={set} className={cn("space-set-mark", set < exercise.done && "space-set-mark-done")} />
+                ))}
+              </span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-4 rounded-2xl bg-bolt p-4 text-void">
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="mock-label">{current.name}</p>
+            <p className="mock-body text-void/72">{setLabel}</p>
+          </div>
+          <div className="mt-3 flex items-baseline gap-5 tabular-nums">
+            <p className="flex items-baseline gap-1.5">
+              <span className="font-display text-[2.75rem] font-semibold leading-none">{current.reps}</span>
+              <span className="mock-label">{session.reps}</span>
+            </p>
+            {current.load !== null && (
+              <p className="flex items-baseline gap-1.5">
+                <span className="font-display text-[2.75rem] font-semibold leading-none">{current.load}</span>
+                <span className="mock-label">kg</span>
+              </p>
+            )}
+          </div>
+          <div className="mock-label mt-4 flex h-10 items-center justify-between rounded-full bg-void px-4 text-white">
+            {session.logSet}
+            <FoundationIcon name="success" size="xs" className="text-bolt" decorative />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function StudioDashboardMockup({ copy }: { copy: LocalizedContent }) {
   return (
     <div className="studio-shell" aria-hidden="true">

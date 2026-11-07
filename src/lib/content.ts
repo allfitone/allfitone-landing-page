@@ -119,14 +119,22 @@ export const content = {
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
       "Allfit Space reúne tu plan, tus sesiones y tu progreso. Entrena por tu cuenta o sigue la planificación de un profesional en el mismo lugar donde registras cada sesión.",
-    appAreasLabel: "Dentro de Allfit Space",
-    appAreas: [
-      ["Hoy", "Tu próxima sesión"],
-      ["Entrena", "Planes, sesiones y progreso"],
-      ["Explora", "Profesionales, gimnasios y servicios"],
-      ["Comunidad", "Las personas con las que entrenas"],
-      ["Tú", "Tu Fitness ID y tus permisos"],
-    ],
+    // The section's phone shows the hero's 18:00 session under way: the program comes from
+    // Estudio Norte and Mariana logs it set by set. The first exercise with sets left is the
+    // one she is on.
+    spaceSession: {
+      status: "En curso · 24 min",
+      plan: "Programa de Estudio Norte · Semana 3 de 4",
+      exercises: [
+        { name: "Press de banca", sets: 4, reps: "8", load: 60, done: 4 },
+        { name: "Remo con barra", sets: 4, reps: "10", load: 50, done: 2 },
+        { name: "Press militar", sets: 3, reps: "10", load: 30, done: 0 },
+        { name: "Dominadas", sets: 3, reps: "máx.", load: null, done: 0 },
+      ],
+      setOf: "Serie {set} de {sets}",
+      reps: "reps",
+      logSet: "Registrar serie",
+    },
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
@@ -292,14 +300,19 @@ export const content = {
     appSectionTitle: "Keep training from where you left off.",
     appSectionCopy:
       "Allfit Space brings together your plan, your sessions and your progress. Train on your own or follow a professional's plan in the same place where you log each session.",
-    appAreasLabel: "Inside Allfit Space",
-    appAreas: [
-      ["Today", "Your next session"],
-      ["Train", "Plans, sessions and progress"],
-      ["Explore", "Professionals, gyms and services"],
-      ["Community", "The people you train with"],
-      ["You", "Your Fitness ID and permissions"],
-    ],
+    spaceSession: {
+      status: "In progress · 24 min",
+      plan: "Estudio Norte program · Week 3 of 4",
+      exercises: [
+        { name: "Bench press", sets: 4, reps: "8", load: 60, done: 4 },
+        { name: "Barbell row", sets: 4, reps: "10", load: 50, done: 2 },
+        { name: "Overhead press", sets: 3, reps: "10", load: 30, done: 0 },
+        { name: "Pull-ups", sets: 3, reps: "max", load: null, done: 0 },
+      ],
+      setOf: "Set {set} of {sets}",
+      reps: "reps",
+      logSet: "Log set",
+    },
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
