@@ -15,7 +15,6 @@ export const content = {
     navSpace: "Allfit Space",
     navStudio: "Allfit Studio",
     analyticsPrivacy: "Privacidad de analítica",
-    contact: "Escríbenos",
     navAction: "Únete a la lista",
     mainNavigation: "Navegación principal",
     mobileNavigation: "Navegación móvil",
@@ -168,8 +167,6 @@ export const content = {
       reset: "Usar otro correo",
       note: "Solo usaremos tu nombre y tu correo para avisarte cuando abramos.",
     },
-    closingPrompt:
-      "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
     tagline: "All the fitness in one place.",
     inceptionMember: "Allfit One es miembro de NVIDIA Inception.",
     inceptionBadgeAlt: "Insignia del NVIDIA Inception Program",
@@ -182,7 +179,6 @@ export const content = {
     navSpace: "Allfit Space",
     navStudio: "Allfit Studio",
     analyticsPrivacy: "Analytics privacy",
-    contact: "Get in touch",
     navAction: "Join the list",
     mainNavigation: "Main navigation",
     mobileNavigation: "Mobile navigation",
@@ -319,8 +315,6 @@ export const content = {
       reset: "Use another email",
       note: "We'll only use your name and email to tell you when we open.",
     },
-    closingPrompt:
-      "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
     tagline: "All the fitness in one place.",
     inceptionMember: "Allfit One is a member of NVIDIA Inception.",
     inceptionBadgeAlt: "NVIDIA Inception Program badge",

@@ -183,15 +183,6 @@ function WaitlistSection({ copy }: { copy: LocalizedContent }) {
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
           <WaitlistForm copy={copy.waitlist} />
-
-          {/* Email stays possible, but quiet: the waitlist is this section's one action. */}
-          <div className="mt-12 flex flex-col gap-2 border-t border-white/14 pt-6">
-            <p className="text-sm leading-6 text-white/64">{copy.closingPrompt}</p>
-            <a href={CONTACT_HREF} className="inline-link self-start">
-              {copy.contact}
-              <FoundationIcon name="forward" size="sm" decorative />
-            </a>
-          </div>
         </div>
       </div>
     </section>
