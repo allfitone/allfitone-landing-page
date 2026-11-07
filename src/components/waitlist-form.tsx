@@ -7,6 +7,7 @@ import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
 import type { LocalizedContent } from "@/lib/content";
+import { usePersonName, withPerson } from "@/lib/person";
 import { siteConfig } from "@/lib/site-config";
 import { isPlausibleEmail, isWaitlistRole, joinWaitlist, type WaitlistEntry, type WaitlistRole } from "@/lib/waitlist";
 
@@ -28,6 +29,7 @@ const FIELD_ORDER: readonly Field[] = ["name", "email", "role"];
  * name and the choice kept.
  */
 export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
+  const person = usePersonName();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [announced, setAnnounced] = useState<Field | null>(null);
@@ -79,7 +81,7 @@ export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
     const next: Errors = {};
     if (!name) next.name = copy.errorNameEmpty;
     if (!email) next.email = copy.errorEmailEmpty;
-    else if (!isPlausibleEmail(email)) next.email = copy.errorEmailInvalid;
+    else if (!isPlausibleEmail(email)) next.email = withPerson(copy.errorEmailInvalid, person);
     if (!isWaitlistRole(role)) next.role = copy.errorRole;
 
     const first = FIELD_ORDER.find((field) => next[field]);
@@ -160,6 +162,7 @@ export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
             autoComplete="given-name"
             autoCapitalize="words"
             maxLength={80}
+            placeholder={withPerson(copy.namePlaceholder, person)}
             defaultValue={kept.name}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={describedBy("name", noteId)}
@@ -183,7 +186,7 @@ export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
             autoComplete="email"
             autoCapitalize="none"
             spellCheck={false}
-            placeholder={copy.emailPlaceholder}
+            placeholder={withPerson(copy.emailPlaceholder, person)}
             aria-invalid={Boolean(errors.email)}
             aria-describedby={describedBy("email", noteId)}
             readOnly={pending}

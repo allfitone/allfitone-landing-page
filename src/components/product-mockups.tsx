@@ -3,6 +3,7 @@ import { FoundationIcon, type IconName } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
 import type { LocalizedContent } from "@/lib/content";
+import { usePersonName, withPerson } from "@/lib/person";
 
 const dashboardIcons = ["overview", "people", "training", "operation", "business"] as const satisfies readonly IconName[];
 
@@ -15,7 +16,7 @@ function exerciseTarget(exercise: ExerciseVolume) {
 }
 
 /*
- * The Allfit Space section's phone: Mariana's 18:00 session, under way. Estudio Norte's program sets each exercise and Mariana logs it set by set, so the
+ * The Allfit Space section's phone: the person's 18:00 session, under way. Estudio Norte's program sets each exercise and the person logs it set by set, so the
  * plan and what she did sit on one screen. The set she is on is the screen's one cyan block.
  */
 export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
@@ -82,13 +83,14 @@ export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
 }
 
 /*
- * The Allfit Studio section's panel closes the story: Mariana finished the 18:00 session
+ * The Allfit Studio section's panel closes the story: the person finished the 18:00 session
  * in Allfit Space and Estudio Norte reviews it against the program it assigned. Plan and
  * log come from the same `spaceSession` data the Space phone shows; the one exercise that
- * differs is the panel's cyan. Studio reaches her history through the access she granted.
+ * differs is the panel's cyan. Studio reaches their history through the access they granted.
  */
 export function StudioReviewMockup({ copy }: { copy: LocalizedContent }) {
   const review = copy.studioReview;
+  const person = usePersonName();
   const [exerciseColumn, planColumn, loggedColumn] = review.columns;
 
   return (
@@ -114,10 +116,10 @@ export function StudioReviewMockup({ copy }: { copy: LocalizedContent }) {
         <div className="studio-main">
           <header className="studio-review-head">
             <div className="studio-shared-person">
-              <span className="studio-shared-avatar">MR</span>
+              <span className="studio-shared-avatar">{person.charAt(0)}</span>
               <div className="min-w-0">
                 <p className="mock-eyebrow text-white/48">{copy.studioNavigation[1]}</p>
-                <p className="mt-1 font-display text-2xl font-semibold uppercase leading-none sm:text-3xl">{copy.studioPerson}</p>
+                <p className="mt-1 font-display text-2xl font-semibold uppercase leading-none sm:text-3xl">{person}</p>
               </div>
             </div>
             <span className="studio-review-action mock-label">
@@ -177,7 +179,7 @@ export function StudioReviewMockup({ copy }: { copy: LocalizedContent }) {
                   <FoundationIcon name="permissions" size="xs" className="text-bolt" decorative />
                   {review.access}
                 </p>
-                <p className="mock-body mt-1 text-white/56">{review.accessPurpose}</p>
+                <p className="mock-body mt-1 text-white/56">{withPerson(review.accessPurpose, person)}</p>
               </section>
             </div>
           </div>

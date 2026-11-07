@@ -4,7 +4,7 @@ import type { LocalizedContent } from "@/lib/content";
 
 /*
  * The Fitness ID as one object: its name, what it holds and where it stays. The list
- * answers the problem section's ledger (the kinds of data Mariana left at her gym, kept
+ * answers the problem section's ledger (the kinds of data the person left at their gym, kept
  * this time), so it carries no label, index or decoration of its own; the cyan foot is
  * the payoff.
  */

@@ -29,6 +29,7 @@ import { RevealTitle } from "@/components/reveal-title";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
+import { usePersonName, withPerson } from "@/lib/person";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
@@ -45,6 +46,7 @@ function NewTabHint({ copy }: { copy: LocalizedContent }) {
 }
 
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
+  const person = usePersonName();
   return (
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -53,13 +55,13 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
           <p className="section-lead mt-8 text-white/70">{copy.problemCopy}</p>
         </div>
 
-        {/* A handover ledger with one real case: what Mariana takes from the gym she
+        {/* A handover ledger with one real case: what the person takes from the gym they
             left (nothing) beside what stays there, in figures rather than categories.
             The Fitness ID card in the next section holds the same kinds of data, kept. */}
         <div className="col-span-12 mt-16 md:mt-24">
           <div className="ledger" data-reveal>
             <div className="ledger-keep">
-              <p className="ledger-label">{copy.problemKeepLabel}</p>
+              <p className="ledger-label">{withPerson(copy.problemKeepLabel, person)}</p>
               <p className="ledger-keep-value">{copy.problemKeepValue}</p>
             </div>
             <div className="ledger-lose">
@@ -127,7 +129,7 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
           </a>
         </div>
 
-        {/* The section's one object is the app itself: Mariana's 18:00 session under way,
+        {/* The section's one object is the app itself: the person's 18:00 session under way,
             the professional's plan and the person's log on one screen. It replaces the row
             of five app areas, which listed what the app will hold instead of showing it. */}
         <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center" data-reveal="stage">
@@ -161,7 +163,7 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
         </div>
 
         {/* The section's one object is the product: Estudio Norte reviewing the session
-            Mariana finished, plan beside log. It replaces the four differentiators and the
+            the person finished, plan beside log. It replaces the four differentiators and the
             five modules, which listed Studio's features instead of showing them. */}
         <div className="studio-review-anchor col-span-12 mt-16 md:mt-20" data-reveal="card">
           <StudioReviewMockup copy={copy} />

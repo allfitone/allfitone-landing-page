@@ -131,8 +131,8 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
 
 test("the hero action leads to the waitlist, which validates and confirms in the page language", async ({ page }) => {
   for (const [language, action, nameLabel, emailLabel, role, submit, nameEmpty, emailInvalid, roleEmpty, joined, another] of [
-    ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Mariana.", "Usar otro correo"],
-    ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Mariana.", "Use another email"],
+    ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Nico.", "Usar otro correo"],
+    ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Nico.", "Use another email"],
   ] as const) {
     await page.goto(`/${language}`);
     await page.locator(".hero-actions").getByRole("link", { name: action }).click();
@@ -155,18 +155,18 @@ test("the hero action leads to the waitlist, which validates and confirms in the
     await expect(email).toHaveAttribute("aria-invalid", "true");
     await expect(name).toBeFocused();
 
-    await name.fill("Mariana");
-    await email.fill("mariana@correo");
+    await name.fill("Nico");
+    await email.fill("nico@correo");
     await email.press("Enter");
     await expect(waitlist.getByRole("alert")).toContainText(emailInvalid);
     await expect(email).toBeFocused();
 
-    await email.fill("mariana.rojas@correo.com");
+    await email.fill("nico@correo.com");
     await email.press("Enter");
     await expect(waitlist.getByRole("alert")).toContainText(roleEmpty);
     await expect(waitlist.getByRole("radio").first()).toBeFocused();
 
-    // Choosing clears the error; the confirmation greets her by name, takes focus, repeats
+    // Choosing clears the error; the confirmation greets them by name, takes focus, repeats
     // the address and names the product that is hers.
     // The radio sits inside its pill; people press the pill, so the test does too.
     await waitlist.locator("label", { hasText: role }).click();
@@ -175,15 +175,40 @@ test("the hero action leads to the waitlist, which validates and confirms in the
     await waitlist.getByRole("button", { name: submit }).click();
     const confirmation = waitlist.locator("p", { hasText: joined });
     await expect(confirmation).toBeFocused();
-    await expect(waitlist.getByRole("status")).toContainText("mariana.rojas@correo.com");
+    await expect(waitlist.getByRole("status")).toContainText("nico@correo.com");
     await expect(waitlist.getByRole("status")).toContainText("Allfit Space");
 
-    // Another email keeps her name and her choice, and puts the keyboard on the email.
+    // Another email keeps their name and their choice, and puts the keyboard on the email.
     await waitlist.getByRole("button", { name: another }).click();
     await expect(waitlist.getByLabel(emailLabel)).toBeFocused();
-    await expect(waitlist.getByLabel(nameLabel)).toHaveValue("Mariana");
+    await expect(waitlist.getByLabel(nameLabel)).toHaveValue("Nico");
     await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
   }
+});
+
+test("the page names one person per visit, the same in every section", async ({ page }) => {
+  const names = ["Kevin", "Walbert", "Jimmy", "Charly", "Nico"];
+  const seen = new Set<string>();
+  await page.goto("/es");
+  for (let visit = 0; visit < 8; visit += 1) {
+    if (visit > 0) await page.reload();
+    const label = page.locator("#problem .ledger-label").first();
+    await expect(label).toHaveText(/ se lleva$/);
+    const person = (await label.innerText()).replace(/ se lleva$/i, "");
+    const name = names.find((candidate) => candidate.toLowerCase() === person.toLowerCase());
+    expect(name, `«${person}» is one of the five names`).toBeDefined();
+    seen.add(name!);
+
+    // The Studio panel, the access line and the waitlist's placeholders name the same person.
+    const panel = page.locator(".studio-review");
+    await expect(panel).toContainText(`Lo autorizó ${name}.`);
+    await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
+    const waitlist = page.locator("#waitlist");
+    await expect(waitlist.getByLabel("Tu nombre")).toHaveAttribute("placeholder", name!);
+    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
+  }
+  // Eight visits all on one name out of five would happen about once in 78,000 runs.
+  expect(seen.size).toBeGreaterThan(1);
 });
 
 test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {

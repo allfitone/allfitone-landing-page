@@ -51,16 +51,16 @@ export const content = {
 
     studioNavigation: ["Resumen", "Personas", "Entrenamiento", "Operación", "Negocio"],
     studioOrganization: "Estudio Norte",
-    studioPerson: "Mariana Rojas",
 
     problemLabel: "El problema",
     problemTitle: "Cada vez que cambias, empiezas de cero.",
     problemCopy:
       "Tu historial no vive contigo: vive en la app, el entrenador o el gimnasio de turno. Cuando esa relación termina, tú sigues entrenando, pero tu progreso se queda ahí.",
-    problemKeepLabel: "Mariana se lleva",
+    // `{name}` is the visit's person (`usePersonName()`), filled by `withPerson()`.
+    problemKeepLabel: "{name} se lleva",
     problemKeepValue: "Nada",
     problemLoseLabel: "Deja en su antiguo gimnasio",
-    // Mariana's record at the gym she left before Estudio Norte, in real figures rather
+    // The person's record at the gym they left before Estudio Norte, in real figures rather
     // than categories. The Fitness ID card in the next section holds the same kinds of
     // data, kept instead of lost.
     problemLoseItems: [
@@ -95,8 +95,8 @@ export const content = {
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
       "Allfit Space reúne tu plan, tus sesiones y tu progreso. Entrena por tu cuenta o sigue la planificación de un profesional en el mismo lugar donde registras cada sesión.",
-    // The section's phone shows Mariana's 18:00 session under way: the program comes from
-    // Estudio Norte and Mariana logs it set by set. The first exercise with sets left is the
+    // The section's phone shows the person's 18:00 session under way: the program comes from
+    // Estudio Norte and the person logs it set by set. The first exercise with sets left is the
     // one she is on.
     spaceSession: {
       status: "En curso · 24 min",
@@ -116,7 +116,7 @@ export const content = {
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
       "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
-    // The section's panel closes the story the Space phone starts: Mariana finished the 18:00 session
+    // The section's panel closes the story the Space phone starts: the person finished the 18:00 session
     // in Allfit Space and Estudio Norte reviews it against the program it assigned. The plan
     // and the log both come from `spaceSession`, so the two screens agree.
     studioReview: {
@@ -129,7 +129,7 @@ export const content = {
       programWeek: "Semana 3 de 4",
       accessLabel: "Acceso",
       access: "Historial de entrenamiento",
-      accessPurpose: "Para seguir su programa. Lo autorizó Mariana.",
+      accessPurpose: "Para seguir su programa. Lo autorizó {name}.",
       action: "Ajustar la próxima sesión",
     },
 
@@ -139,8 +139,11 @@ export const content = {
       "Déjanos tu nombre y tu correo, y te avisaremos cuando Allfit Space y Allfit Studio abran sus puertas.",
     waitlist: {
       nameLabel: "Tu nombre",
+      // The placeholders and the address example use the visit's person: `{handle}` is the
+      // name in lower case.
+      namePlaceholder: "{name}",
       emailLabel: "Tu correo",
-      emailPlaceholder: "nombre@correo.com",
+      emailPlaceholder: "{handle}@correo.com",
       roleLegend: "¿Cómo usarías Allfit One?",
       // Keyed by the role id the waitlist stores (`waitlistRoles`), never by position.
       roles: [
@@ -152,7 +155,7 @@ export const content = {
       pending: "Un momento…",
       errorNameEmpty: "Escribe tu nombre para unirte.",
       errorEmailEmpty: "Escribe tu correo para unirte.",
-      errorEmailInvalid: "Revisa el correo: necesita la forma nombre@correo.com.",
+      errorEmailInvalid: "Revisa el correo: necesita la forma {handle}@correo.com.",
       errorRole: "Elige cómo usarías Allfit One.",
       failed: "No pudimos apuntarte. Inténtalo de nuevo o escríbenos a",
       joinedTitle: "Ya estás en la lista, {name}.",
@@ -213,20 +216,19 @@ export const content = {
 
     studioNavigation: ["Overview", "People", "Training", "Operations", "Business"],
     studioOrganization: "Estudio Norte",
-    studioPerson: "Mariana Rojas",
 
     problemLabel: "The problem",
     problemTitle: "Every time you switch, you start over.",
     problemCopy:
       "Your history does not live with you: it lives in whichever app, coach or gym you are using. When that relationship ends, you keep training, but your progress stays behind.",
-    problemKeepLabel: "Mariana takes",
+    problemKeepLabel: "{name} takes",
     problemKeepValue: "Nothing",
-    problemLoseLabel: "Leaves behind at her old gym",
+    problemLoseLabel: "Leaves behind at the old gym",
     problemLoseItems: [
       ["Logged sessions", "184"],
       ["Best squat", "95 kg"],
       ["Strength program", "12 weeks"],
-      ["Notes on her knee injury", "11"],
+      ["Knee injury notes", "11"],
       ["With the same coach", "2 years"],
     ],
     fitnessIdLabel: "Fitness ID",
@@ -282,7 +284,7 @@ export const content = {
       programWeek: "Week 3 of 4",
       accessLabel: "Access",
       access: "Training history",
-      accessPurpose: "To follow her program. Granted by Mariana.",
+      accessPurpose: "To follow the program. Granted by {name}.",
       action: "Adjust the next session",
     },
 
@@ -292,8 +294,9 @@ export const content = {
       "Leave your name and email, and we'll let you know when Allfit Space and Allfit Studio open their doors.",
     waitlist: {
       nameLabel: "Your name",
+      namePlaceholder: "{name}",
       emailLabel: "Your email",
-      emailPlaceholder: "name@email.com",
+      emailPlaceholder: "{handle}@email.com",
       roleLegend: "How would you use Allfit One?",
       roles: [
         { id: "train", label: "To train" },
@@ -304,7 +307,7 @@ export const content = {
       pending: "One moment…",
       errorNameEmpty: "Enter your name to join.",
       errorEmailEmpty: "Enter your email to join.",
-      errorEmailInvalid: "Check the email: it needs the form name@email.com.",
+      errorEmailInvalid: "Check the email: it needs the form {handle}@email.com.",
       errorRole: "Choose how you'd use Allfit One.",
       failed: "We couldn't add you. Try again or write to us at",
       joinedTitle: "You're on the list, {name}.",
