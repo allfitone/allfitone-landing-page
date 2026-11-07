@@ -253,12 +253,7 @@ section[id].fid-section {
    Status and contact
 --------------------------------------------------------------------------- */
 
-.status-row { display: grid; gap: var(--afo-space-3); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-8); }
-.status-row-name { font-family: var(--afo-font-family-display); font-size: clamp(1.8rem, 4vw, 2.75rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; }
-.status-row-state { display: inline-flex; align-items: center; gap: var(--afo-space-2); font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: var(--landing-tracking-label); text-transform: uppercase; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 72%, transparent); }
-.status-dot { width: 6px; height: 6px; border-radius: var(--afo-radius-circle); background: var(--afo-color-brand-primary); }
 /* A domain or a sentence, so it keeps its own case instead of the inline-link capitals. */
-.inline-link.status-row-link { justify-self: start; font-size: .875rem; font-weight: var(--afo-font-weight-semibold); letter-spacing: .01em; text-transform: none; }
 
 /* Waitlist: the page's one conversion. A visible label (never a placeholder standing in
    for it), one large field with its button on the same line from sm, and the note on
@@ -609,7 +604,6 @@ section[id].fid-section {
   section[id].fid-section { padding-block: calc(var(--fid-slant) + 7rem); }
   .studio-difference-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--afo-space-12); }
   .studio-module-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .status-row { grid-template-columns: minmax(0, 1fr) 11rem minmax(0, 1.25fr); align-items: center; gap: var(--afo-space-6); }
 }
 
 @media (min-width: 1024px) {
@@ -661,7 +655,7 @@ section[id].fid-section {
    then the lead and the action lift in. Below it, each section has a single
    moment, the first time it scrolls into view: its title rises line by line and
    its main object arrives (the product stage, the ledger, a card that uncovers,
-   the Studio columns, the status rows). In the ecosystem the two products then
+   the Studio columns). In the ecosystem the two products then
    connect. A light follows the pointer over the Studio columns; there is no
    scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without

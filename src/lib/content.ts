@@ -186,13 +186,6 @@ export const content = {
     statusTitle: "Estamos construyendo Allfit One.",
     statusCopy:
       "Déjanos tu correo y te avisaremos cuando Allfit Space y Allfit Studio abran sus puertas.",
-    // Each row links to where the product is explained instead of describing it a third time.
-    statusRows: [
-      { name: "Allfit Space", state: "En desarrollo", target: "space" },
-      { name: "Allfit Studio", state: "En desarrollo", target: "studio" },
-      { name: "Fitness ID", state: "Tesis de producto", target: "fitness-id" },
-    ],
-    statusFitnessIdLink: "Qué es el Fitness ID",
     waitlist: {
       label: "Tu correo",
       placeholder: "nombre@correo.com",
@@ -390,12 +383,6 @@ export const content = {
     statusTitle: "We're building Allfit One.",
     statusCopy:
       "Leave your email and we'll let you know when Allfit Space and Allfit Studio open their doors.",
-    statusRows: [
-      { name: "Allfit Space", state: "In development", target: "space" },
-      { name: "Allfit Studio", state: "In development", target: "studio" },
-      { name: "Fitness ID", state: "Product thesis", target: "fitness-id" },
-    ],
-    statusFitnessIdLink: "What Fitness ID is",
     waitlist: {
       label: "Your email",
       placeholder: "name@email.com",

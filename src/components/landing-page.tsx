@@ -261,7 +261,7 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
+function WaitlistSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -270,41 +270,19 @@ function WaitlistSection({ copy, language }: { copy: LocalizedContent; language:
         <div className="col-span-12 lg:col-span-6 lg:row-start-1">
           <RevealTitle className="section-title">{copy.statusTitle}</RevealTitle>
         </div>
-        <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0 lg:self-end">
+        <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
           <WaitlistForm copy={copy.waitlist} />
-        </div>
 
-        <div className="col-span-12 mt-20 border-t border-white/14 md:mt-28">
-          {copy.statusRows.map(({ name, state, target }, index) => {
-            const href = target === "fitness-id" ? "#fitness-id" : productSiteUrl(target, language);
-            // A product row shows the address of its own site; the thesis points back up the page.
-            const label = target === "fitness-id" ? copy.statusFitnessIdLink : new URL(href).host;
-            return (
-              <article key={name} className="status-row" data-reveal style={stagger(index)}>
-                <h3 className="status-row-name">{name}</h3>
-                <p className="status-row-state">
-                  <span className="status-dot" aria-hidden="true" />
-                  {state}
-                </p>
-                <a href={href} className="inline-link status-row-link">
-                  {label}
-                  <FoundationIcon name="forward" size="sm" decorative />
-                </a>
-              </article>
-            );
-          })}
+          {/* Email stays possible, but quiet: the waitlist is this section's one action. */}
+          <div className="mt-12 flex flex-col gap-2 border-t border-white/14 pt-6">
+            <p className="text-sm leading-6 text-white/64">{copy.closingPrompt}</p>
+            <a href={CONTACT_HREF} className="inline-link self-start">
+              {copy.contact}
+              <FoundationIcon name="forward" size="sm" decorative />
+            </a>
+          </div>
         </div>
-
-        {/* Email stays possible, but quiet: the waitlist is this section's one action. */}
-        <div className="col-span-12 mt-12 flex flex-col gap-2 md:mt-16 lg:col-span-8">
-          <p className="max-w-xl text-sm leading-6 text-white/64">{copy.closingPrompt}</p>
-          <a href={CONTACT_HREF} className="inline-link self-start">
-            {copy.contact}
-            <FoundationIcon name="forward" size="sm" decorative />
-          </a>
-        </div>
-
       </div>
     </section>
   );
@@ -463,7 +441,7 @@ export function LandingPage({ language }: { language: Language }) {
       <SpaceSection copy={copy} />
       <StudioSection copy={copy} />
       <EcosystemSection copy={copy} />
-      <WaitlistSection copy={copy} language={language} />
+      <WaitlistSection copy={copy} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">
