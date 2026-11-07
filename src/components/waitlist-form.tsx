@@ -28,7 +28,14 @@ const FIELD_ORDER: readonly Field[] = ["name", "email", "role"];
  * a button that no longer exists. «Use another email» brings the form back with the
  * name and the choice kept.
  */
-export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
+export function WaitlistForm({
+  copy,
+  privacy,
+}: {
+  copy: LocalizedContent["waitlist"];
+  /** The privacy policy, linked under the note: the form collects a name and an email. */
+  privacy: { href: string; label: string; opensInNewTab: string };
+}) {
   const person = usePersonName();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
@@ -256,6 +263,11 @@ export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
       <p id={noteId} className="waitlist-note">
         {copy.note}
       </p>
+      {/* A new tab, so what the person typed survives reading the policy. */}
+      <a className="waitlist-note-link" href={privacy.href} target="_blank" rel="noopener noreferrer">
+        {privacy.label}
+        <span className="sr-only"> {privacy.opensInNewTab}</span>
+      </a>
     </form>
   );
 }

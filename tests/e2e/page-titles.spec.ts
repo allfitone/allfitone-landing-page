@@ -2,13 +2,18 @@ import { expect, test } from "@playwright/test";
 
 import { ambassadorPath, visibleAmbassadors } from "@/lib/ambassadors/registry";
 import { languages } from "@/lib/content";
+import { legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { foreignTitleSeparator } from "@/lib/page-title";
 import { localizedPath } from "@/lib/site-config";
 
 // Every page title separates its parts with « | », in the tab and when shared. New pages
 // join this list; published ambassadors join it on their own.
 const paths = [
-  ...languages.flatMap((language) => [localizedPath(language), localizedPath(language, "/privacy/analytics")]),
+  ...languages.flatMap((language) => [
+    localizedPath(language),
+    localizedPath(language, legalPath()),
+    ...legalDocumentSlugs.map((slug) => localizedPath(language, legalPath(slug))),
+  ]),
   ...visibleAmbassadors(false).flatMap((profile) =>
     languages.map((language) => localizedPath(language, ambassadorPath(profile.slug))),
   ),

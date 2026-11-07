@@ -15,7 +15,10 @@ export const redirects: Record<string, Redirect> = {
   // Temporary, so the root can later negotiate the visitor's language without cached redirects.
   "/": { location: "/es", status: 307 },
   // Pages published before language prefixes keep their links working.
-  "/privacy/analytics": { location: "/es/privacy/analytics", status: 308 },
+  "/privacy/analytics": { location: "/es/legal/analytics", status: 308 },
+  // The analytics notice moved under /legal in November 2026, with the terms and the privacy policy.
+  "/es/privacy/analytics": { location: "/es/legal/analytics", status: 308 },
+  "/en/privacy/analytics": { location: "/en/legal/analytics", status: 308 },
   "/ambassadors/william": { location: "/es/ambassadors/william", status: 308 },
 };
 

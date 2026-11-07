@@ -64,6 +64,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Keep `mailto:hello@allfit.one` as the only conversion path: no checkout, payments, WhatsApp, demo, trial, or waitlist.
 - After changing a profile or the shared template, run `npm run ambassador:check` together with the verification commands below.
 
+## Legal pages
+
+- Everything legal for Allfit One lives on this site under `/es/legal` and `/en/legal`: the index, `terms` (one document for Allfit Space, Allfit Pro and Allfit Studio), `privacy` (one policy for all of Allfit One under Colombia's Ley 1581 de 2012, covering both products and this site's waitlist) and `analytics` (the optional analytics notice, linked from the policy). The owner set this up in November 2026; the Allfit Space landing's `/terms` and `/privacy` drafts redirect here, and the products link here.
+- The copy lives in `src/lib/legal/`, one file per document, in both languages with the same sections. It is in force: never write «borrador», «en revisión», «pendiente» or placeholders on these pages, and the only contact is `hello@allfit.one`. Allfit One has no apps in the stores yet, so the documents do not mention them beyond Allfit Pro being bought through the phone's store.
+- The company's registered name, tax id (NIT) and address are not on the pages yet; the owner will provide them, and they join the «Quién es responsable» section of the policy and the «Aceptación» section of the terms.
+- The analytics notice lived at `/privacy/analytics` until November 2026. `/privacy/analytics`, `/es/privacy/analytics` and `/en/privacy/analytics` redirect permanently (308) to `/{lang}/legal/analytics` in `scripts/static/edge-rules.mts` and in the CloudFront Function in the `allfitone` repository; both must list them, and the products' `ANALYTICS_PRIVACY_NOTICE_URL` points to the new address.
+- The homepage and ambassador footers link the three documents, and the waitlist links the privacy policy under its note, in a new tab so the form keeps what the person typed.
+
 ## Visual direction
 
 - The design should feel premium, athletic, precise, and recognizably Allfit One—not like a generic AI-generated SaaS landing page.
@@ -89,7 +97,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `src/components/landing-motion.ts` arms the reveals (`[data-motion='on']`). There is no pointer light: it lit the Studio columns, removed in November 2026. The CSS lives in the Motion block of `globals.css`.
 - Hidden states stay inside `prefers-reduced-motion: no-preference`, so the page reads whole without JavaScript and reduced motion keeps every final state. Content already on screen when the reveals arm stays shown.
 - Final states must match the static design pixel for pixel, so the visual snapshots never depend on motion.
-- The analytics privacy notice (`src/app/[lang]/privacy/analytics/page.tsx`) is set as a document, not a landing, at the homepage's width (the same 1500px `.site-grid` and side margins): one display title, then sentence-case hierarchy, hairlines and a readable measure, with the contents (`src/components/privacy-contents.tsx`) in the first three columns from 1024px, marking the section being read, and the text in the other nine. It shows when the notice took effect (`analyticsNoticeEffectiveDate` in `src/lib/content.ts`), never the internal version id the products record with consent («analytics-v1»), which the owner removed from the page in November 2026 along with the section numbers, the label above the title and the ghost version behind it. Update the date whenever the notice's terms change.
+- The legal pages are documents, not landings, at the homepage's width (the same 1500px `.site-grid` and side margins), framed by `LegalPage` (`src/components/legal/legal-page.tsx`): one display title, then sentence-case hierarchy, hairlines and a readable measure, with the contents (`src/components/legal/legal-contents.tsx`) in the first three columns from 1024px, marking the section being read, and the text in the other nine. Each shows when it took effect (`legalEffectiveDates` in `src/lib/legal/documents.ts`), never an internal version id such as «analytics-v1», which the owner removed from the analytics notice in November 2026 along with the section numbers, the label above the title and the ghost version behind it. Update a document's date whenever its terms change.
 - Material UI changes must be checked visually at desktop, tablet, and mobile widths. Use the `frontend-design` skill when it is available.
 
 ## Component and implementation rules
@@ -108,7 +116,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## SEO requirements
 
-- Every page title separates its parts with « | » («Allfit One | El ecosistema donde el fitness se conecta», «Privacidad de analítica | Allfit One», «William Vergel | Embajador de Allfit One»), never «-», «–», «—» or «·». The owner set this as a general rule in November 2026. The ambassador schema rejects the other separators (`foreignTitleSeparator` in `src/lib/page-title.ts`) and an E2E test checks every page's `<title>`.
+- Every page title separates its parts with « | » («Allfit One | El ecosistema donde el fitness se conecta», «Política de privacidad | Allfit One», «William Vergel | Embajador de Allfit One»), never «-», «–», «—» or «·». The owner set this as a general rule in November 2026. The ambassador schema rejects the other separators (`foreignTitleSeparator` in `src/lib/page-title.ts`) and an E2E test checks every page's `<title>`.
 - Each page's canonical is its own language URL, such as `https://www.allfit.one/es`. The homepage's `x-default` alternate points to the root.
 - Keep the homepage positioning broad enough to represent the parent ecosystem. Product-specific keywords belong in Allfit Studio copy and future dedicated routes.
 - Preserve crawlable `robots.txt`, the canonical-only sitemap, large-image social metadata, and the Open Graph/Twitter assets.

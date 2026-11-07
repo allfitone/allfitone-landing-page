@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 type Entry = readonly [href: `#${string}`, label: string];
 
 /**
- * The notice's contents. Without JavaScript it is a plain list of anchors; once
+ * A legal document's contents. Without JavaScript it is a plain list of anchors; once
  * hydrated it marks the section being read, the last one whose top has passed the
  * upper third of the viewport. On wide screens it sits beside the text and stays put
  * while the text scrolls; on narrow ones it reads as a list above the first section.
  */
-export function PrivacyContents({ label, entries }: { label: string; entries: readonly Entry[] }) {
+export function LegalContents({ label, entries }: { label: string; entries: readonly Entry[] }) {
   const [current, setCurrent] = useState<string | null>(null);
 
   useEffect(() => {
@@ -43,16 +43,16 @@ export function PrivacyContents({ label, entries }: { label: string; entries: re
   }, [entries]);
 
   return (
-    <nav className="privacy-contents" aria-labelledby="privacy-contents-label">
-      <div className="privacy-contents-inner">
-        <p id="privacy-contents-label" className="privacy-contents-label">
+    <nav className="legal-contents" aria-labelledby="legal-contents-label">
+      <div className="legal-contents-inner">
+        <p id="legal-contents-label" className="legal-contents-label">
           {label}
         </p>
-        <ol className="privacy-contents-list">
+        <ol className="legal-contents-list">
           {entries.map(([href, text]) => (
             <li key={href}>
               <a
-                className="privacy-contents-link"
+                className="legal-contents-link"
                 href={href}
                 aria-current={current === href.slice(1) ? "true" : undefined}
               >

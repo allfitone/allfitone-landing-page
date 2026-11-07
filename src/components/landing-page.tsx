@@ -28,6 +28,7 @@ import { SpaceSessionMockup, StudioReviewMockup } from "@/components/product-moc
 import { RevealTitle } from "@/components/reveal-title";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
+import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
@@ -171,7 +172,7 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
   );
 }
 
-function WaitlistSection({ copy }: { copy: LocalizedContent }) {
+function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -182,7 +183,14 @@ function WaitlistSection({ copy }: { copy: LocalizedContent }) {
         </div>
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
-          <WaitlistForm copy={copy.waitlist} />
+          <WaitlistForm
+            copy={copy.waitlist}
+            privacy={{
+              href: localizedPath(language, legalPath("privacy")),
+              label: legalChrome[language].names.privacy,
+              opensInNewTab: copy.opensInNewTab,
+            }}
+          />
         </div>
       </div>
     </section>
@@ -339,7 +347,7 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      <WaitlistSection copy={copy} />
+      <WaitlistSection copy={copy} language={language} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">
@@ -377,7 +385,11 @@ export function LandingPage({ language }: { language: Language }) {
               <nav className="footer-nav" aria-label={copy.footerInformation}>
                 <p className="footer-nav-title">{copy.footerInformation}</p>
                 <div className="footer-link-list">
-                  <Link className="footer-link" href={localizedPath(language, "/privacy/analytics")}>{copy.analyticsPrivacy}</Link>
+                  {legalDocumentSlugs.map((slug) => (
+                    <Link key={slug} className="footer-link" href={localizedPath(language, legalPath(slug))}>
+                      {legalChrome[language].names[slug]}
+                    </Link>
+                  ))}
                   <a className="footer-link" href={CONTACT_HREF}>
                     <span>{siteConfig.email}</span><span className="footer-link-mark" aria-hidden="true">→</span>
                   </a>

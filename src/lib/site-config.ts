@@ -52,7 +52,7 @@ export function shareImage(language: Language) {
   return { url: "/social/allfit-one-share.png", width: 1200, height: 630, type: "image/png", alt: shareImageAlt[language] };
 }
 
-/** Builds the public path of a page in the given language, e.g. `/en/privacy/analytics`. */
+/** Builds the public path of a page in the given language, e.g. `/en/legal/privacy`. */
 export function localizedPath(language: Language, path = "") {
   return `/${language}${path}`;
 }
