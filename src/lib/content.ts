@@ -126,10 +126,10 @@ export const content = {
       status: "En curso · 24 min",
       plan: "Programa de Estudio Norte · Semana 3 de 4",
       exercises: [
-        { name: "Press de banca", sets: 4, reps: "8", load: 60, done: 4 },
-        { name: "Remo con barra", sets: 4, reps: "10", load: 50, done: 2 },
-        { name: "Press militar", sets: 3, reps: "10", load: 30, done: 0 },
-        { name: "Dominadas", sets: 3, reps: "máx.", load: null, done: 0 },
+        { name: "Press de banca", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
+        { name: "Remo con barra", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
+        { name: "Press militar", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
+        { name: "Dominadas", sets: 3, reps: "máx.", load: null, done: 0, logged: "6" },
       ],
       setOf: "Serie {set} de {sets}",
       reps: "reps",
@@ -140,32 +140,22 @@ export const content = {
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
       "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
-    studioDifferentiators: [
-      [
-        "Cada persona entra con su identidad",
-        "La relación comienza cuando acepta una invitación. Studio usa su Fitness ID y solo muestra los datos que decidió compartir.",
-      ],
-      [
-        "Compara el plan con lo que ocurrió",
-        "Studio conserva cada versión del programa y la compara con lo que la persona registró en sus sesiones.",
-      ],
-      [
-        "Nadie ve a una persona solo por su cargo",
-        "El acceso depende de una relación, una autorización y una asignación vigentes. Ser dueño o administrador no basta.",
-      ],
-      [
-        "Los cobros llegan a tu organización",
-        "Cada pago pasa por tu propia pasarela. Allfit One no recibe ni retiene el dinero.",
-      ],
-    ],
-    studioModulesLabel: "Lo que gestionas desde Studio",
-    studioModules: [
-      ["Personas", "Invitaciones, relaciones y seguimiento de clientes"],
-      ["Entrenamiento", "Plantillas, programas, asignaciones e historial de versiones"],
-      ["Progreso", "Sesiones registradas, adherencia y resultados compartidos"],
-      ["Equipo", "Miembros, roles y permisos"],
-      ["Planes", "Planes que vendes y suscripciones activas"],
-    ],
+    // The section's panel closes the story the hero opens: Mariana finished the 18:00 session
+    // in Allfit Space and Estudio Norte reviews it against the program it assigned. The plan
+    // and the log both come from `spaceSession`, so the two screens agree.
+    studioReview: {
+      status: "Hoy, 18:00 · terminada",
+      columns: ["Ejercicio", "Plan", "Registrado"],
+      asPlanned: "Según el plan",
+      fewerReps: "{n} reps menos",
+      programLabel: "Programa asignado",
+      program: "Fuerza · 4 semanas",
+      programWeek: "Semana 3 de 4",
+      accessLabel: "Acceso",
+      access: "Historial de entrenamiento",
+      accessPurpose: "Para seguir su programa. Lo autorizó Mariana.",
+      action: "Ajustar la próxima sesión",
+    },
 
     statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
@@ -304,10 +294,10 @@ export const content = {
       status: "In progress · 24 min",
       plan: "Estudio Norte program · Week 3 of 4",
       exercises: [
-        { name: "Bench press", sets: 4, reps: "8", load: 60, done: 4 },
-        { name: "Barbell row", sets: 4, reps: "10", load: 50, done: 2 },
-        { name: "Overhead press", sets: 3, reps: "10", load: 30, done: 0 },
-        { name: "Pull-ups", sets: 3, reps: "max", load: null, done: 0 },
+        { name: "Bench press", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
+        { name: "Barbell row", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
+        { name: "Overhead press", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
+        { name: "Pull-ups", sets: 3, reps: "max", load: null, done: 0, logged: "6" },
       ],
       setOf: "Set {set} of {sets}",
       reps: "reps",
@@ -318,32 +308,19 @@ export const content = {
     studioSectionTitle: "Run your business without losing sight of your clients.",
     studioSectionCopy:
       "Studio works on each person's Fitness ID: you plan, follow their progress and run your operation without asking them to start over.",
-    studioDifferentiators: [
-      [
-        "Each person joins with their own identity",
-        "The relationship begins when they accept an invitation. Studio uses their Fitness ID and only shows the data they chose to share.",
-      ],
-      [
-        "Compare the plan with what happened",
-        "Studio keeps every version of the program and compares it with what the person logged in their sessions.",
-      ],
-      [
-        "No one sees a person just because of their role",
-        "Access depends on an active relationship, authorization and assignment. Being an owner or admin is not enough.",
-      ],
-      [
-        "Payments go to your organization",
-        "Each payment goes through your own gateway. Allfit One does not receive or hold the money.",
-      ],
-    ],
-    studioModulesLabel: "What you manage in Studio",
-    studioModules: [
-      ["People", "Invitations, relationships and client follow-up"],
-      ["Training", "Templates, programs, assignments and version history"],
-      ["Progress", "Logged sessions, adherence and shared results"],
-      ["Team", "Members, roles and permissions"],
-      ["Plans", "Plans you sell and active subscriptions"],
-    ],
+    studioReview: {
+      status: "Today, 18:00 · finished",
+      columns: ["Exercise", "Plan", "Logged"],
+      asPlanned: "As planned",
+      fewerReps: "{n} fewer reps",
+      programLabel: "Assigned program",
+      program: "Strength · 4 weeks",
+      programWeek: "Week 3 of 4",
+      accessLabel: "Access",
+      access: "Training history",
+      accessPurpose: "To follow her program. Granted by Mariana.",
+      action: "Adjust the next session",
+    },
 
     statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",

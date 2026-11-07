@@ -24,7 +24,7 @@ import { cn } from "@allfitone/react/lib/utils";
 import { FitnessIdCard } from "@/components/fitness-id-card";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
-import { PhoneMockup, SpaceSessionMockup, StudioDashboardMockup } from "@/components/product-mockups";
+import { PhoneMockup, SpaceSessionMockup, StudioDashboardMockup, StudioReviewMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
@@ -143,14 +143,14 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
     <section id="allfit-studio" className="relative overflow-hidden bg-panel text-white">
       <span id="allfit-os" className="legacy-section-anchor" aria-hidden="true" />
       <div className="site-grid relative z-10 py-24 md:py-32 lg:py-40">
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 lg:col-span-7">
           <div className="product-section-wordmark product-section-wordmark-dark">
             <ProductWordmark product="studio" surface="dark" title={copy.studioSectionLabel} />
           </div>
+          <RevealTitle className="section-title mt-10 md:mt-12">{copy.studioSectionTitle}</RevealTitle>
         </div>
-        <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
-          <RevealTitle className="section-title">{copy.studioSectionTitle}</RevealTitle>
-          <p className="section-lead mt-8 text-white/70">{copy.studioSectionCopy}</p>
+        <div className="col-span-12 mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
+          <p className="section-lead text-white/70">{copy.studioSectionCopy}</p>
           <a {...productSiteLink("studio", language)} className="inline-link mt-6">
             {copy.studioSectionLink}
             <NewTabHint copy={copy} />
@@ -158,27 +158,11 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
           </a>
         </div>
 
-        <div className="studio-difference-grid col-span-12 mt-20 md:mt-28">
-          {copy.studioDifferentiators.map(([title, description], index) => (
-            <article key={title} className="studio-difference" data-reveal data-spotlight style={stagger(index)}>
-              <h3 className="studio-difference-title">{title}</h3>
-              <p className="mt-4 max-w-md text-sm leading-6 text-white/64">{description}</p>
-            </article>
-          ))}
-        </div>
-
-        {/* The modules get a real heading instead of a label above them. Only what Studio
-            does is listed: features that are not built get no cell. */}
-        <div className="col-span-12 mt-20 md:mt-28">
-          <h3 className="studio-modules-title">{copy.studioModulesLabel}</h3>
-          <div className="studio-module-grid">
-            {copy.studioModules.map(([module, description]) => (
-              <article key={module} className="studio-module">
-                <h4 className="studio-module-name">{module}</h4>
-                <p className="mt-2 text-xs leading-5 text-white/64">{description}</p>
-              </article>
-            ))}
-          </div>
+        {/* The section's one object is the product: Estudio Norte reviewing the session
+            Mariana finished, plan beside log. It replaces the four differentiators and the
+            five modules, which listed Studio's features instead of showing them. */}
+        <div className="studio-review-anchor col-span-12 mt-16 md:mt-20" data-reveal="card">
+          <StudioReviewMockup copy={copy} />
         </div>
       </div>
     </section>

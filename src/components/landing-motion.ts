@@ -4,14 +4,12 @@ import { useEffect, type CSSProperties } from "react";
  * The homepage's motion layer, one listener set for the page root marked
  * `[data-landing]`.
  *
- * - `[data-reveal]` elements get `is-in` the first time they enter the viewport.
- *   A masked title first learns which line each word sits on, so its lines rise
- *   one after another, as the Space and Studio titles do.
- * - `[data-spotlight]` elements follow the pointer through `--mx` and `--my`.
+ * `[data-reveal]` elements get `is-in` the first time they enter the viewport.
+ * A masked title first learns which line each word sits on, so its lines rise
+ * one after another, as the Space and Studio titles do. There is no pointer
+ * light: it lit the Studio columns, which were removed in November 2026.
  *
- * Values go to CSS custom properties on the element that uses them, never on the
- * root, so the pointer never restyles the page or re-renders
- * anything. Reveals only arm once `[data-motion='on']` is set here, so the page
+ * Reveals only arm once `[data-motion='on']` is set here, so the page
  * reads whole without JavaScript. Whatever is already on screen when they arm
  * stays shown, so arming never blinks out content the reader can see, and
  * reduced motion gets every final state at once.
@@ -51,25 +49,8 @@ export function useLandingMotion(language: string): void {
     });
     site.dataset.motion = "on";
 
-    let pointerFrame = 0;
-    const onPointer = (event: PointerEvent) => {
-      if (reduced || event.pointerType !== "mouse") return;
-      const target = event.target instanceof Element ? event.target : null;
-      const spot = target?.closest<HTMLElement>("[data-spotlight]");
-      if (!spot) return;
-      cancelAnimationFrame(pointerFrame);
-      pointerFrame = requestAnimationFrame(() => {
-        const box = spot.getBoundingClientRect();
-        spot.style.setProperty("--mx", `${event.clientX - box.left}px`);
-        spot.style.setProperty("--my", `${event.clientY - box.top}px`);
-      });
-    };
-    site.addEventListener("pointermove", onPointer, { passive: true });
-
     return () => {
       revealer.disconnect();
-      cancelAnimationFrame(pointerFrame);
-      site.removeEventListener("pointermove", onPointer);
       delete site.dataset.motion;
     };
   }, [language]);

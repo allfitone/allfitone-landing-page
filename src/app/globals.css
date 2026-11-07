@@ -209,14 +209,38 @@ section[id].fid-section {
    Studio
 --------------------------------------------------------------------------- */
 
-.studio-difference-grid { display: grid; border-top: 1px solid var(--afo-color-border-subtle); }
-.studio-difference { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-8); }
-.studio-difference-title { font-family: var(--afo-font-family-display); font-size: clamp(1.6rem, 2.8vw, 2.35rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; }
-
-.studio-modules-title { font-family: var(--afo-font-family-display); font-size: clamp(1.9rem, 3.4vw, 2.75rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; }
-.studio-module-grid { margin-top: var(--afo-space-8); display: grid; border-top: 1px solid var(--afo-color-border-subtle); }
-.studio-module { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-5); }
-.studio-module-name { font-family: var(--afo-font-family-display); font-size: 1.5rem; font-weight: var(--afo-font-weight-semibold); letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
+/* Allfit Studio section: the panel closes the hero's story. Estudio Norte reviews the
+   session Mariana finished, plan beside log; the one row that differs is the panel's
+   cyan. The screen is Void inside the Panel-coloured section so it reads as a screen,
+   with no shadow, because the card reveal's clip would cut one off. Its text runs a
+   step larger than the hero stage's: here the panel is the section's subject. */
+.studio-review-anchor { --reveal-radius: var(--afo-radius-panel); }
+.studio-review { --landing-type-label: .75rem; background: var(--afo-color-ink-void); box-shadow: none; }
+.studio-review .mock-body { font-size: .8125rem; }
+.studio-review .studio-workspace { min-height: 0; grid-template-columns: minmax(0, 1fr); }
+.studio-review .studio-sidebar { display: none; }
+.studio-review-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--afo-space-4); }
+.studio-review-action { display: inline-flex; min-height: 36px; align-items: center; gap: var(--afo-space-2); border: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 18%, transparent); border-radius: var(--afo-radius-pill); padding-inline: 14px; color: var(--afo-color-neutral-white); }
+.studio-review-grid { display: grid; gap: var(--afo-space-3); margin-top: var(--afo-space-5); }
+.studio-review-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--afo-space-1) var(--afo-space-4); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 8%, transparent); padding-block: 12px; }
+.studio-review-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.studio-review-row > :first-child, .studio-review-row > :last-child { grid-column: 1 / -1; }
+.studio-review-columns { display: none; }
+.studio-review-cell-label { display: block; margin-bottom: 2px; color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
+@media (min-width: 640px) {
+  .studio-review-row { grid-template-columns: minmax(0, 1.25fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.1fr); align-items: center; }
+  .studio-review-row > :first-child, .studio-review-row > :last-child { grid-column: auto; }
+  .studio-review-columns { display: grid; padding-block: 10px; color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
+  .studio-review-cell-label { display: none; }
+}
+@media (min-width: 768px) {
+  .studio-review-grid { grid-template-columns: minmax(0, 1fr) 240px; }
+}
+/* The sidebar returns only where the table keeps room for its four columns beside it. */
+@media (min-width: 1280px) {
+  .studio-review .studio-workspace { grid-template-columns: 176px minmax(0, 1fr); }
+  .studio-review .studio-sidebar { display: flex; }
+}
 
 /* ---------------------------------------------------------------------------
    Waitlist
@@ -288,7 +312,6 @@ section[id].fid-section {
 /* ---------------------------------------------------------------------------
    Analytics privacy notice
 --------------------------------------------------------------------------- */
-
 
 .privacy-page { min-height: 100dvh; overflow: clip; background: var(--afo-color-ink-void); color: var(--afo-color-neutral-chalk); }
 .privacy-shell { width: min(100%, 1500px); margin-inline: auto; padding-inline: var(--afo-space-5); }
@@ -568,9 +591,6 @@ section[id].fid-section {
   .product-phone { width: 236px; }
   .phone-screen { min-height: 500px; }
   section[id].fid-section { padding-block: calc(var(--fid-slant) + 7rem); }
-  .studio-difference-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--afo-space-12); }
-  /* Five modules, one row: stacked below lg, side by side from it. */
-  .studio-module-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--afo-space-8); }
 }
 
 @media (min-width: 1024px) {
@@ -622,9 +642,9 @@ section[id].fid-section {
    The hero enters once, on load: the title rises out of its masks line by line,
    then the lead and the action lift in. Below it, each section has a single
    moment, the first time it scrolls into view: its title rises line by line and
-   its main object arrives (the product stage, the ledger, a card that uncovers,
-   the Studio columns). A light follows the pointer over the Studio columns;
-   there is no scroll progress bar. Everything else stays still. Reveals are armed by
+   its main object arrives (the product stage, the Space phone, the ledger, or a
+   card that uncovers: the Fitness ID card and the Studio panel). There is no
+   pointer light and no scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
 --------------------------------------------------------------------------- */
@@ -639,10 +659,6 @@ section[id].fid-section {
 .hero-line:has(.hero-fitness) { z-index: 1; }
 .reveal-word { display: inline-block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
 .reveal-word > span { display: inline-block; }
-
-[data-spotlight] { position: relative; isolation: isolate; }
-[data-spotlight]::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--afo-color-brand-primary) 12%, transparent), transparent 46%); opacity: 0; pointer-events: none; transition: opacity .5s var(--landing-ease); }
-[data-spotlight]:hover::before { opacity: 1; }
 
 .fid-card { --reveal-radius: var(--afo-radius-panel); }
 
