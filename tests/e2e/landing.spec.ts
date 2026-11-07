@@ -139,6 +139,30 @@ test("editorial sections render without eyebrow markers", async ({ page }) => {
   await expect(page.locator(".section-marker")).toHaveCount(0);
 });
 
+test("every section action receives the pointer, with nothing painted over it", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/es");
+
+    const covered = await page.locator("section[id]").evaluateAll((sections) =>
+      sections.flatMap((section) =>
+        [...section.querySelectorAll<HTMLElement>("a, button")]
+          .filter((element) => element.getClientRects().length > 0 && getComputedStyle(element).visibility !== "hidden")
+          .flatMap((element) => {
+            element.scrollIntoView({ block: "center", behavior: "instant" });
+            const box = element.getBoundingClientRect();
+            const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+            return hit && (hit === element || element.contains(hit))
+              ? []
+              : [`${section.id}: «${element.textContent?.trim()}» is under ${hit?.tagName.toLowerCase()}.${hit?.getAttribute("class") ?? ""}`];
+          }),
+      ),
+    );
+    expect(covered, `${viewport.width}px`).toEqual([]);
+  }
+});
+
 test("sections carry no sequence numbers or ghost marks", async ({ page }) => {
   await page.goto("/es");
 

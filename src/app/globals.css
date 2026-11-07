@@ -94,6 +94,10 @@
 /* A flat Void canvas. The grid texture, the cyan glow and the ghost "1" were removed: they
    only signalled the genre. The headline and the product stage carry the hero. */
 .hero { background: var(--afo-color-ink-void); }
+/* From lg the lead and the action share the headline's grid row, and the headline's line
+   masks are positioned full-width blocks. Lift the copy above them, or the masks take its
+   hover, cursor and clicks. */
+.hero-copy { position: relative; z-index: 2; }
 
 /* ---------------------------------------------------------------------------
    Product previews (phone + Studio dashboard)
