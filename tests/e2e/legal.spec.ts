@@ -97,10 +97,6 @@ test("lists the three documents in the index and links every one from the homepa
   const legalColumn = footer.getByRole("navigation", { name: "Legal" });
   await expect(legalColumn.getByRole("link")).toHaveText(["Términos y condiciones", "Política de privacidad", "Aviso de analítica"]);
   await expect(footer.locator("a[href^='mailto:']")).toHaveCount(0);
-  // The waitlist asks for a name and an email, so it links the policy, in a new tab.
-  const waitlistLink = page.locator("#waitlist").getByRole("link", { name: /Política de privacidad/ });
-  await expect(waitlistLink).toHaveAttribute("href", "/es/legal/privacy");
-  await expect(waitlistLink).toHaveAttribute("target", "_blank");
 });
 
 test("switches language through the URL and links home in the same language", async ({ page }) => {

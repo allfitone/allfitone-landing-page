@@ -171,7 +171,7 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
   );
 }
 
-function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
+function WaitlistSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -182,14 +182,7 @@ function WaitlistSection({ copy, language }: { copy: LocalizedContent; language:
         </div>
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
-          <WaitlistForm
-            copy={copy.waitlist}
-            privacy={{
-              href: localizedPath(language, legalPath("privacy")),
-              label: legalChrome[language].names.privacy,
-              opensInNewTab: copy.opensInNewTab,
-            }}
-          />
+          <WaitlistForm copy={copy.waitlist} />
         </div>
       </div>
     </section>
@@ -346,7 +339,7 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      <WaitlistSection copy={copy} language={language} />
+      <WaitlistSection copy={copy} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">

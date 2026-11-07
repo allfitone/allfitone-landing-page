@@ -70,7 +70,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - The copy lives in `src/lib/legal/`, one file per document, in both languages with the same sections. It is in force: never write «borrador», «en revisión», «pendiente» or placeholders on these pages, and the only contact is `hello@allfit.one`. Allfit One has no apps in the stores yet, so the documents do not mention them beyond Allfit Pro being bought through the phone's store.
 - The company's registered name, tax id (NIT) and address are not on the pages yet; the owner will provide them, and they join the «Quién es responsable» section of the policy and the «Aceptación» section of the terms.
 - The analytics notice lived at `/privacy/analytics` until November 2026. `/privacy/analytics`, `/es/privacy/analytics` and `/en/privacy/analytics` redirect permanently (308) to `/{lang}/legal/analytics` in `scripts/static/edge-rules.mts` and in the CloudFront Function in the `allfitone` repository; both must list them, and the products' `ANALYTICS_PRIVACY_NOTICE_URL` points to the new address.
-- The homepage and ambassador footers link the three documents, and the waitlist links the privacy policy under its note, in a new tab so the form keeps what the person typed.
+- The homepage and ambassador footers link the three documents. Nothing sits under the waitlist form: its note («Solo usaremos tu nombre y tu correo…») and the privacy policy link below it were removed in November 2026 at the owner's request.
 
 ## Visual direction
 

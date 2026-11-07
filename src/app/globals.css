@@ -257,9 +257,6 @@ section[id].fid-section {
 .waitlist-submit { width: 100%; min-height: 3.5rem; margin-top: var(--afo-space-8); padding-inline: var(--afo-space-8); }
 .waitlist-submit:disabled { opacity: 1; cursor: progress; }
 .waitlist-message { display: flex; gap: var(--afo-space-2); margin-top: var(--afo-space-3); font-size: .875rem; line-height: 1.5; color: var(--afo-color-text-danger); }
-.waitlist-note { margin-top: var(--afo-space-4); font-size: .75rem; line-height: 1.55; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 58%, transparent); }
-.waitlist-note-link { display: inline-flex; min-height: var(--afo-space-touch-target); align-items: center; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 72%, transparent); font-size: .75rem; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--afo-color-neutral-chalk) 32%, transparent); text-underline-offset: .3em; transition: color var(--afo-motion-feedback-duration) var(--afo-motion-feedback-easing); }
-.waitlist-note-link:hover { color: var(--afo-color-neutral-chalk); }
 .waitlist-message-link { text-decoration: underline; text-underline-offset: 3px; }
 .waitlist-joined { margin-top: var(--afo-space-8); border-top: 1px solid color-mix(in srgb, var(--afo-color-brand-primary) 40%, transparent); padding-top: var(--afo-space-6); }
 .waitlist-joined-title { display: flex; align-items: center; gap: var(--afo-space-3); font-family: var(--afo-font-family-display); font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: 1; text-transform: uppercase; outline: none; }
