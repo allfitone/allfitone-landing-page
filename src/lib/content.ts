@@ -167,23 +167,35 @@ export const content = {
 
     ecosystemLabel: "Ecosistema",
     ecosystemTitle: "Dos productos. Una sola relación.",
-    ecosystemCopy: "Allfit Space es de la persona; Allfit Studio, del profesional y su organización.",
+    ecosystemCopy:
+      "Así se ve una relación entre Allfit Space y Allfit Studio, desde la invitación hasta el día en que termina.",
+    // One relationship, the hero's Mariana Rojas and Estudio Norte, followed through time. Studio
+    // sits on the left because it opens the relationship; the person's side closes each step.
     ecosystem: {
-      space: {
-        title: "La persona es dueña de lo que registra.",
-        copy: "En Allfit Space registra sesiones, marcas y progreso, y elige qué ve cada profesional.",
-      },
-      connect: {
-        title: "Se conectan con tu permiso",
-      },
-      studio: {
-        title: "El profesional acompaña sin apropiarse.",
-        copy: "Desde Allfit Studio programa, sigue lo que la persona registró y analiza su progreso con el acceso que ella concedió.",
-      },
-      closingLead: "Cambia quién te acompaña.",
-      closingAccent: "No",
-      closingRest: "lo que has construido.",
-      relation: ["Persona", "Profesional", "Organización"],
+      studioSide: "Estudio Norte, en Allfit Studio",
+      spaceSide: "Mariana, en Allfit Space",
+      steps: [
+        {
+          name: "La invitación",
+          studio: "Estudio Norte la invita desde Allfit Studio.",
+          space: "Mariana acepta y elige qué datos compartir.",
+        },
+        {
+          name: "El plan",
+          studio: "Le asigna un programa.",
+          space: "Ella lo entrena y registra cada sesión.",
+        },
+        {
+          name: "El seguimiento",
+          studio: "Ve lo que Mariana registró y compara el plan con lo que ocurrió.",
+          space: "Ella ve su progreso y puede retirar un acceso cuando quiera.",
+        },
+        {
+          name: "El cierre",
+          studio: "Si la relación termina, su acceso se cierra.",
+          space: "Su historial sigue con ella.",
+        },
+      ],
     },
 
     statusLabel: "Lista de espera",
@@ -367,23 +379,33 @@ export const content = {
 
     ecosystemLabel: "Ecosystem",
     ecosystemTitle: "Two products. One relationship.",
-    ecosystemCopy: "Allfit Space belongs to the person; Allfit Studio, to the professional and their organization.",
+    ecosystemCopy:
+      "This is what a relationship between Allfit Space and Allfit Studio looks like, from the invitation to the day it ends.",
     ecosystem: {
-      space: {
-        title: "The person owns what they log.",
-        copy: "In Allfit Space they log sessions, records and progress, and choose what each professional sees.",
-      },
-      connect: {
-        title: "They connect with your permission",
-      },
-      studio: {
-        title: "The professional guides without owning it.",
-        copy: "From Allfit Studio they program, follow what the person logged and analyze progress, with the access the person granted.",
-      },
-      closingLead: "Change who guides you.",
-      closingAccent: "Not",
-      closingRest: "what you've built.",
-      relation: ["Person", "Professional", "Organization"],
+      studioSide: "Estudio Norte, in Allfit Studio",
+      spaceSide: "Mariana, in Allfit Space",
+      steps: [
+        {
+          name: "The invitation",
+          studio: "Estudio Norte invites her from Allfit Studio.",
+          space: "Mariana accepts and chooses which data to share.",
+        },
+        {
+          name: "The plan",
+          studio: "It assigns her a program.",
+          space: "She trains it and logs every session.",
+        },
+        {
+          name: "The follow-up",
+          studio: "It sees what Mariana logged and compares the plan with what happened.",
+          space: "She sees her progress and can withdraw access whenever she wants.",
+        },
+        {
+          name: "The end",
+          studio: "If the relationship ends, its access closes.",
+          space: "Her history stays with her.",
+        },
+      ],
     },
 
     statusLabel: "Waitlist",

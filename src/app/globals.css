@@ -211,49 +211,34 @@ section[id].fid-section {
    Ecosystem
 --------------------------------------------------------------------------- */
 
-.ecosystem-panel { overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 12%, transparent); border-radius: var(--afo-radius-xl); background: var(--afo-color-ink-void); color: var(--afo-color-neutral-white); box-shadow: var(--afo-shadow-card); padding: var(--afo-space-8) var(--afo-space-6); }
-.ecosystem-grid { display: flex; flex-direction: column; }
-.ecosystem-product { padding-block: var(--afo-space-8); }
-.ecosystem-grid > .ecosystem-product:first-child { padding-top: 0; }
-.ecosystem-product-studio { border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); }
-.ecosystem-product-title { font-family: var(--afo-font-family-display); font-size: clamp(1.9rem, 6vw, 2.6rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .98; text-transform: uppercase; }
-.ecosystem-product-copy { margin-top: var(--afo-space-4); max-width: 36ch; font-size: .9375rem; line-height: 1.6; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 66%, transparent); }
-.ecosystem-connect { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: var(--afo-space-8); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); }
-.ecosystem-node { display: block; width: clamp(12rem, 62vw, 16rem); color: var(--afo-color-brand-primary); }
-.ecosystem-node-svg { display: block; width: 100%; height: auto; }
-.ecosystem-connect-title { margin-top: var(--afo-space-5); font-size: .75rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: var(--landing-tracking-label); text-transform: uppercase; color: var(--afo-color-brand-primary); }
-.ecosystem-statement { margin-top: var(--afo-space-8); padding-top: var(--afo-space-8); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); text-align: center; font-family: var(--afo-font-family-display); font-size: clamp(1.5rem, 5vw, 2.15rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: 1.05; text-transform: uppercase; }
-.ecosystem-statement-line { display: block; }
-.ecosystem-statement-accent { color: var(--afo-color-brand-primary); }
-.ecosystem-relation { margin-top: var(--afo-space-8); }
-.ecosystem-relation-flow { display: flex; align-items: center; gap: var(--afo-space-3); }
-.ecosystem-relation-node { font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: .1em; text-transform: uppercase; color: var(--afo-color-ink-void); white-space: nowrap; }
-.ecosystem-relation-link { flex: 1 1 auto; min-width: var(--afo-space-4); height: 1px; background: color-mix(in srgb, var(--afo-color-ink-void) 28%, transparent); }
 /* At 11px the three nodes no longer fit a 320px phone with the default gaps; tighten the
    spacing there instead of dropping the type below the 11px floor. */
-@media (max-width: 359px) {
-  .ecosystem-relation-flow { gap: var(--afo-space-2); }
-  .ecosystem-relation-node { letter-spacing: .04em; }
-  .ecosystem-relation-link { min-width: var(--afo-space-2); }
-}
 
-@media (min-width: 1024px) {
-  .ecosystem-panel { padding: var(--afo-space-10) var(--afo-space-10) var(--afo-space-8); }
-  .ecosystem-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, .82fr) minmax(0, 1fr); align-items: stretch; }
-  .ecosystem-product { display: flex; flex-direction: column; padding: var(--afo-space-2) var(--afo-space-10); }
-  .ecosystem-grid > .ecosystem-product:first-child { padding-top: var(--afo-space-2); padding-left: 0; }
-  .ecosystem-product-studio { border-top: 0; padding-right: 0; }
-  .ecosystem-product-title { font-size: clamp(2.2rem, 3.4vw, 3.1rem); min-height: 2em; }
-  .ecosystem-connect { justify-content: center; border-top: 0; border-inline: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 12%, transparent); padding: var(--afo-space-4) var(--afo-space-8); }
-  .ecosystem-node { width: min(100%, 15rem); }
-  .ecosystem-statement { margin-top: var(--afo-space-10); font-size: clamp(1.8rem, 2.9vw, 2.5rem); }
-}
 
 /* ---------------------------------------------------------------------------
    Status and contact
 --------------------------------------------------------------------------- */
 
 /* A domain or a sentence, so it keeps its own case instead of the inline-link capitals. */
+
+/* Ecosystem: one relationship read across both products. A typographic table in Void ink
+   on the cyan field: hairline rows, the step named in display type, Studio and Space side
+   by side from lg. Below lg each side names itself inline. */
+.relationship-head { display: none; }
+.relationship { border-top: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent); }
+.relationship-step { display: grid; gap: var(--afo-space-4); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent); padding-block: var(--afo-space-8); }
+.relationship-step-name { font-family: var(--afo-font-family-display); font-size: clamp(2rem, 7vw, 3rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; }
+.relationship-side { max-width: 36ch; font-size: 1rem; font-weight: var(--afo-font-weight-medium); line-height: 1.55; color: color-mix(in srgb, var(--afo-color-ink-void) 80%, transparent); }
+.relationship-side-who { display: block; margin-bottom: var(--afo-space-1); font-size: .8125rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .04em; color: var(--afo-color-ink-void); }
+/* The payoff: where the relationship ends, the person's side is the one line set large. */
+.relationship-step:last-child .relationship-side-space { max-width: none; font-family: var(--afo-font-family-display); font-size: clamp(2rem, 7vw, 3rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-display); line-height: .95; text-transform: uppercase; color: var(--afo-color-ink-void); }
+.relationship-step:last-child .relationship-side-space .relationship-side-who { font-family: var(--afo-font-family-body); line-height: 1.4; text-transform: none; letter-spacing: .04em; }
+@media (min-width: 1024px) {
+  .relationship-head, .relationship-step { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr); column-gap: var(--afo-space-8); }
+  .relationship-head { padding-bottom: var(--afo-space-4); font-size: .8125rem; font-weight: var(--afo-font-weight-extrabold); letter-spacing: .04em; color: var(--afo-color-ink-void); }
+  .relationship-step { align-items: baseline; padding-block: var(--afo-space-10); }
+  .relationship-side-who { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
 
 /* Waitlist: the page's one conversion. A visible label (never a placeholder standing in
    for it), one large field with its button on the same line from sm, and the note on
@@ -655,9 +640,8 @@ section[id].fid-section {
    then the lead and the action lift in. Below it, each section has a single
    moment, the first time it scrolls into view: its title rises line by line and
    its main object arrives (the product stage, the ledger, a card that uncovers,
-   the Studio columns). In the ecosystem the two products then
-   connect. A light follows the pointer over the Studio columns; there is no
-   scroll progress bar. Everything else stays still. Reveals are armed by
+   the Studio columns, the steps of the ecosystem relationship). A light
+   follows the pointer over the Studio columns; there is no scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
 --------------------------------------------------------------------------- */
@@ -665,8 +649,8 @@ section[id].fid-section {
 :root { --landing-ease: cubic-bezier(0.16, 1, 0.3, 1); }
 
 /* Masks clip only below the line, so accents and the outlined FITNESS keep their edges. */
-.hero-line, .ecosystem-statement-line { display: block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
-.hero-line > span, .ecosystem-statement-line > span { display: block; }
+.hero-line { display: block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
+.hero-line > span { display: block; }
 /* Each mask is its own stacking context, so the outlined FITNESS keeps drawing over the line below, as it does unmasked. */
 .hero-line { position: relative; }
 .hero-line:has(.hero-fitness) { z-index: 1; }
@@ -679,7 +663,6 @@ section[id].fid-section {
 
 .fid-card { --reveal-radius: var(--afo-radius-panel); }
 .space-areas { --reveal-radius: var(--radius-2xl, 1rem); }
-.ecosystem-panel { --reveal-radius: var(--afo-radius-xl); }
 
 @media (prefers-reduced-motion: no-preference) {
   /* Backwards fill only: a finished entrance stops applying, so the text returns to its normal rendering. */
@@ -691,24 +674,18 @@ section[id].fid-section {
   /* Hidden states arm instantly; the transitions live on the revealed states. */
   [data-landing][data-motion='on'] [data-reveal] { opacity: 0; transform: translate3d(0, 36px, 0); }
   [data-landing][data-motion='on'] :is([data-reveal='mask'], [data-reveal='card'], [data-reveal='stage']) { opacity: 1; transform: none; }
-  [data-landing][data-motion='on'] [data-reveal='mask'] :is(.reveal-word, .ecosystem-statement-line) > span { transform: translate3d(0, 115%, 0); }
+  [data-landing][data-motion='on'] [data-reveal='mask'] .reveal-word > span { transform: translate3d(0, 115%, 0); }
   [data-landing][data-motion='on'] [data-reveal='card'] { clip-path: inset(18% 0 0 0 round var(--reveal-radius, 0)); }
   /* The product stage arrives as one object: the dashboard, then the phone in front of it. */
   [data-landing][data-motion='on'] [data-reveal='stage'] :is(.studio-visual-anchor, .app-visual-anchor) { opacity: 0; transform: translate3d(0, 48px, 0); }
   [data-landing][data-motion='on'] [data-reveal='stage'] .app-visual-anchor { transform: translate3d(0, 88px, 0); }
 
   [data-landing][data-motion='on'] [data-reveal].is-in { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.1s var(--landing-ease); transition-delay: calc(var(--i, 0) * 90ms); }
-  [data-landing][data-motion='on'] [data-reveal='mask'].is-in :is(.reveal-word, .ecosystem-statement-line) > span { transform: none; transition: transform 1.1s var(--landing-ease) calc(var(--l, 0) * 110ms); }
-  [data-landing][data-motion='on'] [data-reveal='mask'].is-in .ecosystem-statement-line + .ecosystem-statement-line > span { transition-delay: 110ms; }
+  [data-landing][data-motion='on'] [data-reveal='mask'].is-in .reveal-word > span { transform: none; transition: transform 1.1s var(--landing-ease) calc(var(--l, 0) * 110ms); }
   [data-landing][data-motion='on'] [data-reveal='card'].is-in { clip-path: inset(0 0 0 0 round var(--reveal-radius, 0)); transition: clip-path 1.2s var(--landing-ease); }
   [data-landing][data-motion='on'] [data-reveal='stage'].is-in :is(.studio-visual-anchor, .app-visual-anchor) { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.2s var(--landing-ease); }
   [data-landing][data-motion='on'] [data-reveal='stage'].is-in .app-visual-anchor { transition-delay: 160ms; }
 
-  /* Once the ecosystem panel has uncovered, each line draws toward the centre and the core lights up. */
-  [data-landing][data-motion='on'] .ecosystem-node-line { stroke-dasharray: 1; stroke-dashoffset: 1; }
-  [data-landing][data-motion='on'] .ecosystem-node-core { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; }
-  [data-landing][data-motion='on'] .is-in .ecosystem-node-line { stroke-dashoffset: 0; transition: stroke-dashoffset .8s var(--landing-ease) 450ms; }
-  [data-landing][data-motion='on'] .is-in .ecosystem-node-core { opacity: 1; transform: none; transition: opacity .6s var(--landing-ease) 950ms, transform .6s var(--landing-ease) 950ms; }
 }
 
 @keyframes landing-rise { from { transform: translate3d(0, 135%, 0); } }

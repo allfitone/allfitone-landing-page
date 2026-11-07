@@ -206,69 +206,40 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
 }
 
 function EcosystemSection({ copy }: { copy: LocalizedContent }) {
+  const { studioSide, spaceSide, steps } = copy.ecosystem;
   return (
     <section id="ecosystem" className="bg-bolt text-void">
-      <div className="site-grid py-24 md:py-32">
-        <div className="col-span-12 md:col-span-8 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,.85fr)] lg:items-end lg:gap-12">
+      <div className="site-grid py-24 md:py-32 lg:py-40">
+        <div className="col-span-12 lg:col-span-7">
           <RevealTitle className="section-title text-void">{copy.ecosystemTitle}</RevealTitle>
-          <div className="mt-8 lg:mt-0">
-            <p className="section-lead text-void/72">{copy.ecosystemCopy}</p>
-            <div className="ecosystem-relation">
-              <div className="ecosystem-relation-flow">
-                <span className="ecosystem-relation-node">{copy.ecosystem.relation[0]}</span>
-                <span className="ecosystem-relation-link" aria-hidden="true" />
-                <span className="ecosystem-relation-node">{copy.ecosystem.relation[1]}</span>
-                <span className="ecosystem-relation-link" aria-hidden="true" />
-                <span className="ecosystem-relation-node">{copy.ecosystem.relation[2]}</span>
-              </div>
-            </div>
-          </div>
         </div>
+        <p className="section-lead col-span-12 mt-8 text-void/76 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
+          {copy.ecosystemCopy}
+        </p>
 
-        <div className="ecosystem-panel col-span-12 mt-16 md:mt-20" data-reveal="card">
-          <div className="ecosystem-grid">
-            {/* Each column opens with what the product means for one side of the
-                relationship; the product is named in the copy, not in a label above it. */}
-            <article className="ecosystem-product">
-              <h3 className="ecosystem-product-title">{copy.ecosystem.space.title}</h3>
-              <p className="ecosystem-product-copy">{copy.ecosystem.space.copy}</p>
-            </article>
-
-            <div className="ecosystem-connect">
-              <span className="ecosystem-node" aria-hidden="true">
-                <svg className="ecosystem-node-svg" viewBox="0 0 260 64" fill="none">
-                  <line className="ecosystem-node-line" pathLength={1} x1="26" y1="32" x2="104" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
-                  <line className="ecosystem-node-line" pathLength={1} x1="234" y1="32" x2="156" y2="32" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
-                  <circle cx="26" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
-                  <circle cx="26" cy="32" r="3.5" fill="currentColor" />
-                  <circle cx="234" cy="32" r="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
-                  <circle cx="234" cy="32" r="3.5" fill="currentColor" />
-                  <g className="ecosystem-node-core">
-                    <circle cx="130" cy="32" r="22" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
-                    <circle cx="130" cy="32" r="13" stroke="currentColor" strokeWidth="1.5" />
-                    <circle cx="130" cy="32" r="5.5" fill="currentColor" />
-                  </g>
-                </svg>
-              </span>
-              <p className="ecosystem-connect-title">{copy.ecosystem.connect.title}</p>
-            </div>
-
-            <article className="ecosystem-product ecosystem-product-studio">
-              <h3 className="ecosystem-product-title">{copy.ecosystem.studio.title}</h3>
-              <p className="ecosystem-product-copy">{copy.ecosystem.studio.copy}</p>
-            </article>
+        {/* One relationship read across both products, step by step. From lg the two sides
+            become columns under a header; below it each side names itself inline, and that
+            inline name is what screen readers hear at every width, so the header stays hidden
+            from them. The last step's person side is the section's one emphasis. */}
+        <div className="col-span-12 mt-16 md:mt-24">
+          <div className="relationship-head" aria-hidden="true">
+            <span />
+            <span>{studioSide}</span>
+            <span>{spaceSide}</span>
           </div>
-
-          <p className="ecosystem-statement" data-reveal="mask">
-            <span className="ecosystem-statement-line">
-              <span>{copy.ecosystem.closingLead}</span>
-            </span>
-            <span className="ecosystem-statement-line">
-              <span>
-                <span className="ecosystem-statement-accent">{copy.ecosystem.closingAccent}</span> {copy.ecosystem.closingRest}
-              </span>
-            </span>
-          </p>
+          <ol className="relationship">
+            {steps.map(({ name, studio, space }, index) => (
+              <li key={name} className="relationship-step" data-reveal style={stagger(index)}>
+                <h3 className="relationship-step-name">{name}</h3>
+                <p className="relationship-side">
+                  <strong className="relationship-side-who">Allfit Studio</strong> {studio}
+                </p>
+                <p className="relationship-side relationship-side-space">
+                  <strong className="relationship-side-who">Allfit Space</strong> {space}
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
