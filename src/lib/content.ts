@@ -114,8 +114,6 @@ export const content = {
       ["Tú revocas", "Retiras un acceso cuando quieras. Tu información no se va con él."],
       ["Tú te lo llevas", "Si la relación termina, el historial sigue siendo tuyo."],
     ],
-    fitnessIdNote:
-      "El Fitness ID es la tesis de producto de Allfit One. Todavía no es una función pública disponible.",
 
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
@@ -129,7 +127,6 @@ export const content = {
       ["Comunidad", "Las personas con las que entrenas"],
       ["Tú", "Tu Fitness ID y tus permisos"],
     ],
-    appVision: "Visión de producto · Próximamente",
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
@@ -161,8 +158,6 @@ export const content = {
       ["Equipo", "Miembros, roles y permisos"],
       ["Planes", "Planes que vendes y suscripciones activas"],
     ],
-    studioUpcomingLabel: "Más adelante",
-    studioUpcoming: ["Agenda y reservas", "Clases y cupos", "Página pública", "Marketplace"],
 
     statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
@@ -292,8 +287,6 @@ export const content = {
       ["You revoke", "Withdraw an access whenever you want. Your information does not leave with it."],
       ["You keep it", "If the relationship ends, the history is still yours."],
     ],
-    fitnessIdNote:
-      "Fitness ID is the Allfit One product thesis. It is not a publicly available feature yet.",
 
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Keep training from where you left off.",
@@ -307,7 +300,6 @@ export const content = {
       ["Community", "The people you train with"],
       ["You", "Your Fitness ID and permissions"],
     ],
-    appVision: "Product vision · Coming soon",
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
@@ -339,8 +331,6 @@ export const content = {
       ["Team", "Members, roles and permissions"],
       ["Plans", "Plans you sell and active subscriptions"],
     ],
-    studioUpcomingLabel: "Later",
-    studioUpcoming: ["Schedule and bookings", "Classes and capacity", "Public page", "Marketplace"],
 
     statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",

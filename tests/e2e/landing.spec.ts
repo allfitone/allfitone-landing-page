@@ -244,6 +244,19 @@ test("sections carry no sequence numbers or ghost marks", async ({ page }) => {
   expect(ghosts).toEqual([]);
 });
 
+test("the homepage states what the products do, without hedging labels", async ({ page }) => {
+  // The owner removed these in November 2026: they read as unfinished and cost credibility.
+  const hedges = {
+    es: /(próximamente|tesis de producto|todavía no|aún no|más adelante|visión de producto|en desarrollo)/i,
+    en: /(coming soon|product thesis|not yet|later|product vision|in development)/i,
+  } as const;
+  for (const language of ["es", "en"] as const) {
+    await page.goto(`/${language}`);
+    const text = await page.locator("main").innerText();
+    expect(text.match(hedges[language])?.[0] ?? null, language).toBeNull();
+  }
+});
+
 test("has a logical heading structure and no serious axe violations", async ({ page }) => {
   await page.goto("/");
 

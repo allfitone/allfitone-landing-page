@@ -191,7 +191,6 @@ section[id].fid-section {
 .fid-controls { margin-top: var(--afo-space-10); border-top: 1px solid var(--afo-color-border-subtle); }
 .fid-control { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-6); }
 .fid-control-title { font-family: var(--afo-font-family-display); font-size: clamp(1.35rem, 2.4vw, 1.75rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1; text-transform: uppercase; }
-.fid-note { display: flex; gap: var(--afo-space-3); margin-top: var(--afo-space-8); font-size: .75rem; line-height: 1.55; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 58%, transparent); }
 
 /* ---------------------------------------------------------------------------
    Studio
@@ -205,7 +204,6 @@ section[id].fid-section {
 .studio-module-grid { margin-top: var(--afo-space-8); display: grid; border-top: 1px solid var(--afo-color-border-subtle); }
 .studio-module { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-5); }
 .studio-module-name { font-family: var(--afo-font-family-display); font-size: 1.5rem; font-weight: var(--afo-font-weight-semibold); letter-spacing: -.03em; line-height: 1; text-transform: uppercase; }
-.studio-module-upcoming .studio-module-name { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 56%, transparent); }
 
 /* ---------------------------------------------------------------------------
    Waitlist
@@ -539,7 +537,6 @@ section[id].fid-section {
   .privacy-boundary-column + .privacy-boundary-column { border-top: 0; border-left: 1px solid var(--afo-color-border-subtle); }
   .privacy-footer-inner { grid-template-columns: 1fr auto 1fr; }
   .privacy-home-link { justify-self: end; }
-  .studio-module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--afo-space-8); }
   .site-mobile-sheet-content { padding-inline: var(--afo-space-10); }
 }
 
@@ -559,7 +556,8 @@ section[id].fid-section {
   .phone-screen { min-height: 500px; }
   section[id].fid-section { padding-block: calc(var(--fid-slant) + 7rem); }
   .studio-difference-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--afo-space-12); }
-  .studio-module-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* Five modules, one row: stacked below lg, side by side from it. */
+  .studio-module-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--afo-space-8); }
 }
 
 @media (min-width: 1024px) {

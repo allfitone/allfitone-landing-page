@@ -102,11 +102,6 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
               </li>
             ))}
           </ul>
-
-          <p className="fid-note">
-            <FoundationIcon name="info" size="sm" className="mt-px shrink-0 text-bolt" decorative />
-            <span>{copy.fitnessIdNote}</span>
-          </p>
         </div>
       </div>
     </section>
@@ -133,10 +128,9 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
         </div>
 
         <div data-reveal="card" className="space-areas col-span-12 mt-20 overflow-hidden rounded-2xl bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
-          <div className="flex flex-col gap-3 border-b border-white/14 pb-7 md:flex-row md:items-end md:justify-between">
-            <h3 className="font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">{copy.appAreasLabel}</h3>
-            <p className="eyebrow text-bolt">{copy.appVision}</p>
-          </div>
+          <h3 className="border-b border-white/14 pb-7 font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">
+            {copy.appAreasLabel}
+          </h3>
           <div className="grid md:grid-cols-5">
             {copy.appAreas.map(([area, description]) => (
               <div
@@ -183,8 +177,8 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
           ))}
         </div>
 
-        {/* The modules get a real heading instead of a label above them, and what comes
-            later fills the grid's sixth cell as the one dimmed module. */}
+        {/* The modules get a real heading instead of a label above them. Only what Studio
+            does is listed: features that are not built get no cell. */}
         <div className="col-span-12 mt-20 md:mt-28">
           <h3 className="studio-modules-title">{copy.studioModulesLabel}</h3>
           <div className="studio-module-grid">
@@ -194,10 +188,6 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
                 <p className="mt-2 text-xs leading-5 text-white/64">{description}</p>
               </article>
             ))}
-            <article className="studio-module studio-module-upcoming">
-              <h4 className="studio-module-name">{copy.studioUpcomingLabel}</h4>
-              <p className="mt-2 text-xs leading-5 text-white/56">{copy.studioUpcoming.join(" · ")}</p>
-            </article>
           </div>
         </div>
       </div>
