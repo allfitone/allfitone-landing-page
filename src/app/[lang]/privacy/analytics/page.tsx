@@ -58,10 +58,11 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/privacy/an
 }
 
 /**
- * The analytics notice, set as a document: a title block, the contents beside the text
- * on wide screens, and five sections in the order the contents list them. Emphasis is
- * spent once, on the title; the sections lean on hierarchy, hairlines and a readable
- * measure rather than display type.
+ * The analytics notice, set as a document on the homepage's twelve-column grid: the
+ * contents take the first three columns on wide screens and the text the other nine,
+ * with five sections in the order the contents list them. Emphasis is spent once, on
+ * the title; the sections lean on hierarchy, hairlines and a readable measure rather
+ * than display type.
  */
 export default async function AnalyticsPrivacyPage({ params }: PageProps<"/[lang]/privacy/analytics">) {
   const { lang } = await params;
@@ -96,7 +97,8 @@ export default async function AnalyticsPrivacyPage({ params }: PageProps<"/[lang
         </div>
       </header>
 
-      <main className="privacy-shell privacy-layout">
+      {/* The homepage's own grid, so the notice spans the same width as every other page. */}
+      <main className="site-grid privacy-layout">
         <header className="privacy-intro">
           <h1 className="privacy-title">
             {titleLines.map((line, index) => (
