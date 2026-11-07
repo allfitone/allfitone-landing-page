@@ -149,18 +149,20 @@
 
 /* ---------------------------------------------------------------------------
    Problem
-   A handover ledger. The left column holds a single hollow word and nothing
-   else; the imbalance against the right column is the whole argument. The
-   right column repeats the Fitness ID field list on purpose — the Fitness ID
-   shows the same inventory, kept instead of lost.
+   A handover ledger with one real case. The left column holds a single solid
+   word, what Mariana takes from the gym she left; the imbalance against the
+   right column is the whole argument. The right column is her record there in
+   figures: each row a dimmed label and its value at full strength, tabular, so
+   the eye reads the numbers she loses. No cyan: the section names the problem.
 --------------------------------------------------------------------------- */
 
 .ledger { display: grid; gap: var(--afo-space-12); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 24%, transparent); padding-top: var(--afo-space-8); }
 .ledger-label { font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: var(--landing-tracking-label); text-transform: uppercase; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 60%, transparent); }
-.ledger-keep-value { margin-top: var(--afo-space-6); font-family: var(--afo-font-family-display); font-size: clamp(4.5rem, 13vw, 11rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.055em; line-height: .85; text-transform: uppercase; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 42%, transparent); }
+.ledger-keep-value { margin-top: var(--afo-space-6); font-family: var(--afo-font-family-display); font-size: clamp(4.5rem, 11vw, 9rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.045em; line-height: .85; text-transform: uppercase; color: var(--afo-color-neutral-chalk); }
 .ledger-list { margin-top: var(--afo-space-4); }
-.ledger-item { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-family: var(--afo-font-family-display); font-size: clamp(1.15rem, 2.4vw, 1.65rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1.05; text-transform: uppercase; }
+.ledger-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--afo-space-6); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-family: var(--afo-font-family-display); font-size: clamp(1.15rem, 2.4vw, 1.65rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1.05; text-transform: uppercase; }
 .ledger-item:last-child { border-bottom: 0; }
+.ledger-value { color: var(--afo-color-neutral-chalk); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
 
 /* ---------------------------------------------------------------------------
    Fitness ID
@@ -594,8 +596,8 @@ section[id].fid-section {
 @media (forced-colors: active) {
   .privacy-hero::after { display: none; }
   .privacy-note, .privacy-contact-link { border-color: LinkText; }
-  .hero-fitness, .ledger-keep-value { -webkit-text-stroke: 0; }
-  .hero-fitness, .ledger-keep-value { color: CanvasText; }
+  .hero-fitness { -webkit-text-stroke: 0; }
+  .hero-fitness { color: CanvasText; }
   section[id].fid-section { clip-path: none; margin-block: 0; }
 }
 

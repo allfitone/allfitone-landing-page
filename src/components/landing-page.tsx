@@ -53,10 +53,9 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
           <p className="section-lead mt-8 text-white/70">{copy.problemCopy}</p>
         </div>
 
-        {/* A handover ledger. The empty left column is the argument, and the right
-            column deliberately mirrors the Fitness ID card: same
-            list, opposite outcome. The title already says when this happens, so the
-            ledger needs no introduction of its own. */}
+        {/* A handover ledger with one real case: what Mariana takes from the gym she
+            left (nothing) beside what stays there, in figures rather than categories.
+            The Fitness ID card in the next section holds the same kinds of data, kept. */}
         <div className="col-span-12 mt-16 md:mt-24">
           <div className="ledger" data-reveal>
             <div className="ledger-keep">
@@ -65,11 +64,14 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
             </div>
             <div className="ledger-lose">
               <p className="ledger-label">{copy.problemLoseLabel}</p>
-              <ul className="ledger-list">
-                {copy.problemLoseItems.map((item) => (
-                  <li key={item} className="ledger-item">{item}</li>
+              <dl className="ledger-list">
+                {copy.problemLoseItems.map(([item, value]) => (
+                  <div key={item} className="ledger-item">
+                    <dt>{item}</dt>
+                    <dd className="ledger-value">{value}</dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
             </div>
           </div>
         </div>

@@ -4,8 +4,9 @@ import type { LocalizedContent } from "@/lib/content";
 
 /*
  * The Fitness ID as one object: its name, what it holds and where it stays. The list
- * mirrors the problem section's ledger (same items, opposite outcome), so it carries no
- * label, index or decoration of its own; the cyan foot is the payoff.
+ * answers the problem section's ledger (the kinds of data Mariana left at her gym, kept
+ * this time), so it carries no label, index or decoration of its own; the cyan foot is
+ * the payoff.
  */
 export function FitnessIdCard({ copy }: { copy: LocalizedContent }) {
   return (
