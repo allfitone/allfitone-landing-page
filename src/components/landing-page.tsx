@@ -357,7 +357,7 @@ export function LandingPage({ language }: { language: Language }) {
             <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
           </a>
 
-          <div className="col-span-6 hidden justify-center gap-6 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60 lg:flex">
+          <div className="col-span-6 hidden justify-center gap-6 text-xs font-bold uppercase tracking-[.12em] text-white/64 lg:flex">
             {primaryLinks.map(([href, label]) => (
               <a key={href} href={href} className="nav-link inline-flex min-h-11 items-center">{label}</a>
             ))}
@@ -367,7 +367,7 @@ export function LandingPage({ language }: { language: Language }) {
             <div className="hidden min-[400px]:block">
               <LanguageSwitch language={language} label={copy.selectLanguage} />
             </div>
-            <a href={CONTACT_HREF} className="ml-auto hidden min-h-11 items-center gap-2 text-[10px] font-extrabold uppercase tracking-[0.16em] text-white sm:flex">
+            <a href={CONTACT_HREF} className="ml-auto hidden min-h-11 items-center gap-2 text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
               {copy.contactShort}
               <FoundationIcon name="forward" size="sm" className="text-bolt" decorative />
             </a>
@@ -406,7 +406,7 @@ export function LandingPage({ language }: { language: Language }) {
                     <div className="mb-6 min-[400px]:hidden">
                       <LanguageSwitch language={language} label={copy.selectLanguage} />
                     </div>
-                    <p className="mb-4 text-[9px] font-bold uppercase tracking-[.18em] text-white/60">{copy.tagline}</p>
+                    <p className="mb-4 text-[11px] font-bold uppercase tracking-[.14em] text-white/64">{copy.tagline}</p>
                     <a href={CONTACT_HREF} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
                       {copy.contact}
                       <FoundationIcon name="forward" data-icon="inline-end" decorative />

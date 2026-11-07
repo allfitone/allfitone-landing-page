@@ -95,28 +95,27 @@ typography:
     letterSpacing: 0.08em
   button:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: 10px
-    fontWeight: 800
-    lineHeight: 1
-    letterSpacing: 0.16em
-    textTransform: uppercase
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.43
+    letterSpacing: 0
   eyebrow:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: 9px
+    fontSize: 11px
     fontWeight: 800
-    lineHeight: 1.33
-    letterSpacing: 0.20em
+    lineHeight: 1.4
+    letterSpacing: 0.14em
     textTransform: uppercase
   nav-link:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: 10px
+    fontSize: 12px
     fontWeight: 700
     lineHeight: 1
-    letterSpacing: 0.16em
+    letterSpacing: 0.12em
     textTransform: uppercase
   mono-index:
     fontFamily: "ui-monospace, SFMono-Regular, Consolas, monospace"
-    fontSize: 10px
+    fontSize: 11px
     fontWeight: 400
     lineHeight: 1
     letterSpacing: 0
@@ -171,11 +170,11 @@ components:
   text-link-dark:
     backgroundColor: transparent
     textColor: "{colors.body-muted}"
-    typography: "{typography.button}"
+    typography: "{typography.nav-link}"
   text-link-light:
     backgroundColor: transparent
     textColor: "{colors.ink-muted-60}"
-    typography: "{typography.button}"
+    typography: "{typography.nav-link}"
   floating-navbar:
     backgroundColor: "rgba(3, 7, 19, 0.86)"
     textColor: "{colors.on-dark}"
@@ -238,7 +237,7 @@ components:
     backgroundColor: transparent
     textColor: "{colors.body-subtle}"
     borderColor: "rgba(234, 255, 255, 0.15)"
-    typography: "{typography.eyebrow}"
+    typography: "{typography.nav-link}"
     rounded: "{rounded.pill}"
     padding: 2px
   input-dark:
@@ -350,15 +349,16 @@ Both brand fonts are loaded through `next/font`. Do not replace them with browse
 | `{typography.body}` | 16px | 400 | 1.75 | 0 | Standard long-form copy |
 | `{typography.body-compact}` | 14px | 400 | 1.71 | 0 | Cards, supporting copy, operational UI |
 | `{typography.caption}` | 12px | 600 | 1.33 | 0.08em | Compact metadata |
-| `{typography.button}` | 10px | 800 | 1.0 | 0.16em | CTA labels |
-| `{typography.eyebrow}` | 9px | 800 | 1.33 | 0.20em | Section labels and signals |
-| `{typography.nav-link}` | 10px | 700 | 1.0 | 0.16em | Desktop navigation |
-| `{typography.mono-index}` | 10px | 400 | 1.0 | 0 | Ordered indexes and tabular markers |
+| `{typography.button}` | 14px | 400 | 1.43 | 0 | Button labels, in sentence case (the Design System button) |
+| `{typography.eyebrow}` | 11px | 800 | 1.4 | 0.14em | Labels, metadata and status signals |
+| `{typography.nav-link}` | 12px | 700 | 1.0 | 0.12em | Desktop navigation, language selector and text actions |
+| `{typography.mono-index}` | 11px | 400 | 1.0 | 0 | Ordered indexes and tabular markers |
 
 ### Principles
 
 - **Compression is the athletic signal.** Display headlines use condensed type, negative tracking, and short line height. Do not fake this by skewing or stretching type.
 - **Display type is re-typeset at every breakpoint.** Desktop line breaks, tracking, and outline treatments are not simply scaled down for mobile.
+- **Nothing renders below 11px.** Labels, indexes, metadata and the product mockups use the 11px `{typography.eyebrow}` step; navigation and text actions use 12px. The 9–10px labels of the first version read as texture rather than text and were raised in November 2026.
 - **Uppercase is a visual treatment.** It belongs to display headlines, eyebrows, and short controls—not paragraphs or long explanatory copy.
 - **Outlined type is secondary.** It may create depth inside a hero, but essential meaning must remain available through solid text and accessible naming.
 - **Body widths stay readable.** Standard copy should remain near 55–75 characters per line.
@@ -461,7 +461,7 @@ Whitespace acts as controlled recovery between high-intensity typographic moment
 
 ### Top Navigation
 
-**`floating-navbar`** — A sticky, centered navigation surface with breathing room above it. Background `rgba(3, 7, 19, 0.86)`, controlled backdrop blur, `{rounded.lg}` radius, and a restrained shadow. It contains the Allfit One lockup, centered section links, language selector, demo action, and menu trigger. It must not use a full-width bottom rule.
+**`floating-navbar`** — A sticky, centered navigation surface with breathing room above it. Background `rgba(3, 7, 19, 0.86)`, controlled backdrop blur, `{rounded.lg}` radius, and a restrained shadow. It contains the Allfit One lockup, centered section links, language selector, the email action, and menu trigger. It must not use a full-width bottom rule.
 
 - Desktop section links use `{typography.nav-link}` and muted Chalk; the active or hovered link shifts to `{colors.primary}`.
 - The brand name is always **Allfit One**, rendered as `ALLFIT ONE` only as a display treatment.
