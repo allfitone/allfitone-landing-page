@@ -108,6 +108,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## SEO requirements
 
+- Every page title separates its parts with « | » («Allfit One | El ecosistema donde el fitness se conecta», «Privacidad de analítica | Allfit One», «William Vergel | Embajador de Allfit One»), never «-», «–», «—» or «·». The owner set this as a general rule in November 2026. The ambassador schema rejects the other separators (`foreignTitleSeparator` in `src/lib/page-title.ts`) and an E2E test checks every page's `<title>`.
 - Each page's canonical is its own language URL, such as `https://www.allfit.one/es`. The homepage's `x-default` alternate points to the root.
 - Keep the homepage positioning broad enough to represent the parent ecosystem. Product-specific keywords belong in Allfit Studio copy and future dedicated routes.
 - Preserve crawlable `robots.txt`, the canonical-only sitemap, large-image social metadata, and the Open Graph/Twitter assets.

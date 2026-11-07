@@ -159,7 +159,7 @@ Cada texto se escribe dos veces, en español (`es`) y en inglés (`en`).
 
 | Campo | Dónde aparece en la página | Ejemplo (Andrea Ejemplo) |
 |---|---|---|
-| `metaTitle` | Título de la pestaña del navegador y al compartir | Andrea Ejemplo · Embajadora de Allfit One |
+| `metaTitle` | Título de la pestaña del navegador y al compartir; separa sus partes con « \| », nunca «-» ni «·» | Andrea Ejemplo \| Embajadora de Allfit One |
 | `metaDescription` | Descripción al compartir el enlace | Andrea Ejemplo, embajadora ficticia… |
 | `role` | Texto pequeño en cyan sobre el nombre | Entrenadora de running y fuerza |
 | `lead` | Frase debajo del nombre | Entrena para correr mejor sin descuidar la fuerza… |
