@@ -254,11 +254,6 @@ components:
     borderColor: "{colors.canvas}"
     rounded: "{rounded.device}"
     padding: 8px
-  connected-product-stage:
-    backgroundColor: transparent
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.none}"
-    padding: 0
   footer:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.body-subtle}"
@@ -506,18 +501,15 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`device-shell`** — A 42px-radius physical frame for an actual Allfit Space surface. Use only when the device explains the personal fitness experience. Do not add a device mockup merely to fill a column.
 
-**`space-session-phone`** — The Allfit Space section's one object: a single `device-shell` on Chalk, 300px wide and 320px from `lg`, leaning +2° like the hero phone, beside the title from `lg` and below the copy under it. It continues the hero's story instead of repeating it: the 18:00 «Fuerza · Tren superior» session is now under way, the program comes from Estudio Norte, and Mariana logs it set by set. Exercises are hairline rows with short set marks filled cyan once logged; finished rows step back to 56% and the set she is on is the screen's one cyan block, with reps and load in display numerals and a «Registrar serie» action. It carries a directional Void shadow, no ring and no glow. The section no longer lists the app's areas.
+**`space-session-phone`** — The Allfit Space section's one object: a single `device-shell` on Chalk, 300px wide and 320px from `lg`, leaning +2° with the brand «1», beside the title from `lg` and below the copy under it. It shows Mariana's 18:00 «Fuerza · Tren superior» session under way: the program comes from Estudio Norte, and Mariana logs it set by set. Exercises are hairline rows with short set marks filled cyan once logged; finished rows step back to 56% and the set she is on is the screen's one cyan block, with reps and load in display numerals and a «Registrar serie» action. It carries a directional Void shadow, no ring and no glow. The section no longer lists the app's areas.
 
 **`studio-review-panel`** — The Allfit Studio section's one object: a full-width Studio workspace below the title, with the lead and link beside the title from `lg`. It closes the story: Estudio Norte, in Personas › Mariana Rojas, reviews the 18:00 session she finished, plan beside what she logged, from the same data as the Space phone. The one exercise that differs («Press militar», two reps fewer per set) is the panel's cyan; the others read «Según el plan». A narrow column holds the assigned program and the access Mariana granted, for what purpose. The workspace is Void inside the Panel section, with no shadow, and its mock text runs one step above the hero stage's. Below `xl` it drops the sidebar so the table keeps its four columns; below `sm` each row stacks with inline Plan and Registrado labels. The section no longer lists Studio's differentiators or modules.
 
-**`connected-product-stage`** — The signature parent-brand composition. A panoramic Allfit Studio administrative panel establishes the operational plane while the Allfit Space phone crosses its edge in the foreground. The overlap communicates one ecosystem; it is not a decorative device pile. On mobile, the products become a deliberate sequence so both previews remain legible.
+**`hero-product-definitions`** — The hero names both products side by side, with equal weight, below the headline: each by its wordmark first, then its audience as a plain line («Para personas», «Para profesionales y organizaciones»), never as an uppercase label above the wordmark, then one sentence and an outline link to its landing. Both wordmarks share a height, not a width. The hero carries no product mockup: the connected stage (a Studio dashboard with the Space phone crossing its edge) was removed in November 2026 at the owner's request, and each product now shows itself in its own section (`space-session-phone`, `studio-review-panel`).
 
-- **One scripted moment, not two screens.** Both previews show the same story: Mariana Rojas trains with a neutral studio, Estudio Norte. Her phone shows today's 18:00 «Fuerza · Tren superior» session and that she shares her history with Estudio Norte; the Studio panel shows the same 18:00 session in its agenda, the week she shared (four sessions done, today's pending) and the activity line that she shared it. Any number or name on one screen must agree with the other.
-- **No metric decoration.** No KPI tile rows, progress rings, sparklines or a percentage repeated across screens. The shared week is drawn as five day marks because the sequence carries the information.
+- **One story across the mockups.** Mariana Rojas trains with a neutral studio, Estudio Norte. The Space phone shows her 18:00 «Fuerza · Tren superior» session under way; the Studio panel shows the same session finished and reviewed. Both read the same data, so any number on one agrees with the other.
+- **No metric decoration.** No KPI tile rows, progress rings, sparklines or a percentage repeated across screens.
 - **No real or Allfit-branded organization inside the mockups.** The studio is fictional and neutral so the preview reads as a customer's workspace, not as Allfit One's own gym.
-- **Composition.** The phone leans forward (+2°) and crosses the panel's edge, never its content; below `lg` the panel drops its sidebar so its main column stays readable beside the phone. The panel carries the workspace shadow only, with no cyan glow.
-- **First viewport.** From `lg`, the lead and the email action sit in columns 8–12 beside the headline, so the stage starts inside a 900px-tall viewport.
-- **Product definitions.** Below the stage, each product is named by its wordmark first, then its audience as a plain line («Para personas», «Para profesionales y organizaciones»), never as an uppercase label above the wordmark. Both wordmarks share a height, not a width.
 
 ### Language Selector
 

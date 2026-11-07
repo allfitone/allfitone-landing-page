@@ -24,7 +24,7 @@ import { cn } from "@allfitone/react/lib/utils";
 import { FitnessIdCard } from "@/components/fitness-id-card";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
-import { PhoneMockup, SpaceSessionMockup, StudioDashboardMockup, StudioReviewMockup } from "@/components/product-mockups";
+import { SpaceSessionMockup, StudioReviewMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
@@ -125,7 +125,7 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
           </a>
         </div>
 
-        {/* The section's one object is the app itself: the hero's 18:00 session under way,
+        {/* The section's one object is the app itself: Mariana's 18:00 session under way,
             the professional's plan and the person's log on one screen. It replaces the row
             of five app areas, which listed what the app will hold instead of showing it. */}
         <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center" data-reveal="stage">
@@ -287,7 +287,7 @@ export function LandingPage({ language }: { language: Language }) {
 
         <div className="site-grid relative z-20 pb-24 pt-32 md:pb-28 md:pt-40 lg:pt-36">
           {/* From lg the lead and the action sit beside the first two headline lines,
-              so the product stage rises into the first viewport. */}
+              so the two products are named inside the first viewport. */}
           <div className="col-span-12 mt-6 md:mt-8 lg:col-start-1 lg:row-start-1">
             <h1 className="hero-title-new" lang="en" aria-label={copy.tagline}>
               <span className="hero-line"><span className="block">ALL THE</span></span>
@@ -308,16 +308,9 @@ export function LandingPage({ language }: { language: Language }) {
             </div>
           </div>
 
-          <div className="product-stage col-span-12 mt-20 md:mt-28 lg:mt-20">
-            <div className="product-stage-visual" data-reveal="stage">
-              <div className="app-visual-anchor">
-                <PhoneMockup copy={copy} />
-              </div>
-              <div className="studio-visual-anchor">
-                <StudioDashboardMockup copy={copy} />
-              </div>
-            </div>
-
+          {/* No product mockups here: each product shows itself in its own section. The
+              hero names both side by side, with equal weight. */}
+          <div className="col-span-12">
             <div className="product-definitions">
               <article className="product-definition product-definition-app">
                 <h2 aria-label="Allfit Space">

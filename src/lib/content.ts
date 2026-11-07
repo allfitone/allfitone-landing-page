@@ -47,37 +47,11 @@ export const content = {
     // Read after a product link's label: every link to a product landing opens a new tab.
     opensInNewTab: "(se abre en una pestaña nueva)",
 
-    phoneToday: "Hoy",
-    phoneGreeting: "Tu siguiente paso",
-    phoneSession: "Fuerza · Tren superior",
-    phoneLocation: "18:00 · Estudio Norte",
-    phoneRecovery: "Recuperación moderada",
-    phoneDuration: "72 min",
-    phoneStart: "Comenzar sesión",
-    phoneWeek: "Semana",
-    phoneSharedWith: "Compartes con",
+    sessionName: "Fuerza · Tren superior",
 
-    dashboardOverview: "Resumen",
-    dashboardGreeting: "Esto necesita atención hoy.",
-    dashboardNavigation: ["Resumen", "Personas", "Entrenamiento", "Operación", "Negocio"],
-    dashboardOrganization: "Estudio Norte",
-    dashboardPerson: "Mariana Rojas",
-    dashboardShared: "Compartió su historial contigo",
-    dashboardWeekDays: ["L", "M", "X", "J", "V"],
-    dashboardWeekSummary: "4 de 5 sesiones hechas · hoy, 18:00",
-    dashboardAgenda: "Sesiones de hoy",
-    dashboardActivity: "Actividad reciente",
-    dashboardViewAll: "Ver todas",
-    dashboardSchedule: [
-      ["07:00", "Fuerza · Grupo 04", "8 personas"],
-      ["10:30", "Evaluación inicial", "Laura Méndez"],
-      ["18:00", "Fuerza · Tren superior", "Mariana Rojas"],
-    ],
-    dashboardUpdates: [
-      ["Mariana compartió su historial", "Hace 8 min"],
-      ["Laura aceptó tu invitación", "Hace 21 min"],
-      ["Programa asignado a Grupo 04", "Hace 34 min"],
-    ],
+    studioNavigation: ["Resumen", "Personas", "Entrenamiento", "Operación", "Negocio"],
+    studioOrganization: "Estudio Norte",
+    studioPerson: "Mariana Rojas",
 
     problemLabel: "El problema",
     problemTitle: "Cada vez que cambias, empiezas de cero.",
@@ -119,7 +93,7 @@ export const content = {
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
       "Allfit Space reúne tu plan, tus sesiones y tu progreso. Entrena por tu cuenta o sigue la planificación de un profesional en el mismo lugar donde registras cada sesión.",
-    // The section's phone shows the hero's 18:00 session under way: the program comes from
+    // The section's phone shows Mariana's 18:00 session under way: the program comes from
     // Estudio Norte and Mariana logs it set by set. The first exercise with sets left is the
     // one she is on.
     spaceSession: {
@@ -140,7 +114,7 @@ export const content = {
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
       "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
-    // The section's panel closes the story the hero opens: Mariana finished the 18:00 session
+    // The section's panel closes the story the Space phone starts: Mariana finished the 18:00 session
     // in Allfit Space and Estudio Norte reviews it against the program it assigned. The plan
     // and the log both come from `spaceSession`, so the two screens agree.
     studioReview: {
@@ -218,37 +192,11 @@ export const content = {
     studioSectionLink: "More about Allfit Studio",
     opensInNewTab: "(opens in a new tab)",
 
-    phoneToday: "Today",
-    phoneGreeting: "Your next move",
-    phoneSession: "Strength · Upper body",
-    phoneLocation: "18:00 · Estudio Norte",
-    phoneRecovery: "Moderate recovery",
-    phoneDuration: "72 min",
-    phoneStart: "Start session",
-    phoneWeek: "Week",
-    phoneSharedWith: "Shared with",
+    sessionName: "Strength · Upper body",
 
-    dashboardOverview: "Overview",
-    dashboardGreeting: "This needs attention today.",
-    dashboardNavigation: ["Overview", "People", "Training", "Operations", "Business"],
-    dashboardOrganization: "Estudio Norte",
-    dashboardPerson: "Mariana Rojas",
-    dashboardShared: "Shared her history with you",
-    dashboardWeekDays: ["M", "T", "W", "T", "F"],
-    dashboardWeekSummary: "4 of 5 sessions done · today, 18:00",
-    dashboardAgenda: "Today's sessions",
-    dashboardActivity: "Recent activity",
-    dashboardViewAll: "View all",
-    dashboardSchedule: [
-      ["07:00", "Strength · Group 04", "8 people"],
-      ["10:30", "Initial assessment", "Laura Méndez"],
-      ["18:00", "Strength · Upper body", "Mariana Rojas"],
-    ],
-    dashboardUpdates: [
-      ["Mariana shared her history", "8 min ago"],
-      ["Laura accepted your invitation", "21 min ago"],
-      ["Program assigned to Group 04", "34 min ago"],
-    ],
+    studioNavigation: ["Overview", "People", "Training", "Operations", "Business"],
+    studioOrganization: "Estudio Norte",
+    studioPerson: "Mariana Rojas",
 
     problemLabel: "The problem",
     problemTitle: "Every time you switch, you start over.",
