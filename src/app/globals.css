@@ -35,6 +35,8 @@
   section[id], .legacy-section-anchor { scroll-margin-top: 7rem; }
   ::selection { background: var(--afo-color-brand-primary); color: var(--afo-color-ink-void); }
   a { outline: none; }
+  /* Body copy never ends on a single orphaned word; headings keep their own balance rules. */
+  p, li { text-wrap: pretty; }
 }
 
 /* ---------------------------------------------------------------------------
