@@ -319,7 +319,6 @@ export function LandingPage({ language }: { language: Language }) {
 
   return (
     <main data-landing className="min-h-screen overflow-x-clip bg-void text-white">
-      <div className="scroll-progress" aria-hidden="true" />
       <section id="home" className="hero relative overflow-hidden">
         <nav
           className="site-grid fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] -translate-x-1/2 items-center rounded-2xl bg-void/86 py-3.5 shadow-[0_18px_55px_rgba(3,7,19,.24)] backdrop-blur-xl"

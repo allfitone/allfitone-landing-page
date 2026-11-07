@@ -630,15 +630,13 @@ section[id].fid-section {
    moment, the first time it scrolls into view: its title rises line by line and
    its main object arrives (the product stage, the ledger, a card that uncovers,
    the Studio columns, the status rows). In the ecosystem the two products then
-   connect. A light follows the pointer over the Studio columns and a bar along
-   the top follows the scroll. Everything else stays still. Reveals are armed by
+   connect. A light follows the pointer over the Studio columns; there is no
+   scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
 --------------------------------------------------------------------------- */
 
 :root { --landing-ease: cubic-bezier(0.16, 1, 0.3, 1); }
-
-.scroll-progress { position: fixed; inset: 0 0 auto; z-index: 60; height: 2px; background: var(--afo-color-brand-primary); transform-origin: 0 50%; transform: scaleX(var(--progress, 0)); pointer-events: none; }
 
 /* Masks clip only below the line, so accents and the outlined FITNESS keep their edges. */
 .hero-line, .ecosystem-statement-line { display: block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
