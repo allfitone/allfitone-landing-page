@@ -33,7 +33,7 @@ export const content = {
     footerSocial: "Síguenos",
     footerInformation: "Información",
     heroLead:
-      "Allfit One es el ecosistema donde el fitness se conecta. Una identidad, dos productos y un historial que viaja contigo: para las personas que entrenan y para los profesionales y organizaciones que lo hacen posible.",
+      "Cambias de entrenador, de gimnasio o de app y tu historial se queda atrás. Estamos construyendo Allfit One para que se quede contigo: Allfit Space para quien entrena, Allfit Studio para quien acompaña y gestiona.",
     heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
 
     appAudience: "Para personas",
@@ -155,7 +155,7 @@ export const content = {
       ],
       [
         "Los cobros llegan a tu organización",
-        "Cada pago pasa por tu propia pasarela. Allfit no recibe ni retiene el dinero.",
+        "Cada pago pasa por tu propia pasarela. Allfit One no recibe ni retiene el dinero.",
       ],
     ],
     studioModulesLabel: "Lo que gestionas desde Studio",
@@ -237,7 +237,7 @@ export const content = {
     footerSocial: "Follow",
     footerInformation: "Information",
     heroLead:
-      "Allfit One is the ecosystem where fitness connects. One identity, two products and a history that travels with you: for the people who train and for the professionals and organizations who make it possible.",
+      "You change coach, gym or app, and your history stays behind. We're building Allfit One so it stays with you: Allfit Space for the people who train, Allfit Studio for the people who coach and run the work.",
     heroNote: "There's no public demo yet. Tell us how you train or run your space.",
 
     appAudience: "For people",
@@ -358,7 +358,7 @@ export const content = {
       ],
       [
         "Payments go to your organization",
-        "Each payment goes through your own gateway. Allfit does not receive or hold the money.",
+        "Each payment goes through your own gateway. Allfit One does not receive or hold the money.",
       ],
     ],
     studioModulesLabel: "What you manage in Studio",
