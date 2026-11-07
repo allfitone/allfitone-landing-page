@@ -102,13 +102,25 @@ test("links styled as buttons show a visible keyboard focus ring", async ({ page
     page.getByRole("link", { name: "Conoce Allfit Space" }),
     page.getByRole("link", { name: "Conoce Allfit Studio" }),
   ];
+  // The ring's outer color is the brand-light token, resolved the way the browser reports it.
+  const ringColor = await page.evaluate(() => {
+    const probe = document.createElement("span");
+    probe.style.color = "var(--afo-color-brand-light)";
+    document.body.append(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    return color;
+  });
+
   for (const action of actions) {
     const resting = await action.evaluate((element) => getComputedStyle(element).boxShadow);
+    expect(resting).not.toContain(`${ringColor} 0px 0px 0px 4px`);
     await action.focus();
     await expect(action).toBeFocused();
-    const focused = await action.evaluate((element) => getComputedStyle(element).boxShadow);
-    expect(focused, "focus must change the rendered ring").not.toBe(resting);
-    expect(focused).toContain("104, 238, 244");
+    // box-shadow transitions, so wait for the settled ring rather than a mid-transition frame.
+    await expect
+      .poll(() => action.evaluate((element) => getComputedStyle(element).boxShadow))
+      .toContain(`${ringColor} 0px 0px 0px 4px`);
   }
 });
 

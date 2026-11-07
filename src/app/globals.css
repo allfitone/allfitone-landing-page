@@ -236,6 +236,13 @@ section[id].fid-section {
 .ecosystem-relation-flow { display: flex; align-items: center; gap: var(--afo-space-3); }
 .ecosystem-relation-node { font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: .1em; text-transform: uppercase; color: var(--afo-color-ink-void); white-space: nowrap; }
 .ecosystem-relation-link { flex: 1 1 auto; min-width: var(--afo-space-4); height: 1px; background: color-mix(in srgb, var(--afo-color-ink-void) 28%, transparent); }
+/* At 11px the three nodes no longer fit a 320px phone with the default gaps; tighten the
+   spacing there instead of dropping the type below the 11px floor. */
+@media (max-width: 359px) {
+  .ecosystem-relation-flow { gap: var(--afo-space-2); }
+  .ecosystem-relation-node { letter-spacing: .04em; }
+  .ecosystem-relation-link { min-width: var(--afo-space-2); }
+}
 .ecosystem-relation-shared { margin-top: var(--afo-space-3); padding-top: var(--afo-space-3); border-top: 1px solid color-mix(in srgb, var(--afo-color-ink-void) 18%, transparent); font-size: .75rem; letter-spacing: .01em; color: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }
 
 @media (min-width: 1024px) {
