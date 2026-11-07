@@ -135,6 +135,9 @@ export const content = {
     statusTitle: "Estamos construyendo Allfit One.",
     statusCopy:
       "Déjanos tu nombre y tu correo, y te avisaremos cuando Allfit Space y Allfit Studio abran sus puertas.",
+    // The launch offer, stated once beside the form; its terms live on the waitlist page.
+    waitlistOffer: "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.",
+    waitlistOfferLink: "Ver condiciones",
     waitlist: {
       nameLabel: "Tu nombre",
       // The placeholders and the address example use the visit's person: `{handle}` is the
@@ -285,6 +288,8 @@ export const content = {
     statusTitle: "We're building Allfit One.",
     statusCopy:
       "Leave your name and email, and we'll let you know when Allfit Space and Allfit Studio open their doors.",
+    waitlistOffer: "The first 100 people on the list get three months of Allfit Pro.",
+    waitlistOfferLink: "See the terms",
     waitlist: {
       nameLabel: "Your name",
       namePlaceholder: "{name}",
@@ -321,6 +326,104 @@ export const content = {
 } as const;
 
 export type LocalizedContent = (typeof content)[Language];
+
+/**
+ * The waitlist page (`/{lang}/waitlist`): the launch offer, what joining brings, what
+ * Allfit Pro is and the offer's terms. The form itself reuses `content[language].waitlist`.
+ * The owner set the offer in November 2026: the first 100 people on the list, whatever
+ * their role, get three months of Allfit Pro from the day they activate it, then move to
+ * the free plan with nothing charged. What each plan includes is not decided yet, so the
+ * page states Allfit Pro's rules and lists none of its features.
+ */
+export const waitlistPageContent = {
+  es: {
+    metaTitle: "Lista de espera | Allfit One",
+    metaDescription:
+      "Únete a la lista de espera de Allfit One: te avisamos cuando abran Allfit Space y Allfit Studio, y las primeras 100 personas tendrán tres meses de Allfit Pro sin costo.",
+    // Two parts, each its own block: the second carries the page's one cyan phrase.
+    title: ["Tres meses de Allfit Pro", "para las primeras 100 personas."],
+    lead:
+      "Te escribimos cuando abra el producto que vas a usar. Y si estás entre las primeras 100 personas de la lista, empiezas Allfit Space con tres meses de Allfit Pro, sin costo.",
+    joinTitle: "Únete a la lista de espera",
+    get: {
+      title: "Qué recibes",
+      rows: [
+        ["Si te unes para entrenar", "Un correo cuando abra Allfit Space."],
+        ["Si acompañas a tus clientes o gestionas un gimnasio o estudio", "Un correo cuando abra Allfit Studio."],
+        [
+          "Si estás entre las primeras 100 personas",
+          "Tres meses de Allfit Pro en Allfit Space, sin costo, sin importar cómo vayas a usar Allfit One.",
+        ],
+      ],
+    },
+    pro: {
+      title: "Qué es Allfit Pro",
+      text: "Allfit Space es gratis. Allfit Pro es su suscripción opcional: amplía lo que puedes hacer en la app.",
+      rows: [
+        [
+          "Tus datos",
+          "Controlarlos nunca se paga. Decidir qué compartes y con quién, ver quién accedió, llevarte tu historial o borrarlo es gratis en cualquier plan.",
+        ],
+        ["Si vuelves al plan gratuito", "No se borra nada. Conservas todo tu historial y lo sigues viendo."],
+      ],
+    },
+    terms: {
+      title: "Condiciones de la oferta",
+      items: [
+        "Aplica a las primeras 100 personas que se unan a la lista de espera, sin importar cómo vayan a usar Allfit One.",
+        "El orden lo marca el momento en que te unes. Cuenta una vez por persona y por correo.",
+        "Cuando abra Allfit Space, te confirmamos por correo si quedaste entre las 100.",
+        "Lo activas en Allfit Space con una cuenta creada con el mismo correo con el que te uniste.",
+        "Los tres meses cuentan desde que lo activas, no desde el día en que abre Allfit Space.",
+        "Al terminar pasas al plan gratuito sin hacer nada: no te cobramos y conservas todo tu historial.",
+        "Es personal: no se transfiere ni se cambia por dinero.",
+      ],
+    },
+  },
+  en: {
+    metaTitle: "Waitlist | Allfit One",
+    metaDescription:
+      "Join the Allfit One waitlist: we'll let you know when Allfit Space and Allfit Studio open, and the first 100 people get three months of Allfit Pro free.",
+    title: ["Three months of Allfit Pro", "for the first 100 people."],
+    lead:
+      "We'll write to you when the product you'll use opens. And if you're among the first 100 people on the list, you start Allfit Space with three months of Allfit Pro, free.",
+    joinTitle: "Join the waitlist",
+    get: {
+      title: "What you get",
+      rows: [
+        ["If you're joining to train", "An email when Allfit Space opens."],
+        ["If you coach clients or run a gym or studio", "An email when Allfit Studio opens."],
+        [
+          "If you're among the first 100 people",
+          "Three months of Allfit Pro in Allfit Space, free, however you'll use Allfit One.",
+        ],
+      ],
+    },
+    pro: {
+      title: "What Allfit Pro is",
+      text: "Allfit Space is free. Allfit Pro is its optional subscription: it extends what you can do in the app.",
+      rows: [
+        [
+          "Your data",
+          "Controlling it is never paid for. Deciding what you share and with whom, seeing who accessed it, taking your history with you or deleting it is free on every plan.",
+        ],
+        ["If you go back to the free plan", "Nothing is deleted. You keep your whole history and can still see it."],
+      ],
+    },
+    terms: {
+      title: "Offer terms",
+      items: [
+        "It applies to the first 100 people who join the waitlist, however they'll use Allfit One.",
+        "Order is set by when you join. It counts once per person and per email.",
+        "When Allfit Space opens, we'll confirm by email whether you're among the 100.",
+        "You activate it in Allfit Space with an account created with the same email you joined with.",
+        "The three months start when you activate it, not on the day Allfit Space opens.",
+        "When they end, you move to the free plan without doing anything: we charge you nothing and you keep your whole history.",
+        "It's personal: it can't be transferred or exchanged for money.",
+      ],
+    },
+  },
+} as const satisfies Record<Language, unknown>;
 
 /**
  * Interface copy shared by every ambassador page. Each ambassador's own copy, plans,

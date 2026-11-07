@@ -30,6 +30,7 @@ import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
+import { waitlistOfferTermsId, waitlistPagePath } from "@/lib/waitlist";
 
 
 /**
@@ -171,7 +172,7 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
   );
 }
 
-function WaitlistSection({ copy }: { copy: LocalizedContent }) {
+function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -182,6 +183,15 @@ function WaitlistSection({ copy }: { copy: LocalizedContent }) {
         </div>
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
+          {/* The offer once, and its terms on the waitlist page; the form stays here. */}
+          <p className="waitlist-offer">{copy.waitlistOffer}</p>
+          <Link
+            href={`${localizedPath(language, waitlistPagePath)}#${waitlistOfferTermsId}`}
+            className="inline-link waitlist-offer-link"
+          >
+            {copy.waitlistOfferLink}
+            <FoundationIcon name="forward" size="sm" decorative />
+          </Link>
           <WaitlistForm copy={copy.waitlist} />
         </div>
       </div>
@@ -195,6 +205,8 @@ export function LandingPage({ language }: { language: Language }) {
   useLandingMotion(language);
 
   const closeMenu = () => setMenuOpen(false);
+  // Every waitlist action opens the waitlist page; the form at the end of this page stays.
+  const waitlistHref = localizedPath(language, waitlistPagePath);
 
   const primaryLinks = [
     ["#fitness-id", copy.navFitnessId, copy.fitnessIdLabel],
@@ -226,11 +238,11 @@ export function LandingPage({ language }: { language: Language }) {
             <div className="hidden min-[400px]:block">
               <LanguageSwitch language={language} label={copy.selectLanguage} />
             </div>
-            {/* The navbar's action is the page's conversion: it jumps to the waitlist, like the hero's. */}
-            <a href="#waitlist" className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
+            {/* The navbar's action is the page's conversion: it opens the waitlist page, like the hero's. */}
+            <Link href={waitlistHref} className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
               {copy.navAction}
               <FoundationIcon name="forward" size="sm" className="text-bolt" decorative />
-            </a>
+            </Link>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger
                 render={<IconButton aria-label={copy.openMenu} variant="outline" className="ml-auto sm:ml-0 lg:hidden" />}
@@ -267,10 +279,10 @@ export function LandingPage({ language }: { language: Language }) {
                       <LanguageSwitch language={language} label={copy.selectLanguage} />
                     </div>
                     <p className="mb-4 text-[11px] font-bold uppercase tracking-[.14em] text-white/64">{copy.tagline}</p>
-                    <a href="#waitlist" onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+                    <Link href={waitlistHref} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
                       {copy.heroAction}
                       <FoundationIcon name="forward" data-icon="inline-end" decorative />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </SheetContent>
@@ -294,10 +306,10 @@ export function LandingPage({ language }: { language: Language }) {
           <div className="hero-copy col-span-12 mt-12 md:mt-14 lg:col-span-5 lg:col-start-8 lg:row-start-1">
             <p className="hero-lead hero-enter">{copy.heroLead}</p>
             <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 lg:mt-8">
-              <a href="#waitlist" className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
+              <Link href={waitlistHref} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
                 {copy.heroAction}
                 <FoundationIcon name="forward" data-icon="inline-end" decorative />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -339,7 +351,7 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      <WaitlistSection copy={copy} />
+      <WaitlistSection copy={copy} language={language} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">

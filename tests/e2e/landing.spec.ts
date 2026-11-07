@@ -63,11 +63,11 @@ test("links each product to its own landing in the page language, in a new tab",
   }
 });
 
-test("the navbar and the mobile menu lead to the waitlist, not to email", async ({ page }) => {
+test("the navbar and the mobile menu lead to the waitlist page, not to email", async ({ page }) => {
   await page.goto("/es");
   await page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: "Únete a la lista", exact: true }).click();
-  await expect(page).toHaveURL(/#waitlist$/);
-  await expect(page.locator("#waitlist").getByLabel("Tu correo")).toBeInViewport();
+  await expect(page).toHaveURL(/\/es\/waitlist$/);
+  await expect(page.locator("#join").getByLabel("Tu correo")).toBeInViewport();
 
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto("/es");
@@ -76,8 +76,24 @@ test("the navbar and the mobile menu lead to the waitlist, not to email", async 
   await expect(dialog.locator("a[href^='mailto:']")).toHaveCount(0);
   await dialog.getByRole("link", { name: "Únete a la lista de espera" }).click();
   await expect(dialog).toBeHidden();
-  await expect(page).toHaveURL(/#waitlist$/);
-  await expect(page.locator("#waitlist").getByLabel("Tu correo")).toBeInViewport();
+  await expect(page).toHaveURL(/\/es\/waitlist$/);
+  // On a phone the offer comes first; the form starts within the first screen.
+  await expect(page.locator("#join").getByLabel("Tu nombre")).toBeInViewport();
+});
+
+test("the homepage keeps its own form and links the launch offer to its terms", async ({ page }) => {
+  for (const [language, offer, link, terms, emailLabel] of [
+    ["es", "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.", "Ver condiciones", "Condiciones de la oferta", "Tu correo"],
+    ["en", "The first 100 people on the list get three months of Allfit Pro.", "See the terms", "Offer terms", "Your email"],
+  ] as const) {
+    await page.goto(`/${language}`);
+    const waitlist = page.locator("#waitlist");
+    await expect(waitlist.getByLabel(emailLabel)).toBeAttached();
+    await expect(waitlist).toContainText(offer);
+    await waitlist.getByRole("link", { name: link }).click();
+    await expect(page).toHaveURL(new RegExp(`/${language}/waitlist#offer-terms$`));
+    await expect(page.getByRole("heading", { level: 2, name: terms })).toBeInViewport();
+  }
 });
 
 test("mobile Sheet traps focus, closes predictably and restores the trigger", async ({ page }) => {
@@ -129,16 +145,16 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
   expect(focusStyle).not.toBe("none");
 });
 
-test("the hero action leads to the waitlist, which validates and confirms in the page language", async ({ page }) => {
+test("the hero action leads to the waitlist page, whose form validates and confirms in the page language", async ({ page }) => {
   for (const [language, action, nameLabel, emailLabel, role, submit, nameEmpty, emailInvalid, roleEmpty, joined, another] of [
     ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Nico.", "Usar otro correo"],
     ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Nico.", "Use another email"],
   ] as const) {
     await page.goto(`/${language}`);
     await page.locator(".hero-actions").getByRole("link", { name: action }).click();
-    await expect(page).toHaveURL(new RegExp(`/${language}#waitlist$`));
+    await expect(page).toHaveURL(new RegExp(`/${language}/waitlist$`));
 
-    const waitlist = page.locator("#waitlist");
+    const waitlist = page.locator("#join");
     const name = waitlist.getByLabel(nameLabel);
     const email = waitlist.getByLabel(emailLabel);
     await expect(name).toBeInViewport();

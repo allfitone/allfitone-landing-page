@@ -1,3 +1,8 @@
+/** The waitlist page, under each language prefix: `/es/waitlist`, `/en/waitlist`. */
+export const waitlistPagePath = "/waitlist";
+/** The offer's terms on that page; the homepage's offer line links straight to them. */
+export const waitlistOfferTermsId = "offer-terms";
+
 /**
  * How a person would use Allfit One. It decides which opening they hear about:
  * Allfit Space for people who train, Allfit Studio for coaches and gyms.
@@ -26,7 +31,8 @@ export function isWaitlistRole(value: unknown): value is WaitlistRole {
  * there is no route handler to receive it here.
  *
  * Do not ship this stub to production: visitors would see "You're on the list"
- * while their name and email go nowhere.
+ * while their name and email go nowhere. The service must also keep the order people
+ * join in: the first 100 get the launch offer (`waitlistPageContent` in content.ts).
  */
 export async function joinWaitlist(entry: WaitlistEntry): Promise<void> {
   void entry;

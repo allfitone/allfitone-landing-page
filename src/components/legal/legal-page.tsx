@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BrandLockup } from "@allfitone/react/brand";
 import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
-import { LanguageSwitch } from "@/components/language-switch";
 import { LegalContents } from "@/components/legal/legal-contents";
+import { SubpageFooter, SubpageHeader } from "@/components/subpage-chrome";
 import { languages, ogLocales, type Language } from "@/lib/content";
 import {
   legalChrome,
-  legalDocumentSlugs,
   legalIndexContent,
   legalPath,
   type LegalDocumentSlug,
@@ -48,10 +46,10 @@ export function legalMetadata(
 type ContentsEntry = readonly [`#${string}`, string];
 
 /**
- * The frame every legal page shares, on the homepage's twelve-column grid: a header with
- * the brand, the legal index and the language switch; a title block; the document's
- * contents in the first three columns from 1024px (the index has none and takes the
- * full width); a closing contact block; and a footer that links the three documents.
+ * The frame every legal page shares, on the homepage's twelve-column grid: the subpage
+ * header with a link to the legal index; a title block; the document's contents in the
+ * first three columns from 1024px (the index has none and takes the full width); a
+ * closing contact block; and the subpage footer, which links the three documents.
  * Emphasis is spent once, on the title. No page shows an effective date or a version.
  */
 export function LegalPage({
@@ -96,24 +94,16 @@ export function LegalPage({
   };
 
   return (
-    <div className="legal-page">
+    <div className="subpage legal-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData).replace(/</g, "\\u003c") }}
       />
-      <header className="legal-header">
-        <div className="legal-shell legal-header-inner">
-          <Link href={homePath} className="legal-brand" aria-label="Allfit One">
-            <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
-          </Link>
-          <div className="legal-header-actions">
-            <Link href={indexPath} className="legal-header-link" aria-current={slug ? undefined : "page"}>
-              {chrome.legal}
-            </Link>
-            <LanguageSwitch language={language} label={chrome.selectLanguage} />
-          </div>
-        </div>
-      </header>
+      <SubpageHeader language={language}>
+        <Link href={indexPath} className="subpage-header-link" aria-current={slug ? undefined : "page"}>
+          {chrome.legal}
+        </Link>
+      </SubpageHeader>
 
       {/* The homepage's own grid, so every legal page spans the same width as the rest of the site. */}
       <main className={cn("site-grid legal-layout", !contents && "legal-layout-single")}>
@@ -143,26 +133,7 @@ export function LegalPage({
         </div>
       </main>
 
-      <footer className="legal-footer">
-        <div className="legal-shell legal-footer-inner">
-          <BrandLockup surface="dark" className="h-7 w-auto" title="Allfit One" />
-          <nav className="legal-footer-nav" aria-label={chrome.documents}>
-            {legalDocumentSlugs.map((document) => (
-              <Link
-                key={document}
-                href={localizedPath(language, legalPath(document))}
-                className="legal-footer-link"
-                aria-current={document === slug ? "page" : undefined}
-              >
-                {chrome.names[document]}
-              </Link>
-            ))}
-          </nav>
-          <Link href={homePath} className="legal-home-link">
-            {chrome.home}
-          </Link>
-        </div>
-      </footer>
+      <SubpageFooter language={language} current={slug} />
     </div>
   );
 }

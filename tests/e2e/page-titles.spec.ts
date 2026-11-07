@@ -5,12 +5,14 @@ import { languages } from "@/lib/content";
 import { legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { foreignTitleSeparator } from "@/lib/page-title";
 import { localizedPath } from "@/lib/site-config";
+import { waitlistPagePath } from "@/lib/waitlist";
 
 // Every page title separates its parts with « | », in the tab and when shared. New pages
 // join this list; published ambassadors join it on their own.
 const paths = [
   ...languages.flatMap((language) => [
     localizedPath(language),
+    localizedPath(language, waitlistPagePath),
     localizedPath(language, legalPath()),
     ...legalDocumentSlugs.map((slug) => localizedPath(language, legalPath(slug))),
   ]),
