@@ -30,7 +30,7 @@ import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
-import { waitlistOfferTermsId, waitlistPagePath } from "@/lib/waitlist";
+import { waitlistPagePath } from "@/lib/waitlist";
 
 
 /**
@@ -172,7 +172,7 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
   );
 }
 
-function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
+function WaitlistSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -183,15 +183,8 @@ function WaitlistSection({ copy, language }: { copy: LocalizedContent; language:
         </div>
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
-          {/* The offer once, and its terms on the waitlist page; the form stays here. */}
+          {/* The offer once, with no link: its terms live on the waitlist page. */}
           <p className="waitlist-offer">{copy.waitlistOffer}</p>
-          <Link
-            href={`${localizedPath(language, waitlistPagePath)}#${waitlistOfferTermsId}`}
-            className="inline-link waitlist-offer-link"
-          >
-            {copy.waitlistOfferLink}
-            <FoundationIcon name="forward" size="sm" decorative />
-          </Link>
           <WaitlistForm copy={copy.waitlist} />
         </div>
       </div>
@@ -351,7 +344,7 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      <WaitlistSection copy={copy} language={language} />
+      <WaitlistSection copy={copy} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">

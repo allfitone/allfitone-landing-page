@@ -239,9 +239,8 @@ section[id].fid-section {
    sits under its own field in the danger text color. A chosen pill turns white, not
    cyan: the button is the section's one cyan. The fields take the pill radius and the
    button's 56px height so field and action read as one family. */
-/* The launch offer, stated once under the lead; the link opens its terms on the waitlist page. */
+/* The launch offer, stated once under the lead; its terms live on the waitlist page. */
 .waitlist-offer { max-width: 46ch; margin-top: var(--afo-space-5); color: var(--afo-color-neutral-chalk); font-size: 1rem; font-weight: var(--afo-font-weight-semibold); line-height: 1.6; text-wrap: pretty; }
-.inline-link.waitlist-offer-link { margin-top: var(--afo-space-1); }
 .waitlist { margin-top: var(--afo-space-8); container-type: inline-size; }
 .waitlist-fields { display: grid; gap: var(--afo-space-5); }
 .waitlist-label { display: block; font-size: .875rem; font-weight: var(--afo-font-weight-semibold); line-height: 1.4; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 86%, transparent); }

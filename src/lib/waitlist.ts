@@ -1,6 +1,6 @@
 /** The waitlist page, under each language prefix: `/es/waitlist`, `/en/waitlist`. */
 export const waitlistPagePath = "/waitlist";
-/** The offer's terms on that page; the homepage's offer line links straight to them. */
+/** The offer's terms on that page, so a link can open them directly. */
 export const waitlistOfferTermsId = "offer-terms";
 
 /**

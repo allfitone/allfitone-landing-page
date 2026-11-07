@@ -137,7 +137,6 @@ export const content = {
       "Déjanos tu nombre y tu correo, y te avisaremos cuando Allfit Space y Allfit Studio abran sus puertas.",
     // The launch offer, stated once beside the form; its terms live on the waitlist page.
     waitlistOffer: "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.",
-    waitlistOfferLink: "Ver condiciones",
     waitlist: {
       nameLabel: "Tu nombre",
       // The placeholders and the address example use the visit's person: `{handle}` is the
@@ -289,7 +288,6 @@ export const content = {
     statusCopy:
       "Leave your name and email, and we'll let you know when Allfit Space and Allfit Studio open their doors.",
     waitlistOffer: "The first 100 people on the list get three months of Allfit Pro.",
-    waitlistOfferLink: "See the terms",
     waitlist: {
       nameLabel: "Your name",
       namePlaceholder: "{name}",
