@@ -59,7 +59,7 @@ export const content = {
       "Tu historial no vive contigo: vive en la app, el entrenador o el gimnasio de turno. Cuando esa relación termina, tú sigues entrenando, pero tu progreso se queda ahí.",
     problemKeepLabel: "Mariana se lleva",
     problemKeepValue: "Nada",
-    problemLoseLabel: "Se queda en Gimnasio Central",
+    problemLoseLabel: "Deja en su antiguo gimnasio",
     // Mariana's record at the gym she left before Estudio Norte, in real figures rather
     // than categories. The Fitness ID card in the next section holds the same kinds of
     // data, kept instead of lost.
@@ -206,7 +206,7 @@ export const content = {
       "Your history does not live with you: it lives in whichever app, coach or gym you are using. When that relationship ends, you keep training, but your progress stays behind.",
     problemKeepLabel: "Mariana takes",
     problemKeepValue: "Nothing",
-    problemLoseLabel: "Stays at Gimnasio Central",
+    problemLoseLabel: "Leaves behind at her old gym",
     problemLoseItems: [
       ["Logged sessions", "184"],
       ["Best squat", "95 kg"],
