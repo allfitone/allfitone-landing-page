@@ -130,40 +130,59 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
 });
 
 test("the hero action leads to the waitlist, which validates and confirms in the page language", async ({ page }) => {
-  for (const [language, action, field, submit, empty, invalid, joined, another] of [
-    ["es", "Únete a la lista de espera", "Tu correo", "Unirme a la lista", "Escribe tu correo", "Revisa el correo", "Ya estás en la lista.", "Usar otro correo"],
-    ["en", "Join the waitlist", "Your email", "Join the list", "Enter your email", "Check the email", "You're on the list.", "Use another email"],
+  for (const [language, action, nameLabel, emailLabel, role, submit, nameEmpty, emailInvalid, roleEmpty, joined, another] of [
+    ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Mariana.", "Usar otro correo"],
+    ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Mariana.", "Use another email"],
   ] as const) {
     await page.goto(`/${language}`);
     await page.locator(".hero-actions").getByRole("link", { name: action }).click();
     await expect(page).toHaveURL(new RegExp(`/${language}#waitlist$`));
 
     const waitlist = page.locator("#waitlist");
-    const email = waitlist.getByLabel(field);
-    await expect(email).toBeInViewport();
+    const name = waitlist.getByLabel(nameLabel);
+    const email = waitlist.getByLabel(emailLabel);
+    await expect(name).toBeInViewport();
+    await expect(name).toHaveAttribute("autocomplete", "given-name");
     await expect(email).toHaveAttribute("type", "email");
     await expect(email).toHaveAttribute("autocomplete", "email");
 
-    // Validation runs on submit, in the page language, and keeps the keyboard on the field.
+    // Validation runs on submit, in the page language: every missing field is marked, and
+    // only the first is announced and takes the keyboard.
     await waitlist.getByRole("button", { name: submit }).click();
-    await expect(waitlist.getByRole("alert")).toContainText(empty);
+    await expect(waitlist.getByRole("alert")).toHaveCount(1);
+    await expect(waitlist.getByRole("alert")).toContainText(nameEmpty);
+    await expect(name).toHaveAttribute("aria-invalid", "true");
     await expect(email).toHaveAttribute("aria-invalid", "true");
-    await expect(email).toBeFocused();
+    await expect(name).toBeFocused();
 
+    await name.fill("Mariana");
     await email.fill("mariana@correo");
     await email.press("Enter");
-    await expect(waitlist.getByRole("alert")).toContainText(invalid);
+    await expect(waitlist.getByRole("alert")).toContainText(emailInvalid);
+    await expect(email).toBeFocused();
 
-    // Typing again clears the error; a plausible address joins and the confirmation takes focus.
     await email.fill("mariana.rojas@correo.com");
-    await expect(waitlist.getByRole("alert")).toHaveCount(0);
     await email.press("Enter");
-    const confirmation = waitlist.getByText(joined);
+    await expect(waitlist.getByRole("alert")).toContainText(roleEmpty);
+    await expect(waitlist.getByRole("radio").first()).toBeFocused();
+
+    // Choosing clears the error; the confirmation greets her by name, takes focus, repeats
+    // the address and names the product that is hers.
+    // The radio sits inside its pill; people press the pill, so the test does too.
+    await waitlist.locator("label", { hasText: role }).click();
+    await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
+    await expect(waitlist.getByRole("alert")).toHaveCount(0);
+    await waitlist.getByRole("button", { name: submit }).click();
+    const confirmation = waitlist.locator("p", { hasText: joined });
     await expect(confirmation).toBeFocused();
     await expect(waitlist.getByRole("status")).toContainText("mariana.rojas@correo.com");
+    await expect(waitlist.getByRole("status")).toContainText("Allfit Space");
 
+    // Another email keeps her name and her choice, and puts the keyboard on the email.
     await waitlist.getByRole("button", { name: another }).click();
-    await expect(waitlist.getByLabel(field)).toBeFocused();
+    await expect(waitlist.getByLabel(emailLabel)).toBeFocused();
+    await expect(waitlist.getByLabel(nameLabel)).toHaveValue("Mariana");
+    await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
   }
 });
 

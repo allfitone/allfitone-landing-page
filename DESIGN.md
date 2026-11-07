@@ -526,7 +526,7 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 - Loading and success states must not depend only on color.
 - Input types, autocomplete, names, and native semantics must reflect the data requested.
 
-**`waitlist-field`** — The homepage's one form: an email field and `button-primary-large` on one line from `sm`, stacked full width below it. Because it sits beside a pill, the field takes the pill radius and the button's 56px height instead of `input-dark`'s 48px `{rounded.sm}`, so the two read as one control. A visible label sits above, a one-line note on what the email is for sits below, and validation runs on submit with the message under the field and focus kept on it. On success a confirmation that repeats the address replaces the form and takes focus, with a text link to use another email.
+**`waitlist-field`** — The homepage's one form: a first name and an email side by side once the form's column is 30rem wide (stacked below it), then «¿Cómo usarías Allfit One?» as three pills («Para entrenar», «Para acompañar a mis clientes», «Para gestionar un gimnasio o estudio»), then `button-primary-large`, full width until that same width. Because they sit with a pill button, the fields take the pill radius and the button's 56px height instead of `input-dark`'s 48px `{rounded.sm}`. The pills are native radios: a chosen pill turns white (border and a 10% white fill), never cyan, because the button is the section's one cyan. Visible labels sit above, a one-line note on what the name and email are for sits below, and validation runs on submit: each missing field is marked under itself, only the first is announced, and it takes focus. On success a confirmation greets the person by name, repeats the address and names the product they will hear about (Allfit Space for training, Allfit Studio for coaches and gyms); it replaces the form and takes focus, with a text link to use another email that keeps the name and the choice.
 
 ### FAQ
 
@@ -662,7 +662,7 @@ The structural breakpoints that matter for implementation are the Tailwind defau
 - Form validation, loading, success, empty, offline, and permission states need complete product-level patterns.
 - A semantic data-visualization palette beyond the core cyan/turquoise family has not been approved.
 - The destructive color exists as a practical implementation token, but warning, success, and informational state scales are not yet formalized.
-- The waitlist form (`waitlist-field`) is front-end only: no service receives the email yet. A demo-request or scheduling experience has not been specified.
+- The waitlist form (`waitlist-field`) is front-end only: no service receives the name, email or choice yet. A demo-request or scheduling experience has not been specified.
 - Allfit Space release scope and complete information architecture remain open.
 - The relationship between native applications and progressive web experiences for Allfit Space is not decided.
 - Dark and light application themes for Allfit Studio have not been approved; the documented light mode is an editorial marketing surface, not a complete product theme.

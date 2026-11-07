@@ -8,56 +8,97 @@ import { cn } from "@allfitone/react/lib/utils";
 
 import type { LocalizedContent } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
-import { isPlausibleEmail, joinWaitlist } from "@/lib/waitlist";
+import { isPlausibleEmail, isWaitlistRole, joinWaitlist, type WaitlistEntry, type WaitlistRole } from "@/lib/waitlist";
 
 type Status = "idle" | "pending" | "joined" | "failed";
+type Field = "name" | "email" | "role";
+type Errors = Partial<Record<Field, string>>;
+
+const FIELD_ORDER: readonly Field[] = ["name", "email", "role"];
 
 /**
- * The homepage's one conversion: an email for the waitlist.
+ * The homepage's one conversion: a first name, an email, and how the person would
+ * use Allfit One, so each hears about the product that is theirs.
  *
  * Validation runs on submit (the browser's own bubbles are off so the messages
- * follow the page language), the field keeps focus on an error, and a joined
- * state replaces the form and takes focus so the confirmation is announced and
- * the keyboard is not left on a button that no longer exists.
+ * follow the page language). Every missing field is marked under itself; only the
+ * first is announced, and it takes the keyboard. A joined state replaces the form
+ * and takes focus so the confirmation is announced and the keyboard is not left on
+ * a button that no longer exists. «Use another email» brings the form back with the
+ * name and the choice kept.
  */
 export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
-  const [joinedEmail, setJoinedEmail] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [errors, setErrors] = useState<Errors>({});
+  const [announced, setAnnounced] = useState<Field | null>(null);
+  const [joined, setJoined] = useState<WaitlistEntry | null>(null);
+  const [kept, setKept] = useState<{ name: string; role: WaitlistRole | null }>({ name: "", role: null });
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const rolesRef = useRef<HTMLFieldSetElement>(null);
   const joinedRef = useRef<HTMLParagraphElement>(null);
-  const returnToField = useRef(false);
+  const focusNext = useRef<Field | null>(null);
   const id = useId();
-  const inputId = `${id}-email`;
-  const messageId = `${id}-message`;
+  const fieldId = (field: Field) => `${id}-${field}`;
+  const errorId = (field: Field) => `${id}-${field}-error`;
+  const failedId = `${id}-failed`;
   const noteId = `${id}-note`;
 
-  // Focus moves only once the swapped block exists, so it waits for the render.
+  // Focus moves only once the swapped block or the error state exists, so it waits for the render.
   useEffect(() => {
-    if (status === "joined") joinedRef.current?.focus();
-    if (status === "idle" && returnToField.current) {
-      returnToField.current = false;
-      inputRef.current?.focus();
+    if (status === "joined") {
+      joinedRef.current?.focus();
+      return;
     }
-  }, [status]);
+    const field = focusNext.current;
+    if (!field) return;
+    focusNext.current = null;
+    if (field === "name") nameRef.current?.focus();
+    else if (field === "email") emailRef.current?.focus();
+    else rolesRef.current?.querySelector<HTMLInputElement>("input:checked, input")?.focus();
+  }, [status, errors]);
+
+  function clearError(field: Field) {
+    if (!errors[field]) return;
+    setErrors((current) => {
+      const next = { ...current };
+      delete next[field];
+      return next;
+    });
+    if (announced === field) setAnnounced(null);
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (status === "pending") return;
-    const email = String(new FormData(event.currentTarget).get("email") ?? "").trim();
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const role = data.get("role");
 
-    if (!email || !isPlausibleEmail(email)) {
-      setError(email ? copy.errorInvalid : copy.errorEmpty);
+    const next: Errors = {};
+    if (!name) next.name = copy.errorNameEmpty;
+    if (!email) next.email = copy.errorEmailEmpty;
+    else if (!isPlausibleEmail(email)) next.email = copy.errorEmailInvalid;
+    if (!isWaitlistRole(role)) next.role = copy.errorRole;
+
+    const first = FIELD_ORDER.find((field) => next[field]);
+    if (first || !isWaitlistRole(role)) {
+      const field = first ?? "role";
+      focusNext.current = field;
+      setErrors(next);
+      setAnnounced(field);
       setStatus("idle");
-      inputRef.current?.focus();
       return;
     }
 
-    setError(null);
+    setErrors({});
+    setAnnounced(null);
     setStatus("pending");
     try {
-      await joinWaitlist(email);
-      setJoinedEmail(email);
+      const entry = { name, email, role };
+      await joinWaitlist(entry);
+      setJoined(entry);
       setStatus("joined");
     } catch {
       setStatus("failed");
@@ -65,22 +106,24 @@ export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
   }
 
   function reset() {
-    returnToField.current = true;
+    if (joined) setKept({ name: joined.name, role: joined.role });
+    focusNext.current = "email";
+    setErrors({});
+    setAnnounced(null);
     setStatus("idle");
-    setError(null);
   }
 
-  if (status === "joined") {
-    const [before, after] = copy.joinedBody.split("{email}");
+  if (status === "joined" && joined) {
+    const [before, after] = copy.joinedBody[joined.role].split("{email}");
     return (
       <div className="waitlist-joined" role="status">
         <p ref={joinedRef} tabIndex={-1} className="waitlist-joined-title">
-          <FoundationIcon name="success" size="md" className="text-bolt" decorative />
-          {copy.joinedTitle}
+          <FoundationIcon name="success" size="md" className="shrink-0 text-bolt" decorative />
+          <span>{copy.joinedTitle.replace("{name}", joined.name)}</span>
         </p>
         <p className="waitlist-joined-body">
           {before}
-          <strong className="font-semibold text-white">{joinedEmail}</strong>
+          <strong className="font-semibold text-white">{joined.email}</strong>
           {after}
         </p>
         <button type="button" className="inline-link waitlist-reset" onClick={reset}>
@@ -90,55 +133,112 @@ export function WaitlistForm({ copy }: { copy: LocalizedContent["waitlist"] }) {
     );
   }
 
-  const invalid = error !== null;
-  const describedBy = [invalid || status === "failed" ? messageId : null, noteId].filter(Boolean).join(" ");
+  const pending = status === "pending";
+  const describedBy = (field: Field, ...rest: string[]) =>
+    [errors[field] ? errorId(field) : null, ...rest].filter(Boolean).join(" ") || undefined;
+
+  const fieldMessage = (field: Field) =>
+    errors[field] ? (
+      <p id={errorId(field)} className="waitlist-message" role={announced === field ? "alert" : undefined}>
+        <FoundationIcon name="error" size="sm" className="mt-px shrink-0" decorative />
+        {errors[field]}
+      </p>
+    ) : null;
 
   return (
-    <form className="waitlist" noValidate onSubmit={submit} aria-busy={status === "pending"}>
-      <label htmlFor={inputId} className="waitlist-label">
-        {copy.label}
-      </label>
-      <div className="waitlist-row">
-        <Input
-          ref={inputRef}
-          id={inputId}
-          name="email"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          autoCapitalize="none"
-          spellCheck={false}
-          placeholder={copy.placeholder}
-          aria-invalid={invalid}
-          aria-describedby={describedBy}
-          readOnly={status === "pending"}
-          onChange={() => invalid && setError(null)}
-          className="waitlist-input"
-        />
-        {/* A plain button with the variants, like the hero's action: the DS <Button> paints its
-            default variant with the accent gradient, which this page keeps flat. */}
-        <button type="submit" disabled={status === "pending"} className={cn(buttonVariants({ size: "lg" }), "waitlist-submit")}>
-          {status === "pending" ? (
-            <>
-              <FoundationIcon name="loading" data-icon="inline-start" className="waitlist-spinner" decorative />
-              {copy.pending}
-            </>
-          ) : (
-            <>
-              {copy.submit}
-              <FoundationIcon name="forward" data-icon="inline-end" decorative />
-            </>
-          )}
-        </button>
+    <form className="waitlist" noValidate onSubmit={submit} aria-busy={pending}>
+      <div className="waitlist-fields">
+        <div>
+          <label htmlFor={fieldId("name")} className="waitlist-label">
+            {copy.nameLabel}
+          </label>
+          <Input
+            ref={nameRef}
+            id={fieldId("name")}
+            name="name"
+            type="text"
+            autoComplete="given-name"
+            autoCapitalize="words"
+            maxLength={80}
+            defaultValue={kept.name}
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={describedBy("name", noteId)}
+            readOnly={pending}
+            onChange={() => clearError("name")}
+            className="waitlist-input"
+          />
+          {fieldMessage("name")}
+        </div>
+
+        <div>
+          <label htmlFor={fieldId("email")} className="waitlist-label">
+            {copy.emailLabel}
+          </label>
+          <Input
+            ref={emailRef}
+            id={fieldId("email")}
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            autoCapitalize="none"
+            spellCheck={false}
+            placeholder={copy.emailPlaceholder}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={describedBy("email", noteId)}
+            readOnly={pending}
+            onChange={() => clearError("email")}
+            className="waitlist-input"
+          />
+          {fieldMessage("email")}
+        </div>
       </div>
 
-      {invalid ? (
-        <p id={messageId} className="waitlist-message" role="alert">
-          <FoundationIcon name="error" size="sm" className="mt-px shrink-0" decorative />
-          {error}
-        </p>
-      ) : status === "failed" ? (
-        <p id={messageId} className="waitlist-message" role="alert">
+      {/* Native radios inside the pills: arrow keys, form data and the group's name come free. */}
+      <fieldset ref={rolesRef} className="waitlist-roles">
+        <legend className="waitlist-label">{copy.roleLegend}</legend>
+        <div className="waitlist-role-options" data-invalid={errors.role ? "" : undefined}>
+          {copy.roles.map((role) => (
+            <label key={role.id} className="waitlist-role">
+              <input
+                type="radio"
+                name="role"
+                value={role.id}
+                defaultChecked={kept.role === role.id}
+                aria-describedby={describedBy("role")}
+                onChange={() => clearError("role")}
+                className="sr-only"
+              />
+              {role.label}
+            </label>
+          ))}
+        </div>
+        {fieldMessage("role")}
+      </fieldset>
+
+      {/* A plain button with the variants, like the hero's action: the DS <Button> paints its
+          default variant with the accent gradient, which this page keeps flat. */}
+      <button
+        type="submit"
+        disabled={pending}
+        aria-describedby={status === "failed" ? failedId : undefined}
+        className={cn(buttonVariants({ size: "lg" }), "waitlist-submit")}
+      >
+        {pending ? (
+          <>
+            <FoundationIcon name="loading" data-icon="inline-start" className="waitlist-spinner" decorative />
+            {copy.pending}
+          </>
+        ) : (
+          <>
+            {copy.submit}
+            <FoundationIcon name="forward" data-icon="inline-end" decorative />
+          </>
+        )}
+      </button>
+
+      {status === "failed" ? (
+        <p id={failedId} className="waitlist-message" role="alert">
           <FoundationIcon name="error" size="sm" className="mt-px shrink-0" decorative />
           <span>
             {copy.failed}{" "}
