@@ -242,22 +242,26 @@ export function LandingPage({ language }: { language: Language }) {
           className="site-grid fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] -translate-x-1/2 items-center rounded-2xl bg-void/86 py-3.5 shadow-[0_18px_55px_rgba(3,7,19,.24)] backdrop-blur-xl"
           aria-label={copy.mainNavigation}
         >
-          <a href="#home" className="col-span-6 flex min-h-11 items-center lg:col-span-3" aria-label={copy.homeLink}>
+          <a href="#home" className="col-span-6 flex min-h-11 items-center lg:col-span-3 lg:row-start-1" aria-label={copy.homeLink}>
             <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
           </a>
 
-          <div className="col-span-6 hidden justify-center gap-6 text-xs font-bold uppercase tracking-[.12em] text-white/64 lg:flex">
+          {/* The links stay centred on the page; the actions take one extra column on the right,
+              overlapping the links' area where it is empty, so the waitlist action never wraps
+              or spills past the bar at 1024px. */}
+          <div className="col-span-6 hidden justify-center gap-6 text-xs font-bold uppercase tracking-[.12em] text-white/64 lg:col-start-4 lg:row-start-1 lg:flex">
             {primaryLinks.map(([href, label]) => (
               <a key={href} href={href} className="nav-link inline-flex min-h-11 items-center">{label}</a>
             ))}
           </div>
 
-          <div className="col-span-6 ml-auto flex items-center gap-3 lg:col-span-3 lg:gap-4">
+          <div className="col-span-6 ml-auto flex items-center gap-3 lg:col-span-4 lg:col-start-9 lg:row-start-1 lg:gap-4">
             <div className="hidden min-[400px]:block">
               <LanguageSwitch language={language} label={copy.selectLanguage} />
             </div>
-            <a href={CONTACT_HREF} className="ml-auto hidden min-h-11 items-center gap-2 text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
-              {copy.contactShort}
+            {/* The navbar's action is the page's conversion: it jumps to the waitlist, like the hero's. */}
+            <a href="#waitlist" className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
+              {copy.navAction}
               <FoundationIcon name="forward" size="sm" className="text-bolt" decorative />
             </a>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -296,8 +300,8 @@ export function LandingPage({ language }: { language: Language }) {
                       <LanguageSwitch language={language} label={copy.selectLanguage} />
                     </div>
                     <p className="mb-4 text-[11px] font-bold uppercase tracking-[.14em] text-white/64">{copy.tagline}</p>
-                    <a href={CONTACT_HREF} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
-                      {copy.contact}
+                    <a href="#waitlist" onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+                      {copy.heroAction}
                       <FoundationIcon name="forward" data-icon="inline-end" decorative />
                     </a>
                   </div>

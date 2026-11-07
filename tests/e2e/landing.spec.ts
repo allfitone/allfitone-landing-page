@@ -9,7 +9,7 @@ test("redirects the root to Spanish and switches language through the URL", asyn
   await page.goto("/");
   await expect(page).toHaveURL(/\/es$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(page.getByText("Escríbenos").first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Únete a la lista", exact: true })).toBeVisible();
 
   const English = page.getByRole("button", { name: "English" }).first();
   await English.click();
@@ -17,7 +17,7 @@ test("redirects the root to Spanish and switches language through the URL", asyn
   await expect(page).toHaveURL(/\/en$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("button", { name: "English" }).first()).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByText("Get in touch").first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Join the waitlist" }).first()).toBeVisible();
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -61,6 +61,23 @@ test("links each product to its own landing in the page language, in a new tab",
       await expect(page.locator(section).locator("a[href^='mailto:']")).toHaveCount(0);
     }
   }
+});
+
+test("the navbar and the mobile menu lead to the waitlist, not to email", async ({ page }) => {
+  await page.goto("/es");
+  await page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: "Únete a la lista", exact: true }).click();
+  await expect(page).toHaveURL(/#waitlist$/);
+  await expect(page.locator("#waitlist").getByLabel("Tu correo")).toBeInViewport();
+
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto("/es");
+  await page.getByRole("button", { name: "Abrir menú" }).click();
+  const dialog = page.getByRole("dialog", { name: "Navegación principal" });
+  await expect(dialog.locator("a[href^='mailto:']")).toHaveCount(0);
+  await dialog.getByRole("link", { name: "Únete a la lista de espera" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page).toHaveURL(/#waitlist$/);
+  await expect(page.locator("#waitlist").getByLabel("Tu correo")).toBeInViewport();
 });
 
 test("mobile Sheet traps focus, closes predictably and restores the trigger", async ({ page }) => {
