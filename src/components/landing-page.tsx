@@ -32,6 +32,18 @@ import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
+/**
+ * Every link to a product landing opens it in a new tab, so the visitor keeps their place
+ * here. Pair it with the `external` icon and `NewTabHint` so the new tab is announced.
+ */
+function productSiteLink(product: "space" | "studio", language: Language) {
+  return { href: productSiteUrl(product, language), target: "_blank", rel: "noopener noreferrer" } as const;
+}
+
+function NewTabHint({ copy }: { copy: LocalizedContent }) {
+  return <span className="sr-only"> {copy.opensInNewTab}</span>;
+}
+
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="problem" className="bg-panel text-white">
@@ -101,7 +113,7 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-function SpaceSection({ copy }: { copy: LocalizedContent }) {
+function SpaceSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
     <section id="allfit-space" className="bg-chalk text-void">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -113,9 +125,10 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
         <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
           <RevealTitle className="section-title text-void">{copy.appSectionTitle}</RevealTitle>
           <p className="section-lead mt-8 text-void/70">{copy.appSectionCopy}</p>
-          <a href={CONTACT_HREF} className="inline-link inline-link-on-light mt-6">
-            {copy.contact}
-            <FoundationIcon name="forward" size="sm" decorative />
+          <a {...productSiteLink("space", language)} className="inline-link inline-link-on-light mt-6">
+            {copy.spaceSectionLink}
+            <NewTabHint copy={copy} />
+            <FoundationIcon name="external" size="sm" decorative />
           </a>
         </div>
 
@@ -141,7 +154,7 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-function StudioSection({ copy }: { copy: LocalizedContent }) {
+function StudioSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
     <section id="allfit-studio" className="relative overflow-hidden bg-panel text-white">
       <span id="allfit-os" className="legacy-section-anchor" aria-hidden="true" />
@@ -154,9 +167,10 @@ function StudioSection({ copy }: { copy: LocalizedContent }) {
         <div className="col-span-12 mt-10 md:col-span-9 md:mt-0 lg:col-span-8">
           <RevealTitle className="section-title">{copy.studioSectionTitle}</RevealTitle>
           <p className="section-lead mt-8 text-white/70">{copy.studioSectionCopy}</p>
-          <a href={CONTACT_HREF} className="inline-link mt-6">
-            {copy.contact}
-            <FoundationIcon name="forward" size="sm" decorative />
+          <a {...productSiteLink("studio", language)} className="inline-link mt-6">
+            {copy.studioSectionLink}
+            <NewTabHint copy={copy} />
+            <FoundationIcon name="external" size="sm" decorative />
           </a>
         </div>
 
@@ -414,9 +428,10 @@ export function LandingPage({ language }: { language: Language }) {
                 </h2>
                 <p className="product-definition-audience">{copy.appAudience}</p>
                 <p className="mt-2 max-w-md text-sm leading-6 text-white/64">{copy.appDescription}</p>
-                <a href={productSiteUrl("space", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
+                <a {...productSiteLink("space", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
                   {copy.spaceLink}
-                  <FoundationIcon name="forward" data-icon="inline-end" decorative />
+                  <NewTabHint copy={copy} />
+                  <FoundationIcon name="external" data-icon="inline-end" decorative />
                 </a>
               </article>
 
@@ -426,9 +441,10 @@ export function LandingPage({ language }: { language: Language }) {
                 </h2>
                 <p className="product-definition-audience">{copy.studioAudience}</p>
                 <p className="mt-2 max-w-md text-sm leading-6 text-white/64">{copy.studioDescription}</p>
-                <a href={productSiteUrl("studio", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
+                <a {...productSiteLink("studio", language)} className={cn(buttonVariants({ variant: "outline" }), "mt-8")}>
                   {copy.studioLink}
-                  <FoundationIcon name="forward" data-icon="inline-end" decorative />
+                  <NewTabHint copy={copy} />
+                  <FoundationIcon name="external" data-icon="inline-end" decorative />
                 </a>
               </article>
             </div>
@@ -438,8 +454,8 @@ export function LandingPage({ language }: { language: Language }) {
 
       <ProblemSection copy={copy} />
       <FitnessIdSection copy={copy} />
-      <SpaceSection copy={copy} />
-      <StudioSection copy={copy} />
+      <SpaceSection copy={copy} language={language} />
+      <StudioSection copy={copy} language={language} />
       <EcosystemSection copy={copy} />
       <WaitlistSection copy={copy} />
 

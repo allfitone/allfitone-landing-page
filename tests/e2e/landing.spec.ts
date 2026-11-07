@@ -33,14 +33,33 @@ test("answers unknown languages and paths with a 404", async ({ request }) => {
   }
 });
 
-test("links each product to its own landing in the page language", async ({ page }) => {
-  for (const [language, space, studio] of [
-    ["es", "Conoce Allfit Space", "Conoce Allfit Studio"],
-    ["en", "Explore Allfit Space", "Explore Allfit Studio"],
+test("links each product to its own landing in the page language, in a new tab", async ({ page }) => {
+  for (const [language, newTab, links] of [
+    ["es", "(se abre en una pestaña nueva)", [
+      ["#home", "Conoce Allfit Space", "space"],
+      ["#home", "Conoce Allfit Studio", "studio"],
+      ["#allfit-space", "Más sobre Allfit Space", "space"],
+      ["#allfit-studio", "Más sobre Allfit Studio", "studio"],
+    ]],
+    ["en", "(opens in a new tab)", [
+      ["#home", "Explore Allfit Space", "space"],
+      ["#home", "Explore Allfit Studio", "studio"],
+      ["#allfit-space", "More about Allfit Space", "space"],
+      ["#allfit-studio", "More about Allfit Studio", "studio"],
+    ]],
   ] as const) {
     await page.goto(`/${language}`);
-    await expect(page.getByRole("link", { name: space })).toHaveAttribute("href", `https://space.allfit.one/${language}`);
-    await expect(page.getByRole("link", { name: studio })).toHaveAttribute("href", `https://studio.allfit.one/${language}`);
+    for (const [section, name, product] of links) {
+      const link = page.locator(section).getByRole("link", { name });
+      await expect(link).toHaveAttribute("href", `https://${product}.allfit.one/${language}`);
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+      await expect(link).toHaveAccessibleName(`${name} ${newTab}`);
+    }
+    // The product sections lead to their landing, not to email.
+    for (const section of ["#allfit-space", "#allfit-studio"]) {
+      await expect(page.locator(section).locator("a[href^='mailto:']")).toHaveCount(0);
+    }
   }
 });
 

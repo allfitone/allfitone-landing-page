@@ -43,6 +43,10 @@ export const content = {
       "Gestiona personas, entrenamiento, progreso y tu operación desde un solo panel.",
     spaceLink: "Conoce Allfit Space",
     studioLink: "Conoce Allfit Studio",
+    spaceSectionLink: "Más sobre Allfit Space",
+    studioSectionLink: "Más sobre Allfit Studio",
+    // Read after a product link's label: every link to a product landing opens a new tab.
+    opensInNewTab: "(se abre en una pestaña nueva)",
 
     phoneToday: "Hoy",
     phoneGreeting: "Tu siguiente paso",
@@ -240,6 +244,9 @@ export const content = {
     studioDescription: "Manage people, training, progress and your operation from one dashboard.",
     spaceLink: "Explore Allfit Space",
     studioLink: "Explore Allfit Studio",
+    spaceSectionLink: "More about Allfit Space",
+    studioSectionLink: "More about Allfit Studio",
+    opensInNewTab: "(opens in a new tab)",
 
     phoneToday: "Today",
     phoneGreeting: "Your next move",
