@@ -331,7 +331,7 @@ There is **no decorative brand gradient**, and no radial cyan atmosphere either:
 
 - **Display:** `Barlow Condensed, Arial Narrow, sans-serif`. The condensed proportions, heavy vertical strokes, and compact counters generate the athletic/editorial voice.
 - **Body / UI:** `Manrope, system-ui, sans-serif`. Its open construction balances the compression of Barlow Condensed and remains legible in bilingual copy and operational UI.
-- **Indexes / tabular utility:** system monospace. Use only for aligned numeric indexes inside components and technical data where fixed width helps scanning. Editorial sections no longer carry a top numeric marker.
+- **Indexes / tabular utility:** system monospace. Use only for times, measurements and technical data where fixed width helps scanning, or for an index whose order the reader actually needs (a numbered procedure). Unordered lists, product columns and section groups carry no `01 / 02 / 03`: since November 2026 the landing has none, because a sequence number on items without a sequence is a template signal.
 
 Both brand fonts are loaded through `next/font`. Do not replace them with browser-default approximations in production assets.
 
@@ -417,7 +417,8 @@ Whitespace acts as controlled recovery between high-intensity typographic moment
 ### Decorative Depth
 
 - The hero has no background decoration: no radial glow, no grid texture and no ghost “1” behind the copy. They were removed in November 2026 because they were genre signals that any dark SaaS landing shares, and the near-invisible “1” left half the first viewport reading as empty. Depth comes from the headline scale and the product stage.
-- A large outline mark may still mark a section (the Fitness ID plate, the Studio wordmark) when it sits clear of the copy, but never behind the hero.
+- No section carries a ghost mark: no outlined “1” behind Fitness ID and no outlined Studio wordmark behind Allfit Studio. Both were removed in November 2026 with the hero decoration, for the same reason. The Fitness ID section keeps its slanted plate, which is structure, not ornament.
+- Objects carry no decorative sheen either: the Fitness ID card lost its diagonal glass band and its pulse line.
 - Backdrop blur is functional on sticky navigation and overlays. It is not a default card treatment.
 - Do not stack translucent glass panels over one another.
 - Continuous floating animation is not part of the default system. If a product object moves, the section must have no competing motion.
@@ -493,9 +494,9 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`editorial-section-light`** — Full-width `{colors.canvas-chalk}` region with Void typography. Used for explanations, comparisons, and FAQ content where reading clarity should temporarily lower the visual intensity.
 
-**`feature-column`** — A grid-aligned content region separated by shared 1px dividers rather than a floating card. It combines a functional icon, numeric index, eyebrow, condensed title, and compact body copy. The shared structure is preferred to three identical rounded feature cards.
+**`feature-column`** — A grid-aligned content region separated by shared 1px dividers rather than a floating card: a condensed title and compact body copy. It carries no icon, numeric index or eyebrow above the title, and it is never the default way to restate a lead; the Allfit Space icon row was removed in November 2026 because it repeated the section lead word for word. Use it only when each column says something the surrounding copy does not.
 
-**`ecosystem-relationship-panel`** — The signature relationship composition inside the ecosystem section: a dark rounded panel with two product columns (`01`/`02` mono eyebrow, condensed title, compact copy, and a tag list) flanking a central connection node — a thin cyan line with end points and concentric rings — and closed by a full-width statement whose single accent word is cyan. On chalk the section frames the panel with a short lead and an inline `person — professional — organization` relationship strip. Below `lg` the three columns stack into one reading column; the product titles reserve equal height so both columns align.
+**`ecosystem-relationship-panel`** — The signature relationship composition inside the ecosystem section: a dark rounded panel with two columns — what the relationship means for the person (Allfit Space) and for the professional (Allfit Studio), each a condensed title and compact copy that names its product — flanking a central connection node (a thin cyan line with end points and concentric rings) captioned «Se conectan con tu permiso», and closed by a full-width statement whose single accent word is cyan. The columns carry no `01`/`02` index, product label above the title or `· `-separated tag triad. On chalk the section frames the panel with a one-sentence lead and an inline `person — professional — organization` relationship strip. Below `lg` the three columns stack into one reading column; the titles reserve equal height so both columns align.
 
 ### Cards & Containers
 
@@ -577,6 +578,9 @@ Allfit Space is the personal expression of the ecosystem:
 
 - Don't build a generic dark SaaS landing page with neon accents and interchangeable feature cards.
 - Don't add decorative chips, “early access” badges, or labels without a real information purpose.
+- Don't put a small uppercase label above a heading («Cómo funciona Studio», «Contiene»). If a group needs a name, give it a real heading.
+- Don't restate the same promise section after section. «Tu historial sigue contigo» has one home (the hero lead, paid off by the Fitness ID card); every other section says something new.
+- Don't summarize content as `·`-separated triads («Identidad · Progreso · Historial»).
 - Don't place floating metric cards over athlete photography.
 - Don't outline every panel in cyan or apply glow to every accent.
 - Don't use gradients on buttons or as a default section background.

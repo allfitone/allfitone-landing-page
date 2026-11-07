@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   BrandLockup,
-  BrandLogo,
   ProductWordmark,
 } from "@allfitone/react/brand";
 import { buttonVariants } from "@allfitone/react/components/button";
@@ -19,7 +18,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@allfitone/react/components/sheet";
-import { FoundationIcon, type IconName } from "@allfitone/react/icons";
+import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
 import { FitnessIdCard } from "@/components/fitness-id-card";
@@ -32,8 +31,6 @@ import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
 const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
-const spacePillarIcons = ["training", "people", "permissions"] as const satisfies readonly IconName[];
-
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="problem" className="bg-panel text-white">
@@ -45,9 +42,9 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
 
         {/* A handover ledger. The empty left column is the argument, and the right
             column deliberately mirrors the Fitness ID card: same
-            list, opposite outcome. */}
+            list, opposite outcome. The title already says when this happens, so the
+            ledger needs no introduction of its own. */}
         <div className="col-span-12 mt-16 md:mt-24">
-          <p className="ledger-lead">{copy.problemLedgerLead}</p>
           <div className="ledger" data-reveal>
             <div className="ledger-keep">
               <p className="ledger-label">{copy.problemKeepLabel}</p>
@@ -72,7 +69,6 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
 function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="fitness-id" className="fid-section bg-void text-white">
-      <BrandLogo variant="cyan" className="fid-section-mark" aria-hidden="true" />
       <div className="site-grid relative z-10">
         <div className="col-span-12 lg:col-span-8">
           <RevealTitle className="section-title">{copy.fitnessIdTitle}</RevealTitle>
@@ -86,13 +82,10 @@ function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
           <p className="section-lead text-white/72">{copy.fitnessIdCopy}</p>
 
           <ul className="fid-controls">
-            {copy.fitnessIdControls.map(([title, description], index) => (
+            {copy.fitnessIdControls.map(([title, description]) => (
               <li key={title} className="fid-control">
-                <span className="fid-control-index">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="fid-control-title">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/64">{description}</p>
-                </div>
+                <h3 className="fid-control-title">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/64">{description}</p>
               </li>
             ))}
           </ul>
@@ -125,19 +118,6 @@ function SpaceSection({ copy }: { copy: LocalizedContent }) {
           </a>
         </div>
 
-        <div className="col-span-12 mt-20 grid border-y border-void/16 md:mt-28 md:grid-cols-3">
-          {copy.appPillars.map(([title, description], index) => (
-            <article
-              key={title}
-              className="border-b border-void/16 py-8 last:border-b-0 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
-            >
-              <FoundationIcon name={spacePillarIcons[index]} size="md" className="text-turquoise-dark" decorative />
-              <h3 className="mt-8 font-display text-3xl font-semibold uppercase leading-none tracking-[-.035em] lg:text-4xl">{title}</h3>
-              <p className="mt-5 max-w-sm text-sm leading-6 text-void/70">{description}</p>
-            </article>
-          ))}
-        </div>
-
         <div data-reveal="card" className="space-areas col-span-12 mt-20 overflow-hidden rounded-2xl bg-void px-6 py-8 text-white md:mt-28 md:px-10 md:py-10">
           <div className="flex flex-col gap-3 border-b border-white/14 pb-7 md:flex-row md:items-end md:justify-between">
             <h3 className="font-display text-3xl font-semibold uppercase tracking-[-.03em] md:text-4xl">{copy.appAreasLabel}</h3>
@@ -164,7 +144,6 @@ function StudioSection({ copy }: { copy: LocalizedContent }) {
   return (
     <section id="allfit-studio" className="relative overflow-hidden bg-panel text-white">
       <span id="allfit-os" className="legacy-section-anchor" aria-hidden="true" />
-      <ProductWordmark product="studio" surface="dark" className="studio-section-mark" aria-hidden="true" />
       <div className="site-grid relative z-10 py-24 md:py-32 lg:py-40">
         <div className="col-span-12 md:col-span-3">
           <div className="product-section-wordmark product-section-wordmark-dark">
@@ -180,33 +159,30 @@ function StudioSection({ copy }: { copy: LocalizedContent }) {
           </a>
         </div>
 
-        <div className="col-span-12 mt-20 md:mt-28">
-          <p className="eyebrow text-white/70">{copy.studioDifferentiatorsLabel}</p>
-          <div className="studio-difference-grid">
-            {copy.studioDifferentiators.map(([title, description], index) => (
-              <article key={title} className="studio-difference" data-reveal data-spotlight style={stagger(index)}>
-                <span className="studio-difference-index">{String(index + 1).padStart(2, "0")}</span>
-                <h3 className="studio-difference-title">{title}</h3>
-                <p className="mt-4 max-w-md text-sm leading-6 text-white/64">{description}</p>
-              </article>
-            ))}
-          </div>
+        <div className="studio-difference-grid col-span-12 mt-20 md:mt-28">
+          {copy.studioDifferentiators.map(([title, description], index) => (
+            <article key={title} className="studio-difference" data-reveal data-spotlight style={stagger(index)}>
+              <h3 className="studio-difference-title">{title}</h3>
+              <p className="mt-4 max-w-md text-sm leading-6 text-white/64">{description}</p>
+            </article>
+          ))}
         </div>
 
-        <div className="col-span-12 mt-20 md:mt-24">
-          <p className="eyebrow text-white/70">{copy.studioModulesLabel}</p>
+        {/* The modules get a real heading instead of a label above them, and what comes
+            later fills the grid's sixth cell as the one dimmed module. */}
+        <div className="col-span-12 mt-20 md:mt-28">
+          <h3 className="studio-modules-title">{copy.studioModulesLabel}</h3>
           <div className="studio-module-grid">
             {copy.studioModules.map(([module, description]) => (
               <article key={module} className="studio-module">
-                <h3 className="font-display text-2xl font-semibold uppercase leading-none tracking-[-.03em]">{module}</h3>
+                <h4 className="studio-module-name">{module}</h4>
                 <p className="mt-2 text-xs leading-5 text-white/64">{description}</p>
               </article>
             ))}
-          </div>
-
-          <div className="studio-upcoming">
-            <p className="eyebrow shrink-0 text-white/60">{copy.studioUpcomingLabel}</p>
-            <p className="text-sm leading-6 text-white/56">{copy.studioUpcoming.join(" · ")}</p>
+            <article className="studio-module studio-module-upcoming">
+              <h4 className="studio-module-name">{copy.studioUpcomingLabel}</h4>
+              <p className="mt-2 text-xs leading-5 text-white/56">{copy.studioUpcoming.join(" · ")}</p>
+            </article>
           </div>
         </div>
       </div>
@@ -230,22 +206,17 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
                 <span className="ecosystem-relation-link" aria-hidden="true" />
                 <span className="ecosystem-relation-node">{copy.ecosystem.relation[2]}</span>
               </div>
-              <p className="ecosystem-relation-shared">{copy.ecosystem.relationShared}</p>
             </div>
           </div>
         </div>
 
         <div className="ecosystem-panel col-span-12 mt-16 md:mt-20" data-reveal="card">
           <div className="ecosystem-grid">
+            {/* Each column opens with what the product means for one side of the
+                relationship; the product is named in the copy, not in a label above it. */}
             <article className="ecosystem-product">
-              <p className="ecosystem-product-head">
-                <span className="ecosystem-product-index">{copy.ecosystem.space.index}</span>
-                <span className="ecosystem-product-rule" aria-hidden="true" />
-                <span className="ecosystem-product-label">{copy.appSectionLabel}</span>
-              </p>
               <h3 className="ecosystem-product-title">{copy.ecosystem.space.title}</h3>
               <p className="ecosystem-product-copy">{copy.ecosystem.space.copy}</p>
-              <p className="ecosystem-tags">{copy.ecosystem.space.tags.join(" · ")}</p>
             </article>
 
             <div className="ecosystem-connect">
@@ -265,18 +236,11 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
                 </svg>
               </span>
               <p className="ecosystem-connect-title">{copy.ecosystem.connect.title}</p>
-              <p className="ecosystem-connect-tags">{copy.ecosystem.connect.tags.join(" · ")}</p>
             </div>
 
             <article className="ecosystem-product ecosystem-product-studio">
-              <p className="ecosystem-product-head">
-                <span className="ecosystem-product-index">{copy.ecosystem.studio.index}</span>
-                <span className="ecosystem-product-rule" aria-hidden="true" />
-                <span className="ecosystem-product-label">{copy.studioSectionLabel}</span>
-              </p>
               <h3 className="ecosystem-product-title">{copy.ecosystem.studio.title}</h3>
               <p className="ecosystem-product-copy">{copy.ecosystem.studio.copy}</p>
-              <p className="ecosystem-tags">{copy.ecosystem.studio.tags.join(" · ")}</p>
             </article>
           </div>
 
@@ -296,7 +260,7 @@ function EcosystemSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-function StatusSection({ copy }: { copy: LocalizedContent }) {
+function StatusSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
     <section id="status" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -306,21 +270,29 @@ function StatusSection({ copy }: { copy: LocalizedContent }) {
         </div>
 
         <div className="col-span-12 mt-16 border-t border-white/14 md:mt-24">
-          {copy.statusRows.map(([name, state, description], index) => (
-            <article key={name} className="status-row" data-reveal style={stagger(index)}>
-              <h3 className="status-row-name">{name}</h3>
-              <p className="status-row-state">
-                <span className="status-dot" aria-hidden="true" />
-                {state}
-              </p>
-              <p className="status-row-description">{description}</p>
-            </article>
-          ))}
+          {copy.statusRows.map(({ name, state, target }, index) => {
+            const href = target === "fitness-id" ? "#fitness-id" : productSiteUrl(target, language);
+            // A product row shows the address of its own site; the thesis points back up the page.
+            const label = target === "fitness-id" ? copy.statusFitnessIdLink : new URL(href).host;
+            return (
+              <article key={name} className="status-row" data-reveal style={stagger(index)}>
+                <h3 className="status-row-name">{name}</h3>
+                <p className="status-row-state">
+                  <span className="status-dot" aria-hidden="true" />
+                  {state}
+                </p>
+                <a href={href} className="inline-link status-row-link">
+                  {label}
+                  <FoundationIcon name="forward" size="sm" decorative />
+                </a>
+              </article>
+            );
+          })}
         </div>
 
         <div className="col-span-12 mt-16 md:mt-24 lg:col-span-8">
           <p className="section-lead text-white/80">{copy.closingPrompt}</p>
-          <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "mt-8 w-full sm:w-auto")}>
+          <a href={CONTACT_HREF} className={cn(buttonVariants({ size: "lg" }), "mt-8 min-h-14 w-full sm:min-h-11 sm:w-auto")}>
             {copy.contact}
             <FoundationIcon name="forward" data-icon="inline-end" decorative />
           </a>
@@ -486,7 +458,7 @@ export function LandingPage({ language }: { language: Language }) {
       <SpaceSection copy={copy} />
       <StudioSection copy={copy} />
       <EcosystemSection copy={copy} />
-      <StatusSection copy={copy} />
+      <StatusSection copy={copy} language={language} />
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">

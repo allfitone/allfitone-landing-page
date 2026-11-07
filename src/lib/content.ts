@@ -37,7 +37,7 @@ export const content = {
     heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
 
     appAudience: "Para personas",
-    appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
+    appDescription: "Entrena por tu cuenta o con un profesional, sin empezar de cero cada vez.",
     studioAudience: "Para profesionales y organizaciones",
     studioDescription:
       "Gestiona personas, entrenamiento, progreso y tu operación desde un solo panel.",
@@ -80,7 +80,6 @@ export const content = {
     problemTitle: "Cada vez que cambias, empiezas de cero.",
     problemCopy:
       "Tu historial no vive contigo: vive en la app, el entrenador o el gimnasio de turno. Cuando esa relación termina, tú sigues entrenando, pero tu progreso se queda ahí.",
-    problemLedgerLead: "Cuando cambias de gimnasio, de entrenador o de app:",
     problemKeepLabel: "Te llevas",
     problemKeepValue: "Nada",
     problemLoseLabel: "Se queda",
@@ -95,8 +94,7 @@ export const content = {
     fitnessIdLabel: "Fitness ID",
     fitnessIdTitle: "Una identidad que no se queda en el gimnasio.",
     fitnessIdCopy:
-      "El Fitness ID es tu identidad fitness portátil. Reúne lo que entrenaste, lo que lograste y con quién lo lograste, y permanece contigo cuando cambias de entrenador, de gimnasio, de ciudad o de disciplina.",
-    fitnessIdCardLabel: "Contiene",
+      "El Fitness ID reúne lo que entrenaste, lo que lograste y con quién lo lograste. No pertenece a la app, al entrenador ni al gimnasio de turno: es tuyo, y tú decides quién lo ve.",
     fitnessIdCardFooter: "Permanece contigo",
     fitnessIdFields: [
       "Objetivos",
@@ -119,12 +117,7 @@ export const content = {
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
-      "Allfit Space reúne tu plan, tus sesiones y tu progreso en un solo lugar. Entrena por tu cuenta o sigue la planificación de un profesional.",
-    appPillars: [
-      ["Entrena por tu cuenta", "Organiza tus sesiones y registra lo que haces cuando entrenas de forma independiente."],
-      ["Sigue el plan de tu entrenador", "Consulta su planificación en el mismo lugar donde registras cada sesión."],
-      ["Tu historial sigue contigo", "Tu Fitness ID conserva tus marcas y tu progreso aunque cambies de gimnasio, profesional o disciplina."],
-    ],
+      "Allfit Space reúne tu plan, tus sesiones y tu progreso. Entrena por tu cuenta o sigue la planificación de un profesional en el mismo lugar donde registras cada sesión.",
     appAreasLabel: "Dentro de Allfit Space",
     appAreas: [
       ["Hoy", "Tu próxima sesión"],
@@ -138,8 +131,7 @@ export const content = {
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
-      "Un solo panel para gestionar clientes, planificación, progreso y operación, conectado con el Fitness ID de cada persona.",
-    studioDifferentiatorsLabel: "Cómo funciona Studio",
+      "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
     studioDifferentiators: [
       [
         "Cada persona entra con su identidad",
@@ -150,7 +142,7 @@ export const content = {
         "Studio conserva cada versión del programa y la compara con lo que la persona registró en sus sesiones.",
       ],
       [
-        "Cada persona decide qué comparte",
+        "Nadie ve a una persona solo por su cargo",
         "El acceso depende de una relación, una autorización y una asignación vigentes. Ser dueño o administrador no basta.",
       ],
       [
@@ -171,40 +163,36 @@ export const content = {
 
     ecosystemLabel: "Ecosistema",
     ecosystemTitle: "Dos productos. Una sola relación.",
-    ecosystemCopy: "Dos experiencias distintas sobre una base compartida.",
+    ecosystemCopy: "Allfit Space es de la persona; Allfit Studio, del profesional y su organización.",
     ecosystem: {
       space: {
-        index: "01",
-        title: "Tu historia sigue contigo.",
-        copy: "La persona entrena, registra su progreso y conserva su información.",
-        tags: ["Identidad", "Progreso", "Historial"],
+        title: "La persona es dueña de lo que registra.",
+        copy: "En Allfit Space registra sesiones, marcas y progreso, y elige qué ve cada profesional.",
       },
       connect: {
         title: "Se conectan con tu permiso",
-        tags: ["Planes", "Progreso", "Información"],
       },
       studio: {
-        index: "02",
         title: "El profesional acompaña sin apropiarse.",
-        copy: "Studio permite programar, acompañar y analizar con acceso autorizado.",
-        tags: ["Programa", "Acompaña", "Analiza"],
+        copy: "Desde Allfit Studio programa, sigue lo que la persona registró y analiza su progreso con el acceso que ella concedió.",
       },
       closingLead: "Cambia quién te acompaña.",
       closingAccent: "No",
       closingRest: "lo que has construido.",
       relation: ["Persona", "Profesional", "Organización"],
-      relationShared: "Identidad · Permisos · Información compartida",
     },
 
     statusLabel: "Dónde estamos",
     statusTitle: "Estamos construyendo Allfit One.",
     statusCopy:
       "Allfit Space y Allfit Studio están en desarrollo. El Fitness ID es la tesis de producto que los conecta.",
+    // Each row links to where the product is explained instead of describing it a third time.
     statusRows: [
-      ["Allfit Space", "En desarrollo", "Entrena por tu cuenta o sigue el plan de un profesional. Tu historial permanece contigo."],
-      ["Allfit Studio", "En desarrollo", "Gestiona clientes, planificación, progreso y suscripciones desde un mismo panel."],
-      ["Fitness ID", "Tesis de producto", "Cada persona conserva su historial y decide qué comparte."],
+      { name: "Allfit Space", state: "En desarrollo", target: "space" },
+      { name: "Allfit Studio", state: "En desarrollo", target: "studio" },
+      { name: "Fitness ID", state: "Tesis de producto", target: "fitness-id" },
     ],
+    statusFitnessIdLink: "Qué es el Fitness ID",
     closingPrompt:
       "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
     tagline: "All the fitness in one place.",
@@ -241,7 +229,7 @@ export const content = {
     heroNote: "There's no public demo yet. Tell us how you train or run your space.",
 
     appAudience: "For people",
-    appDescription: "Train on your own or with a professional and keep your progress with you.",
+    appDescription: "Train on your own or with a professional, without starting over each time.",
     studioAudience: "For professionals and organizations",
     studioDescription: "Manage people, training, progress and your operation from one dashboard.",
     spaceLink: "Explore Allfit Space",
@@ -283,7 +271,6 @@ export const content = {
     problemTitle: "Every time you switch, you start over.",
     problemCopy:
       "Your history does not live with you: it lives in whichever app, coach or gym you are using. When that relationship ends, you keep training, but your progress stays behind.",
-    problemLedgerLead: "When you change gym, coach or app:",
     problemKeepLabel: "You take",
     problemKeepValue: "Nothing",
     problemLoseLabel: "Stays behind",
@@ -298,8 +285,7 @@ export const content = {
     fitnessIdLabel: "Fitness ID",
     fitnessIdTitle: "An identity that doesn't stay at the gym.",
     fitnessIdCopy:
-      "Fitness ID is your portable fitness identity. It holds what you trained, what you achieved and who you achieved it with, and it stays with you when you change coach, gym, city or discipline.",
-    fitnessIdCardLabel: "Holds",
+      "Fitness ID holds what you trained, what you achieved and who you achieved it with. It doesn't belong to whichever app, coach or gym you are using: it's yours, and you decide who sees it.",
     fitnessIdCardFooter: "Stays with you",
     fitnessIdFields: [
       "Goals",
@@ -322,12 +308,7 @@ export const content = {
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Keep training from where you left off.",
     appSectionCopy:
-      "Allfit Space brings your plan, sessions and progress into one place. Train on your own or follow a professional's plan.",
-    appPillars: [
-      ["Train on your own", "Plan your sessions and log what you do when you train independently."],
-      ["Follow your coach's plan", "Keep their plan in the same place where you log each session."],
-      ["Your history stays with you", "Your Fitness ID keeps your records and progress when you change gym, coach or discipline."],
-    ],
+      "Allfit Space brings together your plan, your sessions and your progress. Train on your own or follow a professional's plan in the same place where you log each session.",
     appAreasLabel: "Inside Allfit Space",
     appAreas: [
       ["Today", "Your next session"],
@@ -341,8 +322,7 @@ export const content = {
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
     studioSectionCopy:
-      "One dashboard to manage clients, planning, progress and operations, connected to each person's Fitness ID.",
-    studioDifferentiatorsLabel: "How Studio works",
+      "Studio works on each person's Fitness ID: you plan, follow their progress and run your operation without asking them to start over.",
     studioDifferentiators: [
       [
         "Each person joins with their own identity",
@@ -353,7 +333,7 @@ export const content = {
         "Studio keeps every version of the program and compares it with what the person logged in their sessions.",
       ],
       [
-        "Each person decides what to share",
+        "No one sees a person just because of their role",
         "Access depends on an active relationship, authorization and assignment. Being an owner or admin is not enough.",
       ],
       [
@@ -374,29 +354,23 @@ export const content = {
 
     ecosystemLabel: "Ecosystem",
     ecosystemTitle: "Two products. One relationship.",
-    ecosystemCopy: "Two distinct experiences on one shared base.",
+    ecosystemCopy: "Allfit Space belongs to the person; Allfit Studio, to the professional and their organization.",
     ecosystem: {
       space: {
-        index: "01",
-        title: "Your history stays with you.",
-        copy: "The person trains, logs their progress and keeps their information.",
-        tags: ["Identity", "Progress", "History"],
+        title: "The person owns what they log.",
+        copy: "In Allfit Space they log sessions, records and progress, and choose what each professional sees.",
       },
       connect: {
         title: "They connect with your permission",
-        tags: ["Plans", "Progress", "Information"],
       },
       studio: {
-        index: "02",
         title: "The professional guides without owning it.",
-        copy: "Studio lets them program, guide and analyze with authorized access.",
-        tags: ["Program", "Guide", "Analyze"],
+        copy: "From Allfit Studio they program, follow what the person logged and analyze progress, with the access the person granted.",
       },
       closingLead: "Change who guides you.",
       closingAccent: "Not",
       closingRest: "what you've built.",
       relation: ["Person", "Professional", "Organization"],
-      relationShared: "Identity · Permissions · Shared information",
     },
 
     statusLabel: "Where we are",
@@ -404,10 +378,11 @@ export const content = {
     statusCopy:
       "Allfit Space and Allfit Studio are in development. Fitness ID is the product thesis that connects them.",
     statusRows: [
-      ["Allfit Space", "In development", "Train on your own or follow a professional's plan. Your history stays with you."],
-      ["Allfit Studio", "In development", "Manage clients, planning, progress and subscriptions from one dashboard."],
-      ["Fitness ID", "Product thesis", "Each person keeps their history and decides what to share."],
+      { name: "Allfit Space", state: "In development", target: "space" },
+      { name: "Allfit Studio", state: "In development", target: "studio" },
+      { name: "Fitness ID", state: "Product thesis", target: "fitness-id" },
     ],
+    statusFitnessIdLink: "What Fitness ID is",
     closingPrompt:
       "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
     tagline: "All the fitness in one place.",
