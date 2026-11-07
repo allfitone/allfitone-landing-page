@@ -34,10 +34,9 @@ test("publishes every legal page as an indexable, self-canonical document in bot
   expect(sitemap).not.toContain("/privacy/analytics");
 });
 
-test("states the analytics notice's terms and when it took effect", async ({ request }) => {
+test("states the analytics notice's terms, with no effective date or version", async ({ request }) => {
   const html = await (await request.get("/es/legal/analytics")).text();
-  // The page shows when the notice took effect, not the internal version id.
-  expect(html).toContain("16 de agosto de 2026");
+  expect(html).not.toContain("Vigente desde");
   expect(html).not.toContain("analytics-v1");
   expect(html).toContain("PostHog US");
   expect(html).toContain("90 días");
@@ -49,7 +48,7 @@ test("states the analytics notice's terms and when it took effect", async ({ req
   const english = await (await request.get("/en/legal/analytics")).text();
   expect(english).toContain("We never collect");
   expect(english).toContain("90 days");
-  expect(english).toContain("August 16, 2026");
+  expect(english).not.toContain("Effective");
 });
 
 test("keeps the analytics notice's earlier addresses working", async ({ request }) => {
@@ -94,6 +93,10 @@ test("lists the three documents in the index and links every one from the homepa
   await expect(footer.getByRole("link", { name: "Términos y condiciones" })).toHaveAttribute("href", "/es/legal/terms");
   await expect(footer.getByRole("link", { name: "Política de privacidad" })).toHaveAttribute("href", "/es/legal/privacy");
   await expect(footer.getByRole("link", { name: "Aviso de analítica" })).toHaveAttribute("href", "/es/legal/analytics");
+  // The homepage footer's «Legal» column lists the documents and no email.
+  const legalColumn = footer.getByRole("navigation", { name: "Legal" });
+  await expect(legalColumn.getByRole("link")).toHaveText(["Términos y condiciones", "Política de privacidad", "Aviso de analítica"]);
+  await expect(footer.locator("a[href^='mailto:']")).toHaveCount(0);
   // The waitlist asks for a name and an email, so it links the policy, in a new tab.
   const waitlistLink = page.locator("#waitlist").getByRole("link", { name: /Política de privacidad/ });
   await expect(waitlistLink).toHaveAttribute("href", "/es/legal/privacy");

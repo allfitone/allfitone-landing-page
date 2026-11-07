@@ -2,9 +2,9 @@ import type { Language } from "@/lib/content";
 
 /*
  * The analytics notice: what the optional analytics in Allfit Space and Allfit Studio
- * may measure and what it never collects. Its effective date lives in
- * `legalEffectiveDates`; the products record consent against the internal version id
- * «analytics-v1», which the page does not show. The privacy policy links here.
+ * may measure and what it never collects. The products record consent against the
+ * internal version id «analytics-v1», which the page does not show. The privacy policy
+ * links here.
  */
 export const analyticsNotice = {
   es: {

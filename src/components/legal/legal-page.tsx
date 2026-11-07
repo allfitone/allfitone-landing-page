@@ -9,10 +9,8 @@ import { LanguageSwitch } from "@/components/language-switch";
 import { LegalContents } from "@/components/legal/legal-contents";
 import { languages, ogLocales, type Language } from "@/lib/content";
 import {
-  formatLegalDate,
   legalChrome,
   legalDocumentSlugs,
-  legalEffectiveDates,
   legalIndexContent,
   legalPath,
   type LegalDocumentSlug,
@@ -51,10 +49,10 @@ type ContentsEntry = readonly [`#${string}`, string];
 
 /**
  * The frame every legal page shares, on the homepage's twelve-column grid: a header with
- * the brand, the legal index and the language switch; a title block with the effective
- * date; the document's contents in the first three columns from 1024px (the index has
- * none and takes the full width); a closing contact block; and a footer that links the
- * three documents. Emphasis is spent once, on the title.
+ * the brand, the legal index and the language switch; a title block; the document's
+ * contents in the first three columns from 1024px (the index has none and takes the
+ * full width); a closing contact block; and a footer that links the three documents.
+ * Emphasis is spent once, on the title. No page shows an effective date or a version.
  */
 export function LegalPage({
   language,
@@ -129,7 +127,6 @@ export function LegalPage({
             ))}
           </h1>
           <p className="legal-lead">{lead}</p>
-          {slug ? <EffectiveDate language={language} slug={slug} /> : null}
         </header>
 
         {contents ? <LegalContents label={chrome.contents} entries={contents} /> : null}
@@ -167,19 +164,6 @@ export function LegalPage({
         </div>
       </footer>
     </div>
-  );
-}
-
-/** «Vigente desde el 7 de noviembre de 2026», with the date as a machine-readable `<time>`. */
-export function EffectiveDate({ language, slug }: { language: Language; slug: LegalDocumentSlug }) {
-  const date = legalEffectiveDates[slug];
-  const [before, after] = legalChrome[language].effective.split("{date}");
-  return (
-    <p className="legal-effective">
-      {before}
-      <time dateTime={date}>{formatLegalDate(language, date)}</time>
-      {after}
-    </p>
   );
 }
 

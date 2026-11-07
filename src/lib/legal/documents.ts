@@ -11,29 +11,9 @@ import type { Language } from "@/lib/content";
 export const legalDocumentSlugs = ["terms", "privacy", "analytics"] as const;
 export type LegalDocumentSlug = (typeof legalDocumentSlugs)[number];
 
-/**
- * The day each document took effect, shown as «Vigente desde…». Change a date whenever
- * that document's terms change. The products record analytics consent against the
- * notice's internal version id («analytics-v1»), which the page does not show.
- */
-export const legalEffectiveDates: Record<LegalDocumentSlug, string> = {
-  terms: "2026-11-07",
-  privacy: "2026-11-07",
-  analytics: "2026-08-16",
-};
-
 /** The path of the index, or of one document, without the language prefix. */
 export function legalPath(slug?: LegalDocumentSlug): string {
   return slug ? `/legal/${slug}` : "/legal";
-}
-
-const dateLocales: Record<Language, string> = { es: "es", en: "en-US" };
-
-/** An ISO date written out in the page language: «7 de noviembre de 2026», «November 7, 2026». */
-export function formatLegalDate(language: Language, isoDate: string): string {
-  return new Intl.DateTimeFormat(dateLocales[language], { dateStyle: "long", timeZone: "UTC" }).format(
-    new Date(`${isoDate}T00:00:00Z`),
-  );
 }
 
 /** A section of a plain legal document. A string is a paragraph; a list of strings is a list. */
@@ -61,8 +41,6 @@ export const legalChrome = {
     legal: "Legal",
     home: "Volver a Allfit One",
     contents: "En este documento",
-    // `{date}` is the document's effective date, written out by `formatLegalDate()`.
-    effective: "Vigente desde el {date}",
     documents: "Documentos legales",
     read: "Leer",
     names: {
@@ -76,7 +54,6 @@ export const legalChrome = {
     legal: "Legal",
     home: "Back to Allfit One",
     contents: "In this document",
-    effective: "Effective {date}",
     documents: "Legal documents",
     read: "Read",
     names: {

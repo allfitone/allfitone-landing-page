@@ -89,7 +89,7 @@ export const termsAndConditions = {
         id: "changes",
         title: "Cambios y ley aplicable",
         content: [
-          "Si cambiamos estos términos, publicaremos la nueva versión aquí con su fecha de vigencia y te avisaremos en la app antes de que entre en vigor.",
+          "Si cambiamos estos términos, publicaremos la nueva versión aquí y te avisaremos en la app antes de que entre en vigor.",
           "Estos términos se rigen por las leyes de la República de Colombia. Si esta versión y la versión en inglés difieren, prevalece la versión en español.",
         ],
       },
@@ -176,7 +176,7 @@ export const termsAndConditions = {
         id: "changes",
         title: "Changes and governing law",
         content: [
-          "If we change these terms, we will publish the new version here with its effective date and tell you in the app before it takes effect.",
+          "If we change these terms, we will publish the new version here and tell you in the app before it takes effect.",
           "These terms are governed by the laws of the Republic of Colombia. If this version and the Spanish version differ, the Spanish version prevails.",
         ],
       },

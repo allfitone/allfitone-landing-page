@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FoundationIcon } from "@allfitone/react/icons";
 
-import { EffectiveDate, LegalPage, legalMetadata } from "@/components/legal/legal-page";
+import { LegalPage, legalMetadata } from "@/components/legal/legal-page";
 import { isLanguage } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalIndexContent, legalPath } from "@/lib/legal/documents";
 import { localizedPath } from "@/lib/site-config";
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/legal">): 
   return legalMetadata(lang, undefined, legalIndexContent[lang]);
 }
 
-/** The legal index: each document as one row, with what it covers and since when. */
+/** The legal index: each document as one row, with what it covers. */
 export default async function LegalIndexPage({ params }: PageProps<"/[lang]/legal">) {
   const { lang } = await params;
   if (!isLanguage(lang)) notFound();
@@ -33,7 +33,6 @@ export default async function LegalIndexPage({ params }: PageProps<"/[lang]/lega
               </span>
             </Link>
             <p className="legal-index-summary">{copy.summaries[slug]}</p>
-            <EffectiveDate language={lang} slug={slug} />
           </li>
         ))}
       </ul>

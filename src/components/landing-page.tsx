@@ -31,7 +31,6 @@ import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
 
-const CONTACT_HREF = `mailto:${siteConfig.email}`;
 
 /**
  * Every link to a product landing opens it in a new tab, so the visitor keeps their place
@@ -382,17 +381,14 @@ export function LandingPage({ language }: { language: Language }) {
                 </div>
               </nav>
 
-              <nav className="footer-nav" aria-label={copy.footerInformation}>
-                <p className="footer-nav-title">{copy.footerInformation}</p>
+              <nav className="footer-nav" aria-label={copy.footerLegal}>
+                <p className="footer-nav-title">{copy.footerLegal}</p>
                 <div className="footer-link-list">
                   {legalDocumentSlugs.map((slug) => (
                     <Link key={slug} className="footer-link" href={localizedPath(language, legalPath(slug))}>
                       {legalChrome[language].names[slug]}
                     </Link>
                   ))}
-                  <a className="footer-link" href={CONTACT_HREF}>
-                    <span>{siteConfig.email}</span><span className="footer-link-mark" aria-hidden="true">→</span>
-                  </a>
                 </div>
               </nav>
             </div>

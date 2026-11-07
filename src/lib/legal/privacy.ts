@@ -117,7 +117,7 @@ export const privacyPolicy = {
         id: "changes",
         title: "Cambios a esta política",
         content: [
-          "Si cambiamos esta política, publicaremos la nueva versión aquí con su fecha de vigencia y te avisaremos en la app antes de que los cambios importantes entren en vigor.",
+          "Si cambiamos esta política, publicaremos la nueva versión aquí y te avisaremos en la app antes de que los cambios importantes entren en vigor.",
           "Si esta versión y la versión en inglés difieren, prevalece la versión en español.",
         ],
       },
@@ -232,7 +232,7 @@ export const privacyPolicy = {
         id: "changes",
         title: "Changes to this policy",
         content: [
-          "If we change this policy, we will publish the new version here with its effective date and tell you in the app before significant changes take effect.",
+          "If we change this policy, we will publish the new version here and tell you in the app before significant changes take effect.",
           "If this version and the Spanish version differ, the Spanish version prevails.",
         ],
       },

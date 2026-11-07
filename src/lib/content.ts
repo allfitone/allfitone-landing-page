@@ -28,7 +28,7 @@ export const content = {
     linkedinLabel: "Allfit One en LinkedIn",
     footerExplore: "Explora",
     footerSocial: "Síguenos",
-    footerInformation: "Información",
+    footerLegal: "Legal",
     heroLead:
       "Cambias de entrenador, de gimnasio o de app y tu historial se queda atrás. Estamos construyendo Allfit One para que se quede contigo: Allfit Space para quien entrena, Allfit Studio para quien acompaña y gestiona.",
     heroAction: "Únete a la lista de espera",
@@ -191,7 +191,7 @@ export const content = {
     linkedinLabel: "Allfit One on LinkedIn",
     footerExplore: "Explore",
     footerSocial: "Follow",
-    footerInformation: "Information",
+    footerLegal: "Legal",
     heroLead:
       "You change coach, gym or app, and your history stays behind. We're building Allfit One so it stays with you: Allfit Space for the people who train, Allfit Studio for the people who coach and run the work.",
     heroAction: "Join the waitlist",
