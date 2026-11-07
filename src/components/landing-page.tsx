@@ -418,8 +418,6 @@ export function LandingPage({ language }: { language: Language }) {
           </div>
         </nav>
 
-        <BrandLogo variant="cyan" className="hero-brand-mark" aria-hidden="true" />
-
         <div className="site-grid relative z-20 pb-24 pt-32 md:pb-28 md:pt-40 lg:pt-36">
           <div className="col-span-12 mt-6 md:mt-8">
             <h1 className="hero-title-new" lang="en" aria-label={copy.tagline}>

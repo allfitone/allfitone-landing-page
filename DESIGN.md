@@ -324,7 +324,7 @@ Allfit One is the parent ecosystem—not a synonym for Allfit Studio and not mer
 
 ### Brand Gradient
 
-There is **no decorative brand gradient**. The hero may use low-opacity radial cyan atmosphere to create depth, but it must resolve into `{colors.canvas}` and never become a multicolor or glossy surface. Buttons remain flat. Product content must not depend on gradients for legibility.
+There is **no decorative brand gradient**, and no radial cyan atmosphere either: the hero sits on flat `{colors.canvas}`. A glow behind the headline only signals "dark tech landing" and says nothing about Allfit One. Buttons remain flat. Product content must not depend on gradients for legibility.
 
 ## Typography
 
@@ -416,8 +416,8 @@ Whitespace acts as controlled recovery between high-intensity typographic moment
 
 ### Decorative Depth
 
-- The hero may use a very low-opacity cyan radial field and grid texture to create spatial depth.
-- The giant outline “1” may sit behind content at low contrast, but it cannot reduce readability or become a competing logo.
+- The hero has no background decoration: no radial glow, no grid texture and no ghost “1” behind the copy. They were removed in November 2026 because they were genre signals that any dark SaaS landing shares, and the near-invisible “1” left half the first viewport reading as empty. Depth comes from the headline scale and the product stage.
+- A large outline mark may still mark a section (the Fitness ID plate, the Studio wordmark) when it sits clear of the copy, but never behind the hero.
 - Backdrop blur is functional on sticky navigation and overlays. It is not a default card treatment.
 - Do not stack translucent glass panels over one another.
 - Continuous floating animation is not part of the default system. If a product object moves, the section must have no competing motion.

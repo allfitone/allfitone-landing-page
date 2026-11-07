@@ -72,10 +72,9 @@
    Hero
 --------------------------------------------------------------------------- */
 
-.hero { background: radial-gradient(circle at 82% 24%, color-mix(in srgb, var(--afo-color-brand-primary) 11%, transparent), transparent 24%), linear-gradient(135deg, color-mix(in srgb, var(--afo-color-brand-primary) 3.5%, transparent), transparent 42%), var(--afo-color-ink-void); }
-.hero::before { content: ""; position: absolute; inset: 0; opacity: .1; background-image: linear-gradient(color-mix(in srgb, var(--afo-color-neutral-white) 8%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--afo-color-neutral-white) 8%, transparent) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(to bottom, black, transparent 84%); }
-.hero-brand-mark { position: absolute; right: max(4.5rem, calc((100vw - 1500px) / 2 + 2.75rem)); top: 7%; width: clamp(10rem, 22vw, 22rem); height: auto; filter: drop-shadow(0 0 70px color-mix(in srgb, var(--afo-color-brand-primary) 8%, transparent)); transform: rotate(5deg); }
-.hero-brand-mark path { fill: color-mix(in srgb, var(--afo-color-brand-primary) 1.8%, transparent); stroke: color-mix(in srgb, var(--afo-color-brand-primary) 12%, transparent); stroke-width: 3; }
+/* A flat Void canvas. The grid texture, the cyan glow and the ghost "1" were removed: they
+   only signalled the genre. The headline and the product stage carry the hero. */
+.hero { background: var(--afo-color-ink-void); }
 
 /* ---------------------------------------------------------------------------
    Product previews (phone + Studio dashboard)
@@ -506,7 +505,6 @@ section[id].fid-section {
   .site-grid { max-width: 100vw; }
   .hero-title-new { max-width: 100%; font-size: clamp(3.9rem, 17vw, 5rem); line-height: .74; }
   .hero-place-break { display: block; }
-  .hero-brand-mark { right: 1.25rem; top: 16%; width: 62vw; opacity: .65; transform: none; }
   .studio-workspace { min-height: 360px; grid-template-columns: 1fr; }
   .studio-sidebar { display: none; }
   .studio-main { padding: var(--afo-space-4); }

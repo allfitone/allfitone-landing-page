@@ -76,6 +76,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Preserve the custom “1” mark and its geometry. Do not replace it with a conventional numeral or alter its proportions casually.
 - Favor disciplined typography, spacing, alignment, and editorial structure. Avoid unnecessary badges, chips, floating metric cards, decorative gradients, excessive rounded containers, and scattered animations.
 - Spend visual emphasis in one place per section. Remove decoration that competes with the content hierarchy.
+- The hero sits on flat Void: no grid texture, radial glow or ghost “1” behind the copy. Those were removed as generic dark-landing signals; do not reintroduce them.
 - Homepage motion shares the vocabulary of the Space and Studio landings and is spent sparingly, one moment per section:
   - the hero enters once, on load, in pure CSS;
   - each section title rises line by line out of its masks (`RevealTitle`) the first time it scrolls into view;
