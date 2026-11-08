@@ -1,3 +1,12 @@
+/**
+ * Whether the waitlist is open. The owner closed it in November 2026, while its
+ * backend is built and the launch offer's benefits are settled: `joinWaitlist()`
+ * below still stores nothing. Closed, the build leaves out `/{lang}/waitlist`, the
+ * homepage drops its waitlist section and every «Únete a la lista» action, and the
+ * sitemap leaves the page out. Open it again only once `joinWaitlist()` is real.
+ */
+export const waitlistOpen: boolean = false;
+
 /** The waitlist page, under each language prefix: `/es/waitlist`, `/en/waitlist`. */
 export const waitlistPagePath = "/waitlist";
 /** The offer's terms on that page, so a link can open them directly. */

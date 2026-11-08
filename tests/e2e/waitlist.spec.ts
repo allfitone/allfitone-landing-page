@@ -1,6 +1,11 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+import { waitlistOpen } from "@/lib/waitlist";
+
+// The page is only built while the waitlist is open; landing.spec.ts guards the closed state.
+test.skip(!waitlistOpen, "The waitlist is closed (waitlistOpen in src/lib/waitlist.ts).");
+
 const site = "https://www.allfit.one";
 
 // Every «Únete a la lista» action leads here: the launch offer, its terms and the form.

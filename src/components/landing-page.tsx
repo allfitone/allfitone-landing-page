@@ -30,7 +30,7 @@ import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
-import { waitlistPagePath } from "@/lib/waitlist";
+import { waitlistOpen, waitlistPagePath } from "@/lib/waitlist";
 
 
 /**
@@ -231,11 +231,14 @@ export function LandingPage({ language }: { language: Language }) {
             <div className="hidden min-[400px]:block">
               <LanguageSwitch language={language} label={copy.selectLanguage} />
             </div>
-            {/* The navbar's action is the page's conversion: it opens the waitlist page, like the hero's. */}
-            <Link href={waitlistHref} className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
-              {copy.navAction}
-              <FoundationIcon name="forward" size="sm" className="text-bolt" decorative />
-            </Link>
+            {/* The navbar's action is the page's conversion: it opens the waitlist page, like the hero's.
+                While the waitlist is closed there is no action. */}
+            {waitlistOpen ? (
+              <Link href={waitlistHref} className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
+                {copy.navAction}
+                <FoundationIcon name="forward" size="sm" className="text-bolt" decorative />
+              </Link>
+            ) : null}
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger
                 render={<IconButton aria-label={copy.openMenu} variant="outline" className="ml-auto sm:ml-0 lg:hidden" />}
@@ -271,11 +274,15 @@ export function LandingPage({ language }: { language: Language }) {
                     <div className="mb-6 min-[400px]:hidden">
                       <LanguageSwitch language={language} label={copy.selectLanguage} />
                     </div>
-                    <p className="mb-4 text-[11px] font-bold uppercase tracking-[.14em] text-white/64">{copy.tagline}</p>
-                    <Link href={waitlistHref} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
-                      {copy.heroAction}
-                      <FoundationIcon name="forward" data-icon="inline-end" decorative />
-                    </Link>
+                    {waitlistOpen ? (
+                      <>
+                        <p className="mb-4 text-[11px] font-bold uppercase tracking-[.14em] text-white/64">{copy.tagline}</p>
+                        <Link href={waitlistHref} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+                          {copy.heroAction}
+                          <FoundationIcon name="forward" data-icon="inline-end" decorative />
+                        </Link>
+                      </>
+                    ) : null}
                   </div>
                 </div>
               </SheetContent>
@@ -298,12 +305,14 @@ export function LandingPage({ language }: { language: Language }) {
 
           <div className="hero-copy col-span-12 mt-12 md:mt-14 lg:col-span-5 lg:col-start-8 lg:row-start-1">
             <p className="hero-lead hero-enter">{copy.heroLead}</p>
-            <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 lg:mt-8">
-              <Link href={waitlistHref} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
-                {copy.heroAction}
-                <FoundationIcon name="forward" data-icon="inline-end" decorative />
-              </Link>
-            </div>
+            {waitlistOpen ? (
+              <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 lg:mt-8">
+                <Link href={waitlistHref} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
+                  {copy.heroAction}
+                  <FoundationIcon name="forward" data-icon="inline-end" decorative />
+                </Link>
+              </div>
+            ) : null}
           </div>
 
           {/* No product mockups here: each product shows itself in its own section. The
@@ -344,7 +353,7 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      <WaitlistSection copy={copy} />
+      {waitlistOpen ? <WaitlistSection copy={copy} /> : null}
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">
@@ -360,7 +369,7 @@ export function LandingPage({ language }: { language: Language }) {
                   <a className="footer-link" href="#fitness-id">{copy.navFitnessId}</a>
                   <a className="footer-link" href="#allfit-space">{copy.navSpace}</a>
                   <a className="footer-link" href="#allfit-studio">{copy.navStudio}</a>
-                  <a className="footer-link" href="#waitlist">{copy.statusLabel}</a>
+                  {waitlistOpen ? <a className="footer-link" href="#waitlist">{copy.statusLabel}</a> : null}
                 </div>
               </nav>
 

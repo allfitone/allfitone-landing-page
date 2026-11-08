@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { languages } from "@/lib/content";
 import { localizedPath, shareImage, siteConfig } from "@/lib/site-config";
+import { waitlistOpen } from "@/lib/waitlist";
 
 // Rendered once at build time: the site is a static export.
 export const dynamic = "force-static";
@@ -17,7 +18,9 @@ const pages = [
 
 /** Lists each canonical language URL once, with its translations as hreflang alternates. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.flatMap((page) =>
+  // The waitlist page is only built while the waitlist is open.
+  const published = pages.filter((page) => waitlistOpen || page.path !== "/waitlist");
+  return published.flatMap((page) =>
     languages.map((language) => ({
       url: `${siteConfig.url}${localizedPath(language, page.path)}`,
       lastModified: page.lastModified,
