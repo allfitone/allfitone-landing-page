@@ -1,6 +1,10 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
+import { waitlistOpen } from "@/lib/waitlist";
+
+const waitlistClosed = "The waitlist is closed (waitlistOpen in src/lib/waitlist.ts).";
+
 test("redirects the root to Spanish and switches language through the URL", async ({ page, request }) => {
   const root = await request.get("/", { maxRedirects: 0 });
   expect(root.status()).toBe(307);
@@ -9,7 +13,7 @@ test("redirects the root to Spanish and switches language through the URL", asyn
   await page.goto("/");
   await expect(page).toHaveURL(/\/es$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(page.getByRole("link", { name: "Únete a la lista", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Conoce Allfit Space" })).toBeVisible();
 
   const English = page.getByRole("button", { name: "English" }).first();
   await English.click();
@@ -17,7 +21,7 @@ test("redirects the root to Spanish and switches language through the URL", asyn
   await expect(page).toHaveURL(/\/en$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("button", { name: "English" }).first()).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByRole("link", { name: "Join the waitlist" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Explore Allfit Space" })).toBeVisible();
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -64,6 +68,7 @@ test("links each product to its own landing in the page language, in a new tab",
 });
 
 test("the navbar and the mobile menu lead to the waitlist page, not to email", async ({ page }) => {
+  test.skip(!waitlistOpen, waitlistClosed);
   await page.goto("/es");
   await page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: "Únete a la lista", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/waitlist$/);
@@ -82,6 +87,7 @@ test("the navbar and the mobile menu lead to the waitlist page, not to email", a
 });
 
 test("the homepage keeps its own form and states the launch offer, with no link to its terms", async ({ page }) => {
+  test.skip(!waitlistOpen, waitlistClosed);
   for (const [language, offer, emailLabel] of [
     ["es", "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.", "Tu correo"],
     ["en", "The first 100 people on the list get three months of Allfit Pro.", "Your email"],
@@ -145,6 +151,7 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
 });
 
 test("the hero action leads to the waitlist page, whose form validates and confirms in the page language", async ({ page }) => {
+  test.skip(!waitlistOpen, waitlistClosed);
   for (const [language, action, nameLabel, emailLabel, role, submit, nameEmpty, emailInvalid, roleEmpty, joined, another] of [
     ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Nico.", "Usar otro correo"],
     ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Nico.", "Use another email"],
@@ -211,17 +218,19 @@ test("the page names one person per visit, the same in every section", async ({ 
     // in the same commit, so wait for it and one more task before reading.
     await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve))));
-    const waitlist = page.locator("#waitlist");
-    const person = (await waitlist.getByLabel("Tu nombre").getAttribute("placeholder")) ?? "";
+    const panel = page.locator(".studio-review");
+    const person = /Lo autorizó (\p{L}+)\./u.exec((await panel.textContent()) ?? "")?.[1] ?? "";
     const name = names.find((candidate) => candidate === person);
     expect(name, `«${person}» is one of the five names`).toBeDefined();
     seen.add(name!);
 
-    // The email placeholder, the Studio panel and its access line name the same person.
-    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
-    const panel = page.locator(".studio-review");
-    await expect(panel).toContainText(`Lo autorizó ${name}.`);
+    // The Studio panel's avatar and, while the waitlist is open, its placeholders name the same person.
     await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
+    if (waitlistOpen) {
+      const waitlist = page.locator("#waitlist");
+      await expect(waitlist.getByLabel("Tu nombre")).toHaveAttribute("placeholder", name!);
+      await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
+    }
   }
   // Eight visits all on one name out of five would happen about once in 78,000 runs.
   expect(seen.size).toBeGreaterThan(1);
@@ -230,9 +239,9 @@ test("the page names one person per visit, the same in every section", async ({ 
 test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {
   await page.goto("/es");
 
-  // The hero action, then each product link: all render through buttonVariants().
+  // The hero action (while the waitlist is open), then each product link: all render through buttonVariants().
   const actions = [
-    page.locator(".hero-actions").getByRole("link", { name: "Únete a la lista de espera" }),
+    ...(waitlistOpen ? [page.locator(".hero-actions").getByRole("link", { name: "Únete a la lista de espera" })] : []),
     page.getByRole("link", { name: "Conoce Allfit Space" }),
     page.getByRole("link", { name: "Conoce Allfit Studio" }),
   ];
@@ -421,4 +430,32 @@ test("publishes Studio metadata and keeps the legacy anchor compatible", async (
     return [studio.getBoundingClientRect().top + window.scrollY, legacy.getBoundingClientRect().top + window.scrollY];
   });
   expect(Math.abs(studioTop - legacyTop)).toBeLessThanOrEqual(1);
+});
+
+// The owner closed the waitlist in November 2026 while its backend is built and the
+// offer's benefits are settled. Closed, nothing on the site invites anyone to join it.
+test("while the waitlist is closed, no page shows it, its form or an action to join", async ({ page, request }) => {
+  test.skip(waitlistOpen, "The waitlist is open.");
+  for (const language of ["es", "en"] as const) {
+    await page.goto(`/${language}`);
+    await expect(page.locator("#waitlist")).toHaveCount(0);
+    await expect(page.locator("form")).toHaveCount(0);
+    await expect(page.locator("a[href*='waitlist']")).toHaveCount(0);
+    await expect(page.locator("body")).not.toContainText(/lista de espera|Únete a la lista|waitlist|Join the list|Allfit Pro/i);
+
+    const page404 = await request.get(`/${language}/waitlist`);
+    expect(await page404.text()).toContain('<meta name="robots" content="noindex"/>');
+    await page.goto(`/${language}/waitlist`);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Page not found.");
+  }
+
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto("/es");
+  await page.getByRole("button", { name: "Abrir menú" }).click();
+  const menu = page.getByRole("dialog", { name: "Navegación principal" });
+  await expect(menu.getByRole("link", { name: "Allfit Space" })).toBeVisible();
+  await expect(menu.locator("a[href*='waitlist']")).toHaveCount(0);
+
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  expect(sitemap).not.toContain("/waitlist");
 });
