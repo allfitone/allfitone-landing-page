@@ -1,9 +1,10 @@
 import type { Language } from "@/lib/content";
+import { foreignTitleSeparator } from "../page-title.ts";
 
 /*
- * Data contract for ambassador profiles. The module has no runtime imports, so the
- * Node scripts in `scripts/ambassadors/` load it directly through type stripping and
- * apply exactly the rules the site applies at build time.
+ * Data contract for ambassador profiles. Its only runtime import, `page-title.ts`, has
+ * none of its own, so the Node scripts in `scripts/ambassadors/` load it directly
+ * through type stripping and apply exactly the rules the site applies at build time.
  */
 
 const languageKeys = { es: true, en: true } as const satisfies Record<Language, true>;
@@ -294,8 +295,13 @@ function readCopy(value: unknown, path: string, issues: Issues, hasPlans: boolea
   });
   if (method.length > ambassadorLimits.methodSteps) issues.errors.push(`${path}.method: at most ${ambassadorLimits.methodSteps} steps`);
 
+  const metaTitle = readText(fields.metaTitle, `${path}.metaTitle`, issues);
+  if (foreignTitleSeparator.test(metaTitle)) {
+    issues.errors.push(`${path}.metaTitle: separate the title's parts with " | ", not "-", "–", "—" or "·"`);
+  }
+
   return {
-    metaTitle: readText(fields.metaTitle, `${path}.metaTitle`, issues),
+    metaTitle,
     metaDescription: readText(fields.metaDescription, `${path}.metaDescription`, issues),
     role: readText(fields.role, `${path}.role`, issues),
     lead: readText(fields.lead, `${path}.lead`, issues),

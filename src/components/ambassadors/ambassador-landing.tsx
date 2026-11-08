@@ -9,6 +9,7 @@ import { LanguageSwitch } from "@/components/language-switch";
 import { ambassadorContactHref } from "@/lib/ambassadors/contact";
 import type { AmbassadorProfile } from "@/lib/ambassadors/schema";
 import { ambassadorPageContent, content, type Language } from "@/lib/content";
+import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, siteConfig } from "@/lib/site-config";
 
 /**
@@ -61,9 +62,11 @@ function AmbassadorFooter({ profile, language }: { profile: AmbassadorProfile; l
                 <Link className="footer-link" href={localizedPath(language)}>
                   {ui.footerHome}
                 </Link>
-                <Link className="footer-link" href={localizedPath(language, "/privacy/analytics")}>
-                  {ui.footerPrivacy}
-                </Link>
+                {legalDocumentSlugs.map((slug) => (
+                  <Link key={slug} className="footer-link" href={localizedPath(language, legalPath(slug))}>
+                    {legalChrome[language].names[slug]}
+                  </Link>
+                ))}
                 <a className="footer-link" href={ambassadorContactHref(profile)}>
                   <span>{siteConfig.email}</span>
                   <span className="footer-link-mark" aria-hidden="true">→</span>

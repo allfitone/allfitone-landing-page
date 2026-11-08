@@ -95,28 +95,27 @@ typography:
     letterSpacing: 0.08em
   button:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: 10px
-    fontWeight: 800
-    lineHeight: 1
-    letterSpacing: 0.16em
-    textTransform: uppercase
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.43
+    letterSpacing: 0
   eyebrow:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: 9px
+    fontSize: 11px
     fontWeight: 800
-    lineHeight: 1.33
-    letterSpacing: 0.20em
+    lineHeight: 1.4
+    letterSpacing: 0.14em
     textTransform: uppercase
   nav-link:
     fontFamily: "Manrope, system-ui, sans-serif"
-    fontSize: 10px
+    fontSize: 12px
     fontWeight: 700
     lineHeight: 1
-    letterSpacing: 0.16em
+    letterSpacing: 0.12em
     textTransform: uppercase
   mono-index:
     fontFamily: "ui-monospace, SFMono-Regular, Consolas, monospace"
-    fontSize: 10px
+    fontSize: 11px
     fontWeight: 400
     lineHeight: 1
     letterSpacing: 0
@@ -171,11 +170,11 @@ components:
   text-link-dark:
     backgroundColor: transparent
     textColor: "{colors.body-muted}"
-    typography: "{typography.button}"
+    typography: "{typography.nav-link}"
   text-link-light:
     backgroundColor: transparent
     textColor: "{colors.ink-muted-60}"
-    typography: "{typography.button}"
+    typography: "{typography.nav-link}"
   floating-navbar:
     backgroundColor: "rgba(3, 7, 19, 0.86)"
     textColor: "{colors.on-dark}"
@@ -238,7 +237,7 @@ components:
     backgroundColor: transparent
     textColor: "{colors.body-subtle}"
     borderColor: "rgba(234, 255, 255, 0.15)"
-    typography: "{typography.eyebrow}"
+    typography: "{typography.nav-link}"
     rounded: "{rounded.pill}"
     padding: 2px
   input-dark:
@@ -255,11 +254,6 @@ components:
     borderColor: "{colors.canvas}"
     rounded: "{rounded.device}"
     padding: 8px
-  connected-product-stage:
-    backgroundColor: transparent
-    textColor: "{colors.on-dark}"
-    rounded: "{rounded.none}"
-    padding: 0
   footer:
     backgroundColor: "{colors.canvas}"
     textColor: "{colors.body-subtle}"
@@ -324,7 +318,7 @@ Allfit One is the parent ecosystem—not a synonym for Allfit Studio and not mer
 
 ### Brand Gradient
 
-There is **no decorative brand gradient**. The hero may use low-opacity radial cyan atmosphere to create depth, but it must resolve into `{colors.canvas}` and never become a multicolor or glossy surface. Buttons remain flat. Product content must not depend on gradients for legibility.
+There is **no decorative brand gradient**, and no radial cyan atmosphere either: the hero sits on flat `{colors.canvas}`. A glow behind the headline only signals "dark tech landing" and says nothing about Allfit One. Buttons remain flat. Product content must not depend on gradients for legibility.
 
 ## Typography
 
@@ -332,7 +326,7 @@ There is **no decorative brand gradient**. The hero may use low-opacity radial c
 
 - **Display:** `Barlow Condensed, Arial Narrow, sans-serif`. The condensed proportions, heavy vertical strokes, and compact counters generate the athletic/editorial voice.
 - **Body / UI:** `Manrope, system-ui, sans-serif`. Its open construction balances the compression of Barlow Condensed and remains legible in bilingual copy and operational UI.
-- **Indexes / tabular utility:** system monospace. Use only for aligned numeric indexes inside components and technical data where fixed width helps scanning. Editorial sections no longer carry a top numeric marker.
+- **Indexes / tabular utility:** system monospace. Use only for times, measurements and technical data where fixed width helps scanning, or for an index whose order the reader actually needs (a numbered procedure). Unordered lists, product columns and section groups carry no `01 / 02 / 03`: since November 2026 the landing has none, because a sequence number on items without a sequence is a template signal.
 
 Both brand fonts are loaded through `next/font`. Do not replace them with browser-default approximations in production assets.
 
@@ -350,15 +344,16 @@ Both brand fonts are loaded through `next/font`. Do not replace them with browse
 | `{typography.body}` | 16px | 400 | 1.75 | 0 | Standard long-form copy |
 | `{typography.body-compact}` | 14px | 400 | 1.71 | 0 | Cards, supporting copy, operational UI |
 | `{typography.caption}` | 12px | 600 | 1.33 | 0.08em | Compact metadata |
-| `{typography.button}` | 10px | 800 | 1.0 | 0.16em | CTA labels |
-| `{typography.eyebrow}` | 9px | 800 | 1.33 | 0.20em | Section labels and signals |
-| `{typography.nav-link}` | 10px | 700 | 1.0 | 0.16em | Desktop navigation |
-| `{typography.mono-index}` | 10px | 400 | 1.0 | 0 | Ordered indexes and tabular markers |
+| `{typography.button}` | 14px | 400 | 1.43 | 0 | Button labels, in sentence case (the Design System button) |
+| `{typography.eyebrow}` | 11px | 800 | 1.4 | 0.14em | Labels, metadata and status signals |
+| `{typography.nav-link}` | 12px | 700 | 1.0 | 0.12em | Desktop navigation, language selector and text actions |
+| `{typography.mono-index}` | 11px | 400 | 1.0 | 0 | Ordered indexes and tabular markers |
 
 ### Principles
 
 - **Compression is the athletic signal.** Display headlines use condensed type, negative tracking, and short line height. Do not fake this by skewing or stretching type.
 - **Display type is re-typeset at every breakpoint.** Desktop line breaks, tracking, and outline treatments are not simply scaled down for mobile.
+- **Nothing renders below 11px.** Labels, indexes, metadata and the product mockups use the 11px `{typography.eyebrow}` step; navigation and text actions use 12px. The 9–10px labels of the first version read as texture rather than text and were raised in November 2026.
 - **Uppercase is a visual treatment.** It belongs to display headlines, eyebrows, and short controls—not paragraphs or long explanatory copy.
 - **Outlined type is secondary.** It may create depth inside a hero, but essential meaning must remain available through solid text and accessible naming.
 - **Body widths stay readable.** Standard copy should remain near 55–75 characters per line.
@@ -416,8 +411,9 @@ Whitespace acts as controlled recovery between high-intensity typographic moment
 
 ### Decorative Depth
 
-- The hero may use a very low-opacity cyan radial field and grid texture to create spatial depth.
-- The giant outline “1” may sit behind content at low contrast, but it cannot reduce readability or become a competing logo.
+- The hero has no background decoration: no radial glow, no grid texture and no ghost “1” behind the copy. They were removed in November 2026 because they were genre signals that any dark SaaS landing shares, and the near-invisible “1” left half the first viewport reading as empty. Depth comes from the headline scale and the product stage.
+- No section carries a ghost mark: no outlined “1” behind Fitness ID and no outlined Studio wordmark behind Allfit Studio. Both were removed in November 2026 with the hero decoration, for the same reason. The Fitness ID section keeps its slanted plate, which is structure, not ornament.
+- Objects carry no decorative sheen either: the Fitness ID card lost its diagonal glass band and its pulse line.
 - Backdrop blur is functional on sticky navigation and overlays. It is not a default card treatment.
 - Do not stack translucent glass panels over one another.
 - Continuous floating animation is not part of the default system. If a product object moves, the section must have no competing motion.
@@ -461,7 +457,7 @@ Whitespace acts as controlled recovery between high-intensity typographic moment
 
 ### Top Navigation
 
-**`floating-navbar`** — A sticky, centered navigation surface with breathing room above it. Background `rgba(3, 7, 19, 0.86)`, controlled backdrop blur, `{rounded.lg}` radius, and a restrained shadow. It contains the Allfit One lockup, centered section links, language selector, demo action, and menu trigger. It must not use a full-width bottom rule.
+**`floating-navbar`** — A sticky, centered navigation surface with breathing room above it. Background `rgba(3, 7, 19, 0.86)`, controlled backdrop blur, `{rounded.lg}` radius, and a restrained shadow. It contains the Allfit One lockup, centered section links, language selector, the email action, and menu trigger. It must not use a full-width bottom rule.
 
 - Desktop section links use `{typography.nav-link}` and muted Chalk; the active or hovered link shifts to `{colors.primary}`.
 - The brand name is always **Allfit One**, rendered as `ALLFIT ONE` only as a display treatment.
@@ -493,9 +489,7 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`editorial-section-light`** — Full-width `{colors.canvas-chalk}` region with Void typography. Used for explanations, comparisons, and FAQ content where reading clarity should temporarily lower the visual intensity.
 
-**`feature-column`** — A grid-aligned content region separated by shared 1px dividers rather than a floating card. It combines a functional icon, numeric index, eyebrow, condensed title, and compact body copy. The shared structure is preferred to three identical rounded feature cards.
-
-**`ecosystem-relationship-panel`** — The signature relationship composition inside the ecosystem section: a dark rounded panel with two product columns (`01`/`02` mono eyebrow, condensed title, compact copy, and a tag list) flanking a central connection node — a thin cyan line with end points and concentric rings — and closed by a full-width statement whose single accent word is cyan. On chalk the section frames the panel with a short lead and an inline `person — professional — organization` relationship strip. Below `lg` the three columns stack into one reading column; the product titles reserve equal height so both columns align.
+**`feature-column`** — A grid-aligned content region separated by shared 1px dividers rather than a floating card: a condensed title and compact body copy. It carries no icon, numeric index or eyebrow above the title, and it is never the default way to restate a lead; the Allfit Space icon row was removed in November 2026 because it repeated the section lead word for word. Use it only when each column says something the surrounding copy does not.
 
 ### Cards & Containers
 
@@ -507,7 +501,17 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`device-shell`** — A 42px-radius physical frame for an actual Allfit Space surface. Use only when the device explains the personal fitness experience. Do not add a device mockup merely to fill a column.
 
-**`connected-product-stage`** — The signature parent-brand composition. A panoramic Allfit Studio administrative panel establishes the operational plane while the Allfit Space phone crosses its edge in the foreground. The overlap communicates one ecosystem; it is not a decorative device pile. On mobile, the products become a deliberate sequence so both previews remain legible.
+**`problem-ledger`** — The problem section's one object, below the title and lead: a handover ledger with one real case. It speaks to the reader, like the title. Left, «Tú te llevas» and a single solid display word, «Nada»; right, «Dejas en tu antiguo gimnasio», continuing the left label, and the record that stays there as label–value rows: the label dimmed in condensed uppercase, the value at full strength, right-aligned with tabular numerals (184 sesiones, 95 kg, 12 semanas, 11 notas, 2 años). The imbalance between the columns is the argument. No cyan and no hollow type: the section names the problem, and the Fitness ID card that follows holds the same kinds of data, kept.
+
+**`space-session-phone`** — The Allfit Space section's one object: a single `device-shell` on Chalk, 300px wide and 320px from `lg`, leaning +2° with the brand «1», beside the title from `lg` and below the copy under it. It shows the person's 18:00 «Fuerza · Tren superior» session under way: the program comes from Estudio Norte, and the person logs it set by set. Exercises are hairline rows with short set marks filled cyan once logged; finished rows step back to 56% and the set they are on is the screen's one cyan block, with reps and load in display numerals and a «Registrar serie» action. It carries a directional Void shadow, no ring and no glow. The section no longer lists the app's areas.
+
+**`studio-review-panel`** — The Allfit Studio section's one object: a full-width Studio workspace below the title, with the lead and link beside the title from `lg`. It closes the story: Estudio Norte, in Personas › {name} (first name only, with its initial as the avatar), reviews the 18:00 session they finished, plan beside what they logged, from the same data as the Space phone. The one exercise that differs («Press militar», two reps fewer per set) is the panel's cyan; the others read «Según el plan». A narrow column holds the assigned program and the access the person granted, for what purpose. The workspace is Void inside the Panel section, with no shadow, and its mock text runs one step above the base mock sizes. Below `xl` it drops the sidebar so the table keeps its four columns; below `sm` each row stacks with inline Plan and Registrado labels. The section no longer lists Studio's differentiators or modules.
+
+**`hero-product-definitions`** — The hero names both products side by side, with equal weight, below the headline: each by its wordmark first, then its audience as a plain line («Para personas», «Para profesionales y organizaciones»), never as an uppercase label above the wordmark, then one sentence and an outline link to its landing. Both wordmarks share a height, not a width. The hero carries no product mockup: the connected stage (a Studio dashboard with the Space phone crossing its edge) was removed in November 2026 at the owner's request, and each product now shows itself in its own section (`space-session-phone`, `studio-review-panel`).
+
+- **One story across the mockups.** One person trains with a neutral studio, Estudio Norte: a first name only, picked at random once per visit from Kevin, Walbert, Jimmy, Charly and Nico, and the same everywhere on the page, the waitlist's placeholders included. The Space phone shows their 18:00 «Fuerza · Tren superior» session under way; the Studio panel shows the same session finished and reviewed. Both read the same data, so any number on one agrees with the other.
+- **No metric decoration.** No KPI tile rows, progress rings, sparklines or a percentage repeated across screens.
+- **No real or Allfit-branded organization inside the mockups.** The studio is fictional and neutral so the preview reads as a customer's workspace, not as Allfit One's own gym.
 
 ### Language Selector
 
@@ -521,6 +525,10 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 - Focus uses `{colors.primary-focus}` and remains visible against dark and light surfaces.
 - Loading and success states must not depend only on color.
 - Input types, autocomplete, names, and native semantics must reflect the data requested.
+
+**`waitlist-page`** — Where every waitlist action leads (`/{lang}/waitlist`), on Void with the legal pages' header and footer. The launch offer is the title, set a step below the homepage's section titles because it is a sentence: «Tres meses de Allfit Pro» in Chalk, «para las primeras 100 personas.» in `{colors.primary}`, its words rising once on load. From 1024px the title, the lead and the context take seven columns and the form the last four, held in view while the context scrolls on screens at least 760px tall; below that the form follows the lead. The context («Qué recibes», «Qué es Allfit Pro», «Condiciones de la oferta») uses the legal pages' grammar: display-sm headings in uppercase over hairlines, term–value rows (the condition dimmed, what follows at full strength) and a plain list for the terms. On the homepage, the waitlist section states the offer in one line under its lead, with no link to the terms (the owner removed «Ver condiciones»).
+
+**`waitlist-field`** — The waitlist form, on the homepage and the waitlist page: a first name and an email side by side once the form's column is 30rem wide (stacked below it), then «¿Cómo usarías Allfit One?» as three pills («Para entrenar», «Para acompañar a mis clientes», «Para gestionar un gimnasio o estudio»), then `button-primary-large`, full width until that same width. Because they sit with a pill button, the fields take the pill radius and the button's 56px height instead of `input-dark`'s 48px `{rounded.sm}`. The pills are native radios: a chosen pill turns white (border and a 10% white fill), never cyan, because the button is the section's one cyan. Visible labels sit above, a one-line note on what the name and email are for sits below, and validation runs on submit: each missing field is marked under itself, only the first is announced, and it takes focus. On success a confirmation greets the person by name, repeats the address and names the product they will hear about (Allfit Space for training, Allfit Studio for coaches and gyms); it replaces the form and takes focus, with a text link to use another email that keeps the name and the choice.
 
 ### FAQ
 
@@ -570,6 +578,9 @@ Allfit Space is the personal expression of the ecosystem:
 
 - Don't build a generic dark SaaS landing page with neon accents and interchangeable feature cards.
 - Don't add decorative chips, “early access” badges, or labels without a real information purpose.
+- Don't put a small uppercase label above a heading («Cómo funciona Studio», «Contiene»). If a group needs a name, give it a real heading.
+- Don't restate the same promise section after section. «Tu historial sigue contigo» has one home (the hero lead, paid off by the Fitness ID card); every other section says something new.
+- Don't summarize content as `·`-separated triads («Identidad · Progreso · Historial»).
 - Don't place floating metric cards over athlete photography.
 - Don't outline every panel in cyan or apply glow to every accent.
 - Don't use gradients on buttons or as a default section background.
@@ -653,7 +664,7 @@ The structural breakpoints that matter for implementation are the Tailwind defau
 - Form validation, loading, success, empty, offline, and permission states need complete product-level patterns.
 - A semantic data-visualization palette beyond the core cyan/turquoise family has not been approved.
 - The destructive color exists as a practical implementation token, but warning, success, and informational state scales are not yet formalized.
-- The commercial demo-request flow currently relies on email; a measurable form or scheduling experience has not been specified.
+- The waitlist form (`waitlist-field`) is front-end only: no service receives the name, email or choice yet. A demo-request or scheduling experience has not been specified.
 - Allfit Space release scope and complete information architecture remain open.
 - The relationship between native applications and progressive web experiences for Allfit Space is not decided.
 - Dark and light application themes for Allfit Studio have not been approved; the documented light mode is an editorial marketing surface, not a complete product theme.

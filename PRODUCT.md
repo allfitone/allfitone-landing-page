@@ -225,6 +225,10 @@ Define active-client calculation, proration, taxes, failed payments, cancellatio
 
 The long-term direction may combine a useful free training experience with paid analytics, planning, intelligence, specialized tools, and premium programs. No public pricing or final entitlement model is approved.
 
+### Launch offer
+
+The first 100 people who join the waitlist, whatever their role, get three months of Allfit Pro (Allfit Space's subscription), counted from the day they activate it with an account on the same email. When the three months end they move to the free plan with nothing charged and keep their whole history. The offer is personal and cannot be transferred or exchanged for money. The owner set these terms in November 2026; the waitlist service must keep the order people join in.
+
 ### Marketplace
 
 Commissions for services, bookings, programs, events, or payments are a later business-model direction. They are not current landing-page claims.
@@ -248,7 +252,7 @@ Neither product is demo-able yet, so the page must not offer a demo. Fitness ID 
 - Navigate to the Fitness ID, Allfit Space, Allfit Studio, and ecosystem sections.
 - Write to `hello@allfit.one`. The email action appears in the navbar, the hero, the Allfit Space and Allfit Studio sections, and as a closing call to action at the end of the current-status section.
 
-Neither product has a waitlist or demo CTA until a real destination exists.
+Since November 2026 the conversion is the waitlist: every waitlist action opens `/{lang}/waitlist`, which states the launch offer and its terms beside the form, and the homepage keeps a form of its own at the end. Neither product has a demo CTA.
 
 ## Success metrics
 

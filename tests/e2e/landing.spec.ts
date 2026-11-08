@@ -9,7 +9,7 @@ test("redirects the root to Spanish and switches language through the URL", asyn
   await page.goto("/");
   await expect(page).toHaveURL(/\/es$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await expect(page.getByText("Escríbenos").first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Únete a la lista", exact: true })).toBeVisible();
 
   const English = page.getByRole("button", { name: "English" }).first();
   await English.click();
@@ -17,7 +17,7 @@ test("redirects the root to Spanish and switches language through the URL", asyn
   await expect(page).toHaveURL(/\/en$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.getByRole("button", { name: "English" }).first()).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByText("Get in touch").first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Join the waitlist" }).first()).toBeVisible();
 
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -33,14 +33,65 @@ test("answers unknown languages and paths with a 404", async ({ request }) => {
   }
 });
 
-test("links each product to its own landing in the page language", async ({ page }) => {
-  for (const [language, space, studio] of [
-    ["es", "Conoce Allfit Space", "Conoce Allfit Studio"],
-    ["en", "Explore Allfit Space", "Explore Allfit Studio"],
+test("links each product to its own landing in the page language, in a new tab", async ({ page }) => {
+  for (const [language, newTab, links] of [
+    ["es", "(se abre en una pestaña nueva)", [
+      ["#home", "Conoce Allfit Space", "space"],
+      ["#home", "Conoce Allfit Studio", "studio"],
+      ["#allfit-space", "Más sobre Allfit Space", "space"],
+      ["#allfit-studio", "Más sobre Allfit Studio", "studio"],
+    ]],
+    ["en", "(opens in a new tab)", [
+      ["#home", "Explore Allfit Space", "space"],
+      ["#home", "Explore Allfit Studio", "studio"],
+      ["#allfit-space", "More about Allfit Space", "space"],
+      ["#allfit-studio", "More about Allfit Studio", "studio"],
+    ]],
   ] as const) {
     await page.goto(`/${language}`);
-    await expect(page.getByRole("link", { name: space })).toHaveAttribute("href", `https://space.allfit.one/${language}`);
-    await expect(page.getByRole("link", { name: studio })).toHaveAttribute("href", `https://studio.allfit.one/${language}`);
+    for (const [section, name, product] of links) {
+      const link = page.locator(section).getByRole("link", { name });
+      await expect(link).toHaveAttribute("href", `https://${product}.allfit.one/${language}`);
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", "noopener noreferrer");
+      await expect(link).toHaveAccessibleName(`${name} ${newTab}`);
+    }
+    // The product sections lead to their landing, not to email.
+    for (const section of ["#allfit-space", "#allfit-studio"]) {
+      await expect(page.locator(section).locator("a[href^='mailto:']")).toHaveCount(0);
+    }
+  }
+});
+
+test("the navbar and the mobile menu lead to the waitlist page, not to email", async ({ page }) => {
+  await page.goto("/es");
+  await page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: "Únete a la lista", exact: true }).click();
+  await expect(page).toHaveURL(/\/es\/waitlist$/);
+  await expect(page.locator("#join").getByLabel("Tu correo")).toBeInViewport();
+
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto("/es");
+  await page.getByRole("button", { name: "Abrir menú" }).click();
+  const dialog = page.getByRole("dialog", { name: "Navegación principal" });
+  await expect(dialog.locator("a[href^='mailto:']")).toHaveCount(0);
+  await dialog.getByRole("link", { name: "Únete a la lista de espera" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page).toHaveURL(/\/es\/waitlist$/);
+  // On a phone the offer comes first; the form starts within the first screen.
+  await expect(page.locator("#join").getByLabel("Tu nombre")).toBeInViewport();
+});
+
+test("the homepage keeps its own form and states the launch offer, with no link to its terms", async ({ page }) => {
+  for (const [language, offer, emailLabel] of [
+    ["es", "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.", "Tu correo"],
+    ["en", "The first 100 people on the list get three months of Allfit Pro.", "Your email"],
+  ] as const) {
+    await page.goto(`/${language}`);
+    const waitlist = page.locator("#waitlist");
+    await expect(waitlist.getByLabel(emailLabel)).toBeAttached();
+    await expect(waitlist).toContainText(offer);
+    // The owner removed «Ver condiciones» in November 2026: the terms live on the waitlist page.
+    await expect(waitlist.getByRole("link")).toHaveCount(0);
   }
 });
 
@@ -93,6 +144,120 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
   expect(focusStyle).not.toBe("none");
 });
 
+test("the hero action leads to the waitlist page, whose form validates and confirms in the page language", async ({ page }) => {
+  for (const [language, action, nameLabel, emailLabel, role, submit, nameEmpty, emailInvalid, roleEmpty, joined, another] of [
+    ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Nico.", "Usar otro correo"],
+    ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Nico.", "Use another email"],
+  ] as const) {
+    await page.goto(`/${language}`);
+    await page.locator(".hero-actions").getByRole("link", { name: action }).click();
+    await expect(page).toHaveURL(new RegExp(`/${language}/waitlist$`));
+
+    const waitlist = page.locator("#join");
+    const name = waitlist.getByLabel(nameLabel);
+    const email = waitlist.getByLabel(emailLabel);
+    await expect(name).toBeInViewport();
+    await expect(name).toHaveAttribute("autocomplete", "given-name");
+    await expect(email).toHaveAttribute("type", "email");
+    await expect(email).toHaveAttribute("autocomplete", "email");
+
+    // Validation runs on submit, in the page language: every missing field is marked, and
+    // only the first is announced and takes the keyboard.
+    await waitlist.getByRole("button", { name: submit }).click();
+    await expect(waitlist.getByRole("alert")).toHaveCount(1);
+    await expect(waitlist.getByRole("alert")).toContainText(nameEmpty);
+    await expect(name).toHaveAttribute("aria-invalid", "true");
+    await expect(email).toHaveAttribute("aria-invalid", "true");
+    await expect(name).toBeFocused();
+
+    await name.fill("Nico");
+    await email.fill("nico@correo");
+    await email.press("Enter");
+    await expect(waitlist.getByRole("alert")).toContainText(emailInvalid);
+    await expect(email).toBeFocused();
+
+    await email.fill("nico@correo.com");
+    await email.press("Enter");
+    await expect(waitlist.getByRole("alert")).toContainText(roleEmpty);
+    await expect(waitlist.getByRole("radio").first()).toBeFocused();
+
+    // Choosing clears the error; the confirmation greets them by name, takes focus, repeats
+    // the address and names the product that is hers.
+    // The radio sits inside its pill; people press the pill, so the test does too.
+    await waitlist.locator("label", { hasText: role }).click();
+    await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
+    await expect(waitlist.getByRole("alert")).toHaveCount(0);
+    await waitlist.getByRole("button", { name: submit }).click();
+    const confirmation = waitlist.locator("p", { hasText: joined });
+    await expect(confirmation).toBeFocused();
+    await expect(waitlist.getByRole("status")).toContainText("nico@correo.com");
+    await expect(waitlist.getByRole("status")).toContainText("Allfit Space");
+
+    // Another email keeps their name and their choice, and puts the keyboard on the email.
+    await waitlist.getByRole("button", { name: another }).click();
+    await expect(waitlist.getByLabel(emailLabel)).toBeFocused();
+    await expect(waitlist.getByLabel(nameLabel)).toHaveValue("Nico");
+    await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
+  }
+});
+
+test("the page names one person per visit, the same in every section", async ({ page }) => {
+  const names = ["Kevin", "Walbert", "Jimmy", "Charly", "Nico"];
+  const seen = new Set<string>();
+  await page.goto("/es");
+  for (let visit = 0; visit < 8; visit += 1) {
+    if (visit > 0) await page.reload();
+    // The visit's pick replaces the static name right after hydration; the motion hook arms
+    // in the same commit, so wait for it and one more task before reading.
+    await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
+    await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve))));
+    const waitlist = page.locator("#waitlist");
+    const person = (await waitlist.getByLabel("Tu nombre").getAttribute("placeholder")) ?? "";
+    const name = names.find((candidate) => candidate === person);
+    expect(name, `«${person}» is one of the five names`).toBeDefined();
+    seen.add(name!);
+
+    // The email placeholder, the Studio panel and its access line name the same person.
+    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
+    const panel = page.locator(".studio-review");
+    await expect(panel).toContainText(`Lo autorizó ${name}.`);
+    await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
+  }
+  // Eight visits all on one name out of five would happen about once in 78,000 runs.
+  expect(seen.size).toBeGreaterThan(1);
+});
+
+test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {
+  await page.goto("/es");
+
+  // The hero action, then each product link: all render through buttonVariants().
+  const actions = [
+    page.locator(".hero-actions").getByRole("link", { name: "Únete a la lista de espera" }),
+    page.getByRole("link", { name: "Conoce Allfit Space" }),
+    page.getByRole("link", { name: "Conoce Allfit Studio" }),
+  ];
+  // The ring's outer color is the brand-light token, resolved the way the browser reports it.
+  const ringColor = await page.evaluate(() => {
+    const probe = document.createElement("span");
+    probe.style.color = "var(--afo-color-brand-light)";
+    document.body.append(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    return color;
+  });
+
+  for (const action of actions) {
+    const resting = await action.evaluate((element) => getComputedStyle(element).boxShadow);
+    expect(resting).not.toContain(`${ringColor} 0px 0px 0px 4px`);
+    await action.focus();
+    await expect(action).toBeFocused();
+    // box-shadow transitions, so wait for the settled ring rather than a mid-transition frame.
+    await expect
+      .poll(() => action.evaluate((element) => getComputedStyle(element).boxShadow))
+      .toContain(`${ringColor} 0px 0px 0px 4px`);
+  }
+});
+
 test("honors reduced motion and forced colors", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce", forcedColors: "active" });
   await page.goto("/");
@@ -108,6 +273,67 @@ test("editorial sections render without eyebrow markers", async ({ page }) => {
   await expect(page.locator(".section-marker")).toHaveCount(0);
 });
 
+test("every section action receives the pointer, with nothing painted over it", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/es");
+
+    const covered = await page.locator("section[id]").evaluateAll((sections) =>
+      sections.flatMap((section) =>
+        [...section.querySelectorAll<HTMLElement>("a, button")]
+          .filter((element) => element.getClientRects().length > 0 && getComputedStyle(element).visibility !== "hidden")
+          .flatMap((element) => {
+            element.scrollIntoView({ block: "center", behavior: "instant" });
+            const box = element.getBoundingClientRect();
+            const hit = document.elementFromPoint(box.left + box.width / 2, box.top + box.height / 2);
+            return hit && (hit === element || element.contains(hit))
+              ? []
+              : [`${section.id}: «${element.textContent?.trim()}» is under ${hit?.tagName.toLowerCase()}.${hit?.getAttribute("class") ?? ""}`];
+          }),
+      ),
+    );
+    expect(covered, `${viewport.width}px`).toEqual([]);
+  }
+});
+
+test("sections carry no sequence numbers or ghost marks", async ({ page }) => {
+  await page.goto("/es");
+
+  // No "01 / 02 / 03" on lists whose order carries no information.
+  const indexes = await page.locator("section[id]").evaluateAll((sections) =>
+    sections.flatMap((section) =>
+      [...section.querySelectorAll("*")]
+        .filter((element) => element.children.length === 0 && /^0\d$/.test(element.textContent?.trim() ?? ""))
+        .map((element) => `${section.id}: ${element.textContent?.trim()}`),
+    ),
+  );
+  expect(indexes).toEqual([]);
+
+  // No large decorative outline sitting behind a section's content.
+  const ghosts = await page.locator("section[id]:not(#home)").evaluateAll((sections) =>
+    sections.flatMap((section) =>
+      [...section.querySelectorAll<HTMLElement | SVGElement>("[aria-hidden='true']")]
+        .filter((element) => getComputedStyle(element).position === "absolute" && element.getBoundingClientRect().width > 300)
+        .map(() => section.id),
+    ),
+  );
+  expect(ghosts).toEqual([]);
+});
+
+test("the homepage states what the products do, without hedging labels", async ({ page }) => {
+  // The owner removed these in November 2026: they read as unfinished and cost credibility.
+  const hedges = {
+    es: /(próximamente|tesis de producto|todavía no|aún no|más adelante|visión de producto|en desarrollo)/i,
+    en: /(coming soon|product thesis|not yet|later|product vision|in development)/i,
+  } as const;
+  for (const language of ["es", "en"] as const) {
+    await page.goto(`/${language}`);
+    const text = await page.locator("main").innerText();
+    expect(text.match(hedges[language])?.[0] ?? null, language).toBeNull();
+  }
+});
+
 test("has a logical heading structure and no serious axe violations", async ({ page }) => {
   await page.goto("/");
 
@@ -117,6 +343,16 @@ test("has a logical heading structure and no serious axe violations", async ({ p
     expect(levels[index] - levels[index - 1]).toBeLessThanOrEqual(1);
   }
 
+  // The hero fades in on load; axe would measure its action's colors mid-fade and report
+  // contrast the settled page does not have. Let every finite animation finish first.
+  await page.evaluate(() =>
+    Promise.all(
+      document
+        .getAnimations()
+        .filter((animation) => animation.effect?.getComputedTiming().endTime !== Infinity)
+        .map((animation) => animation.finished),
+    ),
+  );
   const results = await new AxeBuilder({ page }).analyze();
   const seriousViolations = results.violations.filter(({ impact }) => impact === "serious" || impact === "critical");
   expect(seriousViolations).toEqual([]);

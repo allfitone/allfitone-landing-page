@@ -8,7 +8,11 @@ export const dynamic = "force-static";
 
 const pages = [
   { path: "", lastModified: new Date("2026-10-20"), changeFrequency: "monthly", priority: 1, image: true },
-  { path: "/privacy/analytics", lastModified: new Date("2026-10-20"), changeFrequency: "yearly", priority: 0.4, image: false },
+  { path: "/waitlist", lastModified: new Date("2026-11-07"), changeFrequency: "monthly", priority: 0.8, image: true },
+  { path: "/legal", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.3, image: false },
+  { path: "/legal/terms", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.4, image: false },
+  { path: "/legal/privacy", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.4, image: false },
+  { path: "/legal/analytics", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.4, image: false },
 ] as const;
 
 /** Lists each canonical language URL once, with its translations as hreflang alternates. */

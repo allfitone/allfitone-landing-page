@@ -1,13 +1,14 @@
 import type { Language } from "@/lib/content";
 
+// Titles separate their parts with « | »; see `src/lib/page-title.ts`.
 const seo = {
   es: {
-    title: "Allfit One - El ecosistema donde el fitness se conecta",
+    title: "Allfit One | El ecosistema donde el fitness se conecta",
     description:
       "Allfit One conecta personas, profesionales y organizaciones alrededor de una identidad fitness portátil: Allfit Space para vivir el fitness y Allfit Studio para gestionarlo.",
   },
   en: {
-    title: "Allfit One - The ecosystem where fitness connects",
+    title: "Allfit One | The ecosystem where fitness connects",
     description:
       "Allfit One connects people, professionals and organizations around a portable fitness identity: Allfit Space to live fitness and Allfit Studio to manage it.",
   },
@@ -51,7 +52,7 @@ export function shareImage(language: Language) {
   return { url: "/social/allfit-one-share.png", width: 1200, height: 630, type: "image/png", alt: shareImageAlt[language] };
 }
 
-/** Builds the public path of a page in the given language, e.g. `/en/privacy/analytics`. */
+/** Builds the public path of a page in the given language, e.g. `/en/legal/privacy`. */
 export function localizedPath(language: Language, path = "") {
   return `/${language}${path}`;
 }

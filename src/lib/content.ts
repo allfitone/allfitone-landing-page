@@ -14,10 +14,7 @@ export const content = {
     navFitnessId: "Fitness ID",
     navSpace: "Allfit Space",
     navStudio: "Allfit Studio",
-    navEcosystem: "Ecosistema",
-    analyticsPrivacy: "Privacidad de analítica",
-    contact: "Escríbenos",
-    contactShort: "Escríbenos",
+    navAction: "Únete a la lista",
     mainNavigation: "Navegación principal",
     mobileNavigation: "Navegación móvil",
     openMenu: "Abrir menú",
@@ -31,72 +28,50 @@ export const content = {
     linkedinLabel: "Allfit One en LinkedIn",
     footerExplore: "Explora",
     footerSocial: "Síguenos",
-    footerInformation: "Información",
+    footerLegal: "Legal",
     heroLead:
-      "Allfit One es el ecosistema donde el fitness se conecta. Una identidad, dos productos y un historial que viaja contigo: para las personas que entrenan y para los profesionales y organizaciones que lo hacen posible.",
-    heroNote: "Aún no hay demo pública. Cuéntanos cómo entrenas o gestionas tu espacio.",
+      "Cambias de entrenador, de gimnasio o de app y tu historial se queda atrás. Estamos construyendo Allfit One para que se quede contigo: Allfit Space para quien entrena, Allfit Studio para quien acompaña y gestiona.",
+    heroAction: "Únete a la lista de espera",
 
     appAudience: "Para personas",
-    appDescription: "Entrena por tu cuenta o con un profesional y lleva tu progreso contigo.",
+    appDescription: "Entrena por tu cuenta o con un profesional, sin empezar de cero cada vez.",
     studioAudience: "Para profesionales y organizaciones",
     studioDescription:
       "Gestiona personas, entrenamiento, progreso y tu operación desde un solo panel.",
     spaceLink: "Conoce Allfit Space",
     studioLink: "Conoce Allfit Studio",
+    spaceSectionLink: "Más sobre Allfit Space",
+    studioSectionLink: "Más sobre Allfit Studio",
+    // Read after a product link's label: every link to a product landing opens a new tab.
+    opensInNewTab: "(se abre en una pestaña nueva)",
 
-    phaseLabel: "Fase actual",
+    sessionName: "Fuerza · Tren superior",
 
-    phoneToday: "Hoy",
-    phoneGreeting: "Tu siguiente paso",
-    phoneSession: "Fuerza · Tren superior",
-    phoneLocation: "18:00 · Allfit Performance",
-    phoneRecovery: "Recuperación moderada",
-    phoneDuration: "72 min",
-    phoneStart: "Comenzar sesión",
-    phoneWeek: "Semana",
-    phoneAdherence: "Adherencia",
-
-    dashboardOverview: "Resumen",
-    dashboardGreeting: "Esto necesita atención hoy.",
-    dashboardNavigation: ["Resumen", "Personas", "Entrenamiento", "Operación", "Negocio"],
-    dashboardActivePeople: "Personas activas",
-    dashboardSessions: "Sesiones hoy",
-    dashboardAdherence: "Adherencia",
-    dashboardAgenda: "Sesiones de hoy",
-    dashboardActivity: "Actividad reciente",
-    dashboardViewAll: "Ver todas",
-    dashboardSchedule: [
-      ["07:00", "Fuerza · Grupo 04", "8 personas"],
-      ["10:30", "Evaluación inicial", "Laura Méndez"],
-      ["18:00", "Engine · Intermedio", "12 personas"],
-    ],
-    dashboardUpdates: [
-      ["Mariana completó su sesión", "Hace 8 min"],
-      ["Nueva relación aceptada", "Hace 21 min"],
-      ["Programa asignado y confirmado", "Hace 34 min"],
-    ],
+    studioNavigation: ["Resumen", "Personas", "Entrenamiento", "Operación", "Negocio"],
+    studioOrganization: "Estudio Norte",
 
     problemLabel: "El problema",
     problemTitle: "Cada vez que cambias, empiezas de cero.",
     problemCopy:
       "Tu historial no vive contigo: vive en la app, el entrenador o el gimnasio de turno. Cuando esa relación termina, tú sigues entrenando, pero tu progreso se queda ahí.",
-    problemLedgerLead: "Cuando cambias de gimnasio, de entrenador o de app:",
-    problemKeepLabel: "Te llevas",
+    // The ledger speaks to the reader, like the title: what you take, what you leave.
+    problemKeepLabel: "Tú te llevas",
     problemKeepValue: "Nada",
-    problemLoseLabel: "Se queda",
+    problemLoseLabel: "Dejas en tu antiguo gimnasio",
+    // Your record at the gym you leave, in real figures rather
+    // than categories. The Fitness ID card in the next section holds the same kinds of
+    // data, kept instead of lost.
     problemLoseItems: [
-      "Tu historial de entrenamiento",
-      "Tus marcas personales",
-      "Tu progreso y tus métricas",
-      "Tu programación",
-      "Tus relaciones profesionales",
-      "Tu membresía",
+      ["Sesiones registradas", "184"],
+      ["Mejor sentadilla", "95 kg"],
+      ["Programa de fuerza", "12 semanas"],
+      ["Notas sobre tu lesión de rodilla", "11"],
+      ["Con el mismo entrenador", "2 años"],
     ],
     fitnessIdLabel: "Fitness ID",
     fitnessIdTitle: "Una identidad que no se queda en el gimnasio.",
     fitnessIdCopy:
-      "El Fitness ID es tu identidad fitness portátil. Reúne lo que entrenaste, lo que lograste y con quién lo lograste, y permanece contigo cuando cambias de entrenador, de gimnasio, de ciudad o de disciplina.",
-    fitnessIdCardLabel: "Contiene",
+      "El Fitness ID reúne lo que entrenaste, lo que lograste y con quién lo lograste. No pertenece a la app, al entrenador ni al gimnasio de turno: es tuyo, y tú decides quién lo ve.",
     fitnessIdCardFooter: "Permanece contigo",
     fitnessIdFields: [
       "Objetivos",
@@ -113,100 +88,85 @@ export const content = {
       ["Tú revocas", "Retiras un acceso cuando quieras. Tu información no se va con él."],
       ["Tú te lo llevas", "Si la relación termina, el historial sigue siendo tuyo."],
     ],
-    fitnessIdNote:
-      "El Fitness ID es la tesis de producto de Allfit One. Todavía no es una función pública disponible.",
 
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
-      "Allfit Space reúne tu plan, tus sesiones y tu progreso en un solo lugar. Entrena por tu cuenta o sigue la planificación de un profesional.",
-    appPillars: [
-      ["Entrena por tu cuenta", "Organiza tus sesiones y registra lo que haces cuando entrenas de forma independiente."],
-      ["Sigue el plan de tu entrenador", "Consulta su planificación en el mismo lugar donde registras cada sesión."],
-      ["Tu historial sigue contigo", "Tu Fitness ID conserva tus marcas y tu progreso aunque cambies de gimnasio, profesional o disciplina."],
-    ],
-    appAreasLabel: "Dentro de Allfit Space",
-    appAreas: [
-      ["Hoy", "Tu próxima sesión"],
-      ["Entrena", "Planes, sesiones y progreso"],
-      ["Explora", "Profesionales, gimnasios y servicios"],
-      ["Comunidad", "Las personas con las que entrenas"],
-      ["Tú", "Tu Fitness ID y tus permisos"],
-    ],
-    appVision: "Visión de producto · Próximamente",
+      "Allfit Space reúne tu plan, tus sesiones y tu progreso. Entrena por tu cuenta o sigue la planificación de un profesional en el mismo lugar donde registras cada sesión.",
+    // The section's phone shows the person's 18:00 session under way: the program comes from
+    // Estudio Norte and the person logs it set by set. The first exercise with sets left is the
+    // one she is on.
+    spaceSession: {
+      status: "En curso · 24 min",
+      plan: "Programa de Estudio Norte · Semana 3 de 4",
+      exercises: [
+        { name: "Press de banca", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
+        { name: "Remo con barra", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
+        { name: "Press militar", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
+        { name: "Dominadas", sets: 3, reps: "máx.", load: null, done: 0, logged: "6" },
+      ],
+      setOf: "Serie {set} de {sets}",
+      reps: "reps",
+      logSet: "Registrar serie",
+    },
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
-      "Un solo panel para gestionar clientes, planificación, progreso y operación, conectado con el Fitness ID de cada persona.",
-    studioDifferentiatorsLabel: "Cómo funciona Studio",
-    studioDifferentiators: [
-      [
-        "Cada persona entra con su identidad",
-        "La relación comienza cuando acepta una invitación. Studio usa su Fitness ID y solo muestra los datos que decidió compartir.",
-      ],
-      [
-        "Compara el plan con lo que ocurrió",
-        "Studio conserva cada versión del programa y la compara con lo que la persona registró en sus sesiones.",
-      ],
-      [
-        "Cada persona decide qué comparte",
-        "El acceso depende de una relación, una autorización y una asignación vigentes. Ser dueño o administrador no basta.",
-      ],
-      [
-        "Los cobros llegan a tu organización",
-        "Cada pago pasa por tu propia pasarela. Allfit no recibe ni retiene el dinero.",
-      ],
-    ],
-    studioModulesLabel: "Lo que gestionas desde Studio",
-    studioModules: [
-      ["Personas", "Invitaciones, relaciones y seguimiento de clientes"],
-      ["Entrenamiento", "Plantillas, programas, asignaciones e historial de versiones"],
-      ["Progreso", "Sesiones registradas, adherencia y resultados compartidos"],
-      ["Equipo", "Miembros, roles y permisos"],
-      ["Planes", "Planes que vendes y suscripciones activas"],
-    ],
-    studioUpcomingLabel: "Más adelante",
-    studioUpcoming: ["Agenda y reservas", "Clases y cupos", "Página pública", "Marketplace"],
-
-    ecosystemLabel: "Ecosistema",
-    ecosystemTitle: "Dos productos. Una sola relación.",
-    ecosystemCopy: "Dos experiencias distintas sobre una base compartida.",
-    ecosystem: {
-      space: {
-        index: "01",
-        title: "Tu historia sigue contigo.",
-        copy: "La persona entrena, registra su progreso y conserva su información.",
-        tags: ["Identidad", "Progreso", "Historial"],
-      },
-      connect: {
-        title: "Se conectan con tu permiso",
-        tags: ["Planes", "Progreso", "Información"],
-      },
-      studio: {
-        index: "02",
-        title: "El profesional acompaña sin apropiarse.",
-        copy: "Studio permite programar, acompañar y analizar con acceso autorizado.",
-        tags: ["Programa", "Acompaña", "Analiza"],
-      },
-      closingLead: "Cambia quién te acompaña.",
-      closingAccent: "No",
-      closingRest: "lo que has construido.",
-      relation: ["Persona", "Profesional", "Organización"],
-      relationShared: "Identidad · Permisos · Información compartida",
+      "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
+    // The section's panel closes the story the Space phone starts: the person finished the 18:00 session
+    // in Allfit Space and Estudio Norte reviews it against the program it assigned. The plan
+    // and the log both come from `spaceSession`, so the two screens agree.
+    studioReview: {
+      status: "Hoy, 18:00 · terminada",
+      columns: ["Ejercicio", "Plan", "Registrado"],
+      asPlanned: "Según el plan",
+      fewerReps: "{n} reps menos",
+      programLabel: "Programa asignado",
+      program: "Fuerza · 4 semanas",
+      programWeek: "Semana 3 de 4",
+      accessLabel: "Acceso",
+      access: "Historial de entrenamiento",
+      accessPurpose: "Para seguir su programa. Lo autorizó {name}.",
+      action: "Ajustar la próxima sesión",
     },
 
-    statusLabel: "Dónde estamos",
+    statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
     statusCopy:
-      "Allfit Space y Allfit Studio están en desarrollo. El Fitness ID es la tesis de producto que los conecta.",
-    statusRows: [
-      ["Allfit Space", "En desarrollo", "Entrena por tu cuenta o sigue el plan de un profesional. Tu historial permanece contigo."],
-      ["Allfit Studio", "En desarrollo", "Gestiona clientes, planificación, progreso y suscripciones desde un mismo panel."],
-      ["Fitness ID", "Tesis de producto", "Cada persona conserva su historial y decide qué comparte."],
-    ],
-    closingPrompt:
-      "¿Entrenas, acompañas a personas o gestionas un espacio fitness? Escríbenos y construyámoslo contigo.",
+      "Déjanos tu nombre y tu correo, y te avisaremos cuando Allfit Space y Allfit Studio abran sus puertas.",
+    // The launch offer, stated once beside the form; its terms live on the waitlist page.
+    waitlistOffer: "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.",
+    waitlist: {
+      nameLabel: "Tu nombre",
+      // The placeholders and the address example use the visit's person: `{handle}` is the
+      // name in lower case.
+      namePlaceholder: "{name}",
+      emailLabel: "Tu correo",
+      emailPlaceholder: "{handle}@correo.com",
+      roleLegend: "¿Cómo usarías Allfit One?",
+      // Keyed by the role id the waitlist stores (`waitlistRoles`), never by position.
+      roles: [
+        { id: "train", label: "Para entrenar" },
+        { id: "coach", label: "Para acompañar a mis clientes" },
+        { id: "gym", label: "Para gestionar un gimnasio o estudio" },
+      ],
+      submit: "Unirme a la lista",
+      pending: "Un momento…",
+      errorNameEmpty: "Escribe tu nombre para unirte.",
+      errorEmailEmpty: "Escribe tu correo para unirte.",
+      errorEmailInvalid: "Revisa el correo: necesita la forma {handle}@correo.com.",
+      errorRole: "Elige cómo usarías Allfit One.",
+      failed: "No pudimos apuntarte. Inténtalo de nuevo o escríbenos a",
+      joinedTitle: "Ya estás en la lista, {name}.",
+      // Each role hears about the product that is theirs.
+      joinedBody: {
+        train: "Te escribiremos a {email} cuando abra Allfit Space.",
+        coach: "Te escribiremos a {email} cuando abra Allfit Studio.",
+        gym: "Te escribiremos a {email} cuando abra Allfit Studio.",
+      },
+      reset: "Usar otro correo",
+    },
     tagline: "All the fitness in one place.",
     inceptionMember: "Allfit One es miembro de NVIDIA Inception.",
     inceptionBadgeAlt: "Insignia del NVIDIA Inception Program",
@@ -218,10 +178,7 @@ export const content = {
     navFitnessId: "Fitness ID",
     navSpace: "Allfit Space",
     navStudio: "Allfit Studio",
-    navEcosystem: "Ecosystem",
-    analyticsPrivacy: "Analytics privacy",
-    contact: "Get in touch",
-    contactShort: "Contact",
+    navAction: "Join the list",
     mainNavigation: "Main navigation",
     mobileNavigation: "Mobile navigation",
     openMenu: "Open menu",
@@ -235,71 +192,44 @@ export const content = {
     linkedinLabel: "Allfit One on LinkedIn",
     footerExplore: "Explore",
     footerSocial: "Follow",
-    footerInformation: "Information",
+    footerLegal: "Legal",
     heroLead:
-      "Allfit One is the ecosystem where fitness connects. One identity, two products and a history that travels with you: for the people who train and for the professionals and organizations who make it possible.",
-    heroNote: "There's no public demo yet. Tell us how you train or run your space.",
+      "You change coach, gym or app, and your history stays behind. We're building Allfit One so it stays with you: Allfit Space for the people who train, Allfit Studio for the people who coach and run the work.",
+    heroAction: "Join the waitlist",
 
     appAudience: "For people",
-    appDescription: "Train on your own or with a professional and keep your progress with you.",
+    appDescription: "Train on your own or with a professional, without starting over each time.",
     studioAudience: "For professionals and organizations",
     studioDescription: "Manage people, training, progress and your operation from one dashboard.",
     spaceLink: "Explore Allfit Space",
     studioLink: "Explore Allfit Studio",
+    spaceSectionLink: "More about Allfit Space",
+    studioSectionLink: "More about Allfit Studio",
+    opensInNewTab: "(opens in a new tab)",
 
-    phaseLabel: "Current phase",
+    sessionName: "Strength · Upper body",
 
-    phoneToday: "Today",
-    phoneGreeting: "Your next move",
-    phoneSession: "Strength · Upper body",
-    phoneLocation: "18:00 · Allfit Performance",
-    phoneRecovery: "Moderate recovery",
-    phoneDuration: "72 min",
-    phoneStart: "Start session",
-    phoneWeek: "Week",
-    phoneAdherence: "Adherence",
-
-    dashboardOverview: "Overview",
-    dashboardGreeting: "This needs attention today.",
-    dashboardNavigation: ["Overview", "People", "Training", "Operations", "Business"],
-    dashboardActivePeople: "Active people",
-    dashboardSessions: "Sessions today",
-    dashboardAdherence: "Adherence",
-    dashboardAgenda: "Today's sessions",
-    dashboardActivity: "Recent activity",
-    dashboardViewAll: "View all",
-    dashboardSchedule: [
-      ["07:00", "Strength · Group 04", "8 people"],
-      ["10:30", "Initial assessment", "Laura Méndez"],
-      ["18:00", "Engine · Intermediate", "12 people"],
-    ],
-    dashboardUpdates: [
-      ["Mariana completed her session", "8 min ago"],
-      ["New relationship accepted", "21 min ago"],
-      ["Program assigned and confirmed", "34 min ago"],
-    ],
+    studioNavigation: ["Overview", "People", "Training", "Operations", "Business"],
+    studioOrganization: "Estudio Norte",
 
     problemLabel: "The problem",
     problemTitle: "Every time you switch, you start over.",
     problemCopy:
       "Your history does not live with you: it lives in whichever app, coach or gym you are using. When that relationship ends, you keep training, but your progress stays behind.",
-    problemLedgerLead: "When you change gym, coach or app:",
     problemKeepLabel: "You take",
     problemKeepValue: "Nothing",
-    problemLoseLabel: "Stays behind",
+    problemLoseLabel: "You leave behind at your old gym",
     problemLoseItems: [
-      "Your training history",
-      "Your personal records",
-      "Your progress and metrics",
-      "Your programming",
-      "Your professional relationships",
-      "Your membership",
+      ["Logged sessions", "184"],
+      ["Best squat", "95 kg"],
+      ["Strength program", "12 weeks"],
+      ["Notes on your knee injury", "11"],
+      ["With the same coach", "2 years"],
     ],
     fitnessIdLabel: "Fitness ID",
     fitnessIdTitle: "An identity that doesn't stay at the gym.",
     fitnessIdCopy:
-      "Fitness ID is your portable fitness identity. It holds what you trained, what you achieved and who you achieved it with, and it stays with you when you change coach, gym, city or discipline.",
-    fitnessIdCardLabel: "Holds",
+      "Fitness ID holds what you trained, what you achieved and who you achieved it with. It doesn't belong to whichever app, coach or gym you are using: it's yours, and you decide who sees it.",
     fitnessIdCardFooter: "Stays with you",
     fitnessIdFields: [
       "Goals",
@@ -316,100 +246,74 @@ export const content = {
       ["You revoke", "Withdraw an access whenever you want. Your information does not leave with it."],
       ["You keep it", "If the relationship ends, the history is still yours."],
     ],
-    fitnessIdNote:
-      "Fitness ID is the Allfit One product thesis. It is not a publicly available feature yet.",
 
     appSectionLabel: "Allfit Space",
     appSectionTitle: "Keep training from where you left off.",
     appSectionCopy:
-      "Allfit Space brings your plan, sessions and progress into one place. Train on your own or follow a professional's plan.",
-    appPillars: [
-      ["Train on your own", "Plan your sessions and log what you do when you train independently."],
-      ["Follow your coach's plan", "Keep their plan in the same place where you log each session."],
-      ["Your history stays with you", "Your Fitness ID keeps your records and progress when you change gym, coach or discipline."],
-    ],
-    appAreasLabel: "Inside Allfit Space",
-    appAreas: [
-      ["Today", "Your next session"],
-      ["Train", "Plans, sessions and progress"],
-      ["Explore", "Professionals, gyms and services"],
-      ["Community", "The people you train with"],
-      ["You", "Your Fitness ID and permissions"],
-    ],
-    appVision: "Product vision · Coming soon",
+      "Allfit Space brings together your plan, your sessions and your progress. Train on your own or follow a professional's plan in the same place where you log each session.",
+    spaceSession: {
+      status: "In progress · 24 min",
+      plan: "Estudio Norte program · Week 3 of 4",
+      exercises: [
+        { name: "Bench press", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
+        { name: "Barbell row", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
+        { name: "Overhead press", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
+        { name: "Pull-ups", sets: 3, reps: "max", load: null, done: 0, logged: "6" },
+      ],
+      setOf: "Set {set} of {sets}",
+      reps: "reps",
+      logSet: "Log set",
+    },
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
     studioSectionCopy:
-      "One dashboard to manage clients, planning, progress and operations, connected to each person's Fitness ID.",
-    studioDifferentiatorsLabel: "How Studio works",
-    studioDifferentiators: [
-      [
-        "Each person joins with their own identity",
-        "The relationship begins when they accept an invitation. Studio uses their Fitness ID and only shows the data they chose to share.",
-      ],
-      [
-        "Compare the plan with what happened",
-        "Studio keeps every version of the program and compares it with what the person logged in their sessions.",
-      ],
-      [
-        "Each person decides what to share",
-        "Access depends on an active relationship, authorization and assignment. Being an owner or admin is not enough.",
-      ],
-      [
-        "Payments go to your organization",
-        "Each payment goes through your own gateway. Allfit does not receive or hold the money.",
-      ],
-    ],
-    studioModulesLabel: "What you manage in Studio",
-    studioModules: [
-      ["People", "Invitations, relationships and client follow-up"],
-      ["Training", "Templates, programs, assignments and version history"],
-      ["Progress", "Logged sessions, adherence and shared results"],
-      ["Team", "Members, roles and permissions"],
-      ["Plans", "Plans you sell and active subscriptions"],
-    ],
-    studioUpcomingLabel: "Later",
-    studioUpcoming: ["Schedule and bookings", "Classes and capacity", "Public page", "Marketplace"],
-
-    ecosystemLabel: "Ecosystem",
-    ecosystemTitle: "Two products. One relationship.",
-    ecosystemCopy: "Two distinct experiences on one shared base.",
-    ecosystem: {
-      space: {
-        index: "01",
-        title: "Your history stays with you.",
-        copy: "The person trains, logs their progress and keeps their information.",
-        tags: ["Identity", "Progress", "History"],
-      },
-      connect: {
-        title: "They connect with your permission",
-        tags: ["Plans", "Progress", "Information"],
-      },
-      studio: {
-        index: "02",
-        title: "The professional guides without owning it.",
-        copy: "Studio lets them program, guide and analyze with authorized access.",
-        tags: ["Program", "Guide", "Analyze"],
-      },
-      closingLead: "Change who guides you.",
-      closingAccent: "Not",
-      closingRest: "what you've built.",
-      relation: ["Person", "Professional", "Organization"],
-      relationShared: "Identity · Permissions · Shared information",
+      "Studio works on each person's Fitness ID: you plan, follow their progress and run your operation without asking them to start over.",
+    studioReview: {
+      status: "Today, 18:00 · finished",
+      columns: ["Exercise", "Plan", "Logged"],
+      asPlanned: "As planned",
+      fewerReps: "{n} fewer reps",
+      programLabel: "Assigned program",
+      program: "Strength · 4 weeks",
+      programWeek: "Week 3 of 4",
+      accessLabel: "Access",
+      access: "Training history",
+      accessPurpose: "To follow the program. Granted by {name}.",
+      action: "Adjust the next session",
     },
 
-    statusLabel: "Where we are",
+    statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",
     statusCopy:
-      "Allfit Space and Allfit Studio are in development. Fitness ID is the product thesis that connects them.",
-    statusRows: [
-      ["Allfit Space", "In development", "Train on your own or follow a professional's plan. Your history stays with you."],
-      ["Allfit Studio", "In development", "Manage clients, planning, progress and subscriptions from one dashboard."],
-      ["Fitness ID", "Product thesis", "Each person keeps their history and decides what to share."],
-    ],
-    closingPrompt:
-      "Do you train, coach people or run a fitness space? Write to us and let's build it with you.",
+      "Leave your name and email, and we'll let you know when Allfit Space and Allfit Studio open their doors.",
+    waitlistOffer: "The first 100 people on the list get three months of Allfit Pro.",
+    waitlist: {
+      nameLabel: "Your name",
+      namePlaceholder: "{name}",
+      emailLabel: "Your email",
+      emailPlaceholder: "{handle}@email.com",
+      roleLegend: "How would you use Allfit One?",
+      roles: [
+        { id: "train", label: "To train" },
+        { id: "coach", label: "To coach my clients" },
+        { id: "gym", label: "To run a gym or studio" },
+      ],
+      submit: "Join the list",
+      pending: "One moment…",
+      errorNameEmpty: "Enter your name to join.",
+      errorEmailEmpty: "Enter your email to join.",
+      errorEmailInvalid: "Check the email: it needs the form {handle}@email.com.",
+      errorRole: "Choose how you'd use Allfit One.",
+      failed: "We couldn't add you. Try again or write to us at",
+      joinedTitle: "You're on the list, {name}.",
+      joinedBody: {
+        train: "We'll write to {email} when Allfit Space opens.",
+        coach: "We'll write to {email} when Allfit Studio opens.",
+        gym: "We'll write to {email} when Allfit Studio opens.",
+      },
+      reset: "Use another email",
+    },
     tagline: "All the fitness in one place.",
     inceptionMember: "Allfit One is a member of NVIDIA Inception.",
     inceptionBadgeAlt: "NVIDIA Inception Program badge",
@@ -421,144 +325,103 @@ export const content = {
 
 export type LocalizedContent = (typeof content)[Language];
 
-export const analyticsPrivacyContent = {
+/**
+ * The waitlist page (`/{lang}/waitlist`): the launch offer, what joining brings, what
+ * Allfit Pro is and the offer's terms. The form itself reuses `content[language].waitlist`.
+ * The owner set the offer in November 2026: the first 100 people on the list, whatever
+ * their role, get three months of Allfit Pro from the day they activate it, then move to
+ * the free plan with nothing charged. What each plan includes is not decided yet, so the
+ * page states Allfit Pro's rules and lists none of its features.
+ */
+export const waitlistPageContent = {
   es: {
-    metaTitle: "Privacidad de analítica | Allfit One",
+    metaTitle: "Lista de espera | Allfit One",
     metaDescription:
-      "Cómo funciona la analítica opcional de Allfit One, qué datos permitimos, qué datos prohibimos y cómo retirar el consentimiento.",
-    selectLanguage: "Seleccionar idioma",
-    home: "Volver a Allfit One",
-    navigation: "Contenido del aviso",
-    kicker: "Privacidad · Analítica opcional",
-    title: "Lo que medimos. Lo que nunca tocamos.",
+      "Únete a la lista de espera de Allfit One: te avisamos cuando abran Allfit Space y Allfit Studio, y las primeras 100 personas tendrán tres meses de Allfit Pro sin costo.",
+    // Two parts, each its own block: the second carries the page's one cyan phrase.
+    title: ["Tres meses de Allfit Pro", "para las primeras 100 personas."],
     lead:
-      "La analítica de Allfit One es opcional. Nos ayuda a detectar fallos y entender el rendimiento sin leer tu contenido ni convertir tu actividad física en un perfil.",
-    versionLabel: "Aviso vigente",
-    version: "analytics-v1",
-    sections: [
-      ["#purpose", "Para qué la usamos"],
-      ["#data-boundary", "La frontera de datos"],
-      ["#provider", "Proveedor y entorno"],
-      ["#retention", "Retención"],
-      ["#control", "Tus controles"],
-    ],
-    purposeTitle: "Para qué la usamos",
-    purposeBody:
-      "Medimos si una pantalla carga, si una operación termina correctamente y cuánto tarda. También usamos señales agregadas para mantener disponibles la API y los procesos de segundo plano. No usamos esta información para publicidad, decisiones sobre salud ni perfiles comerciales.",
-    boundaryTitle: "La frontera de datos",
-    boundaryLead:
-      "Cada evento pasa por una lista cerrada. Si contiene una propiedad no permitida, no sale de Allfit One.",
-    allowedTitle: "Podemos medir",
-    allowedItems: [
-      "La categoría de pantalla y el paso general de un flujo.",
-      "El nombre técnico de una operación, su resultado y el grupo de estado HTTP.",
-      "Duraciones, Web Vitals y tiempos agregados de dependencias.",
-      "El entorno, la versión de la aplicación, la plataforma y el servicio.",
-      "Resultados agregados de jobs y señales operativas de fallos.",
-    ],
-    prohibitedTitle: "Nunca recopilamos",
-    prohibitedItems: [
-      "Nombres, correos, teléfonos ni identificadores de cuentas, personas u organizaciones.",
-      "URL completas, parámetros, cuerpos de peticiones o respuestas y texto escrito por usuarios.",
-      "Contraseñas, tokens, cookies, direcciones IP ni identificadores del dispositivo.",
-      "Datos de salud, nutrición, medidas corporales, sesiones de entrenamiento o marcas personales.",
-      "Grabaciones de sesión, autocaptura, mapas de calor, encuestas o eventos automáticos del SDK.",
-    ],
-    pseudonymTitle: "Un seudónimo, no tu identidad",
-    pseudonymBody:
-      "Cuando aceptas, la API genera un identificador seudónimo mediante una clave protegida. PostHog no recibe el identificador de tu proveedor de acceso y Allfit One no crea perfiles personales en el proveedor de analítica.",
-    providerTitle: "Proveedor y entorno",
-    providerBody:
-      "Los eventos permitidos se procesan en PostHog US. La analítica está deshabilitada en desarrollo y preview. En producción requiere, al mismo tiempo, tu consentimiento y un gate remoto activo para el producto que usas.",
-    providerBoundary: "Procesador: PostHog US · Perfiles personales: deshabilitados",
-    retentionTitle: "Retención limitada",
-    retentionItems: [
-      ["Analítica de producto", "Hasta 90 días"],
-      ["Logs operativos", "Hasta 30 días"],
-    ],
-    retentionBody:
-      "Al terminar cada periodo, los datos deben eliminarse o agregarse de forma que ya no permitan seguir un seudónimo individual.",
-    controlTitle: "Tú mantienes el control",
-    controlItems: [
-      ["Antes de aceptar", "No cargamos el SDK, no consultamos el gate y no enviamos eventos."],
-      ["Cuando retiras el permiso", "La captura se detiene y los eventos ocurridos mientras está apagada se descartan."],
-      ["Señales de privacidad", "Global Privacy Control y Do Not Track mantienen la analítica desactivada en la web."],
-    ],
-    deletionTitle: "Retiro y eliminación",
-    deletionBody:
-      "Puedes cambiar tu decisión desde el control Privacidad de Allfit Studio, Allfit Space o el Backoffice autorizado. Para solicitar la eliminación de la información asociada a tu seudónimo, escríbenos. Verificaremos la solicitud sin pedirte que publiques datos sensibles.",
-    contact: "Solicitar ayuda de privacidad",
-    footer: "Allfit One · Aviso de analítica analytics-v1",
+      "Te escribimos cuando abra el producto que vas a usar. Y si estás entre las primeras 100 personas de la lista, empiezas Allfit Space con tres meses de Allfit Pro, sin costo.",
+    joinTitle: "Únete a la lista de espera",
+    get: {
+      title: "Qué recibes",
+      rows: [
+        ["Si te unes para entrenar", "Un correo cuando abra Allfit Space."],
+        ["Si acompañas a tus clientes o gestionas un gimnasio o estudio", "Un correo cuando abra Allfit Studio."],
+        [
+          "Si estás entre las primeras 100 personas",
+          "Tres meses de Allfit Pro en Allfit Space, sin costo, sin importar cómo vayas a usar Allfit One.",
+        ],
+      ],
+    },
+    pro: {
+      title: "Qué es Allfit Pro",
+      text: "Allfit Space es gratis. Allfit Pro es su suscripción opcional: amplía lo que puedes hacer en la app.",
+      rows: [
+        [
+          "Tus datos",
+          "Controlarlos nunca se paga. Decidir qué compartes y con quién, ver quién accedió, llevarte tu historial o borrarlo es gratis en cualquier plan.",
+        ],
+        ["Si vuelves al plan gratuito", "No se borra nada. Conservas todo tu historial y lo sigues viendo."],
+      ],
+    },
+    terms: {
+      title: "Condiciones de la oferta",
+      items: [
+        "Aplica a las primeras 100 personas que se unan a la lista de espera, sin importar cómo vayan a usar Allfit One.",
+        "El orden lo marca el momento en que te unes. Cuenta una vez por persona y por correo.",
+        "Cuando abra Allfit Space, te confirmamos por correo si quedaste entre las 100.",
+        "Lo activas en Allfit Space con una cuenta creada con el mismo correo con el que te uniste.",
+        "Los tres meses cuentan desde que lo activas, no desde el día en que abre Allfit Space.",
+        "Al terminar pasas al plan gratuito sin hacer nada: no te cobramos y conservas todo tu historial.",
+        "Es personal: no se transfiere ni se cambia por dinero.",
+      ],
+    },
   },
   en: {
-    metaTitle: "Analytics privacy | Allfit One",
+    metaTitle: "Waitlist | Allfit One",
     metaDescription:
-      "How optional Allfit One analytics works, which data is allowed, which data is prohibited, and how to withdraw consent.",
-    selectLanguage: "Select language",
-    home: "Back to Allfit One",
-    navigation: "Notice contents",
-    kicker: "Privacy · Optional analytics",
-    title: "What we measure. What we never touch.",
+      "Join the Allfit One waitlist: we'll let you know when Allfit Space and Allfit Studio open, and the first 100 people get three months of Allfit Pro free.",
+    title: ["Three months of Allfit Pro", "for the first 100 people."],
     lead:
-      "Allfit One analytics is optional. It helps us find failures and understand performance without reading your content or turning your fitness activity into a profile.",
-    versionLabel: "Current notice",
-    version: "analytics-v1",
-    sections: [
-      ["#purpose", "Why we use it"],
-      ["#data-boundary", "The data boundary"],
-      ["#provider", "Provider and environment"],
-      ["#retention", "Retention"],
-      ["#control", "Your controls"],
-    ],
-    purposeTitle: "Why we use it",
-    purposeBody:
-      "We measure whether a screen loads, whether an operation completes, and how long it takes. We also use aggregate signals to keep the API and background processes available. We do not use this information for advertising, health decisions, or commercial profiles.",
-    boundaryTitle: "The data boundary",
-    boundaryLead:
-      "Every event passes through a closed allowlist. If it contains a property that is not permitted, it does not leave Allfit One.",
-    allowedTitle: "We may measure",
-    allowedItems: [
-      "The screen category and the general step in a flow.",
-      "The technical operation name, its outcome, and its HTTP status group.",
-      "Durations, Web Vitals, and aggregate dependency timing.",
-      "The environment, application release, platform, and service.",
-      "Aggregate job outcomes and operational failure signals.",
-    ],
-    prohibitedTitle: "We never collect",
-    prohibitedItems: [
-      "Names, emails, phone numbers, or account, person, and organization identifiers.",
-      "Full URLs, parameters, request or response bodies, and user-entered text.",
-      "Passwords, tokens, cookies, IP addresses, or device identifiers.",
-      "Health data, nutrition, body measurements, training sessions, or personal records.",
-      "Session recordings, autocapture, heatmaps, surveys, or automatic SDK events.",
-    ],
-    pseudonymTitle: "A pseudonym, not your identity",
-    pseudonymBody:
-      "When you consent, the API creates a pseudonymous identifier with a protected key. PostHog does not receive your identity-provider subject, and Allfit One does not create personal profiles in the analytics provider.",
-    providerTitle: "Provider and environment",
-    providerBody:
-      "Allowed events are processed in PostHog US. Analytics is disabled in development and preview. In production it requires both your consent and an active remote gate for the product you use.",
-    providerBoundary: "Processor: PostHog US · Personal profiles: disabled",
-    retentionTitle: "Limited retention",
-    retentionItems: [
-      ["Product analytics", "Up to 90 days"],
-      ["Operational logs", "Up to 30 days"],
-    ],
-    retentionBody:
-      "At the end of each period, data must be deleted or aggregated so it can no longer be used to follow an individual pseudonym.",
-    controlTitle: "You stay in control",
-    controlItems: [
-      ["Before you consent", "We do not load the SDK, request the gate, or send events."],
-      ["When you withdraw", "Capture stops and events that occur while it is off are discarded."],
-      ["Privacy signals", "Global Privacy Control and Do Not Track keep analytics disabled on the web."],
-    ],
-    deletionTitle: "Withdrawal and deletion",
-    deletionBody:
-      "You can change your choice from the Privacy control in Allfit Studio, Allfit Space, or the authorized Backoffice. To request deletion of information associated with your pseudonym, contact us. We will verify the request without asking you to publish sensitive data.",
-    contact: "Request privacy help",
-    footer: "Allfit One · Analytics notice analytics-v1",
+      "We'll write to you when the product you'll use opens. And if you're among the first 100 people on the list, you start Allfit Space with three months of Allfit Pro, free.",
+    joinTitle: "Join the waitlist",
+    get: {
+      title: "What you get",
+      rows: [
+        ["If you're joining to train", "An email when Allfit Space opens."],
+        ["If you coach clients or run a gym or studio", "An email when Allfit Studio opens."],
+        [
+          "If you're among the first 100 people",
+          "Three months of Allfit Pro in Allfit Space, free, however you'll use Allfit One.",
+        ],
+      ],
+    },
+    pro: {
+      title: "What Allfit Pro is",
+      text: "Allfit Space is free. Allfit Pro is its optional subscription: it extends what you can do in the app.",
+      rows: [
+        [
+          "Your data",
+          "Controlling it is never paid for. Deciding what you share and with whom, seeing who accessed it, taking your history with you or deleting it is free on every plan.",
+        ],
+        ["If you go back to the free plan", "Nothing is deleted. You keep your whole history and can still see it."],
+      ],
+    },
+    terms: {
+      title: "Offer terms",
+      items: [
+        "It applies to the first 100 people who join the waitlist, however they'll use Allfit One.",
+        "Order is set by when you join. It counts once per person and per email.",
+        "When Allfit Space opens, we'll confirm by email whether you're among the 100.",
+        "You activate it in Allfit Space with an account created with the same email you joined with.",
+        "The three months start when you activate it, not on the day Allfit Space opens.",
+        "When they end, you move to the free plan without doing anything: we charge you nothing and you keep your whole history.",
+        "It's personal: it can't be transferred or exchanged for money.",
+      ],
+    },
   },
-} as const;
+} as const satisfies Record<Language, unknown>;
 
 /**
  * Interface copy shared by every ambassador page. Each ambassador's own copy, plans,
@@ -574,7 +437,6 @@ export const ambassadorPageContent = {
     contact: "Escríbenos",
     footerNavTitle: "Allfit One",
     footerHome: "Inicio",
-    footerPrivacy: "Privacidad de analítica",
     footerSocialTitle: "Síguenos",
     rights: "© 2026 Allfit One",
   },
@@ -586,7 +448,6 @@ export const ambassadorPageContent = {
     contact: "Write to us",
     footerNavTitle: "Allfit One",
     footerHome: "Home",
-    footerPrivacy: "Analytics privacy",
     footerSocialTitle: "Follow us",
     rights: "© 2026 Allfit One",
   },

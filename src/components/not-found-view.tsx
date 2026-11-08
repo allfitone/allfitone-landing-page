@@ -35,7 +35,7 @@ export function NotFoundView() {
         >
           <BrandLockup surface="dark" className="h-8 w-auto" aria-hidden="true" />
         </a>
-        <p className="col-span-6 text-right text-[9px] font-extrabold uppercase tracking-[0.2em] text-white/45 lg:col-span-9">
+        <p className="col-span-6 text-right text-[11px] font-extrabold uppercase tracking-[.14em] text-white/56 lg:col-span-9">
           Error / 404
         </p>
       </header>
@@ -68,7 +68,7 @@ export function NotFoundView() {
           </p>
         </div>
 
-        <p className="col-span-full border-t border-white/10 pt-5 text-[8px] font-bold uppercase tracking-[0.18em] text-white/30">
+        <p className="col-span-full border-t border-white/10 pt-5 text-[11px] font-bold uppercase tracking-[.14em] text-white/48">
           All the fitness in one place.
         </p>
       </section>
