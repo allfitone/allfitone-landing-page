@@ -10,7 +10,7 @@ const pages = [
   { path: "", lastModified: new Date("2026-10-20"), changeFrequency: "monthly", priority: 1, image: true },
   { path: "/legal", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.3, image: false },
   { path: "/legal/terms", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.4, image: false },
-  { path: "/legal/privacy", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.4, image: false },
+  { path: "/legal/privacy", lastModified: new Date("2026-11-08"), changeFrequency: "yearly", priority: 0.4, image: false },
   { path: "/legal/analytics", lastModified: new Date("2026-11-07"), changeFrequency: "yearly", priority: 0.4, image: false },
 ] as const;
 
