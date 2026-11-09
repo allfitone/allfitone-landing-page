@@ -3,9 +3,9 @@ import type { Language } from "@/lib/content";
 /*
  * The legal section: one index (`/legal`) and three documents, each under its own URL in
  * both languages. The terms cover Allfit Space and Allfit Studio in one document; the
- * privacy policy covers all of Allfit One (both products and this site, waitlist
- * included); the analytics notice details the one optional processing that asks for
- * consent, and the privacy policy links to it.
+ * privacy policy covers all of Allfit One (both products, their landings and this
+ * site, the Allfit Space waitlist included); the analytics notice details the one
+ * optional processing that asks for consent, and the privacy policy links to it.
  */
 
 export const legalDocumentSlugs = ["terms", "privacy", "analytics"] as const;
