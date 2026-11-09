@@ -67,37 +67,39 @@ test("links each product to its own landing in the page language, in a new tab",
   }
 });
 
-test("the navbar and the mobile menu lead to the waitlist page, not to email", async ({ page }) => {
+test("the navbar and the mobile menu open the Allfit Space waitlist in a new tab, not email", async ({ page }) => {
   test.skip(!waitlistOpen, waitlistClosed);
   await page.goto("/es");
-  await page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: "Únete a la lista", exact: true }).click();
-  await expect(page).toHaveURL(/\/es\/waitlist$/);
-  await expect(page.locator("#join").getByLabel("Tu correo")).toBeInViewport();
+  const navAction = page.getByRole("navigation", { name: "Navegación principal" }).getByRole("link", { name: "Únete a la lista (se abre en una pestaña nueva)", exact: true });
+  await expect(navAction).toHaveAttribute("href", "https://space.allfit.one/es/waitlist");
+  await expect(navAction).toHaveAttribute("target", "_blank");
+  await expect(navAction).toHaveAttribute("rel", "noopener noreferrer");
 
   await page.setViewportSize({ width: 320, height: 800 });
   await page.goto("/es");
   await page.getByRole("button", { name: "Abrir menú" }).click();
   const dialog = page.getByRole("dialog", { name: "Navegación principal" });
   await expect(dialog.locator("a[href^='mailto:']")).toHaveCount(0);
-  await dialog.getByRole("link", { name: "Únete a la lista de espera" }).click();
-  await expect(dialog).toBeHidden();
-  await expect(page).toHaveURL(/\/es\/waitlist$/);
-  // On a phone the offer comes first; the form starts within the first screen.
-  await expect(page.locator("#join").getByLabel("Tu nombre")).toBeInViewport();
+  const menuAction = dialog.getByRole("link", { name: /Únete a la lista de Allfit Space/ });
+  await expect(menuAction).toHaveAttribute("href", "https://space.allfit.one/es/waitlist");
+  await expect(menuAction).toHaveAttribute("target", "_blank");
 });
 
-test("the homepage keeps its own form and states the launch offer, with no link to its terms", async ({ page }) => {
+test("the homepage closes with the offer and the way to the Allfit Space waitlist, with no form", async ({ page }) => {
   test.skip(!waitlistOpen, waitlistClosed);
-  for (const [language, offer, emailLabel] of [
-    ["es", "Las primeras 100 personas de la lista tendrán tres meses de Allfit Pro.", "Tu correo"],
-    ["en", "The first 100 people on the list get three months of Allfit Pro.", "Your email"],
+  for (const [language, offer, action] of [
+    ["es", "Las primeras 100 personas que confirmen su correo serán sus Founding Members.", /Únete a la lista de Allfit Space/],
+    ["en", "The first 100 people to confirm their email become its Founding Members.", /Join the Allfit Space waitlist/],
   ] as const) {
     await page.goto(`/${language}`);
     const waitlist = page.locator("#waitlist");
-    await expect(waitlist.getByLabel(emailLabel)).toBeAttached();
     await expect(waitlist).toContainText(offer);
-    // The owner removed «Ver condiciones» in November 2026: the terms live on the waitlist page.
-    await expect(waitlist.getByRole("link")).toHaveCount(0);
+    await expect(page.locator("form")).toHaveCount(0);
+    // The form, the referral links and the offer's terms live on space.allfit.one.
+    const link = waitlist.getByRole("link", { name: action });
+    await expect(link).toHaveAttribute("href", `https://space.allfit.one/${language}/waitlist`);
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
   }
 });
 
@@ -150,62 +152,21 @@ test("keeps controls reachable and the 320 px canvas free of horizontal overflow
   expect(focusStyle).not.toBe("none");
 });
 
-test("the hero action leads to the waitlist page, whose form validates and confirms in the page language", async ({ page }) => {
+test("the hero action opens the Allfit Space waitlist in the page language, in a new tab", async ({ page, request }) => {
   test.skip(!waitlistOpen, waitlistClosed);
-  for (const [language, action, nameLabel, emailLabel, role, submit, nameEmpty, emailInvalid, roleEmpty, joined, another] of [
-    ["es", "Únete a la lista de espera", "Tu nombre", "Tu correo", "Para entrenar", "Unirme a la lista", "Escribe tu nombre", "Revisa el correo", "Elige cómo usarías", "Ya estás en la lista, Nico.", "Usar otro correo"],
-    ["en", "Join the waitlist", "Your name", "Your email", "To train", "Join the list", "Enter your name", "Check the email", "Choose how you'd use", "You're on the list, Nico.", "Use another email"],
+  for (const [language, action, newTab] of [
+    ["es", "Únete a la lista de Allfit Space", "(se abre en una pestaña nueva)"],
+    ["en", "Join the Allfit Space waitlist", "(opens in a new tab)"],
   ] as const) {
     await page.goto(`/${language}`);
-    await page.locator(".hero-actions").getByRole("link", { name: action }).click();
-    await expect(page).toHaveURL(new RegExp(`/${language}/waitlist$`));
-
-    const waitlist = page.locator("#join");
-    const name = waitlist.getByLabel(nameLabel);
-    const email = waitlist.getByLabel(emailLabel);
-    await expect(name).toBeInViewport();
-    await expect(name).toHaveAttribute("autocomplete", "given-name");
-    await expect(email).toHaveAttribute("type", "email");
-    await expect(email).toHaveAttribute("autocomplete", "email");
-
-    // Validation runs on submit, in the page language: every missing field is marked, and
-    // only the first is announced and takes the keyboard.
-    await waitlist.getByRole("button", { name: submit }).click();
-    await expect(waitlist.getByRole("alert")).toHaveCount(1);
-    await expect(waitlist.getByRole("alert")).toContainText(nameEmpty);
-    await expect(name).toHaveAttribute("aria-invalid", "true");
-    await expect(email).toHaveAttribute("aria-invalid", "true");
-    await expect(name).toBeFocused();
-
-    await name.fill("Nico");
-    await email.fill("nico@correo");
-    await email.press("Enter");
-    await expect(waitlist.getByRole("alert")).toContainText(emailInvalid);
-    await expect(email).toBeFocused();
-
-    await email.fill("nico@correo.com");
-    await email.press("Enter");
-    await expect(waitlist.getByRole("alert")).toContainText(roleEmpty);
-    await expect(waitlist.getByRole("radio").first()).toBeFocused();
-
-    // Choosing clears the error; the confirmation greets them by name, takes focus, repeats
-    // the address and names the product that is hers.
-    // The radio sits inside its pill; people press the pill, so the test does too.
-    await waitlist.locator("label", { hasText: role }).click();
-    await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
-    await expect(waitlist.getByRole("alert")).toHaveCount(0);
-    await waitlist.getByRole("button", { name: submit }).click();
-    const confirmation = waitlist.locator("p", { hasText: joined });
-    await expect(confirmation).toBeFocused();
-    await expect(waitlist.getByRole("status")).toContainText("nico@correo.com");
-    await expect(waitlist.getByRole("status")).toContainText("Allfit Space");
-
-    // Another email keeps their name and their choice, and puts the keyboard on the email.
-    await waitlist.getByRole("button", { name: another }).click();
-    await expect(waitlist.getByLabel(emailLabel)).toBeFocused();
-    await expect(waitlist.getByLabel(nameLabel)).toHaveValue("Nico");
-    await expect(waitlist.getByRole("radio", { name: role })).toBeChecked();
+    const link = page.locator(".hero-actions").getByRole("link", { name: `${action} ${newTab}` });
+    await expect(link).toHaveAttribute("href", `https://space.allfit.one/${language}/waitlist`);
+    await expect(link).toHaveAttribute("target", "_blank");
+    await expect(link).toHaveAttribute("rel", "noopener noreferrer");
   }
+  // This site no longer has a waitlist page of its own.
+  const former = await request.get("/es/waitlist");
+  expect(await former.text()).toContain('<meta name="robots" content="noindex"/>');
 });
 
 test("the page names one person per visit, the same in every section", async ({ page }) => {
@@ -224,13 +185,8 @@ test("the page names one person per visit, the same in every section", async ({ 
     expect(name, `«${person}» is one of the five names`).toBeDefined();
     seen.add(name!);
 
-    // The Studio panel's avatar and, while the waitlist is open, its placeholders name the same person.
+    // The Studio panel's avatar names the same person.
     await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
-    if (waitlistOpen) {
-      const waitlist = page.locator("#waitlist");
-      await expect(waitlist.getByLabel("Tu nombre")).toHaveAttribute("placeholder", name!);
-      await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
-    }
   }
   // Eight visits all on one name out of five would happen about once in 78,000 runs.
   expect(seen.size).toBeGreaterThan(1);
@@ -241,7 +197,7 @@ test("links styled as buttons show a visible keyboard focus ring", async ({ page
 
   // The hero action (while the waitlist is open), then each product link: all render through buttonVariants().
   const actions = [
-    ...(waitlistOpen ? [page.locator(".hero-actions").getByRole("link", { name: "Únete a la lista de espera" })] : []),
+    ...(waitlistOpen ? [page.locator(".hero-actions").getByRole("link", { name: /Únete a la lista de Allfit Space/ })] : []),
     page.getByRole("link", { name: "Conoce Allfit Space" }),
     page.getByRole("link", { name: "Conoce Allfit Studio" }),
   ];
@@ -441,7 +397,7 @@ test("while the waitlist is closed, no page shows it, its form or an action to j
     await expect(page.locator("#waitlist")).toHaveCount(0);
     await expect(page.locator("form")).toHaveCount(0);
     await expect(page.locator("a[href*='waitlist']")).toHaveCount(0);
-    await expect(page.locator("body")).not.toContainText(/lista de espera|Únete a la lista|waitlist|Join the list|Allfit Pro/i);
+    await expect(page.locator("body")).not.toContainText(/lista de espera|Únete a la lista|waitlist|Join the list|Allfit Pro|Founding Members/i);
 
     const page404 = await request.get(`/${language}/waitlist`);
     expect(await page404.text()).toContain('<meta name="robots" content="noindex"/>');

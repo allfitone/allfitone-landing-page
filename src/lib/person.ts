@@ -2,9 +2,9 @@ import { useSyncExternalStore } from "react";
 
 /**
  * The one person the landing names. Every place a name appears (the Allfit Studio
- * panel, the waitlist's placeholders and its email error) uses the same first name,
- * picked at random once per visit from these five, so the page keeps telling one
- * person's story. The owner chose the five in November 2026.
+ * panel and its avatar) uses the same first name, picked at random once per visit
+ * from these five, so the page keeps telling one person's story. The owner chose
+ * the five in November 2026.
  *
  * The static HTML carries the first name; the visit's pick replaces it right after
  * hydration (`useSyncExternalStore` reads the server snapshot while hydrating, so React
@@ -27,7 +27,7 @@ export function usePersonName(): PersonName {
   return useSyncExternalStore(noUpdates, pickForVisit, staticName);
 }
 
-/** Fills `{name}`, and `{handle}` (the name in lower case, for example addresses). */
+/** Fills `{name}` with the visit's person. */
 export function withPerson(text: string, name: string): string {
-  return text.replace(/\{name\}/g, name).replace(/\{handle\}/g, name.toLowerCase());
+  return text.replace(/\{name\}/g, name);
 }
