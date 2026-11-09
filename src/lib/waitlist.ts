@@ -1,54 +1,19 @@
+import type { Language } from "@/lib/content";
+import { productSiteUrl } from "@/lib/site-config";
+
 /**
- * Whether the waitlist is open. The owner closed it in November 2026, while its
- * backend is built and the launch offer's benefits are settled: `joinWaitlist()`
- * below still stores nothing. Closed, the build leaves out `/{lang}/waitlist`, the
- * homepage drops its waitlist section and every «Únete a la lista» action, and the
- * sitemap leaves the page out. Open it again only once `joinWaitlist()` is real.
+ * The Allfit Space waitlist lives on space.allfit.one (`/{lang}/waitlist`), with its
+ * form, its referral links and the Founding Members' terms. The owner moved it there in
+ * November 2026: the list is Allfit Space's alone, and the referral links people share
+ * are Allfit Space links. This site only leads to it.
+ *
+ * Whether this site shows the waitlist at all. Closed, the homepage drops its waitlist
+ * section and every «Únete a la lista» action. Open it only once the waitlist on
+ * space.allfit.one stores sign-ups (TECH-292..296); opening it is TECH-297.
  */
 export const waitlistOpen: boolean = false;
 
-/** The waitlist page, under each language prefix: `/es/waitlist`, `/en/waitlist`. */
-export const waitlistPagePath = "/waitlist";
-/** The offer's terms on that page, so a link can open them directly. */
-export const waitlistOfferTermsId = "offer-terms";
-
-/**
- * How a person would use Allfit One. It decides which opening they hear about:
- * Allfit Space for people who train, Allfit Studio for coaches and gyms.
- */
-export const waitlistRoles = ["train", "coach", "gym"] as const;
-export type WaitlistRole = (typeof waitlistRoles)[number];
-
-export type WaitlistEntry = {
-  /** First name only, for the greeting in the opening email. */
-  name: string;
-  email: string;
-  role: WaitlistRole;
-};
-
-export function isWaitlistRole(value: unknown): value is WaitlistRole {
-  return typeof value === "string" && (waitlistRoles as readonly string[]).includes(value);
-}
-
-/**
- * Adds a person to the Allfit One waitlist.
- *
- * FRONT-END ONLY FOR NOW: nothing is sent or stored. The form around it already
- * handles the pending, joined and failed states, so wiring the real service only
- * means replacing this body with the request (and throwing when it fails). The
- * site is a static export, so that request has to go to an external endpoint;
- * there is no route handler to receive it here.
- *
- * Do not ship this stub to production: visitors would see "You're on the list"
- * while their name and email go nowhere. The service must also keep the order people
- * join in: the first 100 get the launch offer (`waitlistPageContent` in content.ts).
- */
-export async function joinWaitlist(entry: WaitlistEntry): Promise<void> {
-  void entry;
-  await new Promise((resolve) => setTimeout(resolve, 700));
-}
-
-/** Loose on purpose: the service will confirm the address; this only catches typos. */
-export function isPlausibleEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+/** The Allfit Space waitlist page in the visitor's language, e.g. `https://space.allfit.one/es/waitlist`. */
+export function spaceWaitlistUrl(language: Language): string {
+  return `${productSiteUrl("space", language)}/waitlist`;
 }

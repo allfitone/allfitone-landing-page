@@ -30,11 +30,10 @@ import { RevealTitle } from "@/components/reveal-title";
 import { useScrollSteps, type ScrollWindow } from "@/components/scroll-steps";
 import { SpacePhone } from "@/components/space-phone";
 import { StudioWindow } from "@/components/studio-window";
-import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
 import { localizedPath, productSiteUrl, siteConfig } from "@/lib/site-config";
-import { waitlistOpen, waitlistPagePath } from "@/lib/waitlist";
+import { spaceWaitlistUrl, waitlistOpen } from "@/lib/waitlist";
 
 
 /**
@@ -43,6 +42,11 @@ import { waitlistOpen, waitlistPagePath } from "@/lib/waitlist";
  */
 function productSiteLink(product: "space" | "studio", language: Language) {
   return { href: productSiteUrl(product, language), target: "_blank", rel: "noopener noreferrer" } as const;
+}
+
+/** The Allfit Space waitlist, on space.allfit.one: every waitlist action here opens it, in a new tab. */
+function spaceWaitlistLink(language: Language) {
+  return { href: spaceWaitlistUrl(language), target: "_blank", rel: "noopener noreferrer" } as const;
 }
 
 function NewTabHint({ copy }: { copy: LocalizedContent }) {
@@ -176,20 +180,23 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
   );
 }
 
-function WaitlistSection({ copy }: { copy: LocalizedContent }) {
+function WaitlistSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   return (
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
-        {/* The hero's action lands here. As in the hero, the lead and the form sit beside
-            the title from lg, so the form is in view as soon as the jump ends. */}
+        {/* The page's close. The form lives on space.allfit.one, so here the offer is
+            stated once and the action opens it; the lead sits beside the title from lg. */}
         <div className="col-span-12 lg:col-span-6 lg:row-start-1">
           <RevealTitle className="section-title">{copy.statusTitle}</RevealTitle>
         </div>
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
-          {/* The offer once, with no link: its terms live on the waitlist page. */}
           <p className="waitlist-offer">{copy.waitlistOffer}</p>
-          <WaitlistForm copy={copy.waitlist} />
+          <a {...spaceWaitlistLink(language)} className={cn(buttonVariants({ size: "lg" }), "waitlist-action min-h-14 w-full sm:min-h-11 sm:w-auto")}>
+            {copy.heroAction}
+            <NewTabHint copy={copy} />
+            <FoundationIcon name="external" data-icon="inline-end" decorative />
+          </a>
         </div>
       </div>
     </section>
@@ -202,8 +209,7 @@ export function LandingPage({ language }: { language: Language }) {
   useLandingMotion(language);
 
   const closeMenu = () => setMenuOpen(false);
-  // Every waitlist action opens the waitlist page; the form at the end of this page stays.
-  const waitlistHref = localizedPath(language, waitlistPagePath);
+  const waitlistLink = spaceWaitlistLink(language);
 
   const primaryLinks = [
     ["#fitness-id", copy.navFitnessId, copy.fitnessIdLabel],
@@ -236,13 +242,14 @@ export function LandingPage({ language }: { language: Language }) {
             <div className="hidden min-[400px]:block">
               <LanguageSwitch language={language} label={copy.selectLanguage} />
             </div>
-            {/* The navbar's action is the page's conversion: it opens the waitlist page, like the hero's.
-                While the waitlist is closed there is no action. */}
+            {/* The navbar's action is the page's conversion: it opens the Allfit Space waitlist, like
+                the hero's. While the waitlist is closed there is no action. */}
             {waitlistOpen ? (
-              <Link href={waitlistHref} className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
+              <a {...waitlistLink} className="ml-auto hidden min-h-11 items-center gap-2 whitespace-nowrap text-xs font-extrabold uppercase tracking-[.12em] text-white sm:flex">
                 {copy.navAction}
-                <FoundationIcon name="forward" size="sm" className="text-bolt" decorative />
-              </Link>
+                <NewTabHint copy={copy} />
+                <FoundationIcon name="external" size="sm" className="text-bolt" decorative />
+              </a>
             ) : null}
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger
@@ -282,10 +289,11 @@ export function LandingPage({ language }: { language: Language }) {
                     {waitlistOpen ? (
                       <>
                         <p className="mb-4 text-[11px] font-bold uppercase tracking-[.14em] text-white/64">{copy.tagline}</p>
-                        <Link href={waitlistHref} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
+                        <a {...waitlistLink} onClick={closeMenu} className={cn(buttonVariants({ size: "lg" }), "w-full")}>
                           {copy.heroAction}
-                          <FoundationIcon name="forward" data-icon="inline-end" decorative />
-                        </Link>
+                          <NewTabHint copy={copy} />
+                          <FoundationIcon name="external" data-icon="inline-end" decorative />
+                        </a>
                       </>
                     ) : null}
                   </div>
@@ -312,10 +320,11 @@ export function LandingPage({ language }: { language: Language }) {
             <p className="hero-lead hero-enter">{copy.heroLead}</p>
             {waitlistOpen ? (
               <div style={stagger(1)} className="hero-actions hero-enter mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-7 lg:mt-8">
-                <Link href={waitlistHref} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
+                <a {...waitlistLink} className={cn(buttonVariants({ size: "lg" }), "min-h-14 w-full sm:min-h-11 sm:w-auto")}>
                   {copy.heroAction}
-                  <FoundationIcon name="forward" data-icon="inline-end" decorative />
-                </Link>
+                  <NewTabHint copy={copy} />
+                  <FoundationIcon name="external" data-icon="inline-end" decorative />
+                </a>
               </div>
             ) : null}
           </div>
@@ -358,7 +367,7 @@ export function LandingPage({ language }: { language: Language }) {
       <FitnessIdSection copy={copy} />
       <SpaceSection copy={copy} language={language} />
       <StudioSection copy={copy} language={language} />
-      {waitlistOpen ? <WaitlistSection copy={copy} /> : null}
+      {waitlistOpen ? <WaitlistSection copy={copy} language={language} /> : null}
 
       <footer id="footer" className="site-footer">
         <div className="footer-shell">

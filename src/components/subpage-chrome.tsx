@@ -8,9 +8,9 @@ import { legalChrome, legalDocumentSlugs, legalPath, type LegalDocumentSlug } fr
 import { localizedPath } from "@/lib/site-config";
 
 /**
- * The header and footer every page outside the homepage shares: the legal pages and the
- * waitlist. The brand leads home in the page language; the footer lists the three legal
- * documents and the way home. Both sit on the homepage's 1500px frame.
+ * The header and footer every page outside the homepage shares: the legal pages. The
+ * brand leads home in the page language; the footer lists the three legal documents and
+ * the way home. Both sit on the homepage's 1500px frame.
  */
 export function SubpageHeader({ language, children }: { language: Language; children?: ReactNode }) {
   const chrome = legalChrome[language];
