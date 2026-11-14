@@ -208,7 +208,8 @@ test("the hero action leads to the waitlist page, whose form validates and confi
   }
 });
 
-test("the page names one person per visit, the same in every section", async ({ page }) => {
+test("the waitlist names one person per visit, the same in both fields", async ({ page }) => {
+  test.skip(!waitlistOpen, waitlistClosed);
   const names = ["Kevin", "Walbert", "Jimmy", "Charly", "Nico"];
   const seen = new Set<string>();
   await page.goto("/es");
@@ -218,23 +219,67 @@ test("the page names one person per visit, the same in every section", async ({ 
     // in the same commit, so wait for it and one more task before reading.
     await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve))));
-    const panel = page.locator(".studio-review");
-    const person = /Lo autorizó (\p{L}+)\./u.exec((await panel.textContent()) ?? "")?.[1] ?? "";
+    const waitlist = page.locator("#waitlist");
+    const person = (await waitlist.getByLabel("Tu nombre").getAttribute("placeholder")) ?? "";
     const name = names.find((candidate) => candidate === person);
     expect(name, `«${person}» is one of the five names`).toBeDefined();
     seen.add(name!);
-
-    // The Studio panel's avatar and, while the waitlist is open, its placeholders name the same person.
-    await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
-    if (waitlistOpen) {
-      const waitlist = page.locator("#waitlist");
-      await expect(waitlist.getByLabel("Tu nombre")).toHaveAttribute("placeholder", name!);
-      await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
-    }
+    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
   }
   // Eight visits all on one name out of five would happen about once in 78,000 runs.
   expect(seen.size).toBeGreaterThan(1);
 });
+
+/** Puts the top of the Allfit Studio window at a share of the viewport height, with no smooth scrolling. */
+async function placeStudioWindow(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".studio-window-frame").evaluate((frame, at) => {
+    const top = frame.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+/** How far up the page inside the Allfit Studio window has moved, in px. */
+function studioPageOffset(page: import("@playwright/test").Page, screen: "desktop" | "mobile") {
+  return page
+    .locator(`.studio-window[data-screen='${screen}'] .studio-window-page > div`)
+    .evaluate((element) => Math.abs(new DOMMatrixReadOnly(getComputedStyle(element).transform).m42));
+}
+
+for (const [screen, viewport] of [
+  ["desktop", { width: 1440, height: 900 }],
+  ["mobile", { width: 390, height: 844 }],
+] as const) {
+  test(`the Allfit Studio window reads its page down as it crosses the viewport, both ways (${screen})`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto("/es");
+    const shown = page.locator(`.studio-window[data-screen='${screen}']`);
+    const hidden = page.locator(`.studio-window[data-screen='${screen === "desktop" ? "mobile" : "desktop"}']`);
+
+    // One real capture of the app per layout, described for who cannot see it.
+    await expect(shown).toBeVisible();
+    await expect(hidden).toBeHidden();
+    await expect(shown.getByRole("img")).toHaveAttribute("alt", /Allfit Studio, pantalla Cobros/);
+
+    // Below the fold the page is at its top.
+    await placeStudioWindow(page, 0.9);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeLessThan(1);
+
+    // Crossing the viewport reads it down, and never past the end of the capture.
+    await placeStudioWindow(page, 0.3);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeGreaterThan(80);
+    await placeStudioWindow(page, -0.6);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeGreaterThan(300);
+    const box = await shown.locator(".studio-window-page").evaluate((clip) => {
+      const moved = clip.firstElementChild!.getBoundingClientRect();
+      return { clipBottom: clip.getBoundingClientRect().bottom, pageBottom: moved.bottom };
+    });
+    expect(box.pageBottom).toBeGreaterThanOrEqual(box.clipBottom - 1);
+
+    // Scrolling back reads it up again.
+    await placeStudioWindow(page, 0.9);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeLessThan(1);
+  });
+}
 
 test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {
   await page.goto("/es");
@@ -319,10 +364,12 @@ test("sections carry no sequence numbers or ghost marks", async ({ page }) => {
   );
   expect(indexes).toEqual([]);
 
-  // No large decorative outline sitting behind a section's content.
+  // No large decorative outline sitting behind a section's content. The product captures
+  // place their moving parts the same way, and those are the content, not a mark behind it.
   const ghosts = await page.locator("section[id]:not(#home)").evaluateAll((sections) =>
     sections.flatMap((section) =>
       [...section.querySelectorAll<HTMLElement | SVGElement>("[aria-hidden='true']")]
+        .filter((element) => !element.closest(".space-phone, .studio-window"))
         .filter((element) => getComputedStyle(element).position === "absolute" && element.getBoundingClientRect().width > 300)
         .map(() => section.id),
     ),
@@ -458,4 +505,213 @@ test("while the waitlist is closed, no page shows it, its form or an action to j
 
   const sitemap = await (await request.get("/sitemap.xml")).text();
   expect(sitemap).not.toContain("/waitlist");
+});
+
+/** Puts the top of the Fitness ID card at a share of the viewport height, with no smooth scrolling. */
+async function placeFitnessIdCard(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".fid-card").evaluate((card, at) => {
+    // The card itself moves when it is picked up, so measure the cell that holds it.
+    const top = (card.parentElement ?? card).getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+test("the Fitness ID card acts out its controls as it crosses the viewport, both ways", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const card = page.locator(".fid-card");
+  const shared = card.locator("[data-on='true']");
+  const activeControl = page.locator(".fid-control[data-active='true'] h3");
+
+  // Above the fold the card is at rest: nothing shared, no control marked.
+  await expect(card).toHaveAttribute("data-stage", "rest");
+  await expect(shared).toHaveCount(0);
+  await expect(activeControl).toHaveCount(0);
+
+  await placeFitnessIdCard(page, 0.4);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+  await expect(shared).toHaveText(["Historial de entrenamiento", "Marcas personales"]);
+  await expect(activeControl).toHaveText("Tú concedes");
+
+  await placeFitnessIdCard(page, 0.25);
+  await expect(card).toHaveAttribute("data-stage", "revoke");
+  await expect(shared).toHaveText(["Historial de entrenamiento"]);
+  await expect(activeControl).toHaveText("Tú revocas");
+
+  await placeFitnessIdCard(page, 0.12);
+  // «Tú te lo llevas»: every row is on, because all of it leaves with the person.
+  await expect(card).toHaveAttribute("data-stage", "keep");
+  await expect(shared).toHaveCount(8);
+  await expect(activeControl).toHaveText("Tú te lo llevas");
+
+  // Scrolling back plays it in reverse.
+  await placeFitnessIdCard(page, 0.4);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+
+  // A mouse over a control previews its stage, and leaving returns to the scroll's.
+  await page.locator(".fid-control", { hasText: "Tú revocas" }).hover();
+  await expect(card).toHaveAttribute("data-stage", "revoke");
+  await page.mouse.move(700, 880);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+});
+
+/** Puts the top of the Allfit Space phone at a share of the viewport height, with no smooth scrolling. */
+async function placeSpacePhone(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".space-phone-anchor").evaluate((anchor, at) => {
+    const top = anchor.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+test("the Allfit Space phone logs sets as it crosses the viewport, both ways", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const phone = page.locator(".space-phone");
+  const waiting = phone.locator(".space-set[data-waiting='true']");
+  const volume = phone.locator(".space-live-volume");
+  const sets = phone.locator(".space-live-sets");
+  const rowSets = phone.locator(".space-live-row");
+
+  // It is the Space landing's phone: a capture of the app, described for who cannot see it.
+  await expect(phone.getByRole("img")).toHaveAttribute("alt", /Sesión en curso en Allfit Space/);
+
+  // At rest the last two sets of «Dominadas» wait to be logged.
+  await expect(phone).toHaveAttribute("data-logged", "0");
+  await expect(waiting).toHaveCount(2);
+  await expect(sets).toHaveText("5");
+  await expect(volume).toHaveText("1.500");
+
+  await placeSpacePhone(page, 0.3);
+  await expect(phone).toHaveAttribute("data-logged", "1");
+  await expect(waiting).toHaveCount(1);
+  await expect(sets).toHaveText("6");
+  await expect(volume).toHaveText("1.710");
+
+  // With both ticked the screen is the capture as the app took it.
+  await placeSpacePhone(page, 0.2);
+  await expect(phone).toHaveAttribute("data-logged", "2");
+  await expect(waiting).toHaveCount(0);
+  await expect(sets).toHaveText("7");
+  await expect(volume).toHaveText("1.920");
+  await expect(rowSets).toHaveText("3 de 4");
+
+  // The third set belongs to the next exercise.
+  await placeSpacePhone(page, 0.12);
+  await expect(phone).toHaveAttribute("data-logged", "3");
+  await expect(sets).toHaveText("8");
+  await expect(volume).toHaveText("2.280");
+  await expect(rowSets).toHaveText("4 de 4");
+
+  // Scrolling back takes the sets away again.
+  await placeSpacePhone(page, 0.3);
+  await expect(phone).toHaveAttribute("data-logged", "1");
+  await expect(waiting).toHaveCount(1);
+  await expect(rowSets).toHaveText("3 de 4");
+});
+
+/** Puts the top of the ledger's list at a share of the viewport height, with no smooth scrolling. */
+async function placeLedgerList(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".ledger-list").evaluate((list, at) => {
+    const top = list.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+test("the problem ledger strikes its figures out as it crosses the viewport, both ways", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const ledger = page.locator(".ledger");
+  const left = ledger.locator(".ledger-item[data-left]");
+
+  // At rest the record is whole, and the ledger does not wait for the scroll to show itself.
+  await expect(ledger).toHaveAttribute("data-left-behind", "0");
+  await expect(left).toHaveCount(0);
+  await expect(ledger).not.toHaveAttribute("data-reveal");
+
+  // Part of the way through, some figures are struck out and some are not yet.
+  await placeLedgerList(page, 0.5);
+  await expect(ledger).toHaveAttribute("data-left-behind", /^[1-4]$/);
+  const midway = Number(await ledger.getAttribute("data-left-behind"));
+  await expect(left).toHaveCount(midway);
+
+  // Past the window every figure is struck out, and the word on the left stays.
+  await placeLedgerList(page, 0.05);
+  await expect(ledger).toHaveAttribute("data-left-behind", "5");
+  await expect(left).toHaveCount(5);
+  await expect(ledger.locator(".ledger-keep-value")).toHaveText("Nada");
+
+  // Scrolling back gives the record back.
+  await placeLedgerList(page, 0.9);
+  await expect(ledger).toHaveAttribute("data-left-behind", "0");
+  await expect(left).toHaveCount(0);
+});
+
+/** How much of the hero's FITNESS its level covers (0 hollow, 1 solid), where its copy sits and how far the level reaches past the word. */
+async function heroFitnessLevel(page: import("@playwright/test").Page) {
+  return page.locator(".hero-fitness").evaluate((word) => {
+    const level = word.querySelector(".hero-fitness-level");
+    const copy = level?.firstElementChild;
+    if (!level || !copy) throw new Error("The hero FITNESS has no level.");
+    const box = word.getBoundingClientRect();
+    const mask = level.getBoundingClientRect();
+    const text = copy.getBoundingClientRect();
+    return {
+      covered: Math.round(Math.min(1, Math.max(0, (box.bottom - mask.top) / box.height)) * 100) / 100,
+      // How far the copy is from sitting over the outline, in px.
+      copyOffset: Math.round(Math.abs((text.top + text.bottom) / 2 - (box.top + box.bottom) / 2)),
+      pastTheEnd: mask.right - box.right,
+    };
+  });
+}
+
+test("the hero FITNESS fills once the reader starts to scroll, whole to its last letter, and drains at the top", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const word = page.locator(".hero-fitness");
+
+  // The heading holds the word once: the level's copy is drawn, not written.
+  expect(await word.evaluate((element) => element.textContent)).toBe("FITNESS");
+  await expect(word).not.toHaveAttribute("data-filled");
+  expect((await heroFitnessLevel(page)).covered).toBe(0);
+  // The last S leans out of the word's box, so the level must reach past it.
+  expect((await heroFitnessLevel(page)).pastTheEnd).toBeGreaterThan(8);
+
+  await page.evaluate(() => window.scrollTo({ top: 60, behavior: "instant" }));
+  await expect(word).toHaveAttribute("data-filled", "true");
+  await expect.poll(async () => (await heroFitnessLevel(page)).covered).toBe(1);
+  expect((await heroFitnessLevel(page)).copyOffset).toBe(0);
+
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect(word).not.toHaveAttribute("data-filled");
+  await expect.poll(async () => (await heroFitnessLevel(page)).covered).toBe(0);
+});
+
+test("reduced motion keeps the hero, the ledger, the Fitness ID card, the Allfit Space phone and the Allfit Studio window at rest", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
+
+  await placeLedgerList(page, 0.05);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
+  await expect(page.locator(".ledger")).toHaveAttribute("data-left-behind", "0");
+  await expect(page.locator(".ledger-item[data-left]")).toHaveCount(0);
+  await expect(page.locator(".hero-fitness")).not.toHaveAttribute("data-filled");
+  expect((await heroFitnessLevel(page)).covered).toBe(0);
+
+  await placeFitnessIdCard(page, 0.25);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
+  const card = page.locator(".fid-card");
+  await expect(card).toHaveAttribute("data-stage", "rest");
+  await expect(card.locator("[data-on='true']")).toHaveCount(0);
+  expect(await card.evaluate((element) => getComputedStyle(element).transform)).toBe("none");
+
+  await placeSpacePhone(page, 0.12);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
+  await expect(page.locator(".space-phone")).toHaveAttribute("data-logged", "0");
+  await expect(page.locator(".space-phone .space-set[data-waiting='true']")).toHaveCount(2);
+
+  await placeStudioWindow(page, 0.1);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 300))));
+  expect(await studioPageOffset(page, "desktop")).toBe(0);
 });

@@ -93,43 +93,14 @@ export const content = {
     appSectionTitle: "Sigue entrenando desde donde lo dejaste.",
     appSectionCopy:
       "Allfit Space reúne tu plan, tus sesiones y tu progreso. Entrena por tu cuenta o sigue la planificación de un profesional en el mismo lugar donde registras cada sesión.",
-    // The section's phone shows the person's 18:00 session under way: the program comes from
-    // Estudio Norte and the person logs it set by set. The first exercise with sets left is the
-    // one she is on.
-    spaceSession: {
-      status: "En curso · 24 min",
-      plan: "Programa de Estudio Norte · Semana 3 de 4",
-      exercises: [
-        { name: "Press de banca", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
-        { name: "Remo con barra", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
-        { name: "Press militar", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
-        { name: "Dominadas", sets: 3, reps: "máx.", load: null, done: 0, logged: "6" },
-      ],
-      setOf: "Serie {set} de {sets}",
-      reps: "reps",
-      logSet: "Registrar serie",
-    },
+    spacePhoneAlt: "Sesión en curso en Allfit Space: las series de dominadas, con lo que levantaste la vez anterior.",
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
     studioSectionCopy:
       "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
-    // The section's panel closes the story the Space phone starts: the person finished the 18:00 session
-    // in Allfit Space and Estudio Norte reviews it against the program it assigned. The plan
-    // and the log both come from `spaceSession`, so the two screens agree.
-    studioReview: {
-      status: "Hoy, 18:00 · terminada",
-      columns: ["Ejercicio", "Plan", "Registrado"],
-      asPlanned: "Según el plan",
-      fewerReps: "{n} reps menos",
-      programLabel: "Programa asignado",
-      program: "Fuerza · 4 semanas",
-      programWeek: "Semana 3 de 4",
-      accessLabel: "Acceso",
-      access: "Historial de entrenamiento",
-      accessPurpose: "Para seguir su programa. Lo autorizó {name}.",
-      action: "Ajustar la próxima sesión",
-    },
+    studioWindowAlt:
+      "Allfit Studio, pantalla Cobros: quién paga, en qué plan está cada persona y cuándo es su próximo cobro.",
 
     statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
@@ -251,37 +222,14 @@ export const content = {
     appSectionTitle: "Keep training from where you left off.",
     appSectionCopy:
       "Allfit Space brings together your plan, your sessions and your progress. Train on your own or follow a professional's plan in the same place where you log each session.",
-    spaceSession: {
-      status: "In progress · 24 min",
-      plan: "Estudio Norte program · Week 3 of 4",
-      exercises: [
-        { name: "Bench press", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
-        { name: "Barbell row", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
-        { name: "Overhead press", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
-        { name: "Pull-ups", sets: 3, reps: "max", load: null, done: 0, logged: "6" },
-      ],
-      setOf: "Set {set} of {sets}",
-      reps: "reps",
-      logSet: "Log set",
-    },
+    spacePhoneAlt: "A session in progress in Allfit Space: the pull-up sets, with what you lifted last time.",
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",
     studioSectionCopy:
       "Studio works on each person's Fitness ID: you plan, follow their progress and run your operation without asking them to start over.",
-    studioReview: {
-      status: "Today, 18:00 · finished",
-      columns: ["Exercise", "Plan", "Logged"],
-      asPlanned: "As planned",
-      fewerReps: "{n} fewer reps",
-      programLabel: "Assigned program",
-      program: "Strength · 4 weeks",
-      programWeek: "Week 3 of 4",
-      accessLabel: "Access",
-      access: "Training history",
-      accessPurpose: "To follow the program. Granted by {name}.",
-      action: "Adjust the next session",
-    },
+    studioWindowAlt:
+      "Allfit Studio, Billing screen: who pays, which plan each person is on and when their next charge is.",
 
     statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { LazyMotion } from "motion/react";
 import {
   BrandLockup,
   ProductWordmark,
@@ -21,11 +22,14 @@ import {
 import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
-import { FitnessIdCard } from "@/components/fitness-id-card";
+import { FitnessIdSection } from "@/components/fitness-id-section";
+import { HeroFitness } from "@/components/hero-fitness";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
-import { SpaceSessionMockup, StudioReviewMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
+import { useScrollSteps, type ScrollWindow } from "@/components/scroll-steps";
+import { SpacePhone } from "@/components/space-phone";
+import { StudioWindow } from "@/components/studio-window";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
@@ -45,7 +49,17 @@ function NewTabHint({ copy }: { copy: LocalizedContent }) {
   return <span className="sr-only"> {copy.opensInNewTab}</span>;
 }
 
+/**
+ * The ledger's five figures are struck out, top to bottom, while its list climbs from 70%
+ * of the viewport until its foot reaches 45%: the stretch in which every row is in view.
+ */
+const ledgerWindow: ScrollWindow = ["start 0.7", "end 0.45"];
+const leftBehindStarts = [0.08, 0.28, 0.48, 0.68, 0.88] as const;
+
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
+  const list = useRef<HTMLDListElement>(null);
+  const leftBehind = useScrollSteps(list, ledgerWindow, leftBehindStarts);
+
   return (
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -56,18 +70,19 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
 
         {/* A handover ledger spoken to the reader, like the title: what you take from the
             gym you leave (nothing) beside what stays there, in figures rather than categories.
-            The Fitness ID card in the next section holds the same kinds of data, kept. */}
+            The Fitness ID card in the next section holds the same kinds of data, kept.
+            The ledger acts: as it crosses the viewport its figures are struck out one by one. */}
         <div className="col-span-12 mt-16 md:mt-24">
-          <div className="ledger" data-reveal>
+          <div className="ledger" data-left-behind={leftBehind}>
             <div className="ledger-keep">
               <p className="ledger-label">{copy.problemKeepLabel}</p>
               <p className="ledger-keep-value">{copy.problemKeepValue}</p>
             </div>
             <div className="ledger-lose">
               <p className="ledger-label">{copy.problemLoseLabel}</p>
-              <dl className="ledger-list">
-                {copy.problemLoseItems.map(([item, value]) => (
-                  <div key={item} className="ledger-item">
+              <dl ref={list} className="ledger-list">
+                {copy.problemLoseItems.map(([item, value], index) => (
+                  <div key={item} className="ledger-item" data-left={index < leftBehind ? "true" : undefined}>
                     <dt>{item}</dt>
                     <dd className="ledger-value">{value}</dd>
                   </div>
@@ -82,36 +97,22 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
-function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
-  return (
-    <section id="fitness-id" className="fid-section bg-void text-white">
-      <div className="site-grid relative z-10">
-        <div className="col-span-12 lg:col-span-8">
-          <RevealTitle className="section-title">{copy.fitnessIdTitle}</RevealTitle>
-        </div>
+/** Motion's features arrive after the page is interactive; until then every object renders at rest. */
+const loadMotionFeatures = () => import("@/components/motion-features").then((features) => features.default);
 
-        <div className="col-span-12 mt-16 md:mt-20 lg:col-span-5 lg:mt-24">
-          <FitnessIdCard copy={copy} />
-        </div>
-
-        <div className="col-span-12 mt-14 lg:col-span-6 lg:col-start-7 lg:mt-24">
-          <p className="section-lead text-white/72">{copy.fitnessIdCopy}</p>
-
-          <ul className="fid-controls">
-            {copy.fitnessIdControls.map(([title, description]) => (
-              <li key={title} className="fid-control">
-                <h3 className="fid-control-title">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-white/64">{description}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
+/**
+ * Three sets are logged while the top of the phone climbs from 40% of the viewport to
+ * 10%. In that stretch the session's totals, near the top of the screen, are clear of
+ * the navbar and the rows being ticked, lower down, are above the fold, on a phone and
+ * on a short laptop alike.
+ */
+const phoneWindow: ScrollWindow = ["start 0.4", "start 0.1"];
+const loggedSetStarts = [0.2, 0.53, 0.87] as const;
 
 function SpaceSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
+  const phone = useRef<HTMLDivElement>(null);
+  const logged = useScrollSteps(phone, phoneWindow, loggedSetStarts);
+
   return (
     <section id="allfit-space" className="overflow-hidden bg-chalk text-void">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -128,12 +129,13 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
           </a>
         </div>
 
-        {/* The section's one object is the app itself: the person's 18:00 session under way,
-            the professional's plan and the person's log on one screen. It replaces the row
-            of five app areas, which listed what the app will hold instead of showing it. */}
-        <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center" data-reveal="stage">
-          <div className="space-phone-anchor">
-            <SpaceSessionMockup copy={copy} />
+        {/* The section's one object is the app itself: the Space landing's phone, with a
+            session under way. It replaces the row of five app areas, which listed what the
+            app will hold instead of showing it. The phone does not enter: it logs sets as
+            the reader scrolls. */}
+        <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center">
+          <div ref={phone} className="space-phone-anchor">
+            <SpacePhone alt={copy.spacePhoneAlt} logged={logged} />
           </div>
         </div>
       </div>
@@ -161,11 +163,13 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
           </a>
         </div>
 
-        {/* The section's one object is the product: Estudio Norte reviewing the session
-            the person finished, plan beside log. It replaces the four differentiators and the
-            five modules, which listed Studio's features instead of showing them. */}
-        <div className="studio-review-anchor col-span-12 mt-16 md:mt-20" data-reveal="card">
-          <StudioReviewMockup copy={copy} />
+        {/* The section's one object is the product: a window on the real app, where the
+            studio reads the session the Space phone shows under way. It replaces the four
+            differentiators and the five modules, which listed Studio's features instead of
+            showing them. The window does not enter: the session is read down as the
+            reader scrolls. */}
+        <div className="col-span-12 mt-16 md:mt-20">
+          <StudioWindow alt={copy.studioWindowAlt} />
         </div>
       </div>
     </section>
@@ -208,6 +212,7 @@ export function LandingPage({ language }: { language: Language }) {
   ] as const;
 
   return (
+    <LazyMotion features={loadMotionFeatures} strict>
     <main data-landing className="min-h-screen overflow-x-clip bg-void text-white">
       <section id="home" className="hero relative overflow-hidden">
         <nav
@@ -296,7 +301,7 @@ export function LandingPage({ language }: { language: Language }) {
           <div className="col-span-12 mt-6 md:mt-8 lg:col-start-1 lg:row-start-1">
             <h1 className="hero-title-new" lang="en" aria-label={copy.tagline}>
               <span className="hero-line"><span className="block">ALL THE</span></span>
-              <span className="hero-line"><span className="hero-fitness block">FITNESS</span></span>
+              <span className="hero-line"><HeroFitness /></span>
               <span className="hero-line">
                 <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
               </span>
@@ -422,5 +427,6 @@ export function LandingPage({ language }: { language: Language }) {
         </div>
       </footer>
     </main>
+    </LazyMotion>
   );
 }
