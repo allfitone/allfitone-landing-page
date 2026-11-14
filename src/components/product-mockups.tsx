@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import { ProductWordmark } from "@allfitone/react/brand";
 import { FoundationIcon, type IconName } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
@@ -8,6 +11,8 @@ import { usePersonName, withPerson } from "@/lib/person";
 const dashboardIcons = ["overview", "people", "training", "operation", "business"] as const satisfies readonly IconName[];
 
 type ExerciseVolume = { sets: number; reps: string; load: number | null };
+/** An exercise as the phone shows it: its volume and how many of its sets are logged. */
+type SessionExercise = ExerciseVolume & { name: string; done: number };
 
 function exerciseTarget(exercise: ExerciseVolume) {
   return exercise.load === null
@@ -15,17 +20,67 @@ function exerciseTarget(exercise: ExerciseVolume) {
     : `${exercise.sets} × ${exercise.reps} · ${exercise.load} kg`;
 }
 
+/** A set mark fills from the left with a little weight. */
+const markSpring = { type: "spring", stiffness: 420, damping: 30 } as const;
+/** A value that changes rolls into place and settles without a bounce. */
+const rollSpring = { type: "spring", stiffness: 380, damping: 34 } as const;
+/** The log button gives under the thumb and comes back. */
+const press = { scale: [1, 0.94, 1] };
+const pressTiming = { duration: 0.42, times: [0, 0.3, 1], ease: "easeOut" as const };
+
+/** The session with `logged` more sets on it than the copy states, taken in program order. */
+function sessionAfter(exercises: readonly SessionExercise[], logged: number): SessionExercise[] {
+  let left = logged;
+  return exercises.map((exercise) => {
+    const added = Math.min(left, exercise.sets - exercise.done);
+    left -= added;
+    return { ...exercise, done: exercise.done + added };
+  });
+}
+
+/**
+ * A value that rolls when it changes: the old one leaves upward as the new one arrives
+ * from below. What is there on load does not animate, so the static HTML shows it whole.
+ */
+function Roll({ value, className }: { value: string | number; className?: string }) {
+  return (
+    <span className={cn("mock-roll", className)}>
+      <AnimatePresence initial={false} mode="popLayout">
+        <m.span
+          key={value}
+          className="block"
+          initial={{ y: "60%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "-60%", opacity: 0 }}
+          transition={rollSpring}
+        >
+          {value}
+        </m.span>
+      </AnimatePresence>
+    </span>
+  );
+}
+
 /*
  * The Allfit Space section's phone: the person's 18:00 session, under way. Estudio Norte's program sets each exercise and the person logs it set by set, so the
  * plan and what she did sit on one screen. The set she is on is the screen's one cyan block.
+ *
+ * The phone works instead of entering: `logged` is how many sets the reader's scroll has
+ * logged since the screen the copy states. Each one presses the button, fills a mark and
+ * moves the cyan block to the next set, and to the next exercise once one is complete.
  */
-export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
+export function SpaceSessionMockup({ copy, logged = 0 }: { copy: LocalizedContent; logged?: number }) {
   const session = copy.spaceSession;
-  const current = session.exercises.find((exercise) => exercise.done < exercise.sets) ?? session.exercises[0];
+  const exercises = sessionAfter(session.exercises, logged);
+  const current = exercises.find((exercise) => exercise.done < exercise.sets) ?? exercises[0];
   const setLabel = session.setOf.replace("{set}", String(current.done + 1)).replace("{sets}", String(current.sets));
 
+  // The button is pressed when a set is logged, not when scrolling back takes one away.
+  const [seen, setSeen] = useState({ logged, presses: 0 });
+  if (seen.logged !== logged) setSeen({ logged, presses: seen.presses + (logged > seen.logged ? 1 : 0) });
+
   return (
-    <div className="phone-shell space-phone" aria-hidden="true">
+    <div className="phone-shell space-phone" data-logged={logged} aria-hidden="true">
       <div className="phone-screen">
         <div className="phone-island" aria-hidden="true" />
 
@@ -36,7 +91,7 @@ export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
         </div>
 
         <ol className="space-exercises">
-          {session.exercises.map((exercise) => (
+          {exercises.map((exercise) => (
             <li
               key={exercise.name}
               className="space-exercise"
@@ -48,7 +103,15 @@ export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
               </div>
               <span className="space-set-marks">
                 {Array.from({ length: exercise.sets }, (_, set) => (
-                  <span key={set} className={cn("space-set-mark", set < exercise.done && "space-set-mark-done")} />
+                  <span key={set} className="space-set-mark">
+                    <m.span
+                      className="space-set-mark-fill"
+                      style={{ originX: 0 }}
+                      initial={false}
+                      animate={{ scaleX: set < exercise.done ? 1 : 0 }}
+                      transition={markSpring}
+                    />
+                  </span>
                 ))}
               </span>
             </li>
@@ -57,25 +120,34 @@ export function SpaceSessionMockup({ copy }: { copy: LocalizedContent }) {
 
         <div className="mt-4 rounded-2xl bg-bolt p-4 text-void">
           <div className="flex items-baseline justify-between gap-3">
-            <p className="mock-label">{current.name}</p>
-            <p className="mock-body text-void/72">{setLabel}</p>
+            <p className="mock-label">
+              <Roll value={current.name} />
+            </p>
+            <p className="mock-body text-void/72">
+              <Roll value={setLabel} />
+            </p>
           </div>
           <div className="mt-3 flex items-baseline gap-5 tabular-nums">
             <p className="flex items-baseline gap-1.5">
-              <span className="font-display text-[2.75rem] font-semibold leading-none">{current.reps}</span>
+              <Roll value={current.reps} className="font-display text-[2.75rem] font-semibold leading-none" />
               <span className="mock-label">{session.reps}</span>
             </p>
             {current.load !== null && (
               <p className="flex items-baseline gap-1.5">
-                <span className="font-display text-[2.75rem] font-semibold leading-none">{current.load}</span>
+                <Roll value={current.load} className="font-display text-[2.75rem] font-semibold leading-none" />
                 <span className="mock-label">kg</span>
               </p>
             )}
           </div>
-          <div className="mock-label mt-4 flex h-10 items-center justify-between rounded-full bg-void px-4 text-white">
+          <m.div
+            key={seen.presses}
+            className="mock-label mt-4 flex h-10 items-center justify-between rounded-full bg-void px-4 text-white"
+            animate={seen.presses > 0 ? press : undefined}
+            transition={pressTiming}
+          >
             {session.logSet}
             <FoundationIcon name="success" size="xs" className="text-bolt" decorative />
-          </div>
+          </m.div>
         </div>
       </div>
     </div>

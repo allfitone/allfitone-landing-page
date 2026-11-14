@@ -127,8 +127,12 @@
 .space-exercise { display: flex; align-items: center; justify-content: space-between; gap: var(--afo-space-3); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 12%, transparent); padding-block: 11px; }
 .space-exercise[data-state='done'] { color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
 .space-set-marks { display: flex; flex: none; gap: 4px; }
-.space-set-mark { width: 14px; height: 5px; border-radius: var(--afo-radius-pill); background: color-mix(in srgb, var(--afo-color-neutral-white) 18%, transparent); }
-.space-set-mark-done { background: var(--afo-color-brand-primary); }
+.space-exercise { transition: color .3s var(--landing-ease); }
+/* A mark is a track; Motion scales its fill in from the left when the set is logged. */
+.space-set-mark { overflow: hidden; width: 14px; height: 5px; border-radius: var(--afo-radius-pill); background: color-mix(in srgb, var(--afo-color-neutral-white) 18%, transparent); }
+.space-set-mark-fill { display: block; height: 100%; border-radius: inherit; background: var(--afo-color-brand-primary); }
+/* Holds a value that rolls when it changes; the leaving value is placed against it. */
+.mock-roll { position: relative; display: inline-block; }
 
 .studio-shell { overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-brand-light) 18%, transparent); border-radius: var(--afo-radius-panel); background: var(--afo-color-ink-panel); box-shadow: var(--afo-shadow-workspace); }
 .studio-topbar { display: flex; height: 52px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-4); background: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }
@@ -771,8 +775,9 @@ section[id].fid-section {
    The hero enters once, on load: the title rises out of its masks line by line,
    then the lead and the action lift in. Below it, each section has a single
    moment, the first time it scrolls into view: its title rises line by line and
-   its main object arrives (the Space phone, the ledger, or a card that uncovers:
-   the Fitness ID card and the Studio panel). There is no
+   its main object arrives (the ledger, or the Studio panel uncovering). The
+   Fitness ID card and the Space phone do not arrive: they act, driven by the
+   scroll through Motion (src/components/scroll-steps.ts). There is no
    pointer light and no scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
@@ -798,16 +803,13 @@ section[id].fid-section {
 
   /* Hidden states arm instantly; the transitions live on the revealed states. */
   [data-landing][data-motion='on'] [data-reveal] { opacity: 0; transform: translate3d(0, 36px, 0); }
-  [data-landing][data-motion='on'] :is([data-reveal='mask'], [data-reveal='card'], [data-reveal='stage']) { opacity: 1; transform: none; }
+  [data-landing][data-motion='on'] :is([data-reveal='mask'], [data-reveal='card']) { opacity: 1; transform: none; }
   [data-landing][data-motion='on'] [data-reveal='mask'] .reveal-word > span { transform: translate3d(0, 115%, 0); }
   [data-landing][data-motion='on'] [data-reveal='card'] { clip-path: inset(18% 0 0 0 round var(--reveal-radius, 0)); }
-  /* The Space phone rises into place. */
-  [data-landing][data-motion='on'] [data-reveal='stage'] .space-phone-anchor { opacity: 0; transform: translate3d(0, 88px, 0); }
 
   [data-landing][data-motion='on'] [data-reveal].is-in { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.1s var(--landing-ease); transition-delay: calc(var(--i, 0) * 90ms); }
   [data-landing][data-motion='on'] [data-reveal='mask'].is-in .reveal-word > span { transform: none; transition: transform 1.1s var(--landing-ease) calc(var(--l, 0) * 110ms); }
   [data-landing][data-motion='on'] [data-reveal='card'].is-in { clip-path: inset(0 0 0 0 round var(--reveal-radius, 0)); transition: clip-path 1.2s var(--landing-ease); }
-  [data-landing][data-motion='on'] [data-reveal='stage'].is-in .space-phone-anchor { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.2s var(--landing-ease); }
 
 }
 

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { LazyMotion } from "motion/react";
 import {
   BrandLockup,
   ProductWordmark,
@@ -26,6 +27,7 @@ import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
 import { SpaceSessionMockup, StudioReviewMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
+import { useScrollSteps, type ScrollWindow } from "@/components/scroll-steps";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
@@ -82,7 +84,21 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
   );
 }
 
+/** Motion's features arrive after the page is interactive; until then every object renders at rest. */
+const loadMotionFeatures = () => import("@/components/motion-features").then((features) => features.default);
+
+/**
+ * Three sets are logged while the bottom of the phone, where the log button is, climbs
+ * from the foot of the viewport to just past its middle, so the button and the marks it
+ * fills are on screen for all three.
+ */
+const phoneWindow: ScrollWindow = ["end 0.98", "end 0.55"];
+const loggedSetStarts = [0.1, 0.4, 0.7] as const;
+
 function SpaceSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
+  const phone = useRef<HTMLDivElement>(null);
+  const logged = useScrollSteps(phone, phoneWindow, loggedSetStarts);
+
   return (
     <section id="allfit-space" className="overflow-hidden bg-chalk text-void">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -101,10 +117,11 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
 
         {/* The section's one object is the app itself: the person's 18:00 session under way,
             the professional's plan and the person's log on one screen. It replaces the row
-            of five app areas, which listed what the app will hold instead of showing it. */}
-        <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center" data-reveal="stage">
-          <div className="space-phone-anchor">
-            <SpaceSessionMockup copy={copy} />
+            of five app areas, which listed what the app will hold instead of showing it.
+            The phone does not enter: it logs sets as the reader scrolls. */}
+        <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center">
+          <div ref={phone} className="space-phone-anchor">
+            <SpaceSessionMockup copy={copy} logged={logged} />
           </div>
         </div>
       </div>
@@ -179,6 +196,7 @@ export function LandingPage({ language }: { language: Language }) {
   ] as const;
 
   return (
+    <LazyMotion features={loadMotionFeatures} strict>
     <main data-landing className="min-h-screen overflow-x-clip bg-void text-white">
       <section id="home" className="hero relative overflow-hidden">
         <nav
@@ -393,5 +411,6 @@ export function LandingPage({ language }: { language: Language }) {
         </div>
       </footer>
     </main>
+    </LazyMotion>
   );
 }

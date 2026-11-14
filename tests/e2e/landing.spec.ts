@@ -508,7 +508,52 @@ test("the Fitness ID card acts out its controls as it crosses the viewport, both
   await expect(card).toHaveAttribute("data-stage", "grant");
 });
 
-test("reduced motion keeps the Fitness ID card at rest", async ({ page }) => {
+/** Puts the bottom of the Allfit Space phone at a share of the viewport height, with no smooth scrolling. */
+async function placeSpacePhone(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".space-phone-anchor").evaluate((anchor, at) => {
+    const bottom = anchor.getBoundingClientRect().bottom + window.scrollY;
+    window.scrollTo({ top: bottom - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+test("the Allfit Space phone logs sets as it crosses the viewport, both ways", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const phone = page.locator(".space-phone");
+  const currentSet = phone.locator(".bg-bolt");
+  const rows = phone.locator(".space-exercise");
+
+  // Above the fold the phone shows the session as the copy states it.
+  await expect(phone).toHaveAttribute("data-logged", "0");
+  await expect(currentSet).toContainText("Remo con barra");
+  await expect(currentSet).toContainText("Serie 3 de 4");
+
+  await placeSpacePhone(page, 0.9);
+  await expect(phone).toHaveAttribute("data-logged", "1");
+  await expect(currentSet).toContainText("Serie 4 de 4");
+
+  // The fourth set completes the exercise, so the block moves to the next one.
+  await placeSpacePhone(page, 0.78);
+  await expect(phone).toHaveAttribute("data-logged", "2");
+  await expect(currentSet).toContainText("Press militar");
+  await expect(currentSet).toContainText("Serie 1 de 3");
+  await expect(currentSet).toContainText("30");
+  await expect(currentSet).not.toContainText("Remo con barra");
+  await expect(rows.nth(1)).toHaveAttribute("data-state", "done");
+  await expect(rows.nth(2)).toHaveAttribute("data-state", "current");
+
+  await placeSpacePhone(page, 0.62);
+  await expect(phone).toHaveAttribute("data-logged", "3");
+  await expect(currentSet).toContainText("Serie 2 de 3");
+
+  // Scrolling back takes the sets away again.
+  await placeSpacePhone(page, 0.9);
+  await expect(phone).toHaveAttribute("data-logged", "1");
+  await expect(currentSet).toContainText("Remo con barra");
+  await expect(currentSet).not.toContainText("Press militar");
+});
+
+test("reduced motion keeps the Fitness ID card and the Allfit Space phone at rest", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
@@ -520,4 +565,9 @@ test("reduced motion keeps the Fitness ID card at rest", async ({ page }) => {
   await expect(card).toHaveAttribute("data-stage", "rest");
   await expect(card.locator("[data-on='true']")).toHaveCount(0);
   expect(await card.evaluate((element) => getComputedStyle(element).transform)).toBe("none");
+
+  await placeSpacePhone(page, 0.62);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
+  await expect(page.locator(".space-phone")).toHaveAttribute("data-logged", "0");
+  await expect(page.locator(".space-phone .bg-bolt")).toContainText("Serie 3 de 4");
 });
