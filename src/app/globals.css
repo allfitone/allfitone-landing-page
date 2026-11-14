@@ -114,25 +114,38 @@
 
 
 /* The phone leans forward, with the brand "1", not back against it. */
-.phone-shell { width: 270px; transform: rotate(2deg); border: 7px solid var(--afo-color-ink-void); border-radius: var(--afo-radius-device); background: var(--afo-color-ink-void); padding: 7px; box-shadow: var(--afo-shadow-lg), 0 0 0 1px color-mix(in srgb, var(--afo-color-brand-light) 13%, transparent); }
-.phone-screen { overflow: hidden; border-radius: var(--afo-radius-4xl); background: var(--afo-color-ink-panel); padding: var(--afo-space-5); color: var(--afo-color-neutral-white); }
-.phone-island { width: 78px; height: 15px; margin-inline: auto; border-radius: var(--afo-radius-pill); background: var(--afo-color-neutral-black); }
 
 /* Allfit Space section: one larger phone on Chalk, the session under way. Exercises are
    hairline rows; the sets are short marks, filled once logged. Rows already finished
    step back, the one she is on reads at full strength. */
 .space-phone-anchor { width: min(100%, 300px); }
-.space-phone { width: 100%; box-shadow: 0 32px 70px color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent), 0 8px 18px color-mix(in srgb, var(--afo-color-ink-void) 14%, transparent); }
-.space-exercises { margin-top: var(--afo-space-5); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 12%, transparent); }
-.space-exercise { display: flex; align-items: center; justify-content: space-between; gap: var(--afo-space-3); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 12%, transparent); padding-block: 11px; }
-.space-exercise[data-state='done'] { color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
-.space-set-marks { display: flex; flex: none; gap: 4px; }
-.space-exercise { transition: color .3s var(--landing-ease); }
-/* A mark is a track; Motion scales its fill in from the left when the set is logged. */
-.space-set-mark { overflow: hidden; width: 14px; height: 5px; border-radius: var(--afo-radius-pill); background: color-mix(in srgb, var(--afo-color-neutral-white) 18%, transparent); }
-.space-set-mark-fill { display: block; height: 100%; border-radius: inherit; background: var(--afo-color-brand-primary); }
-/* Holds a value that rolls when it changes; the leaving value is placed against it. */
-.mock-roll { position: relative; display: inline-block; }
+/* The Space landing's phone: its frame, and a capture of the app. The capture keeps its
+   own shape and is centred, so anything placed over it sits on the capture's pixels at
+   every width. Sizes inside are the app's own points: the capture is 402pt wide. */
+.space-phone { position: relative; width: 100%; aspect-ratio: 1206 / 2622; padding: 3.2%; border: 1.5px solid color-mix(in srgb, var(--afo-color-brand-primary) 34%, transparent); border-radius: 15% / 7%; background: var(--afo-color-ink-carbon); box-shadow: 0 32px 70px color-mix(in srgb, var(--afo-color-ink-void) 26%, transparent), 0 8px 18px color-mix(in srgb, var(--afo-color-ink-void) 14%, transparent); }
+.space-phone-screen { position: relative; overflow: hidden; width: 100%; height: 100%; border-radius: 12.5% / 5.8%; background: var(--afo-color-ink-panel); }
+.space-phone-capture { --pt: calc(100cqw / 402); position: absolute; top: 0; left: 50%; height: 100%; aspect-ratio: 720 / 1566; transform: translateX(-50%); container-type: inline-size; color: var(--space-app-text); --space-app-text: #fbffff; --space-app-muted: #8798a0; --space-app-surface: #0b151d; --space-app-canvas: #060f15; }
+.space-phone-capture img { display: block; width: 100%; height: 100%; }
+/* A number the capture shows, drawn over it so it can change. */
+.space-live { position: absolute; display: flex; align-items: center; overflow: hidden; line-height: 1; white-space: nowrap; }
+.space-live-volume, .space-live-sets { background: #09181e; font-family: var(--font-display); font-size: calc(var(--pt) * 20); font-weight: 600; }
+.space-live-volume { justify-content: flex-end; padding-right: calc(var(--pt) * 1.5); background: #0b1a1f; }
+.space-live-sets { justify-content: center; }
+.space-live-row { justify-content: center; background: var(--space-app-surface); color: var(--space-app-muted); font-size: calc(var(--pt) * 12); font-weight: 700; }
+/* The bar is redrawn whole: a cover over the capture's own, then the track and its fill. */
+.space-progress { position: absolute; display: flex; align-items: center; background: #0b1a1e; }
+.space-progress-track { display: block; overflow: hidden; width: 100%; height: calc(var(--pt) * 4); border-radius: var(--afo-radius-pill); background: #101d2b; }
+.space-progress-fill { display: block; height: 100%; border-radius: inherit; background: #9db5bb; }
+/* A set still to log, as the app draws it. */
+.space-set { position: absolute; display: flex; align-items: center; gap: calc(var(--pt) * 6); padding: calc(var(--pt) * 4); border-radius: calc(var(--pt) * 12); background: var(--space-app-surface); font-size: calc(var(--pt) * 16); line-height: 1; white-space: nowrap; }
+.space-set > * { display: flex; flex: none; align-items: center; justify-content: center; height: calc(var(--pt) * 34); border-radius: calc(var(--pt) * 10); }
+.space-set-kind { gap: calc(var(--pt) * 3); width: calc(var(--pt) * 46); background: var(--space-app-canvas); font-size: calc(var(--pt) * 15); font-weight: 700; }
+.space-set-kind svg { width: calc(var(--pt) * 10); height: calc(var(--pt) * 10); color: var(--space-app-muted); }
+.space-set > .space-set-previous { justify-content: flex-start; width: calc(var(--pt) * 88); color: #a8bdc6; font-size: calc(var(--pt) * 14); }
+.space-set > .space-set-field { flex: 1; background: var(--space-app-canvas); }
+.space-set-effort { width: calc(var(--pt) * 38); background: var(--space-app-canvas); color: var(--space-app-muted); font-size: calc(var(--pt) * 13); }
+.space-set-tick { width: calc(var(--pt) * 34); border: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 16%, transparent); background: var(--space-app-canvas); }
+.space-set-pulse { position: absolute; width: calc(var(--pt) * 34); height: calc(var(--pt) * 34); border: 1.5px solid var(--afo-color-brand-primary); border-radius: calc(var(--pt) * 10); pointer-events: none; }
 
 .studio-shell { overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-brand-light) 18%, transparent); border-radius: var(--afo-radius-panel); background: var(--afo-color-ink-panel); box-shadow: var(--afo-shadow-workspace); }
 .studio-topbar { display: flex; height: 52px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-4); background: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }

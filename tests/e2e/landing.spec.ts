@@ -508,11 +508,11 @@ test("the Fitness ID card acts out its controls as it crosses the viewport, both
   await expect(card).toHaveAttribute("data-stage", "grant");
 });
 
-/** Puts the bottom of the Allfit Space phone at a share of the viewport height, with no smooth scrolling. */
+/** Puts the top of the Allfit Space phone at a share of the viewport height, with no smooth scrolling. */
 async function placeSpacePhone(page: import("@playwright/test").Page, share: number) {
   await page.locator(".space-phone-anchor").evaluate((anchor, at) => {
-    const bottom = anchor.getBoundingClientRect().bottom + window.scrollY;
-    window.scrollTo({ top: bottom - window.innerHeight * at, behavior: "instant" });
+    const top = anchor.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
   }, share);
 }
 
@@ -520,37 +520,46 @@ test("the Allfit Space phone logs sets as it crosses the viewport, both ways", a
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
   const phone = page.locator(".space-phone");
-  const currentSet = phone.locator(".bg-bolt");
-  const rows = phone.locator(".space-exercise");
+  const waiting = phone.locator(".space-set[data-waiting='true']");
+  const volume = phone.locator(".space-live-volume");
+  const sets = phone.locator(".space-live-sets");
+  const rowSets = phone.locator(".space-live-row");
 
-  // Above the fold the phone shows the session as the copy states it.
+  // It is the Space landing's phone: a capture of the app, described for who cannot see it.
+  await expect(phone.getByRole("img")).toHaveAttribute("alt", /Sesión en curso en Allfit Space/);
+
+  // At rest the last two sets of «Dominadas» wait to be logged.
   await expect(phone).toHaveAttribute("data-logged", "0");
-  await expect(currentSet).toContainText("Remo con barra");
-  await expect(currentSet).toContainText("Serie 3 de 4");
+  await expect(waiting).toHaveCount(2);
+  await expect(sets).toHaveText("5");
+  await expect(volume).toHaveText("1.500");
 
-  await placeSpacePhone(page, 0.9);
+  await placeSpacePhone(page, 0.3);
   await expect(phone).toHaveAttribute("data-logged", "1");
-  await expect(currentSet).toContainText("Serie 4 de 4");
+  await expect(waiting).toHaveCount(1);
+  await expect(sets).toHaveText("6");
+  await expect(volume).toHaveText("1.710");
 
-  // The fourth set completes the exercise, so the block moves to the next one.
-  await placeSpacePhone(page, 0.78);
+  // With both ticked the screen is the capture as the app took it.
+  await placeSpacePhone(page, 0.2);
   await expect(phone).toHaveAttribute("data-logged", "2");
-  await expect(currentSet).toContainText("Press militar");
-  await expect(currentSet).toContainText("Serie 1 de 3");
-  await expect(currentSet).toContainText("30");
-  await expect(currentSet).not.toContainText("Remo con barra");
-  await expect(rows.nth(1)).toHaveAttribute("data-state", "done");
-  await expect(rows.nth(2)).toHaveAttribute("data-state", "current");
+  await expect(waiting).toHaveCount(0);
+  await expect(sets).toHaveText("7");
+  await expect(volume).toHaveText("1.920");
+  await expect(rowSets).toHaveText("3 de 4");
 
-  await placeSpacePhone(page, 0.62);
+  // The third set belongs to the next exercise.
+  await placeSpacePhone(page, 0.12);
   await expect(phone).toHaveAttribute("data-logged", "3");
-  await expect(currentSet).toContainText("Serie 2 de 3");
+  await expect(sets).toHaveText("8");
+  await expect(volume).toHaveText("2.280");
+  await expect(rowSets).toHaveText("4 de 4");
 
   // Scrolling back takes the sets away again.
-  await placeSpacePhone(page, 0.9);
+  await placeSpacePhone(page, 0.3);
   await expect(phone).toHaveAttribute("data-logged", "1");
-  await expect(currentSet).toContainText("Remo con barra");
-  await expect(currentSet).not.toContainText("Press militar");
+  await expect(waiting).toHaveCount(1);
+  await expect(rowSets).toHaveText("3 de 4");
 });
 
 test("reduced motion keeps the Fitness ID card and the Allfit Space phone at rest", async ({ page }) => {
@@ -566,8 +575,8 @@ test("reduced motion keeps the Fitness ID card and the Allfit Space phone at res
   await expect(card.locator("[data-on='true']")).toHaveCount(0);
   expect(await card.evaluate((element) => getComputedStyle(element).transform)).toBe("none");
 
-  await placeSpacePhone(page, 0.62);
+  await placeSpacePhone(page, 0.12);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
   await expect(page.locator(".space-phone")).toHaveAttribute("data-logged", "0");
-  await expect(page.locator(".space-phone .bg-bolt")).toContainText("Serie 3 de 4");
+  await expect(page.locator(".space-phone .space-set[data-waiting='true']")).toHaveCount(2);
 });

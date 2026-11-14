@@ -97,18 +97,14 @@ export const content = {
     // Estudio Norte and the person logs it set by set. The first exercise with sets left is the
     // one she is on.
     spaceSession: {
-      status: "En curso · 24 min",
-      plan: "Programa de Estudio Norte · Semana 3 de 4",
       exercises: [
         { name: "Press de banca", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
         { name: "Remo con barra", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
         { name: "Press militar", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
         { name: "Dominadas", sets: 3, reps: "máx.", load: null, done: 0, logged: "6" },
       ],
-      setOf: "Serie {set} de {sets}",
-      reps: "reps",
-      logSet: "Registrar serie",
     },
+    spacePhoneAlt: "Sesión en curso en Allfit Space: las series de dominadas, con lo que levantaste la vez anterior.",
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Organiza tu negocio sin perder de vista a tus clientes.",
@@ -252,18 +248,14 @@ export const content = {
     appSectionCopy:
       "Allfit Space brings together your plan, your sessions and your progress. Train on your own or follow a professional's plan in the same place where you log each session.",
     spaceSession: {
-      status: "In progress · 24 min",
-      plan: "Estudio Norte program · Week 3 of 4",
       exercises: [
         { name: "Bench press", sets: 4, reps: "8", load: 60, done: 4, logged: "8" },
         { name: "Barbell row", sets: 4, reps: "10", load: 50, done: 2, logged: "10" },
         { name: "Overhead press", sets: 3, reps: "10", load: 30, done: 0, logged: "8" },
         { name: "Pull-ups", sets: 3, reps: "max", load: null, done: 0, logged: "6" },
       ],
-      setOf: "Set {set} of {sets}",
-      reps: "reps",
-      logSet: "Log set",
     },
+    spacePhoneAlt: "A session in progress in Allfit Space: the pull-up sets, with what you lifted last time.",
 
     studioSectionLabel: "Allfit Studio",
     studioSectionTitle: "Run your business without losing sight of your clients.",

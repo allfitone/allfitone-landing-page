@@ -25,9 +25,10 @@ import { cn } from "@allfitone/react/lib/utils";
 import { FitnessIdSection } from "@/components/fitness-id-section";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
-import { SpaceSessionMockup, StudioReviewMockup } from "@/components/product-mockups";
+import { StudioReviewMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
 import { useScrollSteps, type ScrollWindow } from "@/components/scroll-steps";
+import { SpacePhone } from "@/components/space-phone";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
@@ -88,12 +89,13 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
 const loadMotionFeatures = () => import("@/components/motion-features").then((features) => features.default);
 
 /**
- * Three sets are logged while the bottom of the phone, where the log button is, climbs
- * from the foot of the viewport to just past its middle, so the button and the marks it
- * fills are on screen for all three.
+ * Three sets are logged while the top of the phone climbs from 40% of the viewport to
+ * 10%. In that stretch the session's totals, near the top of the screen, are clear of
+ * the navbar and the rows being ticked, lower down, are above the fold, on a phone and
+ * on a short laptop alike.
  */
-const phoneWindow: ScrollWindow = ["end 0.98", "end 0.55"];
-const loggedSetStarts = [0.1, 0.4, 0.7] as const;
+const phoneWindow: ScrollWindow = ["start 0.4", "start 0.1"];
+const loggedSetStarts = [0.2, 0.53, 0.87] as const;
 
 function SpaceSection({ copy, language }: { copy: LocalizedContent; language: Language }) {
   const phone = useRef<HTMLDivElement>(null);
@@ -115,13 +117,13 @@ function SpaceSection({ copy, language }: { copy: LocalizedContent; language: La
           </a>
         </div>
 
-        {/* The section's one object is the app itself: the person's 18:00 session under way,
-            the professional's plan and the person's log on one screen. It replaces the row
-            of five app areas, which listed what the app will hold instead of showing it.
-            The phone does not enter: it logs sets as the reader scrolls. */}
+        {/* The section's one object is the app itself: the Space landing's phone, with a
+            session under way. It replaces the row of five app areas, which listed what the
+            app will hold instead of showing it. The phone does not enter: it logs sets as
+            the reader scrolls. */}
         <div className="col-span-12 mt-16 flex justify-center md:mt-20 lg:col-span-5 lg:mt-0 lg:items-center">
           <div ref={phone} className="space-phone-anchor">
-            <SpaceSessionMockup copy={copy} logged={logged} />
+            <SpacePhone alt={copy.spacePhoneAlt} logged={logged} />
           </div>
         </div>
       </div>
