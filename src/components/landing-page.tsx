@@ -21,7 +21,7 @@ import {
 import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
-import { FitnessIdCard } from "@/components/fitness-id-card";
+import { FitnessIdSection } from "@/components/fitness-id-section";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
 import { SpaceSessionMockup, StudioReviewMockup } from "@/components/product-mockups";
@@ -77,35 +77,6 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
           </div>
         </div>
 
-      </div>
-    </section>
-  );
-}
-
-function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
-  return (
-    <section id="fitness-id" className="fid-section bg-void text-white">
-      <div className="site-grid relative z-10">
-        <div className="col-span-12 lg:col-span-8">
-          <RevealTitle className="section-title">{copy.fitnessIdTitle}</RevealTitle>
-        </div>
-
-        <div className="col-span-12 mt-16 md:mt-20 lg:col-span-5 lg:mt-24">
-          <FitnessIdCard copy={copy} />
-        </div>
-
-        <div className="col-span-12 mt-14 lg:col-span-6 lg:col-start-7 lg:mt-24">
-          <p className="section-lead text-white/72">{copy.fitnessIdCopy}</p>
-
-          <ul className="fid-controls">
-            {copy.fitnessIdControls.map(([title, description]) => (
-              <li key={title} className="fid-control">
-                <h3 className="fid-control-title">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-white/64">{description}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

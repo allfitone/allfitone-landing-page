@@ -185,11 +185,24 @@ section[id].fid-section {
 .fid-card-head { display: flex; align-items: center; gap: var(--afo-space-3); }
 .fid-card-title { font-family: var(--afo-font-family-display); font-size: 1.25rem; font-weight: var(--afo-font-weight-bold); letter-spacing: .02em; line-height: 1; text-transform: uppercase; }
 .fid-card-list { margin-top: var(--afo-space-6); }
-.fid-card-row { border-top: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-3); font-family: var(--afo-font-family-display); font-size: clamp(1.05rem, 2vw, 1.4rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1.05; text-transform: uppercase; }
+.fid-card-row { display: flex; align-items: center; justify-content: space-between; gap: var(--afo-space-4); border-top: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-3); font-family: var(--afo-font-family-display); font-size: clamp(1.05rem, 2vw, 1.4rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1.05; text-transform: uppercase; }
 .fid-card-foot { margin-inline: calc(var(--afo-space-6) * -1); margin-top: var(--afo-space-6); background: var(--afo-color-brand-primary); padding: var(--afo-space-4) var(--afo-space-6); color: var(--afo-color-ink-void); font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: var(--landing-tracking-label); text-transform: uppercase; }
 
 .fid-controls { margin-top: var(--afo-space-10); border-top: 1px solid var(--afo-color-border-subtle); }
 .fid-control { border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-6); }
+/* The card acts out the controls (src/components/fitness-id-section.tsx): a shared row and
+   the control being acted out take the cyan, and the card casts more shadow once picked up.
+   Motion springs the knobs and the card; colour only fades. */
+.fid-card { transition: box-shadow .5s var(--landing-ease); }
+.fid-card[data-stage="keep"] { box-shadow: var(--afo-shadow-floating); }
+.fid-card-row { transition: color .3s var(--landing-ease); }
+.fid-card-row[data-shared="true"] { color: var(--afo-color-brand-primary); }
+.fid-switch { display: inline-flex; flex: none; align-items: center; width: 2rem; height: 1.125rem; border-radius: 999px; padding: 3px; box-shadow: inset 0 0 0 1px var(--afo-color-border-strong); transition: background-color .3s var(--landing-ease), box-shadow .3s var(--landing-ease); }
+.fid-switch-knob { display: block; width: .75rem; height: .75rem; border-radius: 999px; background: var(--afo-color-neutral-steel); transition: background-color .3s var(--landing-ease); }
+.fid-card-row[data-shared="true"] .fid-switch { background: var(--afo-color-brand-primary); box-shadow: inset 0 0 0 1px var(--afo-color-brand-primary); }
+.fid-card-row[data-shared="true"] .fid-switch-knob { background: var(--afo-color-ink-void); }
+.fid-control-title { transition: color .3s var(--landing-ease); }
+.fid-control[data-active="true"] .fid-control-title { color: var(--afo-color-brand-primary); }
 .fid-control-title { font-family: var(--afo-font-family-display); font-size: clamp(1.35rem, 2.4vw, 1.75rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1; text-transform: uppercase; }
 
 /* ---------------------------------------------------------------------------
@@ -775,8 +788,6 @@ section[id].fid-section {
 .hero-line:has(.hero-fitness) { z-index: 1; }
 .reveal-word { display: inline-block; clip-path: inset(-0.5em -0.2em -0.14em -0.2em); }
 .reveal-word > span { display: inline-block; }
-
-.fid-card { --reveal-radius: var(--afo-radius-panel); }
 
 @media (prefers-reduced-motion: no-preference) {
   /* Backwards fill only: a finished entrance stops applying, so the text returns to its normal rendering. */

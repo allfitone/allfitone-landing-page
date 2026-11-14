@@ -459,3 +459,64 @@ test("while the waitlist is closed, no page shows it, its form or an action to j
   const sitemap = await (await request.get("/sitemap.xml")).text();
   expect(sitemap).not.toContain("/waitlist");
 });
+
+/** Puts the top of the Fitness ID card at a share of the viewport height, with no smooth scrolling. */
+async function placeFitnessIdCard(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".fid-card").evaluate((card, at) => {
+    // The card itself moves when it is picked up, so measure the cell that holds it.
+    const top = (card.parentElement ?? card).getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+test("the Fitness ID card acts out its controls as it crosses the viewport, both ways", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const card = page.locator(".fid-card");
+  const shared = card.locator("[data-shared='true']");
+  const activeControl = page.locator(".fid-control[data-active='true'] h3");
+
+  // Above the fold the card is at rest: nothing shared, no control marked.
+  await expect(card).toHaveAttribute("data-stage", "rest");
+  await expect(shared).toHaveCount(0);
+  await expect(activeControl).toHaveCount(0);
+
+  await placeFitnessIdCard(page, 0.4);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+  await expect(shared).toHaveText(["Historial de entrenamiento", "Marcas personales"]);
+  await expect(activeControl).toHaveText("Tú concedes");
+
+  await placeFitnessIdCard(page, 0.25);
+  await expect(card).toHaveAttribute("data-stage", "revoke");
+  await expect(shared).toHaveText(["Historial de entrenamiento"]);
+  await expect(activeControl).toHaveText("Tú revocas");
+
+  await placeFitnessIdCard(page, 0.12);
+  await expect(card).toHaveAttribute("data-stage", "keep");
+  await expect(shared).toHaveCount(0);
+  await expect(activeControl).toHaveText("Tú te lo llevas");
+
+  // Scrolling back plays it in reverse.
+  await placeFitnessIdCard(page, 0.4);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+
+  // A mouse over a control previews its stage, and leaving returns to the scroll's.
+  await page.locator(".fid-control", { hasText: "Tú revocas" }).hover();
+  await expect(card).toHaveAttribute("data-stage", "revoke");
+  await page.mouse.move(700, 880);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+});
+
+test("reduced motion keeps the Fitness ID card at rest", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
+
+  await placeFitnessIdCard(page, 0.25);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
+  const card = page.locator(".fid-card");
+  await expect(card).toHaveAttribute("data-stage", "rest");
+  await expect(card.locator("[data-shared='true']")).toHaveCount(0);
+  expect(await card.evaluate((element) => getComputedStyle(element).transform)).toBe("none");
+});
