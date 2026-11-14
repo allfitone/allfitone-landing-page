@@ -5,12 +5,12 @@ import * as m from "motion/react-m";
 
 /**
  * The Allfit Studio section's one object: a window on the real app. Both captures are the
- * app's «Resultado de la sesión» screen, taken from Allfit Studio itself: the session the
- * Allfit Space phone shows under way («Tirón»), finished and read by the studio.
+ * app's home screen, «Inicio», taken from Allfit Studio itself with sample data: what
+ * waits for the studio today, from people without a professional to the week's clients.
  *
  * The window works instead of entering. Each capture comes in two pieces, the screen as it
  * loads and the whole page under its header, so the page can be read down as the reader
- * scrolls: the sidebar and the header stay, as they do in the app, and the session moves
+ * scrolls: the sidebar and the header stay, as they do in the app, and the page moves
  * under them. Scrolling back reads it up again.
  */
 
@@ -35,25 +35,25 @@ type Capture = {
 
 /** The app from 1024px: its sidebar beside the page. */
 const desktop: Capture = {
-  screen: "/images/studio/session-result-desktop.webp",
-  page: "/images/studio/session-result-desktop-content.webp",
+  screen: "/images/studio/home-desktop.webp",
+  page: "/images/studio/home-desktop-page.webp",
   width: 1280,
   height: 720,
   pageLeft: 272,
   pageTop: 64,
-  pageHeight: 1556,
+  pageHeight: 1313,
   travel: 480,
 };
 
 /** The app on a phone. */
 const mobile: Capture = {
-  screen: "/images/studio/session-result-mobile.webp",
-  page: "/images/studio/session-result-mobile-content.webp",
+  screen: "/images/studio/home-mobile.webp",
+  page: "/images/studio/home-mobile-page.webp",
   width: 390,
   height: 700,
   pageLeft: 0,
   pageTop: 64,
-  pageHeight: 1808,
+  pageHeight: 1746,
   travel: 420,
 };
 

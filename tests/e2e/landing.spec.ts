@@ -249,7 +249,7 @@ for (const [screen, viewport] of [
   ["desktop", { width: 1440, height: 900 }],
   ["mobile", { width: 390, height: 844 }],
 ] as const) {
-  test(`the Allfit Studio window reads the session down as it crosses the viewport, both ways (${screen})`, async ({ page }) => {
+  test(`the Allfit Studio window reads its page down as it crosses the viewport, both ways (${screen})`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto("/es");
     const shown = page.locator(`.studio-window[data-screen='${screen}']`);
@@ -258,7 +258,7 @@ for (const [screen, viewport] of [
     // One real capture of the app per layout, described for who cannot see it.
     await expect(shown).toBeVisible();
     await expect(hidden).toBeHidden();
-    await expect(shown.getByRole("img")).toHaveAttribute("alt", /Allfit Studio, pantalla Resultado de la sesión/);
+    await expect(shown.getByRole("img")).toHaveAttribute("alt", /Allfit Studio, pantalla Inicio/);
 
     // Below the fold the page is at its top.
     await placeStudioWindow(page, 0.9);
