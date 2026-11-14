@@ -6,7 +6,7 @@ import * as m from "motion/react-m";
 /**
  * The Allfit Studio section's one object: a window on the real app. Both captures are the
  * app's content screen, «Contenido», taken from Allfit Studio itself with sample data:
- * the session templates a studio writes, publishes and assigns.
+ * the programs a studio has published and assigns to its clients.
  *
  * The window works instead of entering. Each capture comes in two pieces, the screen as it
  * loads and the whole page under its header, so the page can be read down as the reader
@@ -41,7 +41,7 @@ const desktop: Capture = {
   height: 720,
   pageLeft: 272,
   pageTop: 64,
-  pageHeight: 1114,
+  pageHeight: 1081,
   travel: 420,
 };
 
@@ -53,7 +53,7 @@ const mobile: Capture = {
   height: 700,
   pageLeft: 0,
   pageTop: 64,
-  pageHeight: 1949,
+  pageHeight: 2054,
   travel: 420,
 };
 
