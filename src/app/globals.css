@@ -67,10 +67,14 @@
   .nav-link { @apply transition-colors hover:text-bolt; transition-duration: var(--afo-motion-feedback-duration); }
 
   .hero-title-new { font-family: var(--afo-font-family-display); font-size: clamp(4.5rem, 12.2vw, 12.5rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.065em; line-height: .68; text-transform: uppercase; }
-  /* Hollow at the top of the page; `--fill` raises a level inside the letters as the reader scrolls
-     (src/components/hero-fitness.tsx). The padding gives the fill the glyphs' full height, which the
-     tight line box cuts short, and the margin gives the space back. */
-  .hero-fitness { position: relative; width: max-content; margin-block: -.16em; padding-block: .16em; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); background: linear-gradient(to top, var(--afo-color-neutral-chalk) var(--fill, 0%), transparent var(--fill, 0%)); -webkit-background-clip: text; background-clip: text; }
+  .hero-fitness { position: relative; width: max-content; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); }
+  /* The level that fills the word (src/components/hero-fitness.tsx): a solid copy behind a mask. The mask
+     reaches past the word's box on every side, because the tight line height and the negative tracking
+     let the glyphs out of it, the last S most of all; the copy's padding puts it back over the outline. */
+  .hero-fitness-level { position: absolute; inset: -.2em -.16em -.2em -.08em; overflow: hidden; pointer-events: none; transform: translate3d(0, 100%, 0); -webkit-text-stroke: 0; }
+  .hero-fitness-level > span { display: block; box-sizing: border-box; height: 100%; padding: .2em .16em .2em .08em; color: var(--afo-color-neutral-chalk); transform: translate3d(0, -100%, 0); }
+  .hero-fitness-level > span::before { content: attr(data-text); }
+  .hero-fitness[data-filled] .hero-fitness-level, .hero-fitness[data-filled] .hero-fitness-level > span { transform: none; }
   .hero-place-break { display: inline; }
   .hero-lead { max-width: 46ch; font-size: 1.0625rem; line-height: 1.65; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); }
 
@@ -750,6 +754,7 @@ section[id].fid-section {
 @media (forced-colors: active) {
   .hero-fitness { -webkit-text-stroke: 0; }
   .hero-fitness { color: CanvasText; }
+  .hero-fitness-level { display: none; }
   section[id].fid-section { clip-path: none; margin-block: 0; }
   .legal-contents-link[aria-current="true"] { border-left-color: Highlight; }
   .legal-contact-link { border-color: LinkText; }
@@ -785,6 +790,9 @@ section[id].fid-section {
   .hero-line:nth-child(2) > span { animation-delay: 110ms; }
   .hero-line:nth-child(3) > span { animation-delay: 220ms; }
   .hero-enter { animation: landing-lift 1s var(--landing-ease) backwards; animation-delay: calc(520ms + var(--i, 0) * 120ms); }
+
+  /* The hero's FITNESS fills: its mask and its copy move against each other, on the same curve. */
+  .hero-fitness-level, .hero-fitness-level > span { transition: transform .85s cubic-bezier(.65, 0, .35, 1); will-change: transform; }
 
   /* The ledger's figures are struck out by the scroll; the stroke is drawn, the row dims. */
   .ledger-item, .ledger-value { transition: color .5s var(--landing-ease); }

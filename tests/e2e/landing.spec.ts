@@ -646,19 +646,44 @@ test("the problem ledger strikes its figures out as it crosses the viewport, bot
   await expect(left).toHaveCount(0);
 });
 
-test("the hero FITNESS fills as the reader starts to scroll, and empties on the way back", async ({ page }) => {
+/** How much of the hero's FITNESS its level covers (0 hollow, 1 solid), where its copy sits and how far the level reaches past the word. */
+async function heroFitnessLevel(page: import("@playwright/test").Page) {
+  return page.locator(".hero-fitness").evaluate((word) => {
+    const level = word.querySelector(".hero-fitness-level");
+    const copy = level?.firstElementChild;
+    if (!level || !copy) throw new Error("The hero FITNESS has no level.");
+    const box = word.getBoundingClientRect();
+    const mask = level.getBoundingClientRect();
+    const text = copy.getBoundingClientRect();
+    return {
+      covered: Math.round(Math.min(1, Math.max(0, (box.bottom - mask.top) / box.height)) * 100) / 100,
+      // How far the copy is from sitting over the outline, in px.
+      copyOffset: Math.round(Math.abs((text.top + text.bottom) / 2 - (box.top + box.bottom) / 2)),
+      pastTheEnd: mask.right - box.right,
+    };
+  });
+}
+
+test("the hero FITNESS fills once the reader starts to scroll, whole to its last letter, and drains at the top", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
   const word = page.locator(".hero-fitness");
-  const fill = () => word.evaluate((element) => Number.parseFloat(getComputedStyle(element).getPropertyValue("--fill") || "0"));
 
-  expect(await fill()).toBe(0);
-  await page.evaluate(() => window.scrollTo({ top: 80, behavior: "instant" }));
-  await expect.poll(fill).toBeGreaterThan(30);
-  await page.evaluate(() => window.scrollTo({ top: 400, behavior: "instant" }));
-  await expect.poll(fill).toBe(100);
+  // The heading holds the word once: the level's copy is drawn, not written.
+  expect(await word.evaluate((element) => element.textContent)).toBe("FITNESS");
+  await expect(word).not.toHaveAttribute("data-filled");
+  expect((await heroFitnessLevel(page)).covered).toBe(0);
+  // The last S leans out of the word's box, so the level must reach past it.
+  expect((await heroFitnessLevel(page)).pastTheEnd).toBeGreaterThan(8);
+
+  await page.evaluate(() => window.scrollTo({ top: 60, behavior: "instant" }));
+  await expect(word).toHaveAttribute("data-filled", "true");
+  await expect.poll(async () => (await heroFitnessLevel(page)).covered).toBe(1);
+  expect((await heroFitnessLevel(page)).copyOffset).toBe(0);
+
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
-  await expect.poll(fill).toBe(0);
+  await expect(word).not.toHaveAttribute("data-filled");
+  await expect.poll(async () => (await heroFitnessLevel(page)).covered).toBe(0);
 });
 
 test("reduced motion keeps the hero, the ledger, the Fitness ID card, the Allfit Space phone and the Allfit Studio window at rest", async ({ page }) => {
@@ -671,7 +696,8 @@ test("reduced motion keeps the hero, the ledger, the Fitness ID card, the Allfit
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
   await expect(page.locator(".ledger")).toHaveAttribute("data-left-behind", "0");
   await expect(page.locator(".ledger-item[data-left]")).toHaveCount(0);
-  expect(await page.locator(".hero-fitness").evaluate((element) => Number.parseFloat(getComputedStyle(element).getPropertyValue("--fill") || "0"))).toBe(0);
+  await expect(page.locator(".hero-fitness")).not.toHaveAttribute("data-filled");
+  expect((await heroFitnessLevel(page)).covered).toBe(0);
 
   await placeFitnessIdCard(page, 0.25);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
