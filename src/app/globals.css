@@ -104,16 +104,12 @@
 .hero-copy { position: relative; z-index: 2; }
 
 /* ---------------------------------------------------------------------------
-   Product mockups (the Allfit Space phone and the Allfit Studio panel)
-   Type floor raised so the mockups read as product, not texture.
+   Product objects: the Allfit Space phone and the Allfit Studio window, both
+   real captures of the apps.
 --------------------------------------------------------------------------- */
 
-.mock-eyebrow { font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: .08em; line-height: 1.3; text-transform: uppercase; }
-.mock-label { font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-extrabold); letter-spacing: .06em; line-height: 1.3; text-transform: uppercase; }
-.mock-body { font-size: .6875rem; line-height: 1.45; }
 
 
-/* The phone leans forward, with the brand "1", not back against it. */
 
 /* Allfit Space section: one larger phone on Chalk, the session under way. Exercises are
    hairline rows; the sets are short marks, filled once logged. Rows already finished
@@ -147,16 +143,6 @@
 .space-set-tick { width: calc(var(--pt) * 34); border: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 16%, transparent); background: var(--space-app-canvas); }
 .space-set-pulse { position: absolute; width: calc(var(--pt) * 34); height: calc(var(--pt) * 34); border: 1.5px solid var(--afo-color-brand-primary); border-radius: calc(var(--pt) * 10); pointer-events: none; }
 
-.studio-shell { overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-brand-light) 18%, transparent); border-radius: var(--afo-radius-panel); background: var(--afo-color-ink-panel); box-shadow: var(--afo-shadow-workspace); }
-.studio-topbar { display: flex; height: 52px; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--afo-color-border-subtle); padding-inline: var(--afo-space-4); background: color-mix(in srgb, var(--afo-color-ink-void) 72%, transparent); }
-.studio-workspace { display: grid; grid-template-columns: 140px minmax(0, 1fr); }
-.studio-sidebar { display: flex; flex-direction: column; gap: var(--afo-space-1); border-right: 1px solid var(--afo-color-border-subtle); padding: 18px var(--afo-space-2); background: color-mix(in srgb, var(--afo-color-ink-void) 34%, transparent); }
-.studio-nav-item { display: flex; min-height: 32px; align-items: center; gap: var(--afo-space-2); border-radius: var(--afo-radius-control-small); padding-inline: 9px; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 46%, transparent); font-size: var(--landing-type-label); font-weight: var(--afo-font-weight-bold); letter-spacing: .06em; }
-.studio-nav-item-active { background: var(--afo-color-accent-tonal); color: var(--afo-color-text-accent); }
-.studio-main { min-width: 0; padding: var(--afo-space-5); }
-.studio-shared-person { display: flex; min-width: 0; align-items: center; gap: var(--afo-space-3); }
-.studio-shared-avatar { display: flex; flex: none; width: 34px; height: 34px; align-items: center; justify-content: center; border-radius: var(--afo-radius-circle); background: color-mix(in srgb, var(--afo-color-brand-primary) 14%, transparent); color: var(--afo-color-brand-primary); font-family: var(--afo-font-family-display); font-size: .8125rem; font-weight: var(--afo-font-weight-bold); }
-.studio-panel { min-width: 0; border: 1px solid var(--afo-color-border-subtle); border-radius: var(--afo-radius-control); background: color-mix(in srgb, var(--afo-color-neutral-white) 2%, transparent); padding: 14px; }
 
 .product-definitions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--afo-space-20); border-block: 1px solid var(--afo-color-border-subtle); }
 .product-definition { min-width: 0; padding-block: var(--afo-space-10); }
@@ -226,37 +212,19 @@ section[id].fid-section {
    Studio
 --------------------------------------------------------------------------- */
 
-/* Allfit Studio section: the panel closes the person's story. Estudio Norte reviews the
-   session the person finished, plan beside log; the one row that differs is the panel's
-   cyan. The screen is Void inside the Panel-coloured section so it reads as a screen,
-   with no shadow, because the card reveal's clip would cut one off. Its text runs a
-   step above the base mock sizes: here the panel is the section's subject. */
-.studio-review-anchor { --reveal-radius: var(--afo-radius-panel); }
-.studio-review { --landing-type-label: .75rem; background: var(--afo-color-ink-void); box-shadow: none; }
-.studio-review .mock-body { font-size: .8125rem; }
-.studio-review .studio-workspace { grid-template-columns: minmax(0, 1fr); }
-.studio-review .studio-sidebar { display: none; }
-.studio-review-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--afo-space-4); }
-.studio-review-action { display: inline-flex; min-height: 36px; align-items: center; gap: var(--afo-space-2); border: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 18%, transparent); border-radius: var(--afo-radius-pill); padding-inline: 14px; color: var(--afo-color-neutral-white); }
-.studio-review-grid { display: grid; gap: var(--afo-space-3); margin-top: var(--afo-space-5); }
-.studio-review-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--afo-space-1) var(--afo-space-4); border-bottom: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 8%, transparent); padding-block: 12px; }
-.studio-review-row:last-child { border-bottom: 0; padding-bottom: 0; }
-.studio-review-row > :first-child, .studio-review-row > :last-child { grid-column: 1 / -1; }
-.studio-review-columns { display: none; }
-.studio-review-cell-label { display: block; margin-bottom: 2px; color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
-@media (min-width: 640px) {
-  .studio-review-row { grid-template-columns: minmax(0, 1.25fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.1fr); align-items: center; }
-  .studio-review-row > :first-child, .studio-review-row > :last-child { grid-column: auto; }
-  .studio-review-columns { display: grid; padding-block: 10px; color: color-mix(in srgb, var(--afo-color-neutral-white) 56%, transparent); }
-  .studio-review-cell-label { display: none; }
-}
-@media (min-width: 768px) {
-  .studio-review-grid { grid-template-columns: minmax(0, 1fr) 240px; }
-}
-/* The sidebar returns only where the table keeps room for its four columns beside it. */
-@media (min-width: 1280px) {
-  .studio-review .studio-workspace { grid-template-columns: 176px minmax(0, 1fr); }
-  .studio-review .studio-sidebar { display: flex; }
+/* Allfit Studio section: a window on the real app, where the studio reads the session
+   the Space phone shows under way. The page inside moves under the app's own sidebar
+   and header as the reader scrolls (src/components/studio-window.tsx). */
+.studio-window-frame { position: relative; }
+.studio-window { position: relative; overflow: hidden; border: 1px solid color-mix(in srgb, var(--afo-color-neutral-white) 14%, transparent); border-radius: var(--afo-radius-panel); background: var(--afo-color-ink-void); box-shadow: 0 40px 90px -30px color-mix(in srgb, var(--afo-color-neutral-black) 70%, transparent); }
+.studio-window img { display: block; width: 100%; height: auto; }
+.studio-window-page { position: absolute; overflow: hidden; }
+/* One capture per layout: the app on a phone below 1024px, with its sidebar from there. */
+.studio-window[data-screen='desktop'] { display: none; }
+.studio-window[data-screen='mobile'] { max-width: 390px; margin-inline: auto; }
+@media (min-width: 1024px) {
+  .studio-window[data-screen='desktop'] { display: block; }
+  .studio-window[data-screen='mobile'] { display: none; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -730,7 +698,6 @@ section[id].fid-section {
   .site-grid { max-width: 100vw; }
   .hero-title-new { max-width: 100%; font-size: clamp(3.9rem, 17vw, 5rem); line-height: .74; }
   .hero-place-break { display: block; }
-  .studio-main { padding: var(--afo-space-4); }
   .product-definitions { grid-template-columns: 1fr; margin-top: 3.5rem; }
   .product-definition { padding-block: var(--afo-space-10); }
   .product-definition-app { padding-right: 0; }
@@ -763,11 +730,6 @@ section[id].fid-section {
   .footer-brand { grid-column: 1; grid-row: 1; }
   .footer-nav-grid { grid-column: 2; grid-row: 1; }
   .space-phone-anchor { width: 320px; }
-  .studio-topbar { height: 58px; padding-inline: var(--afo-space-5); }
-  .studio-sidebar { padding: 22px 14px; }
-  .studio-nav-item { min-height: 36px; padding-inline: 11px; font-size: var(--landing-type-label); }
-  .studio-main { padding: 26px; }
-  .studio-panel { border-radius: var(--afo-radius-lg); padding: 18px; }
   section[id].fid-section { padding-block: calc(var(--fid-slant) + 9rem); }
   .fid-card { padding-inline: var(--afo-space-8); }
   .fid-card-foot { margin-inline: calc(var(--afo-space-8) * -1); padding-inline: var(--afo-space-8); }
@@ -788,9 +750,9 @@ section[id].fid-section {
    The hero enters once, on load: the title rises out of its masks line by line,
    then the lead and the action lift in. Below it, each section has a single
    moment, the first time it scrolls into view: its title rises line by line and
-   its main object arrives (the ledger, or the Studio panel uncovering). The
-   Fitness ID card and the Space phone do not arrive: they act, driven by the
-   scroll through Motion (src/components/scroll-steps.ts). There is no
+   its main object arrives (the ledger). The Fitness ID card, the Space phone
+   and the Studio window do not arrive: they act, driven by the scroll through
+   Motion. There is no
    pointer light and no scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
@@ -816,13 +778,11 @@ section[id].fid-section {
 
   /* Hidden states arm instantly; the transitions live on the revealed states. */
   [data-landing][data-motion='on'] [data-reveal] { opacity: 0; transform: translate3d(0, 36px, 0); }
-  [data-landing][data-motion='on'] :is([data-reveal='mask'], [data-reveal='card']) { opacity: 1; transform: none; }
+  [data-landing][data-motion='on'] [data-reveal='mask'] { opacity: 1; transform: none; }
   [data-landing][data-motion='on'] [data-reveal='mask'] .reveal-word > span { transform: translate3d(0, 115%, 0); }
-  [data-landing][data-motion='on'] [data-reveal='card'] { clip-path: inset(18% 0 0 0 round var(--reveal-radius, 0)); }
 
   [data-landing][data-motion='on'] [data-reveal].is-in { opacity: 1; transform: none; transition: opacity .9s var(--landing-ease), transform 1.1s var(--landing-ease); transition-delay: calc(var(--i, 0) * 90ms); }
   [data-landing][data-motion='on'] [data-reveal='mask'].is-in .reveal-word > span { transform: none; transition: transform 1.1s var(--landing-ease) calc(var(--l, 0) * 110ms); }
-  [data-landing][data-motion='on'] [data-reveal='card'].is-in { clip-path: inset(0 0 0 0 round var(--reveal-radius, 0)); transition: clip-path 1.2s var(--landing-ease); }
 
 }
 

@@ -25,10 +25,10 @@ import { cn } from "@allfitone/react/lib/utils";
 import { FitnessIdSection } from "@/components/fitness-id-section";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
-import { StudioReviewMockup } from "@/components/product-mockups";
 import { RevealTitle } from "@/components/reveal-title";
 import { useScrollSteps, type ScrollWindow } from "@/components/scroll-steps";
 import { SpacePhone } from "@/components/space-phone";
+import { StudioWindow } from "@/components/studio-window";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { content, type Language, type LocalizedContent } from "@/lib/content";
 import { legalChrome, legalDocumentSlugs, legalPath } from "@/lib/legal/documents";
@@ -151,11 +151,13 @@ function StudioSection({ copy, language }: { copy: LocalizedContent; language: L
           </a>
         </div>
 
-        {/* The section's one object is the product: Estudio Norte reviewing the session
-            the person finished, plan beside log. It replaces the four differentiators and the
-            five modules, which listed Studio's features instead of showing them. */}
-        <div className="studio-review-anchor col-span-12 mt-16 md:mt-20" data-reveal="card">
-          <StudioReviewMockup copy={copy} />
+        {/* The section's one object is the product: a window on the real app, where the
+            studio reads the session the Space phone shows under way. It replaces the four
+            differentiators and the five modules, which listed Studio's features instead of
+            showing them. The window does not enter: the session is read down as the
+            reader scrolls. */}
+        <div className="col-span-12 mt-16 md:mt-20">
+          <StudioWindow alt={copy.studioWindowAlt} />
         </div>
       </div>
     </section>

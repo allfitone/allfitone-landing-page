@@ -208,7 +208,8 @@ test("the hero action leads to the waitlist page, whose form validates and confi
   }
 });
 
-test("the page names one person per visit, the same in every section", async ({ page }) => {
+test("the waitlist names one person per visit, the same in both fields", async ({ page }) => {
+  test.skip(!waitlistOpen, waitlistClosed);
   const names = ["Kevin", "Walbert", "Jimmy", "Charly", "Nico"];
   const seen = new Set<string>();
   await page.goto("/es");
@@ -218,23 +219,67 @@ test("the page names one person per visit, the same in every section", async ({ 
     // in the same commit, so wait for it and one more task before reading.
     await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
     await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve))));
-    const panel = page.locator(".studio-review");
-    const person = /Lo autorizó (\p{L}+)\./u.exec((await panel.textContent()) ?? "")?.[1] ?? "";
+    const waitlist = page.locator("#waitlist");
+    const person = (await waitlist.getByLabel("Tu nombre").getAttribute("placeholder")) ?? "";
     const name = names.find((candidate) => candidate === person);
     expect(name, `«${person}» is one of the five names`).toBeDefined();
     seen.add(name!);
-
-    // The Studio panel's avatar and, while the waitlist is open, its placeholders name the same person.
-    await expect(panel.locator(".studio-shared-avatar")).toHaveText(name!.charAt(0));
-    if (waitlistOpen) {
-      const waitlist = page.locator("#waitlist");
-      await expect(waitlist.getByLabel("Tu nombre")).toHaveAttribute("placeholder", name!);
-      await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
-    }
+    await expect(waitlist.getByLabel("Tu correo")).toHaveAttribute("placeholder", `${name!.toLowerCase()}@correo.com`);
   }
   // Eight visits all on one name out of five would happen about once in 78,000 runs.
   expect(seen.size).toBeGreaterThan(1);
 });
+
+/** Puts the top of the Allfit Studio window at a share of the viewport height, with no smooth scrolling. */
+async function placeStudioWindow(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".studio-window-frame").evaluate((frame, at) => {
+    const top = frame.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+/** How far up the page inside the Allfit Studio window has moved, in px. */
+function studioPageOffset(page: import("@playwright/test").Page, screen: "desktop" | "mobile") {
+  return page
+    .locator(`.studio-window[data-screen='${screen}'] .studio-window-page > div`)
+    .evaluate((element) => Math.abs(new DOMMatrixReadOnly(getComputedStyle(element).transform).m42));
+}
+
+for (const [screen, viewport] of [
+  ["desktop", { width: 1440, height: 900 }],
+  ["mobile", { width: 390, height: 844 }],
+] as const) {
+  test(`the Allfit Studio window reads the session down as it crosses the viewport, both ways (${screen})`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto("/es");
+    const shown = page.locator(`.studio-window[data-screen='${screen}']`);
+    const hidden = page.locator(`.studio-window[data-screen='${screen === "desktop" ? "mobile" : "desktop"}']`);
+
+    // One real capture of the app per layout, described for who cannot see it.
+    await expect(shown).toBeVisible();
+    await expect(hidden).toBeHidden();
+    await expect(shown.getByRole("img")).toHaveAttribute("alt", /Allfit Studio, pantalla Resultado de la sesión/);
+
+    // Below the fold the page is at its top.
+    await placeStudioWindow(page, 0.9);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeLessThan(1);
+
+    // Crossing the viewport reads it down, and never past the end of the capture.
+    await placeStudioWindow(page, 0.3);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeGreaterThan(80);
+    await placeStudioWindow(page, -0.6);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeGreaterThan(300);
+    const box = await shown.locator(".studio-window-page").evaluate((clip) => {
+      const moved = clip.firstElementChild!.getBoundingClientRect();
+      return { clipBottom: clip.getBoundingClientRect().bottom, pageBottom: moved.bottom };
+    });
+    expect(box.pageBottom).toBeGreaterThanOrEqual(box.clipBottom - 1);
+
+    // Scrolling back reads it up again.
+    await placeStudioWindow(page, 0.9);
+    await expect.poll(() => studioPageOffset(page, screen)).toBeLessThan(1);
+  });
+}
 
 test("links styled as buttons show a visible keyboard focus ring", async ({ page }) => {
   await page.goto("/es");
@@ -319,10 +364,12 @@ test("sections carry no sequence numbers or ghost marks", async ({ page }) => {
   );
   expect(indexes).toEqual([]);
 
-  // No large decorative outline sitting behind a section's content.
+  // No large decorative outline sitting behind a section's content. The product captures
+  // place their moving parts the same way, and those are the content, not a mark behind it.
   const ghosts = await page.locator("section[id]:not(#home)").evaluateAll((sections) =>
     sections.flatMap((section) =>
       [...section.querySelectorAll<HTMLElement | SVGElement>("[aria-hidden='true']")]
+        .filter((element) => !element.closest(".space-phone, .studio-window"))
         .filter((element) => getComputedStyle(element).position === "absolute" && element.getBoundingClientRect().width > 300)
         .map(() => section.id),
     ),
@@ -562,7 +609,7 @@ test("the Allfit Space phone logs sets as it crosses the viewport, both ways", a
   await expect(rowSets).toHaveText("3 de 4");
 });
 
-test("reduced motion keeps the Fitness ID card and the Allfit Space phone at rest", async ({ page }) => {
+test("reduced motion keeps the Fitness ID card, the Allfit Space phone and the Allfit Studio window at rest", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
@@ -579,4 +626,8 @@ test("reduced motion keeps the Fitness ID card and the Allfit Space phone at res
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
   await expect(page.locator(".space-phone")).toHaveAttribute("data-logged", "0");
   await expect(page.locator(".space-phone .space-set[data-waiting='true']")).toHaveCount(2);
+
+  await placeStudioWindow(page, 0.1);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 300))));
+  expect(await studioPageOffset(page, "desktop")).toBe(0);
 });
