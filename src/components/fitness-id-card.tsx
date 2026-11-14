@@ -1,22 +1,24 @@
+import type { CSSProperties } from "react";
 import * as m from "motion/react-m";
 import { BrandLogo } from "@allfitone/react/brand";
 
 import type { LocalizedContent } from "@/lib/content";
 
 /**
- * What the card is showing. At `rest` nothing is shared; the other three follow the
- * section's controls: `grant` shares two kinds of data, `revoke` withdraws one of them,
- * and `keep` ends the relationship, so nothing is shared and the card is picked up.
+ * What the card is showing. At `rest` every switch is off; the other three follow the
+ * section's controls: `grant` turns on two kinds of data, `revoke` turns one of them
+ * off, and `keep` turns every row on, because all of it leaves with the person, and the
+ * card is picked up.
  */
 export type FitnessIdStage = "rest" | "grant" | "revoke" | "keep";
 
-/** The rows shared at each stage, by their place in `fitnessIdFields`: training history, then personal records. */
-const sharedRows: Record<FitnessIdStage, readonly number[]> = {
-  rest: [],
+/** The rows turned on at `grant` and `revoke`, by their place in `fitnessIdFields`: training history, then personal records. */
+const grantedRows: Partial<Record<FitnessIdStage, readonly number[]>> = {
   grant: [1, 2],
   revoke: [1],
-  keep: [],
 };
+/** At `keep` the rows turn on one after another, top to bottom, this many seconds apart. */
+const keepWave = 0.045;
 
 /** A switch knob has weight: it overshoots a little and settles. */
 const knobSpring = { type: "spring", stiffness: 520, damping: 28 } as const;
@@ -29,13 +31,13 @@ const knobTravel = 14;
  * The Fitness ID as one object: its name, what it holds and where it stays. The list
  * answers the problem section's ledger (the kinds of data you leave at your old gym, kept
  * this time), so it carries no label, index or decoration of its own; the cyan foot is
- * the payoff. Each row has the switch the person shares it with: the card acts out the
+ * the payoff. Each row has a switch, and with them the card acts out the
  * section's three controls instead of entering the page. The switches are part of the
  * illustration, so they are hidden from assistive technology and take no pointer.
  */
 export function FitnessIdCard({ copy, stage = "rest" }: { copy: LocalizedContent; stage?: FitnessIdStage }) {
-  const shared = sharedRows[stage];
   const lifted = stage === "keep";
+  const granted = grantedRows[stage] ?? [];
 
   return (
     <m.figure
@@ -52,16 +54,17 @@ export function FitnessIdCard({ copy, stage = "rest" }: { copy: LocalizedContent
 
       <ul className="fid-card-list">
         {copy.fitnessIdFields.map((field, index) => {
-          const on = shared.includes(index);
+          const on = lifted || granted.includes(index);
+          const delay = lifted ? index * keepWave : 0;
           return (
-            <li key={field} className="fid-card-row" data-shared={on}>
+            <li key={field} className="fid-card-row" data-on={on} style={{ "--wave": `${delay}s` } as CSSProperties}>
               <span className="min-w-0">{field}</span>
               <span className="fid-switch" aria-hidden="true">
                 <m.span
                   className="fid-switch-knob"
                   initial={false}
                   animate={{ x: on ? knobTravel : 0 }}
-                  transition={knobSpring}
+                  transition={{ ...knobSpring, delay }}
                 />
               </span>
             </li>

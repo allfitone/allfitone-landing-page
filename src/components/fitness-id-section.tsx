@@ -8,8 +8,8 @@ import type { LocalizedContent } from "@/lib/content";
 /**
  * The Fitness ID section. Its card does not enter the page: it acts out the three
  * controls beside it. As the card crosses the viewport, two rows are shared («Tú
- * concedes»), one is withdrawn («Tú revocas») and, with the relationship over, nothing
- * is shared and the card is picked up («Tú te lo llevas»). The control being acted out
+ * concedes»), one is withdrawn («Tú revocas») and, with the relationship over, every row
+ * turns on and the card is picked up («Tú te lo llevas»). The control being acted out
  * takes the cyan, and scrolling back plays it in reverse. With a mouse, pointing at a
  * control shows its stage.
  *

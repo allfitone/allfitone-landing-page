@@ -473,7 +473,7 @@ test("the Fitness ID card acts out its controls as it crosses the viewport, both
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
   const card = page.locator(".fid-card");
-  const shared = card.locator("[data-shared='true']");
+  const shared = card.locator("[data-on='true']");
   const activeControl = page.locator(".fid-control[data-active='true'] h3");
 
   // Above the fold the card is at rest: nothing shared, no control marked.
@@ -492,8 +492,9 @@ test("the Fitness ID card acts out its controls as it crosses the viewport, both
   await expect(activeControl).toHaveText("Tú revocas");
 
   await placeFitnessIdCard(page, 0.12);
+  // «Tú te lo llevas»: every row is on, because all of it leaves with the person.
   await expect(card).toHaveAttribute("data-stage", "keep");
-  await expect(shared).toHaveCount(0);
+  await expect(shared).toHaveCount(8);
   await expect(activeControl).toHaveText("Tú te lo llevas");
 
   // Scrolling back plays it in reverse.
@@ -517,6 +518,6 @@ test("reduced motion keeps the Fitness ID card at rest", async ({ page }) => {
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
   const card = page.locator(".fid-card");
   await expect(card).toHaveAttribute("data-stage", "rest");
-  await expect(card.locator("[data-shared='true']")).toHaveCount(0);
+  await expect(card.locator("[data-on='true']")).toHaveCount(0);
   expect(await card.evaluate((element) => getComputedStyle(element).transform)).toBe("none");
 });
