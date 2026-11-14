@@ -609,11 +609,69 @@ test("the Allfit Space phone logs sets as it crosses the viewport, both ways", a
   await expect(rowSets).toHaveText("3 de 4");
 });
 
-test("reduced motion keeps the Fitness ID card, the Allfit Space phone and the Allfit Studio window at rest", async ({ page }) => {
+/** Puts the top of the ledger's list at a share of the viewport height, with no smooth scrolling. */
+async function placeLedgerList(page: import("@playwright/test").Page, share: number) {
+  await page.locator(".ledger-list").evaluate((list, at) => {
+    const top = list.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: top - window.innerHeight * at, behavior: "instant" });
+  }, share);
+}
+
+test("the problem ledger strikes its figures out as it crosses the viewport, both ways", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const ledger = page.locator(".ledger");
+  const left = ledger.locator(".ledger-item[data-left]");
+
+  // At rest the record is whole, and the ledger does not wait for the scroll to show itself.
+  await expect(ledger).toHaveAttribute("data-left-behind", "0");
+  await expect(left).toHaveCount(0);
+  await expect(ledger).not.toHaveAttribute("data-reveal");
+
+  // Part of the way through, some figures are struck out and some are not yet.
+  await placeLedgerList(page, 0.5);
+  await expect(ledger).toHaveAttribute("data-left-behind", /^[1-4]$/);
+  const midway = Number(await ledger.getAttribute("data-left-behind"));
+  await expect(left).toHaveCount(midway);
+
+  // Past the window every figure is struck out, and the word on the left stays.
+  await placeLedgerList(page, 0.05);
+  await expect(ledger).toHaveAttribute("data-left-behind", "5");
+  await expect(left).toHaveCount(5);
+  await expect(ledger.locator(".ledger-keep-value")).toHaveText("Nada");
+
+  // Scrolling back gives the record back.
+  await placeLedgerList(page, 0.9);
+  await expect(ledger).toHaveAttribute("data-left-behind", "0");
+  await expect(left).toHaveCount(0);
+});
+
+test("the hero FITNESS fills as the reader starts to scroll, and empties on the way back", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/es");
+  const word = page.locator(".hero-fitness");
+  const fill = () => word.evaluate((element) => Number.parseFloat(getComputedStyle(element).getPropertyValue("--fill") || "0"));
+
+  expect(await fill()).toBe(0);
+  await page.evaluate(() => window.scrollTo({ top: 80, behavior: "instant" }));
+  await expect.poll(fill).toBeGreaterThan(30);
+  await page.evaluate(() => window.scrollTo({ top: 400, behavior: "instant" }));
+  await expect.poll(fill).toBe(100);
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect.poll(fill).toBe(0);
+});
+
+test("reduced motion keeps the hero, the ledger, the Fitness ID card, the Allfit Space phone and the Allfit Studio window at rest", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
   await expect(page.locator("[data-landing][data-motion='on']")).toHaveCount(1);
+
+  await placeLedgerList(page, 0.05);
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));
+  await expect(page.locator(".ledger")).toHaveAttribute("data-left-behind", "0");
+  await expect(page.locator(".ledger-item[data-left]")).toHaveCount(0);
+  expect(await page.locator(".hero-fitness").evaluate((element) => Number.parseFloat(getComputedStyle(element).getPropertyValue("--fill") || "0"))).toBe(0);
 
   await placeFitnessIdCard(page, 0.25);
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 200))));

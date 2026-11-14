@@ -23,6 +23,7 @@ import { FoundationIcon } from "@allfitone/react/icons";
 import { cn } from "@allfitone/react/lib/utils";
 
 import { FitnessIdSection } from "@/components/fitness-id-section";
+import { HeroFitness } from "@/components/hero-fitness";
 import { stagger, useLandingMotion } from "@/components/landing-motion";
 import { LanguageSwitch } from "@/components/language-switch";
 import { RevealTitle } from "@/components/reveal-title";
@@ -48,7 +49,17 @@ function NewTabHint({ copy }: { copy: LocalizedContent }) {
   return <span className="sr-only"> {copy.opensInNewTab}</span>;
 }
 
+/**
+ * The ledger's five figures are struck out, top to bottom, while its list climbs from 70%
+ * of the viewport until its foot reaches 45%: the stretch in which every row is in view.
+ */
+const ledgerWindow: ScrollWindow = ["start 0.7", "end 0.45"];
+const leftBehindStarts = [0.08, 0.28, 0.48, 0.68, 0.88] as const;
+
 function ProblemSection({ copy }: { copy: LocalizedContent }) {
+  const list = useRef<HTMLDListElement>(null);
+  const leftBehind = useScrollSteps(list, ledgerWindow, leftBehindStarts);
+
   return (
     <section id="problem" className="bg-panel text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
@@ -59,18 +70,19 @@ function ProblemSection({ copy }: { copy: LocalizedContent }) {
 
         {/* A handover ledger spoken to the reader, like the title: what you take from the
             gym you leave (nothing) beside what stays there, in figures rather than categories.
-            The Fitness ID card in the next section holds the same kinds of data, kept. */}
+            The Fitness ID card in the next section holds the same kinds of data, kept.
+            The ledger acts: as it crosses the viewport its figures are struck out one by one. */}
         <div className="col-span-12 mt-16 md:mt-24">
-          <div className="ledger" data-reveal>
+          <div className="ledger" data-left-behind={leftBehind}>
             <div className="ledger-keep">
               <p className="ledger-label">{copy.problemKeepLabel}</p>
               <p className="ledger-keep-value">{copy.problemKeepValue}</p>
             </div>
             <div className="ledger-lose">
               <p className="ledger-label">{copy.problemLoseLabel}</p>
-              <dl className="ledger-list">
-                {copy.problemLoseItems.map(([item, value]) => (
-                  <div key={item} className="ledger-item">
+              <dl ref={list} className="ledger-list">
+                {copy.problemLoseItems.map(([item, value], index) => (
+                  <div key={item} className="ledger-item" data-left={index < leftBehind ? "true" : undefined}>
                     <dt>{item}</dt>
                     <dd className="ledger-value">{value}</dd>
                   </div>
@@ -289,7 +301,7 @@ export function LandingPage({ language }: { language: Language }) {
           <div className="col-span-12 mt-6 md:mt-8 lg:col-start-1 lg:row-start-1">
             <h1 className="hero-title-new" lang="en" aria-label={copy.tagline}>
               <span className="hero-line"><span className="block">ALL THE</span></span>
-              <span className="hero-line"><span className="hero-fitness block">FITNESS</span></span>
+              <span className="hero-line"><HeroFitness /></span>
               <span className="hero-line">
                 <span className="block text-bolt">IN ONE<span className="hero-place-break"> PLACE.</span></span>
               </span>

@@ -67,7 +67,10 @@
   .nav-link { @apply transition-colors hover:text-bolt; transition-duration: var(--afo-motion-feedback-duration); }
 
   .hero-title-new { font-family: var(--afo-font-family-display); font-size: clamp(4.5rem, 12.2vw, 12.5rem); font-weight: var(--afo-font-weight-bold); letter-spacing: -.065em; line-height: .68; text-transform: uppercase; }
-  .hero-fitness { position: relative; width: max-content; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); }
+  /* Hollow at the top of the page; `--fill` raises a level inside the letters as the reader scrolls
+     (src/components/hero-fitness.tsx). The padding gives the fill the glyphs' full height, which the
+     tight line box cuts short, and the margin gives the space back. */
+  .hero-fitness { position: relative; width: max-content; margin-block: -.16em; padding-block: .16em; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); background: linear-gradient(to top, var(--afo-color-neutral-chalk) var(--fill, 0%), transparent var(--fill, 0%)); -webkit-background-clip: text; background-clip: text; }
   .hero-place-break { display: inline; }
   .hero-lead { max-width: 46ch; font-size: 1.0625rem; line-height: 1.65; color: color-mix(in srgb, var(--afo-color-neutral-chalk) 78%, transparent); }
 
@@ -157,6 +160,9 @@
    right column is the whole argument. The right column is your record there in
    figures: each row a dimmed label and its value at full strength, tabular, so
    the eye reads the numbers she loses. No cyan: the section names the problem.
+   The ledger acts instead of entering: as it crosses the viewport each figure is
+   struck out and its row dims, top to bottom, until only the word on the left is
+   at full strength. Scrolling back restores them.
 --------------------------------------------------------------------------- */
 
 .ledger { display: grid; gap: var(--afo-space-12); border-top: 1px solid color-mix(in srgb, var(--afo-color-neutral-chalk) 24%, transparent); padding-top: var(--afo-space-8); }
@@ -165,7 +171,11 @@
 .ledger-list { margin-top: var(--afo-space-4); }
 .ledger-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--afo-space-6); border-bottom: 1px solid var(--afo-color-border-subtle); padding-block: var(--afo-space-4); color: color-mix(in srgb, var(--afo-color-neutral-chalk) 62%, transparent); font-family: var(--afo-font-family-display); font-size: clamp(1.15rem, 2.4vw, 1.65rem); font-weight: var(--afo-font-weight-semibold); letter-spacing: var(--afo-letter-spacing-tight); line-height: 1.05; text-transform: uppercase; }
 .ledger-item:last-child { border-bottom: 0; }
-.ledger-value { color: var(--afo-color-neutral-chalk); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.ledger-value { position: relative; color: var(--afo-color-neutral-chalk); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.ledger-value::after { content: ''; position: absolute; inset-inline: -.14em; top: 50%; height: max(1.5px, .055em); background: color-mix(in srgb, var(--afo-color-neutral-chalk) 82%, transparent); transform: scaleX(0); transform-origin: left center; }
+.ledger-item[data-left] { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 34%, transparent); }
+.ledger-item[data-left] .ledger-value { color: color-mix(in srgb, var(--afo-color-neutral-chalk) 54%, transparent); }
+.ledger-item[data-left] .ledger-value::after { transform: scaleX(1); }
 
 /* ---------------------------------------------------------------------------
    Fitness ID
@@ -749,10 +759,10 @@ section[id].fid-section {
    Motion: the vocabulary of the Space and Studio landings, spent sparingly
    The hero enters once, on load: the title rises out of its masks line by line,
    then the lead and the action lift in. Below it, each section has a single
-   moment, the first time it scrolls into view: its title rises line by line and
-   its main object arrives (the ledger). The Fitness ID card, the Space phone
-   and the Studio window do not arrive: they act, driven by the scroll through
-   Motion. There is no
+   moment, the first time it scrolls into view: its title rises line by line.
+   No object arrives. The hero's FITNESS, the ledger, the Fitness ID card, the
+   Space phone and the Studio window act, driven by the scroll through Motion.
+   There is no
    pointer light and no scroll progress bar. Everything else stays still. Reveals are armed by
    `[data-motion='on']` (src/components/landing-motion.ts), so without
    JavaScript the page is whole, and reduced motion keeps every final state.
@@ -775,6 +785,10 @@ section[id].fid-section {
   .hero-line:nth-child(2) > span { animation-delay: 110ms; }
   .hero-line:nth-child(3) > span { animation-delay: 220ms; }
   .hero-enter { animation: landing-lift 1s var(--landing-ease) backwards; animation-delay: calc(520ms + var(--i, 0) * 120ms); }
+
+  /* The ledger's figures are struck out by the scroll; the stroke is drawn, the row dims. */
+  .ledger-item, .ledger-value { transition: color .5s var(--landing-ease); }
+  .ledger-value::after { transition: transform .55s var(--landing-ease); }
 
   /* Hidden states arm instantly; the transitions live on the revealed states. */
   [data-landing][data-motion='on'] [data-reveal] { opacity: 0; transform: translate3d(0, 36px, 0); }

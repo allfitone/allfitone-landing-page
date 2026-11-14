@@ -501,7 +501,7 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 
 **`device-shell`** — A 42px-radius physical frame for an actual Allfit Space surface. Use only when the device explains the personal fitness experience. Do not add a device mockup merely to fill a column.
 
-**`problem-ledger`** — The problem section's one object, below the title and lead: a handover ledger with one real case. It speaks to the reader, like the title. Left, «Tú te llevas» and a single solid display word, «Nada»; right, «Dejas en tu antiguo gimnasio», continuing the left label, and the record that stays there as label–value rows: the label dimmed in condensed uppercase, the value at full strength, right-aligned with tabular numerals (184 sesiones, 95 kg, 12 semanas, 11 notas, 2 años). The imbalance between the columns is the argument. No cyan and no hollow type: the section names the problem, and the Fitness ID card that follows holds the same kinds of data, kept.
+**`problem-ledger`** — The problem section's one object, below the title and lead: a handover ledger with one real case. It speaks to the reader, like the title. Left, «Tú te llevas» and a single solid display word, «Nada»; right, «Dejas en tu antiguo gimnasio», continuing the left label, and the record that stays there as label–value rows: the label dimmed in condensed uppercase, the value at full strength, right-aligned with tabular numerals (184 sesiones, 95 kg, 12 semanas, 11 notas, 2 años). The imbalance between the columns is the argument. No cyan and no hollow type: the section names the problem, and the Fitness ID card that follows holds the same kinds of data, kept. The ledger acts instead of entering: as it crosses the viewport each figure is struck out with a thin Chalk stroke and its row dims, top to bottom, until «Nada» is the only thing at full strength.
 
 **`space-session-phone`** — The Allfit Space section's one object: the Space landing's phone on Chalk, 300px wide and 320px from `lg`, upright, beside the title from `lg` and below the copy under it. It is that landing's frame (carbon body, a hairline of cyan at 34%, the 1206 × 2622 shape) around a real capture of the app's session screen, `public/images/space/session.webp`, so both sites show one product. The parts that change as the reader scrolls (two pending sets of «Dominadas», the volume, the set count, the progress bar and «Remo con barra»'s count) are drawn over the capture with the app's own sizes and colours, sampled from the capture; nothing else is drawn.
 
@@ -587,6 +587,7 @@ Allfit Space is the personal expression of the ecosystem:
 - Don't round full-width editorial sections.
 - Don't use full pills for ordinary text labels.
 - Don't scatter floating, pulsing, or scroll-reveal animation across unrelated elements.
+- Don't make an object arrive with a fade or a slide. The hero's «FITNESS» fills, the ledger is struck out, the Fitness ID card switches, the Space phone logs sets and the Studio window is read: each object changes state with the scroll, both ways.
 - Don't redraw the “1” as a conventional numeral or alter its proportions casually.
 - Don't write `AllfitOne`; the brand is **Allfit One**.
 - Don't position Allfit One only as Allfit Studio, gym-management software, or a “fitness tech company.”
