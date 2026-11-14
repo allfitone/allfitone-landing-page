@@ -258,7 +258,7 @@ for (const [screen, viewport] of [
     // One real capture of the app per layout, described for who cannot see it.
     await expect(shown).toBeVisible();
     await expect(hidden).toBeHidden();
-    await expect(shown.getByRole("img")).toHaveAttribute("alt", /Allfit Studio, pantalla Contenido/);
+    await expect(shown.getByRole("img")).toHaveAttribute("alt", /Allfit Studio, pantalla Cobros/);
 
     // Below the fold the page is at its top.
     await placeStudioWindow(page, 0.9);

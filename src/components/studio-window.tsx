@@ -5,8 +5,8 @@ import * as m from "motion/react-m";
 
 /**
  * The Allfit Studio section's one object: a window on the real app. Both captures are the
- * app's content screen, «Contenido», taken from Allfit Studio itself with sample data:
- * the programs a studio has published and assigns to its clients.
+ * app's billing screen, «Cobros», taken from Allfit Studio itself with sample data: who
+ * pays the studio, on which plan, and when each next charge falls.
  *
  * The window works instead of entering. Each capture comes in two pieces, the screen as it
  * loads and the whole page under its header, so the page can be read down as the reader
@@ -17,7 +17,7 @@ import * as m from "motion/react-m";
 type Capture = {
   /** The screen as it loads, sidebar and header included. */
   screen: string;
-  /** The whole page under the header, as tall as it is. */
+  /** The page under the header, as far down as it is read and a screen more. */
   page: string;
   /** The screen's size in CSS px. */
   width: number;
@@ -35,25 +35,25 @@ type Capture = {
 
 /** The app from 1024px: its sidebar beside the page. */
 const desktop: Capture = {
-  screen: "/images/studio/content-desktop.webp",
-  page: "/images/studio/content-desktop-page.webp",
+  screen: "/images/studio/billing-desktop.webp",
+  page: "/images/studio/billing-desktop-page.webp",
   width: 1280,
   height: 720,
   pageLeft: 272,
   pageTop: 64,
-  pageHeight: 1081,
+  pageHeight: 1312,
   travel: 420,
 };
 
 /** The app on a phone. */
 const mobile: Capture = {
-  screen: "/images/studio/content-mobile.webp",
-  page: "/images/studio/content-mobile-page.webp",
+  screen: "/images/studio/billing-mobile.webp",
+  page: "/images/studio/billing-mobile-page.webp",
   width: 390,
   height: 700,
   pageLeft: 0,
   pageTop: 64,
-  pageHeight: 2054,
+  pageHeight: 1272,
   travel: 420,
 };
 

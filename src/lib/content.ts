@@ -100,7 +100,7 @@ export const content = {
     studioSectionCopy:
       "Studio trabaja sobre el Fitness ID de cada persona: planificas, sigues su progreso y llevas tu operación sin pedirle que empiece de cero.",
     studioWindowAlt:
-      "Allfit Studio, pantalla Contenido: los programas del gimnasio, cada uno con sus versiones publicadas.",
+      "Allfit Studio, pantalla Cobros: quién paga, en qué plan está cada persona y cuándo es su próximo cobro.",
 
     statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
@@ -229,7 +229,7 @@ export const content = {
     studioSectionCopy:
       "Studio works on each person's Fitness ID: you plan, follow their progress and run your operation without asking them to start over.",
     studioWindowAlt:
-      "Allfit Studio, Content screen: the gym's programs, each with its published versions.",
+      "Allfit Studio, Billing screen: who pays, which plan each person is on and when their next charge is.",
 
     statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",
