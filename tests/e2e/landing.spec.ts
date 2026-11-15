@@ -455,43 +455,92 @@ async function placeFitnessIdCard(page: import("@playwright/test").Page, share: 
   }, share);
 }
 
-test("the Fitness ID card acts out its controls as it crosses the viewport, both ways", async ({ page }) => {
+test("the Fitness ID card acts out its controls one after another once it is in view", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/es");
   const card = page.locator(".fid-card");
   const shared = card.locator("[data-on='true']");
   const activeControl = page.locator(".fid-control[data-active='true'] h3");
+  const status = card.locator(".fid-card-status [data-active='true']");
 
   // Above the fold the card is at rest: nothing shared, no control marked.
   await expect(card).toHaveAttribute("data-stage", "rest");
   await expect(shared).toHaveCount(0);
   await expect(activeControl).toHaveCount(0);
+  await expect(status).toHaveCount(0);
 
-  await placeFitnessIdCard(page, 0.4);
+  // Every stage is seen, in order and at its own pace, however the reader got here.
+  await card.evaluate((element) => {
+    const seen: string[] = [];
+    new MutationObserver(() => seen.push((element as HTMLElement).dataset.stage ?? "")).observe(element, {
+      attributes: true,
+      attributeFilter: ["data-stage"],
+    });
+    (window as unknown as { fidStages: string[] }).fidStages = seen;
+  });
+  await placeFitnessIdCard(page, 0.2);
+
   await expect(card).toHaveAttribute("data-stage", "grant");
   await expect(shared).toHaveText(["Historial de entrenamiento", "Marcas personales"]);
   await expect(activeControl).toHaveText("Tú concedes");
+  // The card names the control itself: on a phone the list is below the fold.
+  await expect(status).toHaveText("Tú concedes");
 
-  await placeFitnessIdCard(page, 0.25);
   await expect(card).toHaveAttribute("data-stage", "revoke");
   await expect(shared).toHaveText(["Historial de entrenamiento"]);
   await expect(activeControl).toHaveText("Tú revocas");
 
-  await placeFitnessIdCard(page, 0.12);
   // «Tú te lo llevas»: every row is on, because all of it leaves with the person.
   await expect(card).toHaveAttribute("data-stage", "keep");
   await expect(shared).toHaveCount(8);
   await expect(activeControl).toHaveText("Tú te lo llevas");
+  await expect(status).toHaveText("Tú te lo llevas");
+  expect(await page.evaluate(() => (window as unknown as { fidStages: string[] }).fidStages)).toEqual([
+    "grant",
+    "revoke",
+    "keep",
+  ]);
 
-  // Scrolling back plays it in reverse.
-  await placeFitnessIdCard(page, 0.4);
-  await expect(card).toHaveAttribute("data-stage", "grant");
-
-  // A mouse over a control previews its stage, and leaving returns to the scroll's.
-  await page.locator(".fid-control", { hasText: "Tú revocas" }).hover();
+  // A mouse over a control previews its stage, and leaving returns to where the card was.
+  const revoke = await page.locator(".fid-control", { hasText: "Tú revocas" }).boundingBox();
+  if (!revoke) throw new Error("the controls are not on screen");
+  await page.mouse.move(revoke.x + 40, revoke.y + 20);
+  await page.mouse.move(revoke.x + 60, revoke.y + 30);
   await expect(card).toHaveAttribute("data-stage", "revoke");
   await page.mouse.move(700, 880);
+  await expect(card).toHaveAttribute("data-stage", "keep");
+
+  // The list passing under a still cursor is not the reader pointing at a control.
+  const concede = await page.locator(".fid-control", { hasText: "Tú concedes" }).boundingBox();
+  if (!concede) throw new Error("the controls are not on screen");
+  await page.mouse.move(concede.x + 40, concede.y - 140);
+  await page.mouse.wheel(0, 160);
+  await page.waitForTimeout(400);
+  // The control really is under the cursor now.
+  const under = await page.evaluate(
+    ([x, y]) => document.elementFromPoint(x, y)?.closest(".fid-control")?.textContent ?? "",
+    [concede.x + 40, concede.y - 140],
+  );
+  expect(under).toContain("Tú concedes");
+  await expect(card).toHaveAttribute("data-stage", "keep");
+
+  // Past the card it stays picked up; back above it, it rests and plays again on the way down.
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await expect(card).toHaveAttribute("data-stage", "rest");
+  await placeFitnessIdCard(page, 0.2);
   await expect(card).toHaveAttribute("data-stage", "grant");
+});
+
+test("on a phone the Fitness ID card plays with its controls still below the fold", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/es");
+  const card = page.locator(".fid-card");
+
+  await placeFitnessIdCard(page, 0.2);
+  await expect(card).toHaveAttribute("data-stage", "grant");
+  await expect(page.locator(".fid-controls")).not.toBeInViewport();
+  await expect(card.locator(".fid-card-status [data-active='true']")).toHaveText("Tú concedes");
+  await expect(card).toHaveAttribute("data-stage", "keep");
 });
 
 /** Puts the top of the Allfit Space phone at a share of the viewport height, with no smooth scrolling. */
