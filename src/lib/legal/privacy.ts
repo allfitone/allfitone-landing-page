@@ -83,7 +83,6 @@ export const privacyPolicy = {
         content: [
           "Usamos proveedores de infraestructura en la nube que pueden alojar datos fuera de Colombia, con garantías adecuadas de protección. La analítica opcional se procesa en PostHog, en Estados Unidos.",
           "Nuestros proveedores tratan los datos solo para prestarnos su servicio.",
-          "Cuando confirmas tu correo en la lista de espera, el equipo fundador recibe un aviso con tu nombre y tu correo en Slack, su herramienta interna de mensajería.",
         ],
       },
       {
@@ -199,7 +198,6 @@ export const privacyPolicy = {
         content: [
           "We use cloud infrastructure providers that may host data outside Colombia, with adequate protection safeguards. Optional analytics is processed by PostHog, in the United States.",
           "Our providers process data only to provide their service to us.",
-          "When you confirm your email on the waitlist, the founding team gets a notice with your name and email in Slack, its internal messaging tool.",
         ],
       },
       {
