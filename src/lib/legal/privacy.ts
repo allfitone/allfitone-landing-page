@@ -29,7 +29,7 @@ export const privacyPolicy = {
         id: "scope",
         title: "A qué se aplica",
         content: [
-          "A Allfit Space, la app personal; a Allfit Studio, el sistema para entrenadores, gimnasios y estudios; y a www.allfit.one, incluida su lista de espera.",
+          "A Allfit Space, la app personal; a Allfit Studio, el sistema para entrenadores, gimnasios y estudios; y a sus sitios web (www.allfit.one, space.allfit.one y studio.allfit.one), incluida la lista de espera de Allfit Space.",
         ],
       },
       {
@@ -43,7 +43,7 @@ export const privacyPolicy = {
             "Nutrición no clínica: comidas, alimentos, nutrientes y, si las subes, fotos de tus comidas.",
             "Progreso corporal y contexto de salud, solo si decides registrarlos. Son datos sensibles: darlos es opcional y nunca condiciona el uso de la app.",
             "En Allfit Studio, los datos de tu negocio y de tu equipo, y los de tus clientes que ellos te autoricen ver.",
-            "En la lista de espera de Allfit Space, tu nombre, tu correo, el código de quien te invitó y, para descartar registros repetidos, la conexión y el dispositivo desde los que te uniste. De la conexión y el dispositivo guardamos solo una huella que no permite recuperarlos, y para reconocer el dispositivo space.allfit.one guarda en tu navegador una cookie con un identificador al azar.",
+            "En la lista de espera de Allfit Space, tu nombre, tu correo, tu idioma, el canal por el que llegaste si tu link lo indica (por ejemplo, Instagram), el código de quien te invitó y, para descartar registros repetidos, la conexión y el dispositivo desde los que te uniste. De la conexión y el dispositivo guardamos solo una huella que no permite recuperarlos, y para reconocer el dispositivo space.allfit.one guarda en tu navegador una cookie con un identificador al azar.",
           ],
         ],
       },
@@ -83,6 +83,7 @@ export const privacyPolicy = {
         content: [
           "Usamos proveedores de infraestructura en la nube que pueden alojar datos fuera de Colombia, con garantías adecuadas de protección. La analítica opcional se procesa en PostHog, en Estados Unidos.",
           "Nuestros proveedores tratan los datos solo para prestarnos su servicio.",
+          "Cuando confirmas tu correo en la lista de espera, el equipo fundador recibe un aviso con tu nombre y tu correo en Slack, su herramienta interna de mensajería.",
         ],
       },
       {
@@ -144,7 +145,7 @@ export const privacyPolicy = {
         id: "scope",
         title: "What it covers",
         content: [
-          "Allfit Space, the personal app; Allfit Studio, the system for coaches, gyms and studios; and www.allfit.one, including its waitlist.",
+          "Allfit Space, the personal app; Allfit Studio, the system for coaches, gyms and studios; and their websites (www.allfit.one, space.allfit.one and studio.allfit.one), including the Allfit Space waitlist.",
         ],
       },
       {
@@ -158,7 +159,7 @@ export const privacyPolicy = {
             "Non-clinical nutrition: meals, foods, nutrients and, if you upload them, photos of your meals.",
             "Body progress and health context, only if you choose to log them. These are sensitive data: giving them is optional and never a condition for using the app.",
             "In Allfit Studio, your business and team data, and the data of your clients that they authorize you to see.",
-            "On the Allfit Space waitlist, your name, your email, the code of whoever invited you and, to rule out repeated sign-ups, the connection and device you joined from. Of the connection and the device we keep only a fingerprint that cannot be turned back into them, and to recognize the device space.allfit.one keeps a cookie with a random identifier in your browser.",
+            "On the Allfit Space waitlist, your name, your email, your language, the channel you came through if your link names it (for example, Instagram), the code of whoever invited you and, to rule out repeated sign-ups, the connection and device you joined from. Of the connection and the device we keep only a fingerprint that cannot be turned back into them, and to recognize the device space.allfit.one keeps a cookie with a random identifier in your browser.",
           ],
         ],
       },
@@ -198,6 +199,7 @@ export const privacyPolicy = {
         content: [
           "We use cloud infrastructure providers that may host data outside Colombia, with adequate protection safeguards. Optional analytics is processed by PostHog, in the United States.",
           "Our providers process data only to provide their service to us.",
+          "When you confirm your email on the waitlist, the founding team gets a notice with your name and email in Slack, its internal messaging tool.",
         ],
       },
       {
