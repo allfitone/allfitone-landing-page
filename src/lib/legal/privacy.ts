@@ -29,7 +29,7 @@ export const privacyPolicy = {
         id: "scope",
         title: "A qué se aplica",
         content: [
-          "A Allfit Space, la app personal; a Allfit Studio, el sistema para entrenadores, gimnasios y estudios; y a www.allfit.one, incluida su lista de espera.",
+          "A Allfit Space, la app personal; a Allfit Studio, el sistema para entrenadores, gimnasios y estudios; y a sus sitios web (www.allfit.one, space.allfit.one y studio.allfit.one), incluida la lista de espera de Allfit Space.",
         ],
       },
       {
@@ -43,7 +43,7 @@ export const privacyPolicy = {
             "Nutrición no clínica: comidas, alimentos, nutrientes y, si las subes, fotos de tus comidas.",
             "Progreso corporal y contexto de salud, solo si decides registrarlos. Son datos sensibles: darlos es opcional y nunca condiciona el uso de la app.",
             "En Allfit Studio, los datos de tu negocio y de tu equipo, y los de tus clientes que ellos te autoricen ver.",
-            "En la lista de espera, tu nombre, tu correo y cómo usarías Allfit One.",
+            "En la lista de espera de Allfit Space, tu nombre, tu correo, tu idioma, el canal por el que llegaste si tu link lo indica (por ejemplo, Instagram), el código de quien te invitó y, para descartar registros repetidos, la conexión y el dispositivo desde los que te uniste. De la conexión y el dispositivo guardamos solo una huella que no permite recuperarlos, y para reconocer el dispositivo space.allfit.one guarda en tu navegador una cookie con un identificador al azar.",
           ],
         ],
       },
@@ -55,7 +55,7 @@ export const privacyPolicy = {
             "Prestarte el servicio: guardar tu historial, mostrarte tu progreso y proponerte programas.",
             "Compartir con un gimnasio o entrenador exactamente las categorías que tú autorices, y solo mientras las autorices.",
             "Proteger tu cuenta, darte soporte y cumplir obligaciones legales.",
-            "Avisarte cuando abran Allfit Space y Allfit Studio, si te uniste a la lista de espera.",
+            "Si te uniste a la lista de espera: avisarte cuando abra Allfit Space, confirmar tu lugar entre los Founding Members y contar las personas que se unen con tu link.",
           ],
           "No vendemos tus datos ni los usamos para publicidad de terceros.",
         ],
@@ -83,6 +83,7 @@ export const privacyPolicy = {
         content: [
           "Usamos proveedores de infraestructura en la nube que pueden alojar datos fuera de Colombia, con garantías adecuadas de protección. La analítica opcional se procesa en PostHog, en Estados Unidos.",
           "Nuestros proveedores tratan los datos solo para prestarnos su servicio.",
+          "Cuando confirmas tu correo en la lista de espera, el equipo fundador recibe un aviso con tu nombre y tu correo en Slack, su herramienta interna de mensajería.",
         ],
       },
       {
@@ -90,7 +91,7 @@ export const privacyPolicy = {
         title: "Seguridad y conservación",
         content: [
           "Protegemos tus datos con controles técnicos y organizativos, y cada acceso autorizado a ellos queda registrado.",
-          "Conservamos tus datos mientras tengas una cuenta activa y durante los plazos que exija la ley. Los de la lista de espera, hasta que nos pidas borrarlos.",
+          "Conservamos tus datos mientras tengas una cuenta activa y durante los plazos que exija la ley. Si te uniste a la lista de espera y no creas tu cuenta, borramos esos datos 90 días después de que abra Allfit Space. Puedes salir de la lista antes desde cualquiera de sus correos.",
         ],
       },
       {
@@ -144,7 +145,7 @@ export const privacyPolicy = {
         id: "scope",
         title: "What it covers",
         content: [
-          "Allfit Space, the personal app; Allfit Studio, the system for coaches, gyms and studios; and www.allfit.one, including its waitlist.",
+          "Allfit Space, the personal app; Allfit Studio, the system for coaches, gyms and studios; and their websites (www.allfit.one, space.allfit.one and studio.allfit.one), including the Allfit Space waitlist.",
         ],
       },
       {
@@ -158,7 +159,7 @@ export const privacyPolicy = {
             "Non-clinical nutrition: meals, foods, nutrients and, if you upload them, photos of your meals.",
             "Body progress and health context, only if you choose to log them. These are sensitive data: giving them is optional and never a condition for using the app.",
             "In Allfit Studio, your business and team data, and the data of your clients that they authorize you to see.",
-            "On the waitlist, your name, your email and how you would use Allfit One.",
+            "On the Allfit Space waitlist, your name, your email, your language, the channel you came through if your link names it (for example, Instagram), the code of whoever invited you and, to rule out repeated sign-ups, the connection and device you joined from. Of the connection and the device we keep only a fingerprint that cannot be turned back into them, and to recognize the device space.allfit.one keeps a cookie with a random identifier in your browser.",
           ],
         ],
       },
@@ -170,7 +171,7 @@ export const privacyPolicy = {
             "To provide the service: keep your history, show your progress and suggest programs.",
             "To share with a gym or coach exactly the categories you authorize, and only while you authorize them.",
             "To protect your account, support you and meet legal obligations.",
-            "To tell you when Allfit Space and Allfit Studio open, if you joined the waitlist.",
+            "If you joined the waitlist: to tell you when Allfit Space opens, confirm your place among the Founding Members and count the people who join through your link.",
           ],
           "We do not sell your data or use it for third-party advertising.",
         ],
@@ -198,6 +199,7 @@ export const privacyPolicy = {
         content: [
           "We use cloud infrastructure providers that may host data outside Colombia, with adequate protection safeguards. Optional analytics is processed by PostHog, in the United States.",
           "Our providers process data only to provide their service to us.",
+          "When you confirm your email on the waitlist, the founding team gets a notice with your name and email in Slack, its internal messaging tool.",
         ],
       },
       {
@@ -205,7 +207,7 @@ export const privacyPolicy = {
         title: "Security and retention",
         content: [
           "We protect your data with technical and organizational controls, and every authorized access to it is logged.",
-          "We keep your data while you have an active account and for the periods the law requires. Waitlist data, until you ask us to delete it.",
+          "We keep your data while you have an active account and for the periods the law requires. If you joined the waitlist and do not create an account, we delete that data 90 days after Allfit Space opens. You can leave the list sooner from any of its emails.",
         ],
       },
       {
