@@ -1,39 +1,36 @@
 import { useRef, useState } from "react";
 
-import { FitnessIdCard, type FitnessIdStage } from "@/components/fitness-id-card";
+import { FitnessIdCard, fitnessIdControlStages, type FitnessIdStage } from "@/components/fitness-id-card";
 import { RevealTitle } from "@/components/reveal-title";
-import { useScrollSteps, type ScrollWindow } from "@/components/scroll-steps";
+import { useTimedSteps } from "@/components/timed-steps";
 import type { LocalizedContent } from "@/lib/content";
 
 /**
  * The Fitness ID section. Its card does not enter the page: it acts out the three
- * controls beside it. As the card crosses the viewport, two rows are shared («Tú
- * concedes»), one is withdrawn («Tú revocas») and, with the relationship over, every row
- * turns on and the card is picked up («Tú te lo llevas»). The control being acted out
- * takes the cyan, and scrolling back plays it in reverse. With a mouse, pointing at a
- * control shows its stage.
+ * controls beside it. Once the card is in view, two rows are shared («Tú concedes»), one
+ * is withdrawn («Tú revocas») and, with the relationship over, every row turns on and the
+ * card is picked up («Tú te lo llevas»). The control being acted out takes the cyan. With
+ * a mouse, pointing at a control shows its stage.
  *
- * The scroll picks the stage; Motion springs the knobs and the card between stages.
+ * Time picks the stage, not the scroll: tied to the scroll the three changes fit in two
+ * turns of a mouse wheel, so a reader in a hurry skipped one and nobody had time to read
+ * the control it stood for. Motion springs the knobs and the card between stages.
  * Server-rendered HTML and reduced motion get the card at rest, whole and still.
  */
 
-/** The card's stages in scroll order: at rest, then one per control, in the order of `fitnessIdControls`. */
-const stages = ["rest", "grant", "revoke", "keep"] as const satisfies readonly FitnessIdStage[];
+/** The card's stages in order: at rest, then one per control, in the order of `fitnessIdControls`. */
+const stages = ["rest", ...fitnessIdControlStages] as const satisfies readonly FitnessIdStage[];
 
-/**
- * Progress runs from the card's top reaching the middle of the viewport to its bottom
- * passing that middle, about one card height of scrolling whatever the screen. The stages
- * sit where the rows that change are on screen, and the card is whole in view when it is
- * picked up.
- */
-const scrollWindow: ScrollWindow = ["start 0.55", "end 0.6"];
-const stageStarts = [0.08, 0.4, 0.72] as const;
+/** Seconds before each stage once the card is in view: a breath, then time to read a control. */
+const stageBeats = [0.45, 1.7, 1.7] as const;
 
 export function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
   const card = useRef<HTMLDivElement>(null);
-  const scrolled = stages[useScrollSteps(card, scrollWindow, stageStarts)];
+  const played = stages[useTimedSteps(card, stageBeats)];
   const [pointed, setPointed] = useState<FitnessIdStage | null>(null);
-  const stage = pointed ?? scrolled;
+  /** Where the pointer was when a control came under it. */
+  const entered = useRef({ x: 0, y: 0 });
+  const stage = pointed ?? played;
 
   return (
     <section id="fitness-id" className="fid-section bg-void text-white">
@@ -55,9 +52,15 @@ export function FitnessIdSection({ copy }: { copy: LocalizedContent }) {
                 key={title}
                 className="fid-control"
                 data-active={stage === stages[index + 1]}
-                // Touch has no hover to leave, so only a mouse previews a stage.
+                // Only a mouse that moves previews a stage: touch has no hover to leave, and
+                // the list passing under a still cursor is not the reader pointing at it.
                 onPointerEnter={(event) => {
-                  if (event.pointerType === "mouse") setPointed(stages[index + 1]);
+                  entered.current = { x: event.clientX, y: event.clientY };
+                }}
+                onPointerMove={(event) => {
+                  if (event.pointerType !== "mouse") return;
+                  const { x, y } = entered.current;
+                  if (event.clientX !== x || event.clientY !== y) setPointed(stages[index + 1]);
                 }}
                 onPointerLeave={() => setPointed(null)}
               >
