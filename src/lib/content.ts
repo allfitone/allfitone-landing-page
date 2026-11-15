@@ -104,6 +104,7 @@ export const content = {
 
     statusLabel: "Lista de espera",
     statusTitle: "Estamos construyendo Allfit One.",
+    statusTitleLead: "Estamos construyendo",
     statusCopy: "Allfit Space tiene lista de espera. Únete y te avisamos cuando abra.",
     // The launch offer, stated once; its terms live on the waitlist page on space.allfit.one.
     waitlistOffer: "Las primeras 100 personas que confirmen su correo serán sus Founding Members.",
@@ -202,6 +203,7 @@ export const content = {
 
     statusLabel: "Waitlist",
     statusTitle: "We're building Allfit One.",
+    statusTitleLead: "We're building",
     statusCopy: "Allfit Space has a waitlist. Join it and we'll let you know when it opens.",
     waitlistOffer: "The first 100 people to confirm their email become its Founding Members.",
     tagline: "All the fitness in one place.",

@@ -526,7 +526,7 @@ Links styled as buttons remain native anchors. In the current Base UI stack, use
 - Loading and success states must not depend only on color.
 - Input types, autocomplete, names, and native semantics must reflect the data requested.
 
-**`waitlist-section`** — Not shown while the waitlist is closed (`waitlistOpen`). The homepage's close, on Void: the title rises like every section title, the lead sits beside it from lg, then the offer in one line of Chalk and `button-primary-large` with the `external` icon, opening the Allfit Space waitlist on space.allfit.one in a new tab. The form, the referral links and the offer's terms live there; this site has no waitlist page or form.
+**`waitlist-section`** — Not shown while the waitlist is closed (`waitlistOpen`). The homepage's close, on Void: the title rises like every section title and names the brand with the official Allfit One wordmark as its last word, at the title’s cap height and with no period after it (the owner asked for the logotype there in November 2026), the lead sits beside it from lg, then the offer in one line of Chalk and `button-primary-large` with the `external` icon, opening the Allfit Space waitlist on space.allfit.one in a new tab. The form, the referral links and the offer's terms live there; this site has no waitlist page or form.
 
 
 ### FAQ

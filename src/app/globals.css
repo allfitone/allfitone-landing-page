@@ -82,6 +82,9 @@
   .section-lead { max-width: 46ch; font-size: 1rem; line-height: 1.75; }
   .eyebrow { @apply font-extrabold uppercase; font-size: var(--landing-type-label); letter-spacing: var(--landing-tracking-label); line-height: 1.4; }
 
+  /* The Allfit One wordmark as a title's last word. Its letters are 700 of the 756 units of its
+     box, so this height sets them at the type's cap height (0.7em) and the offsets drop the padding. */
+  .section-title .title-wordmark { display: inline-block; width: auto; height: 0.756em; margin-left: -0.02em; vertical-align: -0.028em; }
   .product-section-wordmark { width: min(100%, 11rem); }
   .product-section-wordmark svg { display: block; width: 100%; height: auto; }
   .product-section-wordmark-dark { width: min(100%, 12rem); }

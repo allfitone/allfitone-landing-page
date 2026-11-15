@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { LazyMotion } from "motion/react";
 import {
   BrandLockup,
+  BrandWordmark,
   ProductWordmark,
 } from "@allfitone/react/brand";
 import { buttonVariants } from "@allfitone/react/components/button";
@@ -185,9 +186,16 @@ function WaitlistSection({ copy, language }: { copy: LocalizedContent; language:
     <section id="waitlist" className="bg-void text-white">
       <div className="site-grid py-24 md:py-32 lg:py-40">
         {/* The page's close. The form lives on space.allfit.one, so here the offer is
-            stated once and the action opens it; the lead sits beside the title from lg. */}
+            stated once and the action opens it; the lead sits beside the title from lg.
+            The title names the brand with its wordmark, at the title's cap height. */}
         <div className="col-span-12 lg:col-span-6 lg:row-start-1">
-          <RevealTitle className="section-title">{copy.statusTitle}</RevealTitle>
+          <RevealTitle
+            className="section-title"
+            label={copy.statusTitle}
+            tail={<BrandWordmark surface="dark" className="title-wordmark" aria-hidden="true" />}
+          >
+            {copy.statusTitleLead}
+          </RevealTitle>
         </div>
         <div className="col-span-12 mt-8 lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:mt-0">
           <p className="section-lead text-white/72">{copy.statusCopy}</p>
