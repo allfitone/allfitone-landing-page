@@ -8,10 +8,10 @@ import { productSiteUrl } from "@/lib/site-config";
  * are Allfit Space links. This site only leads to it.
  *
  * Whether this site shows the waitlist at all. Closed, the homepage drops its waitlist
- * section and every «Únete a la lista» action. Open it only once the waitlist on
- * space.allfit.one stores sign-ups (TECH-292..296); opening it is TECH-297.
+ * section and every «Únete a la lista» action. Open since November 2026 (TECH-297), when
+ * the waitlist on space.allfit.one began storing sign-ups.
  */
-export const waitlistOpen: boolean = false;
+export const waitlistOpen: boolean = true;
 
 /** The Allfit Space waitlist page in the visitor's language, e.g. `https://space.allfit.one/es/waitlist`. */
 export function spaceWaitlistUrl(language: Language): string {

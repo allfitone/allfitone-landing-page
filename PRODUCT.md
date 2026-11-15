@@ -252,7 +252,7 @@ Neither product is demo-able yet, so the page must not offer a demo. Fitness ID 
 - Navigate to the Fitness ID, Allfit Space, Allfit Studio, and ecosystem sections.
 - Write to `hello@allfit.one`. The email action appears in the navbar, the hero, the Allfit Space and Allfit Studio sections, and as a closing call to action at the end of the current-status section.
 
-The waitlist is closed on this site for now (see `waitlistOpen` in `src/lib/waitlist.ts`): while it is, the homepage has no conversion action. Open, the conversion is the Allfit Space waitlist on space.allfit.one: every waitlist action opens `https://space.allfit.one/{lang}/waitlist` in a new tab, and the homepage closes with the offer in one line and the same action. This site has no waitlist form or page of its own. Neither product has a demo CTA.
+The waitlist is open on this site (see `waitlistOpen` in `src/lib/waitlist.ts`; closed, the homepage has no conversion action). The conversion is the Allfit Space waitlist on space.allfit.one: every waitlist action opens `https://space.allfit.one/{lang}/waitlist` in a new tab, and the homepage closes with the offer in one line and the same action. This site has no waitlist form or page of its own. Neither product has a demo CTA.
 
 ## Success metrics
 
