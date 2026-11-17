@@ -1,3 +1,5 @@
+import { createHash } from "node:crypto";
+
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
@@ -381,6 +383,21 @@ test("describes each product with the identity and URL of its own landing", asyn
   }
 });
 
+test("previews each language with its own image, named by its content", async ({ request }) => {
+  for (const language of ["es", "en"]) {
+    const html = await (await request.get(`/${language}`)).text();
+    const address = /<meta property="og:image" content="([^"]+)"/.exec(html)?.[1] ?? "";
+    expect(address).toContain(`https://www.allfit.one/social/allfit-one-share-${language}.`);
+
+    const image = await request.get(new URL(address).pathname);
+    expect(image.status()).toBe(200);
+    expect(image.headers()["content-type"]).toBe("image/png");
+    // Apps keep a preview by its image's address: a changed picture must take a new name.
+    const hash = createHash("sha256").update(await image.body()).digest("hex").slice(0, 8);
+    expect(address.endsWith(`.${hash}.png`)).toBe(true);
+  }
+});
+
 test("publishes Studio metadata and keeps the legacy anchor compatible", async ({ page, request }) => {
   const response = await request.get("/es");
   const html = await response.text();
@@ -388,7 +405,7 @@ test("publishes Studio metadata and keeps the legacy anchor compatible", async (
   expect(html).toContain('<link rel="canonical" href="https://www.allfit.one/es"/>');
   expect(html).toContain('<link rel="alternate" hrefLang="en" href="https://www.allfit.one/en"/>');
   expect(html).toContain('<link rel="alternate" hrefLang="x-default" href="https://www.allfit.one"/>');
-  expect(html).toContain('<meta property="og:image" content="https://www.allfit.one/social/allfit-one-share.png"/>');
+  expect(html).toContain('<meta property="og:image" content="https://www.allfit.one/social/allfit-one-share-es.');
   expect(html).toContain("Allfit Studio");
   expect(html).not.toContain("Allfit OS");
 

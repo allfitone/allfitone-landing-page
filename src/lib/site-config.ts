@@ -40,16 +40,23 @@ export function productSiteUrl(product: keyof typeof siteConfig.products, langua
 }
 
 const shareImageAlt = {
-  es: "Allfit One — All the fitness in one place. Allfit Space y Allfit Studio, dos productos conectados.",
-  en: "Allfit One — All the fitness in one place. Allfit Space and Allfit Studio, two connected products.",
+  es: "Allfit One, el ecosistema donde el fitness se conecta: el panel de Allfit Studio con la app Allfit Space delante, en un teléfono.",
+  en: "Allfit One, the ecosystem where fitness connects: the Allfit Studio panel with the Allfit Space app in front of it, on a phone.",
+} as const satisfies Record<Language, string>;
+
+// Apps keep a preview by its image's address, so a file never changes in place:
+// its name carries a hash of its content, and a new picture is a new name.
+const shareImageFile = {
+  es: "allfit-one-share-es.6cfb3eda.png",
+  en: "allfit-one-share-en.bd93d8ec.png",
 } as const satisfies Record<Language, string>;
 
 /**
- * The shared social preview. It is declared explicitly because a page that sets its own
- * openGraph or twitter metadata replaces the inherited object, image included.
+ * The shared social preview, the logo over the site's title in each language. It is declared explicitly
+ * because a page that sets its own openGraph or twitter metadata replaces the inherited object, image included.
  */
 export function shareImage(language: Language) {
-  return { url: "/social/allfit-one-share.png", width: 1200, height: 630, type: "image/png", alt: shareImageAlt[language] };
+  return { url: `/social/${shareImageFile[language]}`, width: 1200, height: 630, type: "image/png", alt: shareImageAlt[language] };
 }
 
 /** Builds the public path of a page in the given language, e.g. `/en/legal/privacy`. */
